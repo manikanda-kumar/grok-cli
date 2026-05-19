@@ -42,7 +42,7 @@ describe("callOpenRouter", () => {
     ).rejects.toThrow("Missing OPENROUTER_API_KEY");
   });
 
-  it("maps OpenRouter API failures", async () => {
+  it("maps insufficient credit failures", async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: false,
       status: 402,
@@ -55,6 +55,66 @@ describe("callOpenRouter", () => {
         { role: "research", model: "perplexity/sonar", messages: [{ role: "user", content: "Prompt" }] },
         fetchMock,
       ),
-    ).rejects.toBeInstanceOf(OpenRouterError);
+    ).rejects.toThrow("OpenRouter credits or quota error: Insufficient credits");
+  });
+
+  it("maps model unavailable failures with the selected model", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 404,
+      text: async () => "No endpoints found for model",
+    });
+
+    await expect(
+      callOpenRouter(
+        { apiKey: "test-openrouter-key", appName: "grok-cli" },
+        { role: "expert", model: "x-ai/missing-model", messages: [{ role: "user", content: "Prompt" }] },
+        fetchMock,
+      ),
+    ).rejects.toThrow("Model unavailable: x-ai/missing-model. Try --economy or override the configured model alias.");
+  });
+
+  it("maps network failures to retryable OpenRouter errors", async () => {
+    const fetchMock = vi.fn().mockRejectedValue(new TypeError("fetch failed"));
+
+    await expect(
+      callOpenRouter(
+        { apiKey: "test-openrouter-key", appName: "grok-cli" },
+        { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+        fetchMock,
+      ),
+    ).rejects.toThrow("Network error talking to OpenRouter. Please retry.");
+  });
+
+  it("maps auth failures", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 401,
+      text: async () => "Invalid token",
+    });
+
+    await expect(
+      callOpenRouter(
+        { apiKey: "test-openrouter-key", appName: "grok-cli" },
+        { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+        fetchMock,
+      ),
+    ).rejects.toThrow("OpenRouter authentication failed: Invalid token");
+  });
+
+  it("maps retryable provider failures", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 503,
+      text: async () => "Provider overloaded",
+    });
+
+    await expect(
+      callOpenRouter(
+        { apiKey: "test-openrouter-key", appName: "grok-cli" },
+        { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+        fetchMock,
+      ),
+    ).rejects.toThrow("OpenRouter provider error (503): Provider overloaded. Please retry.");
   });
 });
