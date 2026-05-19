@@ -339,7 +339,7 @@ git commit -m "feat: add model defaults and shared types"
 - Modify: `src/cli.ts`
 - Test: `test/args.test.ts`
 
-- [ ] **Step 1: Write parser tests in `test/args.test.ts`**
+- [x] **Step 1: Write parser tests in `test/args.test.ts`**
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -384,7 +384,7 @@ describe("parseArgs", () => {
 });
 ```
 
-- [ ] **Step 2: Run parser tests to verify failure**
+- [x] **Step 2: Run parser tests to verify failure**
 
 Run:
 
@@ -394,7 +394,7 @@ pnpm test test/args.test.ts
 
 Expected: FAIL because `src/args.ts` does not exist.
 
-- [ ] **Step 3: Create `src/args.ts`**
+- [x] **Step 3: Create `src/args.ts`**
 
 ```ts
 import type { CliOptions, Mode, OutputFormat, Profile } from "./types.js";
@@ -483,7 +483,7 @@ export class HelpRequested extends Error {
 }
 ```
 
-- [ ] **Step 4: Replace `src/cli.ts` with parser wiring**
+- [x] **Step 4: Replace `src/cli.ts` with parser wiring**
 
 ```ts
 #!/usr/bin/env node
@@ -510,7 +510,7 @@ async function main() {
 await main();
 ```
 
-- [ ] **Step 5: Run parser tests and help smoke test**
+- [x] **Step 5: Run parser tests and help smoke test**
 
 Run:
 
@@ -521,7 +521,7 @@ pnpm grok --help
 
 Expected: tests pass; help text prints usage and options.
 
-- [ ] **Step 6: Commit parser**
+- [x] **Step 6: Commit parser**
 
 ```bash
 git add src/args.ts src/cli.ts test/args.test.ts
