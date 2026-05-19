@@ -968,7 +968,7 @@ git commit -m "feat: call openrouter chat completions"
 - Create: `src/formatters.ts`
 - Test: `test/formatters.test.ts`
 
-- [ ] **Step 1: Write formatter tests in `test/formatters.test.ts`**
+- [x] **Step 1: Write formatter tests in `test/formatters.test.ts`**
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -1016,7 +1016,7 @@ describe("formatters", () => {
 });
 ```
 
-- [ ] **Step 2: Run formatter tests to verify failure**
+- [x] **Step 2: Run formatter tests to verify failure**
 
 Run:
 
@@ -1026,7 +1026,7 @@ pnpm test test/formatters.test.ts
 
 Expected: FAIL because `src/formatters.ts` does not exist.
 
-- [ ] **Step 3: Create `src/prompts.ts`**
+- [x] **Step 3: Create `src/prompts.ts`**
 
 ```ts
 import type { OutputFormat } from "./types.js";
@@ -1084,7 +1084,7 @@ function systemPrompt(outputFormat: OutputFormat): string {
 }
 ```
 
-- [ ] **Step 4: Create `src/formatters.ts`**
+- [x] **Step 4: Create `src/formatters.ts`**
 
 ```ts
 import { formatCost } from "./cost.js";
@@ -1143,7 +1143,7 @@ function warnings(items: string[]): string {
 }
 ```
 
-- [ ] **Step 5: Run formatter tests and typecheck**
+- [x] **Step 5: Run formatter tests and typecheck**
 
 Run:
 
@@ -1154,7 +1154,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 6: Commit prompts and formatters**
+- [x] **Step 6: Commit prompts and formatters**
 
 ```bash
 git add src/prompts.ts src/formatters.ts test/formatters.test.ts
