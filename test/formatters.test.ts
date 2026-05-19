@@ -16,6 +16,14 @@ const result: PipelineResult = {
   profile: "quality",
   outputFormat: "brief",
   content: "# Decision Brief\n\n## Recommendation\nUse Next.js.",
+  answer: {
+    recommendation: "Use Next.js.",
+    keyFacts: ["It has strong routing conventions."],
+    tradeoffs: ["Framework coupling."],
+    risks: ["Vendor platform drift."],
+    openQuestions: ["Team familiarity?"],
+    confidence: "medium",
+  },
   sources: [{ url: "https://example.com" }],
   warnings: [],
   usage,
@@ -25,6 +33,8 @@ describe("formatters", () => {
   it("adds a cost footer to markdown", () => {
     const output = formatMarkdown(result);
     expect(output).toContain("# Decision Brief");
+    expect(output).toContain("## Sources");
+    expect(output).toContain("https://example.com");
     expect(output).toContain("Cost: $0.0100");
     expect(output).toContain("Models: x-ai/grok-4.20");
   });
@@ -32,6 +42,10 @@ describe("formatters", () => {
   it("formats stable JSON", () => {
     const output = JSON.parse(formatJson(result));
     expect(output.mode).toBe("expert");
+    expect(output.answer.recommendation).toBe("Use Next.js.");
+    expect(output.answer.key_facts).toEqual(["It has strong routing conventions."]);
+    expect(output.answer.open_questions).toEqual(["Team familiarity?"]);
+    expect(output.answer.keyFacts).toBeUndefined();
     expect(output.usage.cost_usd).toBe(0.01);
     expect(output.sources).toEqual([{ url: "https://example.com" }]);
   });

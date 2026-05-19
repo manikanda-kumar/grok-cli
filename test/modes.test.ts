@@ -59,4 +59,76 @@ describe("runMode", () => {
     expect(result.content).toBe("Final");
     expect(result.usage.calls).toHaveLength(5);
   });
+
+  it("parses JSON decision answers", async () => {
+    const caller = vi.fn().mockResolvedValue(
+      fakeResult(
+        "expert",
+        "x-ai/grok-4.20",
+        JSON.stringify({
+          recommendation: "Use Postgres.",
+          key_facts: ["Reliable transactions."],
+          tradeoffs: ["Operational overhead."],
+          risks: ["Scaling write hotspots."],
+          open_questions: ["Data volume?"],
+          confidence: "high",
+        }),
+      ),
+    );
+
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      { prompt: "Prompt", mode: "expert", profile: "quality", outputFormat: "brief", json: true },
+      caller,
+    );
+
+    expect(result.answer).toMatchObject({
+      recommendation: "Use Postgres.",
+      keyFacts: ["Reliable transactions."],
+      openQuestions: ["Data volume?"],
+      confidence: "high",
+    });
+  });
+
+  it("continues multi mode when one analysis role fails", async () => {
+    const caller = vi
+      .fn()
+      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-pro-search", "Facts"))
+      .mockResolvedValueOnce(fakeResult("engineering", "x-ai/grok-4.20", "Engineering"))
+      .mockRejectedValueOnce(new Error("product unavailable"))
+      .mockResolvedValueOnce(fakeResult("skeptic", "x-ai/grok-4.20", "Skeptic"))
+      .mockResolvedValueOnce(fakeResult("synthesis", "x-ai/grok-4.20", "Final"));
+
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false },
+      caller,
+    );
+
+    expect(result.content).toBe("Final");
+    expect(result.warnings).toEqual(["product analysis failed: Error: product unavailable"]);
+    expect(result.usage.calls).toHaveLength(4);
+  });
+
+  it("fails multi mode when all analysis roles fail", async () => {
+    const caller = vi
+      .fn()
+      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-pro-search", "Facts"))
+      .mockRejectedValueOnce(new Error("engineering unavailable"))
+      .mockRejectedValueOnce(new Error("product unavailable"))
+      .mockRejectedValueOnce(new Error("skeptic unavailable"));
+
+    await expect(
+      runMode(DEFAULT_CONFIG, { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false }, caller),
+    ).rejects.toThrow("Multi-agent mode failed because all Grok analysis roles failed");
+  });
+
+  it("fails multi mode when research fails", async () => {
+    const caller = vi.fn().mockRejectedValueOnce(new Error("research unavailable"));
+
+    await expect(
+      runMode(DEFAULT_CONFIG, { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false }, caller),
+    ).rejects.toThrow("research unavailable");
+    expect(caller).toHaveBeenCalledTimes(1);
+  });
 });

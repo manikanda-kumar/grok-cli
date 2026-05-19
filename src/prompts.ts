@@ -31,12 +31,12 @@ export function buildRoleAnalysisMessages(role: "engineering" | "product" | "ske
   ];
 }
 
-export function buildSynthesisMessages(prompt: string, research: string, analyses: string[], outputFormat: OutputFormat) {
+export function buildSynthesisMessages(prompt: string, research: string, analyses: string[], outputFormat: OutputFormat, sources: string[] = []) {
   return [
     { role: "system" as const, content: systemPrompt(outputFormat) },
     {
       role: "user" as const,
-      content: `Original question:\n${prompt}\n\nGrounded research:\n${research}\n\nRole analyses:\n${analyses.join("\n\n---\n\n")}\n\nSynthesize the final answer.`,
+      content: `Original question:\n${prompt}\n\nGrounded research:\n${research}\n\nSource URLs:\n${sources.join("\n") || "None provided"}\n\nRole analyses:\n${analyses.join("\n\n---\n\n")}\n\nSynthesize the final answer.`,
     },
   ];
 }
@@ -47,8 +47,8 @@ function systemPrompt(outputFormat: OutputFormat): string {
   }
 
   if (outputFormat === "report") {
-    return "Write a detailed research report with recommendation, background, evidence, alternatives, tradeoffs, risks, sources, and open questions.";
+    return "Write a detailed Markdown research report with these headings: # Research Report, ## Recommendation, ## Background, ## Evidence, ## Alternatives, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions.";
   }
 
-  return "Write a concise decision brief with these sections: Recommendation, Key facts, Tradeoffs, Risks / unknowns, Sources. Be direct and useful to coding agents making technology or product decisions.";
+  return "Write a concise Markdown decision brief with exactly these headings where applicable: # Decision Brief, ## Recommendation, ## Key facts, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions. Be direct and useful to coding agents making technology or product decisions. If the caller requested JSON, instead return a JSON object with keys recommendation, key_facts, tradeoffs, risks, open_questions, confidence.";
 }

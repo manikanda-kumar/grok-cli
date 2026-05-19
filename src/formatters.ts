@@ -1,8 +1,8 @@
 import { formatCost } from "./cost.js";
-import type { PipelineResult, UsageSummary } from "./types.js";
+import type { DecisionAnswer, PipelineResult, UsageSummary } from "./types.js";
 
 export function formatMarkdown(result: PipelineResult): string {
-  return `${result.content.trim()}\n\n${warnings(result.warnings)}${footer(result.usage)}`.trimEnd();
+  return `${withSources(result.content.trim(), result.sources)}\n\n${warnings(result.warnings)}${footer(result.usage)}`.trimEnd();
 }
 
 export function formatRaw(result: PipelineResult): string {
@@ -15,7 +15,7 @@ export function formatJson(result: PipelineResult): string {
       mode: result.mode,
       profile: result.profile,
       output_format: result.outputFormat,
-      answer: result.answer,
+      answer: formatAnswer(result.answer),
       content: result.content,
       sources: result.sources,
       warnings: result.warnings,
@@ -51,4 +51,22 @@ function footer(usage: UsageSummary): string {
 function warnings(items: string[]): string {
   if (items.length === 0) return "";
   return `## Warnings\n${items.map((item) => `- ${item}`).join("\n")}\n\n`;
+}
+
+function withSources(content: string, sources: PipelineResult["sources"]): string {
+  if (sources.length === 0 || /(^|\n)## Sources\b/i.test(content)) return content;
+  return `${content}\n\n## Sources\n${sources.map((source) => `- ${source.title ? `${source.title}: ` : ""}${source.url}`).join("\n")}`;
+}
+
+function formatAnswer(answer: DecisionAnswer | undefined) {
+  if (!answer) return undefined;
+
+  return {
+    recommendation: answer.recommendation,
+    key_facts: answer.keyFacts,
+    tradeoffs: answer.tradeoffs,
+    risks: answer.risks,
+    open_questions: answer.openQuestions,
+    confidence: answer.confidence,
+  };
 }
