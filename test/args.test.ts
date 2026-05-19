@@ -37,4 +37,15 @@ describe("parseArgs", () => {
   it("throws for missing prompts", () => {
     expect(() => parseArgs([])).toThrow("Missing prompt");
   });
+
+  it("throws for unknown flags", () => {
+    expect(() => parseArgs(["--jsno", "Prompt"])).toThrow("Unknown option: --jsno");
+    expect(() => parseArgs(["-x", "Prompt"])).toThrow("Unknown option: -x");
+  });
+
+  it("allows prompts that start with a dash after --", () => {
+    expect(parseArgs(["--", "--not-a-flag"])).toMatchObject({
+      prompt: "--not-a-flag",
+    });
+  });
 });

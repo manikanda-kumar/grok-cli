@@ -58,9 +58,18 @@ export function parseArgs(argv: string[]): CliOptions {
       continue;
     }
 
+    if (token === "--") {
+      promptParts.push(...tokens);
+      break;
+    }
+
     if (promptParts.length === 0 && isMode(token)) {
       mode = token;
       continue;
+    }
+
+    if (token.startsWith("-")) {
+      throw new Error(`Unknown option: ${token}`);
     }
 
     promptParts.push(token, ...tokens);
