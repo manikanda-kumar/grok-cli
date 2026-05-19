@@ -155,7 +155,7 @@ git commit -m "chore: scaffold grok cli"
 - Create: `src/defaults.ts`
 - Test: `test/config.test.ts`
 
-- [ ] **Step 1: Create `src/types.ts`**
+- [x] **Step 1: Create `src/types.ts`**
 
 ```ts
 export type Mode = "auto" | "fast" | "expert" | "research" | "multi";
@@ -263,7 +263,7 @@ export interface OpenRouterResponse {
 }
 ```
 
-- [ ] **Step 2: Create `src/defaults.ts`**
+- [x] **Step 2: Create `src/defaults.ts`**
 
 ```ts
 import type { AppConfig, ModelProfiles } from "./types.js";
@@ -298,7 +298,7 @@ export const DEFAULT_CONFIG: AppConfig = {
 export const DEFAULT_CONFIG_PATH = "~/.config/grok-cli/config.json";
 ```
 
-- [ ] **Step 3: Add initial defaults test in `test/config.test.ts`**
+- [x] **Step 3: Add initial defaults test in `test/config.test.ts`**
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -314,7 +314,7 @@ describe("defaults", () => {
 });
 ```
 
-- [ ] **Step 4: Run tests and typecheck**
+- [x] **Step 4: Run tests and typecheck**
 
 Run:
 
@@ -325,7 +325,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 5: Commit types and defaults**
+- [x] **Step 5: Commit types and defaults**
 
 ```bash
 git add src/types.ts src/defaults.ts test/config.test.ts
