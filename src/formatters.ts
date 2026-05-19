@@ -13,6 +13,12 @@ export function formatJson(result: PipelineResult): string {
   return JSON.stringify(
     {
       mode: result.mode,
+      web: result.web
+        ? {
+            search_enabled: result.web.searchEnabled,
+            fetch_enabled: result.web.fetchEnabled,
+          }
+        : undefined,
       profile: result.profile,
       output_format: result.outputFormat,
       answer: formatAnswer(result.answer),
@@ -23,12 +29,14 @@ export function formatJson(result: PipelineResult): string {
         total_prompt_tokens: result.usage.totalPromptTokens,
         total_completion_tokens: result.usage.totalCompletionTokens,
         cost_usd: result.usage.costUsd ?? null,
+        server_tool_use: formatServerToolUse(result.usage.serverToolUse),
         calls: result.usage.calls.map((call) => ({
           role: call.role,
           model: call.model,
           prompt_tokens: call.promptTokens,
           completion_tokens: call.completionTokens,
           cost_usd: call.costUsd ?? null,
+          server_tool_use: formatServerToolUse(call.serverToolUse),
         })),
       },
     },
@@ -45,7 +53,21 @@ export function formatError(error: unknown, json: boolean): string {
 
 function footer(usage: UsageSummary): string {
   const models = [...new Set(usage.calls.map((call) => call.model))].join(", ") || "unavailable";
-  return `---\nCost: ${formatCost(usage)} | Models: ${models} | Tokens: ${usage.totalPromptTokens.toLocaleString()} in / ${usage.totalCompletionTokens.toLocaleString()} out`;
+  const toolParts: string[] = [];
+  const webSearches = usage.serverToolUse?.webSearchRequests;
+  const webFetches = usage.serverToolUse?.webFetchRequests;
+  if (webSearches && webSearches > 0) toolParts.push(`Web searches: ${webSearches}`);
+  if (webFetches && webFetches > 0) toolParts.push(`Web fetches: ${webFetches}`);
+  const webPart = toolParts.length > 0 ? ` | ${toolParts.join(" | ")}` : "";
+  return `---\nCost: ${formatCost(usage)} | Models: ${models} | Tokens: ${usage.totalPromptTokens.toLocaleString()} in / ${usage.totalCompletionTokens.toLocaleString()} out${webPart}`;
+}
+
+function formatServerToolUse(serverToolUse: UsageSummary["serverToolUse"]) {
+  if (!serverToolUse) return undefined;
+  const payload: Record<string, number> = {};
+  if (serverToolUse.webSearchRequests !== undefined) payload.web_search_requests = serverToolUse.webSearchRequests;
+  if (serverToolUse.webFetchRequests !== undefined) payload.web_fetch_requests = serverToolUse.webFetchRequests;
+  return Object.keys(payload).length > 0 ? payload : undefined;
 }
 
 function warnings(items: string[]): string {

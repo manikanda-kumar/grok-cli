@@ -1,4 +1,4 @@
-import type { AppConfig, ModelProfiles } from "./types.js";
+import type { AppConfig, ModelProfiles, WebConfig } from "./types.js";
 
 export const DEFAULT_MODELS: ModelProfiles = {
   quality: {
@@ -17,6 +17,20 @@ export const DEFAULT_MODELS: ModelProfiles = {
   },
 };
 
+export const DEFAULT_WEB_CONFIG: WebConfig = {
+  search: {
+    enabled: true,
+    engine: "auto",
+    maxResults: 5,
+    maxTotalResults: 10,
+  },
+  fetch: {
+    enabled: false,
+    engine: "auto",
+    maxContentTokens: 50000,
+  },
+};
+
 export const DEFAULT_CONFIG: AppConfig = {
   defaultMode: "auto",
   defaultProfile: "quality",
@@ -25,6 +39,7 @@ export const DEFAULT_CONFIG: AppConfig = {
     appName: "grok-cli",
     siteUrl: "https://github.com/local/grok-cli",
   },
+  web: DEFAULT_WEB_CONFIG,
 };
 
 export const DEFAULT_CONFIG_PATH = "~/.config/grok-cli/config.json";

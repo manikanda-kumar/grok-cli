@@ -1,8 +1,11 @@
 import type { OutputFormat } from "./types.js";
 
-export function buildSingleCallMessages(prompt: string, outputFormat: OutputFormat, json = false) {
+const WEB_SEARCH_INSTRUCTION =
+  "You have access to live web search. Use it for time-sensitive facts, current versions, pricing, or anything that may have changed since training. Cite authoritative sources; include URLs in ## Sources when writing Markdown.";
+
+export function buildSingleCallMessages(prompt: string, outputFormat: OutputFormat, json = false, webSearch = false) {
   return [
-    { role: "system" as const, content: systemPrompt(outputFormat, json) },
+    { role: "system" as const, content: systemPrompt(outputFormat, json, webSearch) },
     { role: "user" as const, content: prompt },
   ];
 }
@@ -11,7 +14,7 @@ export function buildResearchMessages(prompt: string, outputFormat: OutputFormat
   return [
     {
       role: "system" as const,
-      content: `${systemPrompt(outputFormat, json)}\nGround every factual claim in current sources. Include citations when available.`,
+      content: `${systemPrompt(outputFormat, json, false)}\nGround every factual claim in current sources. Include citations when available.`,
     },
     { role: "user" as const, content: prompt },
   ];
@@ -33,7 +36,7 @@ export function buildRoleAnalysisMessages(role: "engineering" | "product" | "ske
 
 export function buildSynthesisMessages(prompt: string, research: string, analyses: string[], outputFormat: OutputFormat, sources: string[] = [], json = false) {
   return [
-    { role: "system" as const, content: systemPrompt(outputFormat, json) },
+    { role: "system" as const, content: systemPrompt(outputFormat, json, false) },
     {
       role: "user" as const,
       content: `Original question:\n${prompt}\n\nGrounded research:\n${research}\n\nSource URLs:\n${sources.join("\n") || "None provided"}\n\nRole analyses:\n${analyses.join("\n\n---\n\n")}\n\nSynthesize the final answer.`,
@@ -41,18 +44,25 @@ export function buildSynthesisMessages(prompt: string, research: string, analyse
   ];
 }
 
-function systemPrompt(outputFormat: OutputFormat, json: boolean): string {
+function systemPrompt(outputFormat: OutputFormat, json: boolean, webSearch: boolean): string {
+  let prompt: string;
+
   if (json) {
-    return "Return only a JSON object with keys recommendation, key_facts, tradeoffs, risks, open_questions, confidence. Use arrays of strings for key_facts, tradeoffs, risks, and open_questions. Use confidence as one of low, medium, or high. Do not wrap the JSON in Markdown.";
+    prompt =
+      "Return only a JSON object with keys recommendation, key_facts, tradeoffs, risks, open_questions, confidence. Use arrays of strings for key_facts, tradeoffs, risks, and open_questions. Use confidence as one of low, medium, or high. Do not wrap the JSON in Markdown.";
+  } else if (outputFormat === "raw") {
+    prompt = "Answer directly. Do not add unnecessary framing.";
+  } else if (outputFormat === "report") {
+    prompt =
+      "Write a detailed Markdown research report with these headings: # Research Report, ## Recommendation, ## Background, ## Evidence, ## Alternatives, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions.";
+  } else {
+    prompt =
+      "Write a concise Markdown decision brief with exactly these headings where applicable: # Decision Brief, ## Recommendation, ## Key facts, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions. Be direct and useful to coding agents making technology or product decisions.";
   }
 
-  if (outputFormat === "raw") {
-    return "Answer directly. Do not add unnecessary framing.";
+  if (webSearch) {
+    prompt = `${prompt}\n\n${WEB_SEARCH_INSTRUCTION}`;
   }
 
-  if (outputFormat === "report") {
-    return "Write a detailed Markdown research report with these headings: # Research Report, ## Recommendation, ## Background, ## Evidence, ## Alternatives, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions.";
-  }
-
-  return "Write a concise Markdown decision brief with exactly these headings where applicable: # Decision Brief, ## Recommendation, ## Key facts, ## Tradeoffs, ## Risks / unknowns, ## Sources, ## Open questions. Be direct and useful to coding agents making technology or product decisions.";
+  return prompt;
 }

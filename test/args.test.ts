@@ -9,12 +9,19 @@ describe("parseArgs", () => {
       outputFormat: "brief",
       json: false,
       prompt: "Compare Next.js and Remix",
+      web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
     });
   });
 
   it("parses subcommands", () => {
     expect(parseArgs(["research", "React Server Components"])).toMatchObject({
       mode: "research",
+      modeExplicit: true,
+      prompt: "React Server Components",
+    });
+
+    expect(parseArgs(["deepresearch", "React Server Components"])).toMatchObject({
+      mode: "deepresearch",
       modeExplicit: true,
       prompt: "React Server Components",
     });
@@ -29,6 +36,39 @@ describe("parseArgs", () => {
       outputFormat: "brief",
       json: true,
       prompt: "Prompt",
+    });
+  });
+
+  it("parses --web-fetch", () => {
+    expect(parseArgs(["--web-fetch", "Prompt"]).web.fetchFlag).toBe(true);
+  });
+
+  it("parses web flags", () => {
+    expect(
+      parseArgs([
+        "--no-web",
+        "--web",
+        "--web-fetch",
+        "--web-engine",
+        "exa",
+        "--web-max-results",
+        "3",
+        "--web-max-total-results",
+        "8",
+        "--web-allowed-domains",
+        "example.com,docs.example.com",
+        "Prompt",
+      ]),
+    ).toMatchObject({
+      web: {
+        noWeb: true,
+        deprecatedWebFlag: true,
+        fetchFlag: true,
+        engine: "exa",
+        maxResults: 3,
+        maxTotalResults: 8,
+        allowedDomains: ["example.com", "docs.example.com"],
+      },
     });
   });
 

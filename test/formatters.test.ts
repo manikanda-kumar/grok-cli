@@ -26,7 +26,11 @@ const result: PipelineResult = {
   },
   sources: [{ url: "https://example.com" }],
   warnings: [],
-  usage,
+  usage: {
+    ...usage,
+    serverToolUse: { webSearchRequests: 2 },
+  },
+  web: { searchEnabled: true, fetchEnabled: false },
 };
 
 describe("formatters", () => {
@@ -37,6 +41,7 @@ describe("formatters", () => {
     expect(output).toContain("https://example.com");
     expect(output).toContain("Cost: $0.0100");
     expect(output).toContain("Models: x-ai/grok-4.20");
+    expect(output).toContain("Web searches: 2");
   });
 
   it("formats stable JSON", () => {
@@ -47,6 +52,8 @@ describe("formatters", () => {
     expect(output.answer.open_questions).toEqual(["Team familiarity?"]);
     expect(output.answer.keyFacts).toBeUndefined();
     expect(output.usage.cost_usd).toBe(0.01);
+    expect(output.usage.server_tool_use).toEqual({ web_search_requests: 2 });
+    expect(output.web).toEqual({ search_enabled: true, fetch_enabled: false });
     expect(output.sources).toEqual([{ url: "https://example.com" }]);
   });
 

@@ -3,7 +3,14 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { DEFAULT_CONFIG } from "../src/defaults.js";
-import { loadConfig, resolveCliOptions, resolveModel } from "../src/config.js";
+import {
+  assertWebToolsCompatible,
+  loadConfig,
+  resolveCliOptions,
+  resolveModel,
+  resolveWebOptions,
+  validateWebOptions,
+} from "../src/config.js";
 
 describe("defaults", () => {
   it("uses quality-first Grok and Sonar defaults", () => {
@@ -11,6 +18,8 @@ describe("defaults", () => {
     expect(DEFAULT_CONFIG.models.quality.fast).toBe("x-ai/grok-4.3");
     expect(DEFAULT_CONFIG.models.quality.expert).toBe("x-ai/grok-4.20");
     expect(DEFAULT_CONFIG.models.quality.research).toBe("perplexity/sonar-pro-search");
+    expect(DEFAULT_CONFIG.models.quality.deepResearch).toBe("perplexity/sonar-deep-research");
+    expect(DEFAULT_CONFIG.web.search.enabled).toBe(true);
   });
 });
 
@@ -39,6 +48,50 @@ describe("resolveModel", () => {
   });
 });
 
+describe("validateWebOptions", () => {
+  const webOn = resolveWebOptions(DEFAULT_CONFIG, "expert", { noWeb: false, deprecatedWebFlag: false, fetchFlag: false });
+
+  it("rejects allow and block lists together", () => {
+    expect(() =>
+      validateWebOptions(
+        { ...webOn, allowedDomains: ["example.com"], blockedDomains: ["spam.example"] },
+        { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
+      ),
+    ).toThrow("Cannot combine");
+  });
+
+  it("rejects --web-fetch with --no-web", () => {
+    expect(() =>
+      validateWebOptions(
+        resolveWebOptions(DEFAULT_CONFIG, "expert", { noWeb: true, deprecatedWebFlag: false, fetchFlag: true }),
+        { noWeb: true, deprecatedWebFlag: false, fetchFlag: true },
+      ),
+    ).toThrow('Flag "--web-fetch" has no effect');
+  });
+});
+
+describe("assertWebToolsCompatible", () => {
+  const webOn = resolveWebOptions(DEFAULT_CONFIG, "expert", { noWeb: false, deprecatedWebFlag: false, fetchFlag: false });
+
+  it("allows Grok models with web enabled", () => {
+    expect(() => assertWebToolsCompatible(DEFAULT_CONFIG, "quality", "expert", webOn)).not.toThrow();
+  });
+
+  it("rejects Perplexity expert overrides with web enabled", () => {
+    const config = {
+      ...DEFAULT_CONFIG,
+      models: {
+        ...DEFAULT_CONFIG.models,
+        quality: { ...DEFAULT_CONFIG.models.quality, expert: "perplexity/sonar-pro-search" },
+      },
+    };
+
+    expect(() => assertWebToolsCompatible(config, "quality", "expert", webOn)).toThrow(
+      "does not support OpenRouter server tools",
+    );
+  });
+});
+
 describe("resolveCliOptions", () => {
   const config = { ...DEFAULT_CONFIG, defaultMode: "research" as const, defaultProfile: "economy" as const };
 
@@ -52,6 +105,7 @@ describe("resolveCliOptions", () => {
         profileExplicit: false,
         outputFormat: "brief",
         json: false,
+        web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
       }),
     ).toMatchObject({ mode: "research", profile: "economy" });
   });
@@ -66,6 +120,7 @@ describe("resolveCliOptions", () => {
         profileExplicit: true,
         outputFormat: "brief",
         json: false,
+        web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
       }),
     ).toMatchObject({ mode: "expert", profile: "quality" });
   });
