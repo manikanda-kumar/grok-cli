@@ -1,2 +1,27 @@
 node_modules/
 dist/
+coverage/
+
+# Env / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Local tool config
+.claude/
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Root markdown (keep README, docs/)
+/*.md
+!/README.md
