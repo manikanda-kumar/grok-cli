@@ -179,3 +179,22 @@ pnpm test
 ```
 
 Implementation plan: [`docs/plans/2026-05-19-web-search-integration.md`](docs/plans/2026-05-19-web-search-integration.md)
+
+## Claude Code skill
+
+Reusable Claude Code skill at [`skills/grok-research/`](skills/grok-research/SKILL.md). Teaches any Claude Code agent when/how to call `grok` (mode selection, web flags, JSON parsing, X/Twitter grounding via `--web-allowed-domains`).
+
+Install for your user:
+
+```bash
+mkdir -p ~/.claude/skills
+cp -R skills/grok-research ~/.claude/skills/
+```
+
+Or symlink so updates flow automatically:
+
+```bash
+ln -s "$(pwd)/skills/grok-research" ~/.claude/skills/grok-research
+```
+
+Skill assumes `grok` is on `PATH`. After `pnpm build`, run `npm link` (or `pnpm link --global`) once to expose it globally.
