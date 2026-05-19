@@ -783,7 +783,7 @@ git commit -m "feat: track grok cli usage costs"
 - Create: `src/openrouter.ts`
 - Test: `test/openrouter.test.ts`
 
-- [ ] **Step 1: Write `test/openrouter.test.ts`**
+- [x] **Step 1: Write `test/openrouter.test.ts`**
 
 ```ts
 import { describe, expect, it, vi } from "vitest";
@@ -848,7 +848,7 @@ describe("callOpenRouter", () => {
 });
 ```
 
-- [ ] **Step 2: Run OpenRouter tests to verify failure**
+- [x] **Step 2: Run OpenRouter tests to verify failure**
 
 Run:
 
@@ -858,7 +858,7 @@ pnpm test test/openrouter.test.ts
 
 Expected: FAIL because `src/openrouter.ts` does not exist.
 
-- [ ] **Step 3: Create `src/openrouter.ts`**
+- [x] **Step 3: Create `src/openrouter.ts`**
 
 ```ts
 import { addUsageCall, emptyUsage } from "./cost.js";
@@ -943,7 +943,7 @@ export async function callOpenRouter(
 }
 ```
 
-- [ ] **Step 4: Run OpenRouter tests and typecheck**
+- [x] **Step 4: Run OpenRouter tests and typecheck**
 
 Run:
 
@@ -954,7 +954,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 5: Commit OpenRouter client**
+- [x] **Step 5: Commit OpenRouter client**
 
 ```bash
 git add src/openrouter.ts test/openrouter.test.ts
