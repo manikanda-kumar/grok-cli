@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { parseArgs } from "../src/args.js";
+import { parseArgs, wantsJson } from "../src/args.js";
 
 describe("parseArgs", () => {
   it("parses a default prompt", () => {
@@ -15,6 +15,7 @@ describe("parseArgs", () => {
   it("parses subcommands", () => {
     expect(parseArgs(["research", "React Server Components"])).toMatchObject({
       mode: "research",
+      modeExplicit: true,
       prompt: "React Server Components",
     });
   });
@@ -22,7 +23,9 @@ describe("parseArgs", () => {
   it("parses flags", () => {
     expect(parseArgs(["--mode", "expert", "--json", "--economy", "Prompt"])).toMatchObject({
       mode: "expert",
+      modeExplicit: true,
       profile: "economy",
+      profileExplicit: true,
       outputFormat: "brief",
       json: true,
       prompt: "Prompt",
@@ -47,5 +50,10 @@ describe("parseArgs", () => {
     expect(parseArgs(["--", "--not-a-flag"])).toMatchObject({
       prompt: "--not-a-flag",
     });
+  });
+
+  it("detects json intent before full parsing", () => {
+    expect(wantsJson(["--json"])).toBe(true);
+    expect(wantsJson(["--jsno"])).toBe(false);
   });
 });

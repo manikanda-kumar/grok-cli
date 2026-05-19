@@ -3,7 +3,7 @@ import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
 import { DEFAULT_CONFIG } from "../src/defaults.js";
-import { loadConfig, resolveModel } from "../src/config.js";
+import { loadConfig, resolveCliOptions, resolveModel } from "../src/config.js";
 
 describe("defaults", () => {
   it("uses quality-first Grok and Sonar defaults", () => {
@@ -36,5 +36,37 @@ describe("resolveModel", () => {
   it("uses profile alias", () => {
     expect(resolveModel(DEFAULT_CONFIG, "quality", "expert")).toBe("x-ai/grok-4.20");
     expect(resolveModel(DEFAULT_CONFIG, "economy", "research")).toBe("perplexity/sonar");
+  });
+});
+
+describe("resolveCliOptions", () => {
+  const config = { ...DEFAULT_CONFIG, defaultMode: "research" as const, defaultProfile: "economy" as const };
+
+  it("applies config default mode and profile when CLI did not override them", () => {
+    expect(
+      resolveCliOptions(config, {
+        prompt: "Prompt",
+        mode: "auto",
+        modeExplicit: false,
+        profile: "quality",
+        profileExplicit: false,
+        outputFormat: "brief",
+        json: false,
+      }),
+    ).toMatchObject({ mode: "research", profile: "economy" });
+  });
+
+  it("keeps explicit CLI mode and profile over config defaults", () => {
+    expect(
+      resolveCliOptions(config, {
+        prompt: "Prompt",
+        mode: "expert",
+        modeExplicit: true,
+        profile: "quality",
+        profileExplicit: true,
+        outputFormat: "brief",
+        json: false,
+      }),
+    ).toMatchObject({ mode: "expert", profile: "quality" });
   });
 });

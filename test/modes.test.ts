@@ -4,6 +4,19 @@ import { DEFAULT_CONFIG } from "../src/defaults.js";
 import { runMode } from "../src/modes.js";
 import type { PipelineResult } from "../src/types.js";
 
+function options(overrides: Partial<Parameters<typeof runMode>[1]> = {}): Parameters<typeof runMode>[1] {
+  return {
+    prompt: "Prompt",
+    mode: "auto",
+    modeExplicit: false,
+    profile: "quality",
+    profileExplicit: false,
+    outputFormat: "brief",
+    json: false,
+    ...overrides,
+  };
+}
+
 function fakeResult(role: string, model: string, content: string): PipelineResult {
   return {
     mode: "auto",
@@ -21,7 +34,7 @@ describe("runMode", () => {
     const caller = vi.fn().mockResolvedValue(fakeResult("expert", "x-ai/grok-4.20", "Expert answer"));
     const result = await runMode(
       DEFAULT_CONFIG,
-      { prompt: "Prompt", mode: "expert", profile: "quality", outputFormat: "brief", json: false },
+      options({ mode: "expert", modeExplicit: true }),
       caller,
     );
 
@@ -33,7 +46,7 @@ describe("runMode", () => {
     const caller = vi.fn().mockResolvedValue(fakeResult("research", "perplexity/sonar", "Research answer"));
     await runMode(
       DEFAULT_CONFIG,
-      { prompt: "Prompt", mode: "research", profile: "economy", outputFormat: "brief", json: false },
+      options({ mode: "research", modeExplicit: true, profile: "economy", profileExplicit: true }),
       caller,
     );
 
@@ -51,7 +64,7 @@ describe("runMode", () => {
 
     const result = await runMode(
       DEFAULT_CONFIG,
-      { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false },
+      options({ mode: "multi", modeExplicit: true }),
       caller,
     );
 
@@ -78,7 +91,7 @@ describe("runMode", () => {
 
     const result = await runMode(
       DEFAULT_CONFIG,
-      { prompt: "Prompt", mode: "expert", profile: "quality", outputFormat: "brief", json: true },
+      options({ mode: "expert", modeExplicit: true, json: true }),
       caller,
     );
 
@@ -108,7 +121,7 @@ describe("runMode", () => {
 
     const result = await runMode(
       DEFAULT_CONFIG,
-      { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false },
+      options({ mode: "multi", modeExplicit: true }),
       caller,
     );
 
@@ -126,7 +139,7 @@ describe("runMode", () => {
       .mockRejectedValueOnce(new Error("skeptic unavailable"));
 
     await expect(
-      runMode(DEFAULT_CONFIG, { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false }, caller),
+      runMode(DEFAULT_CONFIG, options({ mode: "multi", modeExplicit: true }), caller),
     ).rejects.toThrow("Multi-agent mode failed because all Grok analysis roles failed");
   });
 
@@ -134,7 +147,7 @@ describe("runMode", () => {
     const caller = vi.fn().mockRejectedValueOnce(new Error("research unavailable"));
 
     await expect(
-      runMode(DEFAULT_CONFIG, { prompt: "Prompt", mode: "multi", profile: "quality", outputFormat: "brief", json: false }, caller),
+      runMode(DEFAULT_CONFIG, options({ mode: "multi", modeExplicit: true }), caller),
     ).rejects.toThrow("research unavailable");
     expect(caller).toHaveBeenCalledTimes(1);
   });

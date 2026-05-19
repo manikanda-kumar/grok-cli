@@ -29,7 +29,9 @@ export interface AppConfig {
 export interface CliOptions {
   prompt: string;
   mode: Mode;
+  modeExplicit: boolean;
   profile: Profile;
+  profileExplicit: boolean;
   outputFormat: OutputFormat;
   json: boolean;
 }

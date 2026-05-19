@@ -4,7 +4,7 @@ const MODES = new Set<Mode>(["auto", "fast", "expert", "research", "multi"]);
 
 export const HELP_TEXT = `Usage:
   grok [options] <prompt>
-  grok <fast|expert|research|multi> [options] <prompt>
+  grok <auto|fast|expert|research|multi> [options] <prompt>
 
 Options:
   --mode <mode>     auto, fast, expert, research, multi
@@ -18,7 +18,9 @@ Options:
 export function parseArgs(argv: string[]): CliOptions {
   const tokens = [...argv];
   let mode: Mode = "auto";
+  let modeExplicit = false;
   let profile: Profile = "quality";
+  let profileExplicit = false;
   let outputFormat: OutputFormat = "brief";
   let json = false;
   const promptParts: string[] = [];
@@ -35,11 +37,13 @@ export function parseArgs(argv: string[]): CliOptions {
       const value = tokens.shift();
       if (!isMode(value)) throw new Error(`Invalid mode: ${value ?? ""}`);
       mode = value;
+      modeExplicit = true;
       continue;
     }
 
     if (token === "--economy") {
       profile = "economy";
+      profileExplicit = true;
       continue;
     }
 
@@ -65,6 +69,7 @@ export function parseArgs(argv: string[]): CliOptions {
 
     if (promptParts.length === 0 && isMode(token)) {
       mode = token;
+      modeExplicit = true;
       continue;
     }
 
@@ -79,7 +84,11 @@ export function parseArgs(argv: string[]): CliOptions {
   const prompt = promptParts.join(" ").trim();
   if (!prompt) throw new Error("Missing prompt");
 
-  return { prompt, mode, profile, outputFormat, json };
+  return { prompt, mode, modeExplicit, profile, profileExplicit, outputFormat, json };
+}
+
+export function wantsJson(argv: string[]): boolean {
+  return argv.includes("--json");
 }
 
 function isMode(value: string | undefined): value is Mode {

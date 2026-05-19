@@ -2,7 +2,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { homedir } from "node:os";
 import { join } from "node:path";
 import { DEFAULT_CONFIG } from "./defaults.js";
-import type { AppConfig, ModelAlias, Profile } from "./types.js";
+import type { AppConfig, CliOptions, ModelAlias, Profile } from "./types.js";
 
 interface LoadConfigOptions {
   configPath?: string;
@@ -24,6 +24,14 @@ export function loadConfig(options: LoadConfigOptions = {}): AppConfig {
 
 export function resolveModel(config: AppConfig, profile: Profile, alias: ModelAlias): string {
   return config.models[profile][alias];
+}
+
+export function resolveCliOptions(config: AppConfig, options: CliOptions): CliOptions {
+  return {
+    ...options,
+    mode: options.modeExplicit ? options.mode : config.defaultMode,
+    profile: options.profileExplicit ? options.profile : config.defaultProfile,
+  };
 }
 
 function readConfigFile(path: string): Partial<AppConfig> {

@@ -54,4 +54,21 @@ describe("formatters", () => {
     expect(formatRaw(result)).toContain("Use Next.js.");
     expect(formatRaw(result)).toContain("Cost: $0.0100");
   });
+
+  it("emits null cost fields when cost is unavailable", () => {
+    const output = JSON.parse(
+      formatJson({
+        ...result,
+        usage: addUsageCall(emptyUsage(), {
+          role: "expert",
+          model: "x-ai/grok-4.20",
+          promptTokens: 100,
+          completionTokens: 25,
+        }),
+      }),
+    );
+
+    expect(output.usage.cost_usd).toBeNull();
+    expect(output.usage.calls[0].cost_usd).toBeNull();
+  });
 });

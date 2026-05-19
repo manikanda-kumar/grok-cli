@@ -1,18 +1,20 @@
 #!/usr/bin/env node
 
-import { HELP_TEXT, HelpRequested, parseArgs } from "./args.js";
-import { loadConfig } from "./config.js";
+import { HELP_TEXT, HelpRequested, parseArgs, wantsJson } from "./args.js";
+import { loadConfig, resolveCliOptions } from "./config.js";
 import { formatError, formatJson, formatMarkdown, formatRaw } from "./formatters.js";
 import { runMode } from "./modes.js";
 import { callOpenRouter } from "./openrouter.js";
 
 async function main() {
-  let jsonMode = false;
+  const argv = process.argv.slice(2);
+  let jsonMode = wantsJson(argv);
 
   try {
-    const options = parseArgs(process.argv.slice(2));
-    jsonMode = options.json;
+    const parsedOptions = parseArgs(argv);
+    jsonMode = parsedOptions.json;
     const config = loadConfig();
+    const options = resolveCliOptions(config, parsedOptions);
     const result = await runMode(config, options, (call) => callOpenRouter(config.openrouter, call));
 
     if (options.json) {

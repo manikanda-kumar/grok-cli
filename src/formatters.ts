@@ -22,13 +22,13 @@ export function formatJson(result: PipelineResult): string {
       usage: {
         total_prompt_tokens: result.usage.totalPromptTokens,
         total_completion_tokens: result.usage.totalCompletionTokens,
-        cost_usd: result.usage.costUsd,
+        cost_usd: result.usage.costUsd ?? null,
         calls: result.usage.calls.map((call) => ({
           role: call.role,
           model: call.model,
           prompt_tokens: call.promptTokens,
           completion_tokens: call.completionTokens,
-          cost_usd: call.costUsd,
+          cost_usd: call.costUsd ?? null,
         })),
       },
     },
