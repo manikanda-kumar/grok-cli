@@ -1470,7 +1470,7 @@ git commit -m "feat: wire grok cli end to end"
 **Files:**
 - Modify only if smoke tests reveal bugs.
 
-- [ ] **Step 1: Run live help smoke test**
+- [x] **Step 1: Run live help smoke test**
 
 Run:
 
@@ -1480,7 +1480,7 @@ pnpm grok --help
 
 Expected: usage text prints without requiring an API key.
 
-- [ ] **Step 2: Run live quality fast/expert smoke test if `OPENROUTER_API_KEY` is available**
+- [x] **Step 2: Run live quality fast/expert smoke test if `OPENROUTER_API_KEY` is available**
 
 Run:
 
@@ -1490,7 +1490,7 @@ OPENROUTER_API_KEY="$OPENROUTER_API_KEY" pnpm grok --mode fast --raw "In one par
 
 Expected: model answer prints with a cost footer.
 
-- [ ] **Step 3: Run live research JSON smoke test if `OPENROUTER_API_KEY` is available**
+- [x] **Step 3: Run live research JSON smoke test if `OPENROUTER_API_KEY` is available**
 
 Run:
 
@@ -1500,7 +1500,7 @@ OPENROUTER_API_KEY="$OPENROUTER_API_KEY" pnpm grok research --json "What is the 
 
 Expected: valid JSON prints with `mode`, `profile`, `content`, `sources`, and `usage` fields.
 
-- [ ] **Step 4: Run live economy multi smoke test if budget allows**
+- [x] **Step 4: Run live economy multi smoke test if budget allows**
 
 Run:
 
@@ -1510,7 +1510,7 @@ OPENROUTER_API_KEY="$OPENROUTER_API_KEY" pnpm grok multi --economy "Choose SQLit
 
 Expected: decision brief prints with cost footer and any citations from the research pass.
 
-- [ ] **Step 5: Final review checklist**
+- [x] **Step 5: Final review checklist**
 
 Confirm:
 
@@ -1524,7 +1524,7 @@ Confirm:
 - JSON output is valid JSON on success and structured JSON on expected errors.
 - Multi-agent mode continues when one analysis role fails.
 
-- [ ] **Step 6: Commit smoke-test fixes if any**
+- [x] **Step 6: Commit smoke-test fixes if any**
 
 ```bash
 git add src test README.md package.json tsconfig.json
