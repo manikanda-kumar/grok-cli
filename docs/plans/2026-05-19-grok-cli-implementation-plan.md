@@ -1167,7 +1167,7 @@ git commit -m "feat: format grok cli research output"
 - Create: `src/modes.ts`
 - Test: `test/modes.test.ts`
 
-- [ ] **Step 1: Write `test/modes.test.ts`**
+- [x] **Step 1: Write `test/modes.test.ts`**
 
 ```ts
 import { describe, expect, it, vi } from "vitest";
@@ -1222,7 +1222,7 @@ describe("runMode", () => {
 });
 ```
 
-- [ ] **Step 2: Run mode tests to verify failure**
+- [x] **Step 2: Run mode tests to verify failure**
 
 Run:
 
@@ -1232,7 +1232,7 @@ pnpm test test/modes.test.ts
 
 Expected: FAIL because `src/modes.ts` does not exist.
 
-- [ ] **Step 3: Create `src/modes.ts`**
+- [x] **Step 3: Create `src/modes.ts`**
 
 ```ts
 import { mergeUsage } from "./cost.js";
@@ -1312,7 +1312,7 @@ async function runMulti(config: AppConfig, options: CliOptions, caller: ModeCall
 }
 ```
 
-- [ ] **Step 4: Run mode tests and typecheck**
+- [x] **Step 4: Run mode tests and typecheck**
 
 Run:
 
@@ -1323,7 +1323,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 5: Commit mode pipelines**
+- [x] **Step 5: Commit mode pipelines**
 
 ```bash
 git add src/modes.ts test/modes.test.ts
