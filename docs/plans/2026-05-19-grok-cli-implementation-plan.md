@@ -1337,7 +1337,7 @@ git commit -m "feat: orchestrate grok cli modes"
 - Modify: `README.md`
 - Test: existing test suite
 
-- [ ] **Step 1: Replace `src/cli.ts` with full CLI wiring**
+- [x] **Step 1: Replace `src/cli.ts` with full CLI wiring**
 
 ```ts
 #!/usr/bin/env node
@@ -1378,7 +1378,7 @@ async function main() {
 await main();
 ```
 
-- [ ] **Step 2: Update `README.md` with final usage docs**
+- [x] **Step 2: Update `README.md` with final usage docs**
 
 ````md
 # grok-cli
@@ -1435,7 +1435,7 @@ Default output is a decision brief. Use `--report`, `--raw`, or `--json` for alt
 Every response includes a cost footer when OpenRouter returns usage data. If cost cannot be computed, the CLI prints `Cost: unavailable`.
 ````
 
-- [ ] **Step 3: Run full verification**
+- [x] **Step 3: Run full verification**
 
 Run:
 
@@ -1448,7 +1448,7 @@ pnpm grok --help
 
 Expected: tests, typecheck, and build pass; help text prints.
 
-- [ ] **Step 4: Run missing-key smoke test**
+- [x] **Step 4: Run missing-key smoke test**
 
 Run:
 
@@ -1458,7 +1458,7 @@ env -u OPENROUTER_API_KEY pnpm grok "Compare Next.js and Remix"
 
 Expected: exits non-zero and prints a helpful missing API key message.
 
-- [ ] **Step 5: Commit CLI wiring**
+- [x] **Step 5: Commit CLI wiring**
 
 ```bash
 git add src/cli.ts README.md
