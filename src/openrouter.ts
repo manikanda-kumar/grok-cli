@@ -42,7 +42,7 @@ export async function callOpenRouter(
   };
   if (call.temperature !== undefined) body.temperature = call.temperature;
   if (call.maxTokens !== undefined) body.max_tokens = call.maxTokens;
-  if (call.json === true) body.response_format = { type: "json_object" };
+  if (call.json === true && supportsJsonObjectResponseFormat(call.model)) body.response_format = { type: "json_object" };
 
   let response: Response;
   try {
@@ -121,4 +121,8 @@ function mapOpenRouterError(status: number, text: string, model: string): OpenRo
   }
 
   return new OpenRouterError(`OpenRouter request failed (${status}): ${detail}`, status);
+}
+
+function supportsJsonObjectResponseFormat(model: string): boolean {
+  return !model.startsWith("perplexity/");
 }

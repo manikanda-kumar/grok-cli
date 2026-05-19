@@ -20,7 +20,7 @@ export async function runMode(config: AppConfig, options: CliOptions, caller: Mo
   const role = options.mode === "auto" ? "expert" : options.mode;
   const modelAlias = role === "research" ? "research" : role === "fast" ? "fast" : "expert";
   const model = resolveModel(config, options.profile, modelAlias);
-  const messages = role === "research" ? buildResearchMessages(options.prompt, options.outputFormat) : buildSingleCallMessages(options.prompt, options.outputFormat);
+  const messages = role === "research" ? buildResearchMessages(options.prompt, options.outputFormat, options.json) : buildSingleCallMessages(options.prompt, options.outputFormat, options.json);
   const result = await caller({ role, model, messages, temperature: 0.2, json: options.json });
   return normalizeResult(result, options);
 }
@@ -67,6 +67,7 @@ async function runMulti(config: AppConfig, options: CliOptions, caller: ModeCall
       analyses.map((item) => item.content),
       options.outputFormat,
       research.sources.map((source) => source.url),
+      options.json,
     ),
     temperature: 0.2,
     json: options.json,

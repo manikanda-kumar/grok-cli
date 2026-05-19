@@ -88,6 +88,13 @@ describe("runMode", () => {
       openQuestions: ["Data volume?"],
       confidence: "high",
     });
+    expect(caller).toHaveBeenCalledWith(
+      expect.objectContaining({
+        messages: expect.arrayContaining([
+          expect.objectContaining({ content: expect.stringContaining("Return only a JSON object") }),
+        ]),
+      }),
+    );
   });
 
   it("continues multi mode when one analysis role fails", async () => {

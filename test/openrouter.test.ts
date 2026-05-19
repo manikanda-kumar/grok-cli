@@ -32,6 +32,38 @@ describe("callOpenRouter", () => {
     expect(result.usage.calls[0]).toMatchObject({ costUsd: 0.001, promptTokens: 10, completionTokens: 5 });
   });
 
+  it("sends json_object response format for models that support it", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: "{}" } }] }),
+    });
+
+    await callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }], json: true },
+      fetchMock,
+    );
+
+    const body = JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string);
+    expect(body.response_format).toEqual({ type: "json_object" });
+  });
+
+  it("omits json_object response format for Perplexity models", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: "{}" } }] }),
+    });
+
+    await callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "research", model: "perplexity/sonar-pro-search", messages: [{ role: "user", content: "Prompt" }], json: true },
+      fetchMock,
+    );
+
+    const body = JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string);
+    expect(body.response_format).toBeUndefined();
+  });
+
   it("throws a helpful error for missing API keys", async () => {
     await expect(
       callOpenRouter(
