@@ -534,7 +534,7 @@ git commit -m "feat: parse grok cli arguments"
 - Create: `src/config.ts`
 - Modify: `test/config.test.ts`
 
-- [ ] **Step 1: Extend config tests in `test/config.test.ts`**
+- [x] **Step 1: Extend config tests in `test/config.test.ts`**
 
 ```ts
 import { mkdtempSync, writeFileSync } from "node:fs";
@@ -579,7 +579,7 @@ describe("resolveModel", () => {
 });
 ```
 
-- [ ] **Step 2: Run config tests to verify failure**
+- [x] **Step 2: Run config tests to verify failure**
 
 Run:
 
@@ -589,7 +589,7 @@ pnpm test test/config.test.ts
 
 Expected: FAIL because `src/config.ts` does not exist.
 
-- [ ] **Step 3: Create `src/config.ts`**
+- [x] **Step 3: Create `src/config.ts`**
 
 ```ts
 import { existsSync, readFileSync } from "node:fs";
@@ -641,7 +641,7 @@ function mergeConfig(base: AppConfig, override: Partial<AppConfig>): AppConfig {
 }
 ```
 
-- [ ] **Step 4: Run config tests and typecheck**
+- [x] **Step 4: Run config tests and typecheck**
 
 Run:
 
@@ -652,7 +652,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 5: Commit config loading**
+- [x] **Step 5: Commit config loading**
 
 ```bash
 git add src/config.ts test/config.test.ts
