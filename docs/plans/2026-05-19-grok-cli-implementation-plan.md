@@ -665,7 +665,7 @@ git commit -m "feat: load grok cli config"
 - Create: `src/cost.ts`
 - Test: `test/cost.test.ts`
 
-- [ ] **Step 1: Write `test/cost.test.ts`**
+- [x] **Step 1: Write `test/cost.test.ts`**
 
 ```ts
 import { describe, expect, it } from "vitest";
@@ -713,7 +713,7 @@ describe("cost helpers", () => {
 });
 ```
 
-- [ ] **Step 2: Run cost tests to verify failure**
+- [x] **Step 2: Run cost tests to verify failure**
 
 Run:
 
@@ -723,7 +723,7 @@ pnpm test test/cost.test.ts
 
 Expected: FAIL because `src/cost.ts` does not exist.
 
-- [ ] **Step 3: Create `src/cost.ts`**
+- [x] **Step 3: Create `src/cost.ts`**
 
 ```ts
 import type { UsageCall, UsageSummary } from "./types.js";
@@ -759,7 +759,7 @@ export function formatCost(summary: UsageSummary): string {
 }
 ```
 
-- [ ] **Step 4: Run cost tests**
+- [x] **Step 4: Run cost tests**
 
 Run:
 
@@ -770,7 +770,7 @@ pnpm typecheck
 
 Expected: tests and typecheck pass.
 
-- [ ] **Step 5: Commit cost helpers**
+- [x] **Step 5: Commit cost helpers**
 
 ```bash
 git add src/cost.ts test/cost.test.ts
