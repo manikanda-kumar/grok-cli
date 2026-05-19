@@ -40,7 +40,7 @@
 - Create: `src/cli.ts`
 - Create: `README.md`
 
-- [ ] **Step 1: Create `package.json`**
+- [x] **Step 1: Create `package.json`**
 
 ```json
 {
@@ -72,7 +72,7 @@
 }
 ```
 
-- [ ] **Step 2: Create `tsconfig.json`**
+- [x] **Step 2: Create `tsconfig.json`**
 
 ```json
 {
@@ -95,7 +95,7 @@
 }
 ```
 
-- [ ] **Step 3: Create temporary `src/cli.ts` smoke entrypoint**
+- [x] **Step 3: Create temporary `src/cli.ts` smoke entrypoint**
 
 ```ts
 #!/usr/bin/env node
@@ -103,7 +103,7 @@
 console.log("grok-cli scaffold ready");
 ```
 
-- [ ] **Step 4: Create initial `README.md`**
+- [x] **Step 4: Create initial `README.md`**
 
 ````md
 # grok-cli
@@ -119,7 +119,7 @@ OPENROUTER_API_KEY=... pnpm grok multi --economy "Choose a vector database for R
 The CLI defaults to a decision brief and includes cost metadata when OpenRouter returns usage data.
 ````
 
-- [ ] **Step 5: Install dependencies**
+- [x] **Step 5: Install dependencies**
 
 Run:
 
@@ -129,7 +129,7 @@ pnpm install
 
 Expected: `node_modules` and a lockfile are created, and no install errors occur.
 
-- [ ] **Step 6: Verify scaffold**
+- [x] **Step 6: Verify scaffold**
 
 Run:
 
@@ -141,7 +141,7 @@ pnpm grok
 
 Expected: typecheck and build pass; `pnpm grok` prints `grok-cli scaffold ready`.
 
-- [ ] **Step 7: Commit scaffold**
+- [x] **Step 7: Commit scaffold**
 
 ```bash
 git add package.json pnpm-lock.yaml tsconfig.json src/cli.ts README.md
