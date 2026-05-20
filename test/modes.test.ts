@@ -130,14 +130,14 @@ describe("runMode", () => {
   });
 
   it("routes economy deepresearch to economy sonar", async () => {
-    const caller = vi.fn().mockResolvedValue(fakeResult("deepresearch", "perplexity/sonar", "Research answer"));
+    const caller = vi.fn().mockResolvedValue(fakeResult("deepresearch", "perplexity/sonar-pro", "Research answer"));
     await runMode(
       DEFAULT_CONFIG,
       options({ mode: "deepresearch", modeExplicit: true, profile: "economy", profileExplicit: true }),
       caller,
     );
 
-    expect(caller).toHaveBeenCalledWith(expect.objectContaining({ model: "perplexity/sonar" }));
+    expect(caller).toHaveBeenCalledWith(expect.objectContaining({ model: "perplexity/sonar-pro" }));
   });
 
   it("warns when deprecated --web is passed", async () => {
@@ -156,7 +156,7 @@ describe("runMode", () => {
   it("runs multi mode research, analyses, and synthesis without web tools", async () => {
     const caller = vi
       .fn()
-      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-pro-search", "Facts"))
+      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-reasoning-pro", "Facts"))
       .mockResolvedValueOnce(fakeResult("engineering", "x-ai/grok-4.20", "Engineering"))
       .mockResolvedValueOnce(fakeResult("product", "x-ai/grok-4.20", "Product"))
       .mockResolvedValueOnce(fakeResult("skeptic", "x-ai/grok-4.20", "Skeptic"))
@@ -238,7 +238,7 @@ describe("runMode", () => {
   it("continues multi mode when one analysis role fails", async () => {
     const caller = vi
       .fn()
-      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-pro-search", "Facts"))
+      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-reasoning-pro", "Facts"))
       .mockResolvedValueOnce(fakeResult("engineering", "x-ai/grok-4.20", "Engineering"))
       .mockRejectedValueOnce(new Error("product unavailable"))
       .mockResolvedValueOnce(fakeResult("skeptic", "x-ai/grok-4.20", "Skeptic"))
@@ -258,7 +258,7 @@ describe("runMode", () => {
   it("fails multi mode when all analysis roles fail", async () => {
     const caller = vi
       .fn()
-      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-pro-search", "Facts"))
+      .mockResolvedValueOnce(fakeResult("research", "perplexity/sonar-reasoning-pro", "Facts"))
       .mockRejectedValueOnce(new Error("engineering unavailable"))
       .mockRejectedValueOnce(new Error("product unavailable"))
       .mockRejectedValueOnce(new Error("skeptic unavailable"));

@@ -4,15 +4,15 @@ export const DEFAULT_MODELS: ModelProfiles = {
   quality: {
     fast: "x-ai/grok-4.3",
     expert: "x-ai/grok-4.20",
-    research: "perplexity/sonar-pro-search",
+    research: "perplexity/sonar-reasoning-pro",
     deepResearch: "perplexity/sonar-deep-research",
     nativeMulti: "x-ai/grok-4.20-multi-agent",
   },
   economy: {
     fast: "x-ai/grok-4.3",
     expert: "x-ai/grok-4.3",
-    research: "perplexity/sonar",
-    deepResearch: "perplexity/sonar",
+    research: "perplexity/sonar-pro",
+    deepResearch: "perplexity/sonar-pro",
     nativeMulti: "x-ai/grok-4.3",
   },
 };

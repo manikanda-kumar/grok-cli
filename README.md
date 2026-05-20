@@ -26,7 +26,7 @@ Modes choose **which pipeline runs**, not output format. Default mode is `auto`.
 | `auto` | Same as `expert` | 1× Grok | OpenRouter web search **on** (default) |
 | `fast` | `grok-4.3` | 1× Grok | web search on (default) |
 | `expert` | `grok-4.20` | 1× Grok | web search on (default) |
-| `deepresearch` | Sonar deep (`sonar-deep-research` / economy `sonar`) | 1× Sonar | Sonar only — no OpenRouter web tools |
+| `deepresearch` | Sonar deep (`sonar-deep-research` / economy `sonar-pro`) | 1× Sonar | Sonar only — no OpenRouter web tools |
 | `multi` | Sonar + 3× Grok roles + synthesis | 5+ calls | Sonar pass only; Grok legs **no** web tools |
 | `research` | *(deprecated alias for `deepresearch`)* | same | same |
 
@@ -130,7 +130,7 @@ grok --web-fetch expert "Summarize the OpenRouter web search tool docs"
 |-------|--------|
 | `fast` | `x-ai/grok-4.3` |
 | `expert` | `x-ai/grok-4.20` |
-| `research` | `perplexity/sonar-pro-search` |
+| `research` | `perplexity/sonar-reasoning-pro` |
 | `deepResearch` | `perplexity/sonar-deep-research` |
 | `nativeMulti` | `x-ai/grok-4.20-multi-agent` |
 
@@ -140,11 +140,11 @@ grok --web-fetch expert "Summarize the OpenRouter web search tool docs"
 |-------|--------|
 | `fast` | `x-ai/grok-4.3` |
 | `expert` | `x-ai/grok-4.3` |
-| `research` | `perplexity/sonar` |
-| `deepResearch` | `perplexity/sonar` |
+| `research` | `perplexity/sonar-pro` |
+| `deepResearch` | `perplexity/sonar-pro` |
 | `nativeMulti` | `x-ai/grok-4.3` |
 
-`deepresearch` mode uses the `deepResearch` alias. `multi` uses the `research` alias (Sonar pro-search) for its first pass.
+`deepresearch` mode uses the `deepResearch` alias. `multi` uses the `research` alias (Sonar reasoning-pro) for its first pass.
 
 ## Config
 

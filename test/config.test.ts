@@ -17,7 +17,7 @@ describe("defaults", () => {
     expect(DEFAULT_CONFIG.defaultProfile).toBe("quality");
     expect(DEFAULT_CONFIG.models.quality.fast).toBe("x-ai/grok-4.3");
     expect(DEFAULT_CONFIG.models.quality.expert).toBe("x-ai/grok-4.20");
-    expect(DEFAULT_CONFIG.models.quality.research).toBe("perplexity/sonar-pro-search");
+    expect(DEFAULT_CONFIG.models.quality.research).toBe("perplexity/sonar-reasoning-pro");
     expect(DEFAULT_CONFIG.models.quality.deepResearch).toBe("perplexity/sonar-deep-research");
     expect(DEFAULT_CONFIG.web.search.enabled).toBe(true);
   });
@@ -44,7 +44,7 @@ describe("loadConfig", () => {
 describe("resolveModel", () => {
   it("uses profile alias", () => {
     expect(resolveModel(DEFAULT_CONFIG, "quality", "expert")).toBe("x-ai/grok-4.20");
-    expect(resolveModel(DEFAULT_CONFIG, "economy", "research")).toBe("perplexity/sonar");
+    expect(resolveModel(DEFAULT_CONFIG, "economy", "research")).toBe("perplexity/sonar-pro");
   });
 });
 

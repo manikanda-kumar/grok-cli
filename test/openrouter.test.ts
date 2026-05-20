@@ -24,7 +24,7 @@ describe("buildTools", () => {
   });
 
   it("omits tools for Perplexity models", () => {
-    expect(buildTools("perplexity/sonar-pro-search", webOn)).toBeUndefined();
+    expect(buildTools("perplexity/sonar-reasoning-pro", webOn)).toBeUndefined();
   });
 
   it("omits tools when search is disabled", () => {
@@ -204,7 +204,7 @@ describe("callOpenRouter", () => {
 
     await callOpenRouter(
       { apiKey: "test-openrouter-key", appName: "grok-cli" },
-      { role: "research", model: "perplexity/sonar-pro-search", messages: [{ role: "user", content: "Prompt" }], json: true },
+      { role: "research", model: "perplexity/sonar-reasoning-pro", messages: [{ role: "user", content: "Prompt" }], json: true },
       fetchMock,
     );
 
@@ -232,7 +232,7 @@ describe("callOpenRouter", () => {
     await expect(
       callOpenRouter(
         { apiKey: "test-openrouter-key", appName: "grok-cli" },
-        { role: "research", model: "perplexity/sonar", messages: [{ role: "user", content: "Prompt" }] },
+        { role: "research", model: "perplexity/sonar-pro", messages: [{ role: "user", content: "Prompt" }] },
         fetchMock,
       ),
     ).rejects.toThrow("OpenRouter credits or quota error: Insufficient credits");
