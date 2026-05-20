@@ -33,6 +33,12 @@ async function main() {
 
     const result = await runMode(config, options, (call) => callOpenRouter(config.openrouter, call));
 
+    // Over-limit aborts inside runMode (before further calls). Here we only flag the
+    // case where cost is unknown, so a silently-unenforced --max-cost is visible.
+    if (options.maxCost !== undefined && result.usage.costUsd === undefined) {
+      console.error(`warning: --max-cost set ($${options.maxCost.toFixed(4)}) but OpenRouter returned no cost; limit not enforced`);
+    }
+
     if (!options.json && options.outputFormat === "raw" && result.warnings.length > 0) {
       for (const warning of result.warnings) {
         console.error(`warning: ${warning}`);

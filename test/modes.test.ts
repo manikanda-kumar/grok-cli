@@ -111,7 +111,6 @@ describe("runMode", () => {
       expect.objectContaining({
         model: "perplexity/sonar-deep-research",
         role: "deepresearch",
-        web: undefined,
       }),
     );
     expect(result.mode).toBe("deepresearch");
@@ -176,6 +175,27 @@ describe("runMode", () => {
     expect(result.content).toBe("Final");
     expect(result.usage.calls).toHaveLength(5);
     expect(result.web?.searchEnabled).toBe(false);
+  });
+
+  it("aborts a single call when --max-cost is exceeded", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeResult("expert", "x-ai/grok-4.20", "Expert answer"));
+    await expect(
+      runMode(DEFAULT_CONFIG, options({ mode: "expert", modeExplicit: true, maxCost: 0.0005 }), caller),
+    ).rejects.toThrow("exceeded limit of $0.0005");
+    expect(caller).toHaveBeenCalledTimes(1);
+  });
+
+  it("runs multi legs sequentially under --max-cost and stops dispatching once exceeded", async () => {
+    const caller = vi.fn().mockImplementation((call) => Promise.resolve(fakeResult(call.role, "x-ai/grok-4.20", call.role)));
+
+    // Each call costs $0.001. Cap $0.0015: research ($0.001) ok, engineering crosses to
+    // $0.002 > cap. product, skeptic, and synthesis must never be dispatched (no overspend).
+    await expect(
+      runMode(DEFAULT_CONFIG, options({ mode: "multi", modeExplicit: true, maxCost: 0.0015 }), caller),
+    ).rejects.toThrow("exceeded limit of $0.0015");
+
+    const dispatchedRoles = caller.mock.calls.map((c) => c[0].role);
+    expect(dispatchedRoles).toEqual(["research", "engineering"]);
   });
 
   it("parses JSON decision answers", async () => {

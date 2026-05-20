@@ -100,33 +100,75 @@ export async function callOpenRouter(
   if (call.json === true && supportsJsonObjectResponseFormat(call.model)) body.response_format = { type: "json_object" };
   if (tools) body.tools = tools;
 
-  let response: Response;
-  try {
-    response = await fetchImpl("https://openrouter.ai/api/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${config.apiKey}`,
-        "Content-Type": "application/json",
-        "HTTP-Referer": config.siteUrl ?? "https://github.com/local/grok-cli",
-        "X-Title": config.appName,
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (error) {
-    throw new OpenRouterError("Network error talking to OpenRouter. Please retry.", undefined, { cause: error });
+  let lastError: Error | undefined;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    try {
+      const response = await fetchImpl("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${config.apiKey}`,
+          "Content-Type": "application/json",
+          "HTTP-Referer": config.siteUrl ?? "https://github.com/local/grok-cli",
+          "X-Title": config.appName,
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (!response.ok) {
+        const text = await response.text();
+        const error = mapOpenRouterError(response.status, text, call.model, tools !== undefined);
+        if (isRetryableError(response.status) && attempt < 3) {
+          await sleep(retryDelay(attempt, response));
+          continue;
+        }
+        throw error;
+      }
+
+      let json: OpenRouterResponse;
+      try {
+        json = (await response.json()) as OpenRouterResponse;
+      } catch (error) {
+        throw new OpenRouterError("OpenRouter returned an invalid JSON response. Please retry.", undefined, { cause: error });
+      }
+      return handleSuccess(json, call);
+    } catch (error) {
+      if (
+        (error instanceof OpenRouterError && error.status && isRetryableError(error.status)) ||
+        (error instanceof TypeError && error.message.toLowerCase().includes("fetch"))
+      ) {
+        if (attempt < 3) {
+          lastError = error;
+          await sleep(retryDelay(attempt));
+          continue;
+        }
+      }
+      throw error;
+    }
   }
 
-  if (!response.ok) {
-    const text = await response.text();
-    throw mapOpenRouterError(response.status, text, call.model, tools !== undefined);
-  }
+  throw lastError ?? new Error("OpenRouter request failed after 3 attempts");
+}
 
-  let json: OpenRouterResponse;
-  try {
-    json = (await response.json()) as OpenRouterResponse;
-  } catch (error) {
-    throw new OpenRouterError("OpenRouter returned an invalid JSON response. Please retry.", undefined, { cause: error });
+function isRetryableError(status: number): boolean {
+  return status === 429 || status >= 500;
+}
+
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+// Exponential backoff, but honor a server Retry-After header when present (429s).
+function retryDelay(attempt: number, response?: Response): number {
+  const backoff = Math.pow(2, attempt) * 1000;
+  const header = response?.headers?.get?.("retry-after");
+  if (header) {
+    const seconds = Number.parseInt(header, 10);
+    if (Number.isFinite(seconds) && seconds >= 0) return Math.max(backoff, seconds * 1000);
   }
+  return backoff;
+}
+
+function handleSuccess(json: OpenRouterResponse, call: OpenRouterCall): PipelineResult {
   const content = json.choices?.[0]?.message?.content;
   if (!content) {
     throw new OpenRouterError("OpenRouter response did not include message content");

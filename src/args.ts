@@ -26,6 +26,7 @@ Options:
   --json                     Emit structured JSON (compatible with web tools)
   --report                   Emit a longer research report
   --raw                      Emit minimally shaped model output
+  --max-cost <n>             Error if total cost exceeds <n> USD
   -h, --help                 Show help
 `;
 
@@ -37,6 +38,7 @@ export function parseArgs(argv: string[]): CliOptions {
   let profileExplicit = false;
   let outputFormat: CliOptions["outputFormat"] = "brief";
   let json = false;
+  let maxCost: number | undefined;
   const web = emptyWebOverrides();
   const promptParts: string[] = [];
 
@@ -128,6 +130,14 @@ export function parseArgs(argv: string[]): CliOptions {
       continue;
     }
 
+    if (token === "--max-cost") {
+      const value = tokens.shift();
+      const parsed = Number.parseFloat(requireValue(token, value));
+      if (!Number.isFinite(parsed) || parsed <= 0) throw new Error(`Invalid value for --max-cost: ${value}`);
+      maxCost = parsed;
+      continue;
+    }
+
     if (token.startsWith("-")) {
       throw new Error(`Unknown option: ${token}`);
     }
@@ -139,7 +149,17 @@ export function parseArgs(argv: string[]): CliOptions {
   const prompt = promptParts.join(" ").trim();
   if (!prompt) throw new Error("Missing prompt");
 
-  return { prompt, mode, modeExplicit, profile, profileExplicit, outputFormat, json, web };
+  return {
+    prompt,
+    mode,
+    modeExplicit,
+    profile,
+    profileExplicit,
+    outputFormat,
+    json,
+    web,
+    ...(maxCost === undefined ? {} : { maxCost }),
+  };
 }
 
 export function wantsJson(argv: string[]): boolean {

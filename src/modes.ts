@@ -15,7 +15,51 @@ interface ModeCall {
 
 type ModeCaller = (call: ModeCall) => Promise<PipelineResult>;
 
-export async function runMode(config: AppConfig, options: CliOptions, caller: ModeCaller): Promise<PipelineResult> {
+export class MaxCostExceededError extends Error {
+  constructor(spentUsd: number, limitUsd: number, role: string) {
+    super(`Cost $${spentUsd.toFixed(4)} exceeded limit of $${limitUsd.toFixed(4)} (aborted after "${role}")`);
+    this.name = "MaxCostExceededError";
+  }
+}
+
+// Wrap the caller so the pipeline aborts as soon as cumulative spend crosses --max-cost,
+// preventing subsequent calls (matters most for multi's 5-call fan-out). Enforced only
+// while every call so far reported a cost; otherwise the total is unknown and we let cli warn.
+function withBudget(caller: ModeCaller, maxCost: number | undefined): ModeCaller {
+  if (maxCost === undefined) return caller;
+  let spent = 0;
+  let costKnown = true;
+  return async (call) => {
+    // Pre-check: if a prior stage already blew the budget, don't fire this call.
+    if (costKnown && spent > maxCost) throw new MaxCostExceededError(spent, maxCost, call.role);
+    const result = await caller(call);
+    if (result.usage.costUsd === undefined) costKnown = false;
+    else spent += result.usage.costUsd;
+    if (costKnown && spent > maxCost) throw new MaxCostExceededError(spent, maxCost, call.role);
+    return result;
+  };
+}
+
+// Sequential analog of Promise.allSettled that stops as soon as a leg aborts on budget,
+// so no further (billable) legs are dispatched once --max-cost is crossed.
+async function runSequential<T extends string>(
+  roles: readonly T[],
+  run: (role: T) => Promise<PipelineResult>,
+): Promise<PromiseSettledResult<PipelineResult>[]> {
+  const results: PromiseSettledResult<PipelineResult>[] = [];
+  for (const role of roles) {
+    try {
+      results.push({ status: "fulfilled", value: await run(role) });
+    } catch (reason) {
+      results.push({ status: "rejected", reason });
+      if (reason instanceof MaxCostExceededError) break;
+    }
+  }
+  return results;
+}
+
+export async function runMode(config: AppConfig, options: CliOptions, rawCaller: ModeCaller): Promise<PipelineResult> {
+  const caller = withBudget(rawCaller, options.maxCost);
   const { mode, warnings: modeWarnings } = canonicalizeMode(options.mode);
   const web = resolveWebOptions(config, mode, options.web);
   const deprecatedWarnings = [
@@ -28,6 +72,7 @@ export async function runMode(config: AppConfig, options: CliOptions, caller: Mo
   }
 
   if (mode === "deepresearch") {
+    if (!options.json) console.error("Step 1/1: Researching...");
     const model = resolveModel(config, options.profile, "deepResearch");
     const result = await caller({
       role: "deepresearch",
@@ -35,7 +80,6 @@ export async function runMode(config: AppConfig, options: CliOptions, caller: Mo
       messages: buildResearchMessages(options.prompt, options.outputFormat, options.json),
       temperature: 0.2,
       json: options.json,
-      web: undefined,
     });
     return normalizeResult(result, options, mode, web, deprecatedWarnings);
   }
@@ -43,6 +87,10 @@ export async function runMode(config: AppConfig, options: CliOptions, caller: Mo
   const role = mode === "auto" ? "expert" : mode;
   const modelAlias = role === "fast" ? "fast" : "expert";
   const model = resolveModel(config, options.profile, modelAlias);
+  if (!options.json) {
+    const webStatus = web.searchEnabled ? " (web search enabled)" : "";
+    console.error(`Step 1/1: Calling ${modelAlias} model${webStatus}...`);
+  }
   const result = await caller({
     role,
     model,
@@ -65,26 +113,34 @@ async function runMulti(
   const researchModel = resolveModel(config, options.profile, "research");
   const expertModel = resolveModel(config, options.profile, "expert");
 
+  if (!options.json) console.error("Step 1/3: Researching grounded facts...");
   const research = await caller({
     role: "research",
     model: researchModel,
     messages: buildResearchMessages(options.prompt, "report"),
     temperature: 0.1,
-    web: undefined,
   });
 
   const roles = ["engineering", "product", "skeptic"] as const;
-  const settled = await Promise.allSettled(
-    roles.map((role) =>
-      caller({
-        role,
-        model: expertModel,
-        messages: buildRoleAnalysisMessages(role, options.prompt, research.content),
-        temperature: 0.2,
-        web: undefined,
-      }),
-    ),
-  );
+  if (!options.json) console.error(`Step 2/3: Analyzing perspectives (${roles.join(", ")})...`);
+  const runLeg = (role: (typeof roles)[number]) =>
+    caller({
+      role,
+      model: expertModel,
+      messages: buildRoleAnalysisMessages(role, options.prompt, research.content),
+      temperature: 0.2,
+    });
+
+  // Parallel by default for latency. With --max-cost, run legs sequentially so the budget
+  // pre-check can stop dispatching the moment the cap is crossed (no concurrent overspend).
+  const settled =
+    options.maxCost === undefined
+      ? await Promise.allSettled(roles.map(runLeg))
+      : await runSequential(roles, runLeg);
+
+  // A budget abort in any leg is fatal for the run — surface it instead of demoting to a warning.
+  const budgetHit = settled.find((item) => item.status === "rejected" && item.reason instanceof MaxCostExceededError);
+  if (budgetHit?.status === "rejected") throw budgetHit.reason;
 
   const analyses = settled.flatMap((item) => (item.status === "fulfilled" ? [item.value] : []));
   const roleWarnings = settled.flatMap((item, index) => {
@@ -96,6 +152,7 @@ async function runMulti(
     throw new Error("Multi-agent mode failed because all Grok analysis roles failed");
   }
 
+  if (!options.json) console.error("Step 3/3: Synthesizing final answer...");
   const synthesis = await caller({
     role: "synthesis",
     model: expertModel,
@@ -109,7 +166,6 @@ async function runMulti(
     ),
     temperature: 0.2,
     json: options.json,
-    web: undefined,
   });
 
   return normalizeResult(

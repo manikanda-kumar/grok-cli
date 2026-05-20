@@ -80,6 +80,7 @@ export interface CliOptions {
   outputFormat: OutputFormat;
   json: boolean;
   web: CliWebOverrides;
+  maxCost?: number;
 }
 
 export interface ServerToolUse {

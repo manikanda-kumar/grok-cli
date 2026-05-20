@@ -254,8 +254,36 @@ describe("callOpenRouter", () => {
     ).rejects.toThrow("Model unavailable: x-ai/missing-model. Try --economy or override the configured model alias.");
   });
 
-  it("maps network failures to retryable OpenRouter errors", async () => {
-    const fetchMock = vi.fn().mockRejectedValue(new TypeError("fetch failed"));
+  it("retries on network failures", async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi
+      .fn()
+      .mockRejectedValueOnce(new TypeError("fetch failed"))
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ choices: [{ message: { content: "Success" } }] }),
+      });
+
+    const promise = callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+      fetchMock,
+    );
+
+    await vi.runAllTimersAsync();
+    const result = await promise;
+    expect(result.content).toBe("Success");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
+  });
+
+  it("maps invalid JSON responses to a friendly error", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => {
+        throw new SyntaxError("Unexpected token");
+      },
+    });
 
     await expect(
       callOpenRouter(
@@ -263,7 +291,39 @@ describe("callOpenRouter", () => {
         { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
         fetchMock,
       ),
-    ).rejects.toThrow("Network error talking to OpenRouter. Please retry.");
+    ).rejects.toThrow("OpenRouter returned an invalid JSON response. Please retry.");
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+  });
+
+  it("honors Retry-After header on 429", async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 429,
+        headers: { get: (name: string) => (name.toLowerCase() === "retry-after" ? "5" : null) },
+        text: async () => "Rate limited",
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ choices: [{ message: { content: "Success" } }] }),
+      });
+
+    const promise = callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+      fetchMock,
+    );
+
+    // Backoff for attempt 1 is 2s; Retry-After of 5s must win.
+    await vi.advanceTimersByTimeAsync(2000);
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    await vi.advanceTimersByTimeAsync(3000);
+    const result = await promise;
+    expect(result.content).toBe("Success");
+    expect(fetchMock).toHaveBeenCalledTimes(2);
+    vi.useRealTimers();
   });
 
   it("maps auth failures", async () => {
@@ -326,19 +386,57 @@ describe("callOpenRouter", () => {
     expect(result.usage.serverToolUse).toEqual({ webFetchRequests: 1 });
   });
 
-  it("maps retryable provider failures", async () => {
+  it("retries on transient failures (429, 5xx)", async () => {
+    vi.useFakeTimers();
+    const fetchMock = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 429,
+        text: async () => "Rate limited",
+      })
+      .mockResolvedValueOnce({
+        ok: false,
+        status: 500,
+        text: async () => "Internal server error",
+      })
+      .mockResolvedValueOnce({
+        ok: true,
+        json: async () => ({ choices: [{ message: { content: "Success" } }] }),
+      });
+
+    const promise = callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+      fetchMock,
+    );
+
+    await vi.runAllTimersAsync();
+    const result = await promise;
+    expect(result.content).toBe("Success");
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    vi.useRealTimers();
+  });
+
+  it("fails after 3 attempts", async () => {
+    vi.useFakeTimers();
     const fetchMock = vi.fn().mockResolvedValue({
       ok: false,
-      status: 503,
-      text: async () => "Provider overloaded",
+      status: 429,
+      text: async () => "Rate limited",
     });
 
-    await expect(
-      callOpenRouter(
-        { apiKey: "test-openrouter-key", appName: "grok-cli" },
-        { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
-        fetchMock,
-      ),
-    ).rejects.toThrow("OpenRouter provider error (503): Provider overloaded. Please retry.");
+    const promise = callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      { role: "expert", model: "x-ai/grok-4.20", messages: [{ role: "user", content: "Prompt" }] },
+      fetchMock,
+    );
+    const assertion = expect(promise).rejects.toThrow("OpenRouter provider error (429): Rate limited. Please retry.");
+
+    await vi.runAllTimersAsync();
+
+    await assertion;
+    expect(fetchMock).toHaveBeenCalledTimes(3);
+    vi.useRealTimers();
   });
 });

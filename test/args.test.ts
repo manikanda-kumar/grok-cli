@@ -92,6 +92,12 @@ describe("parseArgs", () => {
     });
   });
 
+  it("parses --max-cost", () => {
+    expect(parseArgs(["--max-cost", "0.05", "Prompt"])).toMatchObject({ maxCost: 0.05 });
+    expect(() => parseArgs(["--max-cost", "invalid", "Prompt"])).toThrow("Invalid value for --max-cost");
+    expect(() => parseArgs(["--max-cost", "-1", "Prompt"])).toThrow("Invalid value for --max-cost");
+  });
+
   it("detects json intent before full parsing", () => {
     expect(wantsJson(["--json"])).toBe(true);
     expect(wantsJson(["--jsno"])).toBe(false);
