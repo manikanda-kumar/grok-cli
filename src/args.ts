@@ -1,10 +1,17 @@
 import type { CliOptions, CliWebOverrides, Mode } from "./types.js";
 
+import { basename } from "node:path";
+
 const MODES = new Set<Mode>(["auto", "fast", "expert", "deepresearch", "research", "multi"]);
 
+const PROGRAM_NAME =
+  process.env.GROK_PROGRAM_NAME ||
+  basename(process.argv[1] || "grok").replace(/\.(js|ts)$/, "") ||
+  "grok";
+
 export const HELP_TEXT = `Usage:
-  grok [options] <prompt>
-  grok <auto|fast|expert|deepresearch|research|multi> [options] <prompt>
+  ${PROGRAM_NAME} [options] <prompt>
+  ${PROGRAM_NAME} <auto|fast|expert|deepresearch|research|multi> [options] <prompt>
 
 Modes:
   auto, fast, expert     Grok with OpenRouter web search on by default
