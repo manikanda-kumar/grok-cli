@@ -1,5 +1,5 @@
 import { formatCost } from "./cost.js";
-import type { DecisionAnswer, PipelineResult, UsageSummary } from "./types.js";
+import type { DecisionAnswer, PipelineResult, SearchResult, UsageSummary } from "./types.js";
 
 export function formatMarkdown(result: PipelineResult): string {
   return `${withSources(result.content.trim(), result.sources)}\n\n${warnings(result.warnings)}${footer(result.usage)}`.trimEnd();
@@ -9,46 +9,83 @@ export function formatRaw(result: PipelineResult): string {
   return `${result.content.trim()}\n\n${footer(result.usage)}`.trimEnd();
 }
 
+// Tavily-style markdown for --output results (non-JSON). Lists each result with
+// title, url, snippet, and score; appends the optional answer if present.
+export function formatRetrieveMarkdown(result: PipelineResult): string {
+  const parts: string[] = [];
+  if (result.content.trim()) {
+    parts.push(result.content.trim(), "");
+  }
+  if (result.searchResults && result.searchResults.length > 0) {
+    parts.push("## Results");
+    for (const item of result.searchResults) {
+      parts.push(`- **${item.title || item.url}**${item.score !== undefined ? ` (score: ${item.score})` : ""}`);
+      parts.push(`  ${item.url}`);
+      if (item.content) parts.push(`  ${item.content}`);
+    }
+    parts.push("");
+  }
+  parts.push(warnings(result.warnings), footer(result.usage));
+  return parts.join("\n").trimEnd();
+}
+
 export function formatJson(result: PipelineResult): string {
-  return JSON.stringify(
-    {
-      mode: result.mode,
-      web: result.web
-        ? {
-            search_enabled: result.web.searchEnabled,
-            fetch_enabled: result.web.fetchEnabled,
-          }
-        : undefined,
-      profile: result.profile,
-      output_format: result.outputFormat,
-      answer: formatAnswer(result.answer),
-      content: result.content,
-      sources: result.sources,
-      warnings: result.warnings,
-      usage: {
-        total_prompt_tokens: result.usage.totalPromptTokens,
-        total_completion_tokens: result.usage.totalCompletionTokens,
-        cost_usd: result.usage.costUsd ?? null,
-        server_tool_use: formatServerToolUse(result.usage.serverToolUse),
-        calls: result.usage.calls.map((call) => ({
-          role: call.role,
-          model: call.model,
-          prompt_tokens: call.promptTokens,
-          completion_tokens: call.completionTokens,
-          cost_usd: call.costUsd ?? null,
-          server_tool_use: formatServerToolUse(call.serverToolUse),
-        })),
-      },
+  const payload: Record<string, unknown> = {
+    mode: result.mode,
+    web: result.web
+      ? {
+          search_enabled: result.web.searchEnabled,
+          fetch_enabled: result.web.fetchEnabled,
+        }
+      : undefined,
+    profile: result.profile,
+    output_format: result.outputFormat,
+    answer: formatAnswer(result.answer),
+    content: result.content,
+    sources: result.sources,
+    warnings: result.warnings,
+    usage: {
+      total_prompt_tokens: result.usage.totalPromptTokens,
+      total_completion_tokens: result.usage.totalCompletionTokens,
+      cost_usd: result.usage.costUsd ?? null,
+      server_tool_use: formatServerToolUse(result.usage.serverToolUse),
+      calls: result.usage.calls.map((call) => ({
+        role: call.role,
+        model: call.model,
+        prompt_tokens: call.promptTokens,
+        completion_tokens: call.completionTokens,
+        cost_usd: call.costUsd ?? null,
+        server_tool_use: formatServerToolUse(call.serverToolUse),
+      })),
     },
-    null,
-    2,
-  );
+  };
+
+  if (result.searchResults && result.searchResults.length > 0) {
+    payload.search_results = result.searchResults.map(formatSearchResult);
+  }
+  if (result.schemaResult !== undefined) {
+    payload.schema_result = result.schemaResult;
+  }
+
+  return JSON.stringify(payload, null, 2);
 }
 
 export function formatError(error: unknown, json: boolean): string {
   const message = error instanceof Error ? error.message : String(error);
   if (json) return JSON.stringify({ error: { message } }, null, 2);
   return `Error: ${message}`;
+}
+
+function formatSearchResult(item: SearchResult): Record<string, unknown> {
+  const out: Record<string, unknown> = {
+    title: item.title,
+    url: item.url,
+    content: item.content,
+  };
+  if (item.score !== undefined) out.score = item.score;
+  if (item.raw_content !== undefined) out.raw_content = item.raw_content;
+  if (item.favicon !== undefined) out.favicon = item.favicon;
+  return out;
 }
 
 function footer(usage: UsageSummary): string {

@@ -1,7 +1,10 @@
+import { readFileSync } from "node:fs";
+import { resolve as resolvePath } from "node:path";
 import { canonicalizeMode, modeAllowsWeb, resolveModel, resolveWebOptions } from "./config.js";
 import { mergeUsage } from "./cost.js";
-import { buildResearchMessages, buildRoleAnalysisMessages, buildSingleCallMessages, buildSynthesisMessages } from "./prompts.js";
-import type { AppConfig, CanonicalMode, CliOptions, DecisionAnswer, OpenRouterMessage, PipelineResult, ResolvedWebOptions } from "./types.js";
+import { buildResearchMessages, buildRoleAnalysisMessages, buildSchemaMessages, buildSingleCallMessages, buildSynthesisMessages, buildRetrieveMessages } from "./prompts.js";
+import { mergeRetrieveResults, parseRetrieveContent } from "./retrieval.js";
+import type { AppConfig, CanonicalMode, CliOptions, DecisionAnswer, OpenRouterMessage, PipelineResult, ResolvedWebOptions, SearchResult } from "./types.js";
 
 interface ModeCall {
   role: string;
@@ -67,8 +70,45 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     ...(options.web.deprecatedWebFlag ? ['Flag "--web" is deprecated; web search is on by default. Use --no-web to disable.'] : []),
   ];
 
+  // Schema-guided output: takes over the single-call path regardless of mode.
+  // The model is asked to return JSON conforming to the user-supplied schema;
+  // the parsed object lands in result.schemaResult. Checked before multi so
+  // --schema overrides every mode (with a warning when it hijacks multi/deepresearch).
+  if (options.schema !== undefined) {
+    const schemaWarnings = [...deprecatedWarnings];
+    if (mode === "deepresearch" || mode === "multi") {
+      schemaWarnings.push(`--schema overrides ${options.modeExplicit ? options.mode : `"${options.mode}"`} mode; using a single Grok call with schema-constrained output instead.`);
+    }
+    const schemaJson = loadSchema(options.schema);
+    const model = resolveModel(config, options.profile, mode === "fast" ? "fast" : "expert");
+    if (!options.json) console.error(`Step 1/1: Generating schema-constrained output (${model})...`);
+    const result = await caller({
+      role: "schema",
+      model,
+      messages: buildSchemaMessages(options.prompt, schemaJson),
+      temperature: 0.1,
+      json: true,
+      web,
+    });
+    return normalizeSchemaResult(result, options, mode, web, schemaWarnings);
+  }
+
   if (options.mode === "multi") {
     return runMulti(config, options, mode, web, deprecatedWarnings, caller);
+  }
+
+  // Retrieve mode (or --retrieve / --output results|both on a Grok mode): run a
+  // retrieval-focused call that emits Tavily-style results[].
+  const retrieveRequested = mode === "retrieve" || options.retrieve || options.outputStyle !== "brief";
+  if (retrieveRequested && modeAllowsWeb(mode)) {
+    return runRetrieve(config, options, mode, web, deprecatedWarnings, caller);
+  }
+  if (retrieveRequested && !modeAllowsWeb(mode)) {
+    // --retrieve / --output results|both was requested on a non-web mode
+    // (deepresearch or multi). Surface a warning so agents know it was ignored.
+    deprecatedWarnings.push(
+      `--retrieve/--output was ignored in ${options.modeExplicit ? options.mode : `"${options.mode}"`} mode; this mode does not use OpenRouter web tools.`,
+    );
   }
 
   if (mode === "deepresearch") {
@@ -100,6 +140,144 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     web,
   });
   return normalizeResult(result, options, mode, web, deprecatedWarnings);
+}
+
+async function runRetrieve(
+  config: AppConfig,
+  options: CliOptions,
+  mode: CanonicalMode,
+  web: ResolvedWebOptions,
+  warnings: string[],
+  caller: ModeCaller,
+): Promise<PipelineResult> {
+  const model = resolveModel(config, options.profile, mode === "fast" ? "fast" : "expert");
+  if (!options.json) console.error(`Step 1/1: Retrieving web results (${model})...`);
+
+  const result = await caller({
+    role: "retrieve",
+    model,
+    messages: buildRetrieveMessages(options.prompt),
+    temperature: 0.1,
+    json: true,
+    web,
+  });
+
+  const parsed = parseRetrieveContent(result.content);
+  const searchResults = mergeRetrieveResults(parsed, result.sources);
+
+  // --output both: also run a synthesis call over the retrieved results.
+  let synthesis: PipelineResult | undefined;
+  if (options.outputStyle === "both") {
+    if (!options.json) console.error("Step 2/2: Synthesizing brief from retrieved results...");
+    const sourcesBlock = searchResults
+      .map((r) => `- ${r.title ? `${r.title}: ` : ""}${r.url}${r.content ? `\n  ${r.content}` : ""}`)
+      .join("\n");
+    synthesis = await caller({
+      role: "synthesis",
+      model,
+      messages: [
+        { role: "system", content: "Write a concise Markdown decision brief grounded in the provided sources. Cite URLs inline." },
+        { role: "user", content: `Query:\n${options.prompt}\n\nRetrieved sources:\n${sourcesBlock}\n\nSynthesize the answer.` },
+      ],
+      temperature: 0.2,
+      // Web is intentionally off: grounding is already in the retrieved sources block.
+      // Re-enabling web would add cost and latency for no new information.
+    });
+  }
+
+  const merged = synthesis
+    ? {
+        ...result,
+        content: synthesis.content,
+        usage: mergeUsage([result.usage, synthesis.usage]),
+        sources: [...result.sources, ...synthesis.sources],
+        warnings: [...result.warnings, ...synthesis.warnings],
+      }
+    : result;
+
+  return normalizeRetrieveResult(merged, options, mode, web, warnings, searchResults, parsed.answer);
+}
+
+function normalizeRetrieveResult(
+  result: PipelineResult,
+  options: CliOptions,
+  mode: CanonicalMode,
+  web: ResolvedWebOptions,
+  extraWarnings: string[],
+  searchResults: SearchResult[],
+  answer: string | undefined,
+): PipelineResult {
+  const { answer: _dropAnswer, ...resultWithoutAnswer } = result;
+  const normalized: PipelineResult = {
+    ...resultWithoutAnswer,
+    mode,
+    profile: options.profile,
+    outputFormat: options.outputFormat,
+    warnings: dedupeWarnings([...extraWarnings, ...result.warnings]),
+    searchResults,
+    ...(modeAllowsWeb(mode)
+      ? { web: { searchEnabled: web.searchEnabled, fetchEnabled: web.fetchEnabled } }
+      : { web: { searchEnabled: false, fetchEnabled: false } }),
+  };
+
+  // --output results: the content body is the optional LLM answer (if the model
+  // returned one), otherwise empty. --output both already has the synthesis in
+  // content from the merged result above; --output brief keeps the raw retrieve
+  // JSON (the caller is expected to read search_results).
+  if (options.outputStyle === "results" && answer) {
+    normalized.content = answer;
+  } else if (options.outputStyle === "results") {
+    normalized.content = "";
+  }
+
+  return normalized;
+}
+
+function normalizeSchemaResult(
+  result: PipelineResult,
+  options: CliOptions,
+  mode: CanonicalMode,
+  web: ResolvedWebOptions,
+  extraWarnings: string[],
+): PipelineResult {
+  let schemaResult: unknown;
+  let parseWarning: string | undefined;
+  try {
+    schemaResult = JSON.parse(result.content);
+  } catch {
+    schemaResult = undefined;
+    parseWarning = "--schema output was not valid JSON; schema_result is omitted. The raw model text is in content.";
+  }
+
+  const { answer: _dropSchemaAnswer, ...resultWithoutAnswer } = result;
+  const warnings = parseWarning ? [...extraWarnings, ...result.warnings, parseWarning] : [...extraWarnings, ...result.warnings];
+  const normalized: PipelineResult = {
+    ...resultWithoutAnswer,
+    mode,
+    profile: options.profile,
+    outputFormat: options.outputFormat,
+    warnings: dedupeWarnings(warnings),
+    ...(schemaResult !== undefined ? { schemaResult } : {}),
+    ...(modeAllowsWeb(mode)
+      ? { web: { searchEnabled: web.searchEnabled, fetchEnabled: web.fetchEnabled } }
+      : { web: { searchEnabled: false, fetchEnabled: false } }),
+  };
+  return normalized;
+}
+
+function loadSchema(source: string): string {
+  // Inline JSON if it parses, otherwise treat as a file path.
+  try {
+    JSON.parse(source);
+    return source;
+  } catch {
+    // fall through to file read
+  }
+  try {
+    return readFileSync(resolvePath(source), "utf8");
+  } catch (error) {
+    throw new Error(`Could not load --schema from ${source}: ${error instanceof Error ? error.message : String(error)}`);
+  }
 }
 
 async function runMulti(
@@ -213,7 +391,7 @@ function normalizeResult(
         }),
   };
 
-  if (options.json) {
+  if (options.json && options.schema === undefined && options.outputStyle === "brief" && !options.retrieve && mode !== "retrieve") {
     normalized.answer = parseDecisionAnswer(result.content);
   }
 

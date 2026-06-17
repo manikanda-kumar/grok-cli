@@ -3,6 +3,9 @@ import type { OutputFormat } from "./types.js";
 const WEB_SEARCH_INSTRUCTION =
   "You have access to live web search. Use it for time-sensitive facts, current versions, pricing, or anything that may have changed since training. Cite authoritative sources; include URLs in ## Sources when writing Markdown.";
 
+const RETRIEVE_INSTRUCTION =
+  "You have live web search. Run searches to find the most relevant, authoritative results for the query. After searching, return ONLY a JSON object with this exact shape: { \"results\": [ { \"title\": string, \"url\": string, \"content\": string } ], \"answer\": string }. The results array must contain one entry per distinct source you found, ranked by relevance, with a concise snippet (1-3 sentences) in content. The answer field must be a short (2-4 sentence) summary if the query asks for one, otherwise an empty string. Do not include any text outside the JSON. Do not wrap it in Markdown fences.";
+
 export function buildSingleCallMessages(prompt: string, outputFormat: OutputFormat, json = false, webSearch = false) {
   return [
     { role: "system" as const, content: systemPrompt(outputFormat, json, webSearch) },
@@ -41,6 +44,24 @@ export function buildSynthesisMessages(prompt: string, research: string, analyse
       role: "user" as const,
       content: `Original question:\n${prompt}\n\nGrounded research:\n${research}\n\nSource URLs:\n${sources.join("\n") || "None provided"}\n\nRole analyses:\n${analyses.join("\n\n---\n\n")}\n\nSynthesize the final answer.`,
     },
+  ];
+}
+
+export function buildRetrieveMessages(prompt: string) {
+  return [
+    { role: "system" as const, content: RETRIEVE_INSTRUCTION },
+    { role: "user" as const, content: prompt },
+  ];
+}
+
+// When --schema is supplied, instruct the model to return a JSON object that
+// conforms to the given JSON Schema. The schema is embedded verbatim so the
+// model can see property names, types, and descriptions.
+export function buildSchemaMessages(prompt: string, schemaJson: string) {
+  const system = `Return ONLY a valid JSON object that conforms to this JSON Schema. Do not include any text outside the JSON. Do not wrap it in Markdown fences.\n\nSchema:\n${schemaJson}`;
+  return [
+    { role: "system" as const, content: system },
+    { role: "user" as const, content: prompt },
   ];
 }
 

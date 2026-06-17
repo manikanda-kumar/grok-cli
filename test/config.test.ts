@@ -6,6 +6,7 @@ import { DEFAULT_CONFIG } from "../src/defaults.js";
 import {
   assertWebToolsCompatible,
   loadConfig,
+  modeAllowsWeb,
   resolveCliOptions,
   resolveModel,
   resolveWebOptions,
@@ -45,6 +46,46 @@ describe("resolveModel", () => {
   it("uses profile alias", () => {
     expect(resolveModel(DEFAULT_CONFIG, "quality", "expert")).toBe("x-ai/grok-4.20");
     expect(resolveModel(DEFAULT_CONFIG, "economy", "research")).toBe("perplexity/sonar-pro");
+  });
+});
+
+describe("modeAllowsWeb", () => {
+  it("allows web on retrieve mode", () => {
+    expect(modeAllowsWeb("retrieve")).toBe(true);
+  });
+});
+
+describe("resolveWebOptions", () => {
+  it("forces search on in retrieve mode even when config disables it, but does not force fetch", () => {
+    const config = {
+      ...DEFAULT_CONFIG,
+      web: {
+        ...DEFAULT_CONFIG.web,
+        search: { ...DEFAULT_CONFIG.web.search, enabled: false },
+        fetch: { ...DEFAULT_CONFIG.web.fetch, enabled: false },
+      },
+    };
+    const web = resolveWebOptions(config, "retrieve", { noWeb: false, deprecatedWebFlag: false, fetchFlag: false });
+    expect(web.searchEnabled).toBe(true);
+    // Fetch is not forced in retrieve mode (raw_content extraction not wired).
+    expect(web.fetchEnabled).toBe(false);
+  });
+
+  it("still enables fetch in retrieve mode when --web-fetch is passed", () => {
+    const config = {
+      ...DEFAULT_CONFIG,
+      web: {
+        ...DEFAULT_CONFIG.web,
+        fetch: { ...DEFAULT_CONFIG.web.fetch, enabled: false },
+      },
+    };
+    const web = resolveWebOptions(config, "retrieve", { noWeb: false, deprecatedWebFlag: false, fetchFlag: true });
+    expect(web.fetchEnabled).toBe(true);
+  });
+
+  it("respects --no-web in retrieve mode", () => {
+    const web = resolveWebOptions(DEFAULT_CONFIG, "retrieve", { noWeb: true, deprecatedWebFlag: false, fetchFlag: false });
+    expect(web.searchEnabled).toBe(false);
   });
 });
 
@@ -104,6 +145,9 @@ describe("resolveCliOptions", () => {
         profile: "quality",
         profileExplicit: false,
         outputFormat: "brief",
+        outputStyle: "brief",
+        retrieve: false,
+        webProvider: "openrouter",
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
       }),
@@ -119,6 +163,9 @@ describe("resolveCliOptions", () => {
         profile: "quality",
         profileExplicit: true,
         outputFormat: "brief",
+        outputStyle: "brief",
+        retrieve: false,
+        webProvider: "openrouter",
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
       }),

@@ -28,6 +28,7 @@ Modes choose **which pipeline runs**, not output format. Default mode is `auto`.
 | `expert` | `grok-4.20` | 1× Grok | web search on (default) |
 | `deepresearch` | Sonar deep (`sonar-deep-research` / economy `sonar-pro`) | 1× Sonar | Sonar only — no OpenRouter web tools |
 | `multi` | Sonar + 3× Grok roles + synthesis | 5+ calls | Sonar pass only; Grok legs **no** web tools |
+| `retrieve` | Grok (expert/fast) | 1× (+1 if `--output both`) | OpenRouter web search **forced on** |
 | `research` | *(deprecated alias for `deepresearch`)* | same | same |
 
 **Mode choice for agents:**
@@ -35,6 +36,7 @@ Modes choose **which pipeline runs**, not output format. Default mode is `auto`.
 - Decisions / tradeoffs → `grok "..."`, `grok expert "..."`, or `grok fast "..."` (web on by default; stderr hint each run)
 - Deep factual research → `grok deepresearch "..."` (Sonar deep — do **not** use default Grok for this)
 - Multi-perspective synthesis → `grok multi "..."` (Sonar supplies facts; Grok legs have no web tools)
+- Raw retrieval (Tavily-style `results[]`) → `grok retrieve "..."` or `grok expert --retrieve "..."`
 
 ```bash
 grok deepresearch "Latest stable Node.js LTS version as of 2026"
@@ -47,6 +49,10 @@ grok research "..."
 
 | Flag | Effect |
 |------|--------|
+| `--retrieve` | Force retrieval-focused output (Tavily-style `results[]` in `--json`) on any Grok mode |
+| `--output <style>` | Output shape: `brief` (default), `results` (raw retrieval), `both` (retrieve then synthesize) |
+| `--schema <json\|file>` | Constrain JSON output to a JSON Schema (inline JSON or file path) |
+| `--web-provider <provider>` | Web retrieval provider: `openrouter` (default) |
 | `--no-web` | Disable OpenRouter web search for this run (Grok modes only) |
 | `--web` | **Deprecated.** No-op with stderr warning; search is already on by default |
 | `--web-fetch` | Also attach `openrouter:web_fetch` when web is enabled (Grok modes only) |
@@ -61,7 +67,7 @@ grok research "..."
 | `--raw` | Model text + cost footer only; no brief/report scaffolding. |
 | `-h`, `--help` | Usage text; exit 0. |
 
-**Precedence:** CLI `--no-web` overrides config `web.search.enabled`. Modes `deepresearch`, `multi`, and deprecated `research` never enable OpenRouter web tools.
+**Precedence:** CLI `--no-web` overrides config `web.search.enabled`. Modes `deepresearch`, `multi`, and deprecated `research` never enable OpenRouter web tools. `retrieve` mode forces web on (unless `--no-web`).
 
 ```bash
 grok fast --raw "One sentence: what is Bun?"
@@ -69,6 +75,10 @@ grok --mode expert --json "Bun vs Node for a CLI tool"
 grok --no-web expert "Explain what a mutex is"
 grok deepresearch "Current state of React Server Components"
 grok multi "Redis or Memcached for session cache only"
+grok retrieve "latest React 19 patterns"
+grok expert --retrieve --json "latest Bun vs Deno benchmarks"
+grok expert --output both --json "compare Postgres vs MySQL for small teams"
+grok expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' "Go vs Rust for a CLI"
 ```
 
 ## Web search cost notes
@@ -87,8 +97,11 @@ OpenRouter runs `openrouter:web_search` and optional `openrouter:web_fetch` **se
 | `--report` | Markdown **research report** (longer sections) |
 | `--raw` | Plain model output |
 | `--json` | JSON: `mode`, `web`, `profile`, `output_format`, `answer`, `content`, `sources`, `warnings`, `usage` |
+| `retrieve` / `--retrieve` | Tavily-style **results list** (markdown) or `search_results[]` in `--json` |
+| `--output both` | Retrieve results **then** synthesize a brief (2 calls) |
+| `--schema` | JSON object conforming to your schema (`schema_result` in `--json`, pretty-printed JSON otherwise) |
 
-When web search runs, `sources` includes `url_citation` annotations from OpenRouter. Footer example:
+When web search runs, `sources` includes `url_citation` annotations from OpenRouter. In retrieve mode, `--json` also includes a `search_results` array with `title`, `url`, `content`, and `score` (heuristic, based on citation order). With `--schema`, `--json` includes `schema_result` (the parsed object). Footer example:
 
 ```text
 ---
@@ -107,9 +120,12 @@ hint: OpenRouter web search is enabled (--no-web to disable)
 2. **Use `--no-web`** for timeless or minimum-cost Grok runs.
 3. **Use `deepresearch` for deep factual research** — not default `grok "..."`. `research` is a deprecated alias.
 4. **Use `multi` for ensemble synthesis** — not to “turn on web”.
-5. **Prefer `--json`** for `answer`, `sources`, and `usage.server_tool_use`.
-6. **Prompts that start with `-`:** `grok -- --not-a-flag`
-7. **Exit code:** `0` success, `1` error.
+5. **Use `retrieve` or `--retrieve` for Tavily-style `results[]`** — when you need raw retrieval (RAG input) not a synthesized brief. Combine with `--json` to get `search_results` with scores.
+6. **Use `--output both`** when you want both raw results and a synthesized brief in one run (2 calls).
+7. **Use `--schema`** to get structured JSON conforming to your own schema (`schema_result` in `--json`).
+8. **Prefer `--json`** for `answer`, `sources`, `search_results`, `schema_result`, and `usage.server_tool_use`.
+9. **Prompts that start with `-`:** `grok -- --not-a-flag`
+10. **Exit code:** `0` success, `1` error.
 
 ## Examples
 
@@ -120,6 +136,10 @@ grok --mode expert --json "Compare Bun vs Node for a CLI tool"
 grok deepresearch "Latest stable Node.js LTS version as of 2026"
 grok multi "Redis or Memcached for session cache only"
 grok --web-fetch expert "Summarize the OpenRouter web search tool docs"
+grok retrieve --json "latest React 19 patterns"
+grok expert --retrieve --json "latest Bun vs Deno benchmarks"
+grok expert --output both --json "compare Postgres vs MySQL for small teams"
+grok expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
 ```
 
 ## Model aliases (`config.json` overrides)

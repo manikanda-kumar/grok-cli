@@ -1,4 +1,4 @@
-export type Mode = "auto" | "fast" | "expert" | "deepresearch" | "research" | "multi";
+export type Mode = "auto" | "fast" | "expert" | "deepresearch" | "research" | "multi" | "retrieve";
 
 export type CanonicalMode = Exclude<Mode, "research">;
 
@@ -6,11 +6,19 @@ export type Profile = "quality" | "economy";
 
 export type OutputFormat = "brief" | "report" | "raw";
 
+// --output controls the high-level shape of what's emitted: a synthesized brief
+// (default), raw retrieval results (Tavily-style), or both side-by-side.
+export type OutputStyle = "brief" | "results" | "both";
+
 export type ModelAlias = "fast" | "expert" | "research" | "deepResearch" | "nativeMulti";
 
 export type ModelAliases = Record<ModelAlias, string>;
 
 export type ModelProfiles = Record<Profile, ModelAliases>;
+
+// Web retrieval provider. Only "openrouter" is supported today; kept as an
+// extension point so future providers can be wired behind --web-provider.
+export type WebProvider = "openrouter";
 
 export interface WebSearchConfig {
   enabled: boolean;
@@ -78,6 +86,10 @@ export interface CliOptions {
   profile: Profile;
   profileExplicit: boolean;
   outputFormat: OutputFormat;
+  outputStyle: OutputStyle;
+  retrieve: boolean;
+  schema?: string;
+  webProvider: WebProvider;
   json: boolean;
   web: CliWebOverrides;
   maxCost?: number;
@@ -110,6 +122,29 @@ export interface Source {
   url: string;
 }
 
+// A single web retrieval result in Tavily-like shape. `score` and `raw_content`
+// are populated only when the underlying provider surfaces them; OpenRouter web
+// tools currently expose title/url/snippet via annotations, so score is derived
+// heuristically and raw_content is omitted.
+export interface SearchResult {
+  title: string;
+  url: string;
+  content: string;
+  score?: number;
+  raw_content?: string;
+  favicon?: string;
+}
+
+// Result of a retrieve-mode run. `results` is the primary payload; `answer` is
+// an optional LLM-generated summary (only when --output brief or both).
+export interface RetrieveResult {
+  query: string;
+  results: SearchResult[];
+  answer?: string;
+  sources: Source[];
+  usage?: UsageSummary;
+}
+
 export interface DecisionAnswer {
   recommendation: string;
   keyFacts: string[];
@@ -134,6 +169,12 @@ export interface PipelineResult {
   warnings: string[];
   usage: UsageSummary;
   web?: PipelineWebInfo;
+  // Populated by retrieve mode and by --output both / --retrieve on any mode.
+  // Mirrors Tavily's results[] array.
+  searchResults?: SearchResult[];
+  // Populated when --schema is used: the parsed JSON object the model returned
+  // constrained by the user-supplied schema.
+  schemaResult?: unknown;
 }
 
 export interface OpenRouterMessage {

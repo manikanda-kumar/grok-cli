@@ -53,7 +53,7 @@ export function canonicalizeMode(mode: Mode): { mode: CanonicalMode; warnings: s
 }
 
 export function modeAllowsWeb(mode: CanonicalMode): boolean {
-  return mode === "auto" || mode === "fast" || mode === "expert";
+  return mode === "auto" || mode === "fast" || mode === "expert" || mode === "retrieve";
 }
 
 export function modelSupportsServerTools(model: string): boolean {
@@ -95,7 +95,12 @@ export function assertWebToolsCompatible(
 }
 
 export function resolveWebOptions(config: AppConfig, mode: CanonicalMode, web: CliWebOverrides): ResolvedWebOptions {
-  const searchEnabled = modeAllowsWeb(mode) && config.web.search.enabled && !web.noWeb;
+  // retrieve mode is retrieval-first: force search on (unless --no-web).
+  // Fetch is not forced because raw_content extraction from web_fetch is not
+  // wired into SearchResult yet; forcing it would add cost for no benefit.
+  // Users can still opt in with --web-fetch.
+  const isRetrieve = mode === "retrieve";
+  const searchEnabled = modeAllowsWeb(mode) && (isRetrieve ? true : config.web.search.enabled) && !web.noWeb;
   const fetchEnabled = searchEnabled && (config.web.fetch.enabled || web.fetchFlag);
   const allowedDomains = web.allowedDomains ?? config.web.search.allowedDomains;
   const blockedDomains = web.blockedDomains ?? config.web.search.blockedDomains;

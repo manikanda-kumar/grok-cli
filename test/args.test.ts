@@ -102,4 +102,46 @@ describe("parseArgs", () => {
     expect(wantsJson(["--json"])).toBe(true);
     expect(wantsJson(["--jsno"])).toBe(false);
   });
+
+  it("parses retrieve as a positional mode", () => {
+    expect(parseArgs(["retrieve", "React 19 patterns"])).toMatchObject({
+      mode: "retrieve",
+      modeExplicit: true,
+      prompt: "React 19 patterns",
+    });
+  });
+
+  it("parses --retrieve flag", () => {
+    expect(parseArgs(["--retrieve", "Prompt"])).toMatchObject({ retrieve: true });
+  });
+
+  it("parses --output style", () => {
+    expect(parseArgs(["--output", "results", "Prompt"])).toMatchObject({ outputStyle: "results" });
+    expect(parseArgs(["--output", "both", "Prompt"])).toMatchObject({ outputStyle: "both" });
+    expect(parseArgs(["--output", "brief", "Prompt"])).toMatchObject({ outputStyle: "brief" });
+  });
+
+  it("rejects invalid --output style", () => {
+    expect(() => parseArgs(["--output", "verbose", "Prompt"])).toThrow("Invalid --output style");
+  });
+
+  it("parses --schema inline json", () => {
+    expect(parseArgs(["--schema", '{"type":"object"}', "Prompt"])).toMatchObject({ schema: '{"type":"object"}' });
+  });
+
+  it("parses --schema file path", () => {
+    expect(parseArgs(["--schema", "schema.json", "Prompt"])).toMatchObject({ schema: "schema.json" });
+  });
+
+  it("parses --web-provider", () => {
+    expect(parseArgs(["--web-provider", "openrouter", "Prompt"])).toMatchObject({ webProvider: "openrouter" });
+  });
+
+  it("rejects invalid --web-provider", () => {
+    expect(() => parseArgs(["--web-provider", "tavily", "Prompt"])).toThrow("Invalid --web-provider");
+  });
+
+  it("defaults outputStyle to brief and retrieve to false", () => {
+    expect(parseArgs(["Prompt"])).toMatchObject({ outputStyle: "brief", retrieve: false, webProvider: "openrouter" });
+  });
 });

@@ -13,6 +13,9 @@ function options(overrides: Partial<Parameters<typeof runMode>[1]> = {}): Parame
     profile: "quality",
     profileExplicit: false,
     outputFormat: "brief",
+    outputStyle: "brief",
+    retrieve: false,
+    webProvider: "openrouter",
     json: false,
     web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
     ...overrides,
@@ -28,6 +31,13 @@ function fakeResult(role: string, model: string, content: string): PipelineResul
     sources: [],
     warnings: [],
     usage: addUsageCall(emptyUsage(), { role, model, promptTokens: 10, completionTokens: 5, costUsd: 0.001 }),
+  };
+}
+
+function fakeRetrieveResult(role: string, model: string): PipelineResult {
+  return {
+    ...fakeResult(role, model, JSON.stringify({ results: [{ title: "R", url: "https://r.example", content: "snip" }], answer: "sum" })),
+    sources: [{ url: "https://r.example", title: "R" }],
   };
 }
 
@@ -275,5 +285,230 @@ describe("runMode", () => {
       runMode(DEFAULT_CONFIG, options({ mode: "multi", modeExplicit: true }), caller),
     ).rejects.toThrow("research unavailable");
     expect(caller).toHaveBeenCalledTimes(1);
+  });
+});
+
+describe("runMode retrieve", () => {
+  it("routes retrieve mode to a retrieval call with web enabled", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "retrieve", modeExplicit: true, json: true }),
+      caller,
+    );
+
+    expect(caller).toHaveBeenCalledWith(
+      expect.objectContaining({
+        role: "retrieve",
+        model: "x-ai/grok-4.20",
+        json: true,
+        web: expect.objectContaining({ searchEnabled: true, fetchEnabled: false }),
+      }),
+    );
+    expect(result.searchResults).toBeDefined();
+    expect(result.searchResults?.length).toBeGreaterThanOrEqual(1);
+    expect(result.searchResults?.[0]?.url).toBe("https://r.example");
+    expect(result.answer).toBeUndefined();
+  });
+
+  it("forces web search on in retrieve mode even when config defaults it off", async () => {
+    const config = { ...DEFAULT_CONFIG, web: { ...DEFAULT_CONFIG.web, search: { ...DEFAULT_CONFIG.web.search, enabled: false } } };
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    await runMode(DEFAULT_CONFIG, options({ mode: "retrieve", modeExplicit: true }), caller);
+    expect(caller.mock.calls[0]?.[0].web?.searchEnabled).toBe(true);
+    void config;
+  });
+
+  it("respects --no-web in retrieve mode", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "retrieve", modeExplicit: true, web: { noWeb: true, deprecatedWebFlag: false, fetchFlag: false } }),
+      caller,
+    );
+    expect(caller.mock.calls[0]?.[0].web?.searchEnabled).toBe(false);
+  });
+
+  it("sets content to the answer in --output results mode", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "retrieve", modeExplicit: true, outputStyle: "results", json: true }),
+      caller,
+    );
+    expect(result.content).toBe("sum");
+  });
+
+  it("runs a second synthesis call in --output both mode", async () => {
+    const caller = vi
+      .fn()
+      .mockResolvedValueOnce(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"))
+      .mockResolvedValueOnce(fakeResult("synthesis", "x-ai/grok-4.20", "Synthesized brief"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "retrieve", modeExplicit: true, outputStyle: "both", json: true }),
+      caller,
+    );
+
+    expect(caller).toHaveBeenCalledTimes(2);
+    expect(caller.mock.calls[1]?.[0].role).toBe("synthesis");
+    // Synthesis leg should not have web enabled (grounding already in sources block).
+    expect(caller.mock.calls[1]?.[0].web).toBeUndefined();
+    expect(result.content).toBe("Synthesized brief");
+    expect(result.searchResults?.[0]?.url).toBe("https://r.example");
+    expect(result.usage.calls).toHaveLength(2);
+  });
+
+  it("does not force DecisionAnswer parsing in retrieve mode", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "retrieve", modeExplicit: true, json: true }),
+      caller,
+    );
+    expect(result.answer).toBeUndefined();
+  });
+});
+
+describe("runMode --retrieve on a Grok mode", () => {
+  it("activates the retrieve path when --retrieve is set on expert", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, retrieve: true, json: true }),
+      caller,
+    );
+    expect(caller.mock.calls[0]?.[0].role).toBe("retrieve");
+    expect(result.searchResults?.[0]?.url).toBe("https://r.example");
+  });
+
+  it("activates the retrieve path when --output results is set on expert", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeRetrieveResult("retrieve", "x-ai/grok-4.20"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, outputStyle: "results", json: true }),
+      caller,
+    );
+    expect(caller.mock.calls[0]?.[0].role).toBe("retrieve");
+    expect(result.searchResults).toBeDefined();
+  });
+});
+
+describe("runMode --schema", () => {
+  it("parses schema-constrained JSON output into schemaResult", async () => {
+    const caller = vi.fn().mockResolvedValue(
+      fakeResult("schema", "x-ai/grok-4.20", JSON.stringify({ name: "Bun", stable: true })),
+    );
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+
+    expect(caller).toHaveBeenCalledWith(
+      expect.objectContaining({
+        role: "schema",
+        json: true,
+        messages: expect.arrayContaining([
+          expect.objectContaining({ content: expect.stringContaining("JSON Schema") }),
+        ]),
+      }),
+    );
+    expect(result.schemaResult).toEqual({ name: "Bun", stable: true });
+    expect(result.answer).toBeUndefined();
+  });
+
+  it("leaves schemaResult undefined when the model returns invalid JSON", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeResult("schema", "x-ai/grok-4.20", "not json"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+    expect(result.schemaResult).toBeUndefined();
+  });
+
+  it("does not parse DecisionAnswer when --schema is set", async () => {
+    const caller = vi.fn().mockResolvedValue(
+      fakeResult("schema", "x-ai/grok-4.20", JSON.stringify({ custom: "value" })),
+    );
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+    expect(result.answer).toBeUndefined();
+  });
+
+  it("warns when --schema overrides deepresearch mode", async () => {
+    const caller = vi.fn().mockResolvedValue(
+      fakeResult("schema", "x-ai/grok-4.20", JSON.stringify({ winner: "Go" })),
+    );
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "deepresearch", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([expect.stringContaining("--schema overrides deepresearch mode")]),
+    );
+    expect(caller.mock.calls[0]?.[0].role).toBe("schema");
+  });
+
+  it("warns when --schema overrides multi mode", async () => {
+    const caller = vi.fn().mockResolvedValue(
+      fakeResult("schema", "x-ai/grok-4.20", JSON.stringify({ winner: "Go" })),
+    );
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "multi", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([expect.stringContaining("--schema overrides multi mode")]),
+    );
+    // Should only make 1 call (schema), not the 5-call multi fan-out.
+    expect(caller).toHaveBeenCalledTimes(1);
+  });
+
+  it("warns when schema JSON parse fails", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeResult("schema", "x-ai/grok-4.20", "not valid json"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, schema: '{"type":"object"}', json: true }),
+      caller,
+    );
+    expect(result.schemaResult).toBeUndefined();
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([expect.stringContaining("--schema output was not valid JSON")]),
+    );
+  });
+});
+
+describe("runMode --retrieve on non-web modes", () => {
+  it("warns when --retrieve is ignored on deepresearch", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeResult("deepresearch", "perplexity/sonar-deep-research", "Research"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "deepresearch", modeExplicit: true, retrieve: true, json: true }),
+      caller,
+    );
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([expect.stringContaining("--retrieve/--output was ignored")]),
+    );
+    // Should still run as normal deepresearch, not retrieve.
+    expect(caller.mock.calls[0]?.[0].role).toBe("deepresearch");
+  });
+
+  it("warns when --output results is ignored on deepresearch", async () => {
+    const caller = vi.fn().mockResolvedValue(fakeResult("deepresearch", "perplexity/sonar-deep-research", "Research"));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "deepresearch", modeExplicit: true, outputStyle: "results", json: true }),
+      caller,
+    );
+    expect(result.warnings).toEqual(
+      expect.arrayContaining([expect.stringContaining("--retrieve/--output was ignored")]),
+    );
   });
 });

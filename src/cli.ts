@@ -9,7 +9,7 @@ import {
   resolveWebOptions,
   validateWebOptions,
 } from "./config.js";
-import { formatError, formatJson, formatMarkdown, formatRaw } from "./formatters.js";
+import { formatError, formatJson, formatMarkdown, formatRaw, formatRetrieveMarkdown } from "./formatters.js";
 import { runMode } from "./modes.js";
 import { callOpenRouter } from "./openrouter.js";
 
@@ -47,6 +47,11 @@ async function main() {
 
     if (options.json) {
       console.log(formatJson(result));
+    } else if (options.schema !== undefined) {
+      // Schema mode: print the structured object (pretty JSON) for human-readable output too.
+      console.log(JSON.stringify(result.schemaResult ?? null, null, 2));
+    } else if (options.outputStyle === "results" || options.mode === "retrieve") {
+      console.log(formatRetrieveMarkdown(result));
     } else if (options.outputFormat === "raw") {
       console.log(formatRaw(result));
     } else {
