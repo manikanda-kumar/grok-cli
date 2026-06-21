@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "bin": {
-    "grok": "dist/cli.js"
+    "grok-research": "dist/cli.js"
   },
   "scripts": {
     "build": "tsup src/cli.ts --format esm --clean --out-dir dist",

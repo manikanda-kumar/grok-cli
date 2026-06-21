@@ -7,8 +7,8 @@ CLI for technology and product decisions via OpenRouter (xAI Grok + Perplexity S
 ## Command shape
 
 ```text
-grok [flags...] <prompt>
-grok <mode> [flags...] <prompt>
+grok-research [flags...] <prompt>
+grok-research <mode> [flags...] <prompt>
 ```
 
 - **`<prompt>`** — required; last argument (or everything after `--`).
@@ -33,14 +33,14 @@ Modes choose **which pipeline runs**, not output format. Default mode is `auto`.
 
 **Mode choice for agents:**
 
-- Decisions / tradeoffs → `grok "..."`, `grok expert "..."`, or `grok fast "..."` (web on by default; stderr hint each run)
-- Deep factual research → `grok deepresearch "..."` (Sonar deep — do **not** use default Grok for this)
-- Multi-perspective synthesis → `grok multi "..."` (Sonar supplies facts; Grok legs have no web tools)
-- Raw retrieval (Tavily-style `results[]`) → `grok retrieve "..."` or `grok expert --retrieve "..."`
+- Decisions / tradeoffs → `grok-research "..."`, `grok-research expert "..."`, or `grok-research fast "..."` (web on by default; stderr hint each run)
+- Deep factual research → `grok-research deepresearch "..."` (Sonar deep — do **not** use default Grok for this)
+- Multi-perspective synthesis → `grok-research multi "..."` (Sonar supplies facts; Grok legs have no web tools)
+- Raw retrieval (Tavily-style `results[]`) → `grok-research retrieve "..."` or `grok-research expert --retrieve "..."`
 
 ```bash
-grok deepresearch "Latest stable Node.js LTS version as of 2026"
-grok --mode deepresearch "Latest stable Node.js LTS version as of 2026"
+grok-research deepresearch "Latest stable Node.js LTS version as of 2026"
+grok-research --mode deepresearch "Latest stable Node.js LTS version as of 2026"
 # deprecated alias:
 grok research "..."
 ```
@@ -70,15 +70,15 @@ grok research "..."
 **Precedence:** CLI `--no-web` overrides config `web.search.enabled`. Modes `deepresearch`, `multi`, and deprecated `research` never enable OpenRouter web tools. `retrieve` mode forces web on (unless `--no-web`).
 
 ```bash
-grok fast --raw "One sentence: what is Bun?"
-grok --mode expert --json "Bun vs Node for a CLI tool"
-grok --no-web expert "Explain what a mutex is"
-grok deepresearch "Current state of React Server Components"
-grok multi "Redis or Memcached for session cache only"
-grok retrieve "latest React 19 patterns"
-grok expert --retrieve --json "latest Bun vs Deno benchmarks"
-grok expert --output both --json "compare Postgres vs MySQL for small teams"
-grok expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' "Go vs Rust for a CLI"
+grok-research fast --raw "One sentence: what is Bun?"
+grok-research --mode expert --json "Bun vs Node for a CLI tool"
+grok-research --no-web expert "Explain what a mutex is"
+grok-research deepresearch "Current state of React Server Components"
+grok-research multi "Redis or Memcached for session cache only"
+grok-research retrieve "latest React 19 patterns"
+grok-research expert --retrieve --json "latest Bun vs Deno benchmarks"
+grok-research expert --output both --json "compare Postgres vs MySQL for small teams"
+grok-research expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' "Go vs Rust for a CLI"
 ```
 
 ## Web search cost notes
@@ -118,28 +118,28 @@ hint: OpenRouter web search is enabled (--no-web to disable)
 
 1. **Do not pass `--web`** — deprecated and unnecessary. Web search is on by default for `auto` / `fast` / `expert`.
 2. **Use `--no-web`** for timeless or minimum-cost Grok runs.
-3. **Use `deepresearch` for deep factual research** — not default `grok "..."`. `research` is a deprecated alias.
+3. **Use `deepresearch` for deep factual research** — not default `grok-research "..."`. `research` is a deprecated alias.
 4. **Use `multi` for ensemble synthesis** — not to “turn on web”.
 5. **Use `retrieve` or `--retrieve` for Tavily-style `results[]`** — when you need raw retrieval (RAG input) not a synthesized brief. Combine with `--json` to get `search_results` with scores.
 6. **Use `--output both`** when you want both raw results and a synthesized brief in one run (2 calls).
 7. **Use `--schema`** to get structured JSON conforming to your own schema (`schema_result` in `--json`).
 8. **Prefer `--json`** for `answer`, `sources`, `search_results`, `schema_result`, and `usage.server_tool_use`.
-9. **Prompts that start with `-`:** `grok -- --not-a-flag`
+9. **Prompts that start with `-`:** `grok-research -- --not-a-flag`
 10. **Exit code:** `0` success, `1` error.
 
 ## Examples
 
 ```bash
-grok "Latest stable Node.js LTS version as of 2026"
-grok --no-web fast "Explain what a mutex is"
-grok --mode expert --json "Compare Bun vs Node for a CLI tool"
-grok deepresearch "Latest stable Node.js LTS version as of 2026"
-grok multi "Redis or Memcached for session cache only"
-grok --web-fetch expert "Summarize the OpenRouter web search tool docs"
-grok retrieve --json "latest React 19 patterns"
-grok expert --retrieve --json "latest Bun vs Deno benchmarks"
-grok expert --output both --json "compare Postgres vs MySQL for small teams"
-grok expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
+grok-research "Latest stable Node.js LTS version as of 2026"
+grok-research --no-web fast "Explain what a mutex is"
+grok-research --mode expert --json "Compare Bun vs Node for a CLI tool"
+grok-research deepresearch "Latest stable Node.js LTS version as of 2026"
+grok-research multi "Redis or Memcached for session cache only"
+grok-research --web-fetch expert "Summarize the OpenRouter web search tool docs"
+grok-research retrieve --json "latest React 19 patterns"
+grok-research expert --retrieve --json "latest Bun vs Deno benchmarks"
+grok-research expert --output both --json "compare Postgres vs MySQL for small teams"
+grok-research expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
 ```
 
 ## Model aliases (`config.json` overrides)
