@@ -5,7 +5,7 @@ description: Web-grounded research via grok-cli (xAI Grok + Perplexity Sonar thr
 
 # grok-research
 
-CLI wrapper for `grok` (grok-cli at `/Users/manik/Github/grok-cli`, linked globally). Routes prompts through OpenRouter to Grok (`x-ai/grok-4.x`) and Perplexity Sonar. Web search runs **server-side** at OpenRouter — single HTTP request, no client tool loop.
+CLI wrapper, command `grok-research` (grok-cli at `/Users/manik/Github/grok-cli`, linked globally). Renamed from `grok` to avoid clash with the Grok coding-agent CLI. Routes prompts through OpenRouter to Grok (`x-ai/grok-4.x`) and Perplexity Sonar. Web search runs **server-side** at OpenRouter — single HTTP request, no client tool loop.
 
 ## Prereq
 
@@ -51,21 +51,21 @@ When web runs, `sources` carries `url_citation` annotations.
 ## Invocation
 
 ```bash
-grok [mode] [flags] "<prompt>"
+grok-research [mode] [flags] "<prompt>"
 ```
 
 Examples:
 
 ```bash
-grok "Next.js vs Remix for SaaS"                          # default brief, web on
-grok fast "Bun vs Node tldr"
-grok expert --no-web "Explain mutex"                      # skip web cost for static prompt
-grok deepresearch "Stable Node LTS as of 2026"            # Sonar deep
-grok multi "Vector DB for latency-sensitive RAG"          # ensemble
-grok --json --mode expert "LangGraph vs Mastra"
-grok --web-engine exa --web-max-results 8 "AI agent frameworks 2026"
-grok --web-allowed-domains "x.com,twitter.com" "what are devs saying about Grok 4.20"
-grok --economy fast "Zig 0.13 changes"
+grok-research "Next.js vs Remix for SaaS"                          # default brief, web on
+grok-research fast "Bun vs Node tldr"
+grok-research expert --no-web "Explain mutex"                      # skip web cost for static prompt
+grok-research deepresearch "Stable Node LTS as of 2026"            # Sonar deep
+grok-research multi "Vector DB for latency-sensitive RAG"          # ensemble
+grok-research --json --mode expert "LangGraph vs Mastra"
+grok-research --web-engine exa --web-max-results 8 "AI agent frameworks 2026"
+grok-research --web-allowed-domains "x.com,twitter.com" "what are devs saying about Grok 4.20"
+grok-research --economy fast "Zig 0.13 changes"
 ```
 
 ## Mode selection rules
@@ -87,14 +87,14 @@ grok --economy fast "Zig 0.13 changes"
 ## How to run
 
 ```bash
-grok deepresearch "<prompt>" 2>&1
+grok-research deepresearch "<prompt>" 2>&1
 ```
 
 JSON parsing for agent chains:
 
 ```bash
-grok --json deepresearch "<prompt>" | jq '.answer'
-grok --json expert "<prompt>" | jq '.sources[].url'
+grok-research --json deepresearch "<prompt>" | jq '.answer'
+grok-research --json expert "<prompt>" | jq '.sources[].url'
 ```
 
 ## Errors

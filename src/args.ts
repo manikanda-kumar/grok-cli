@@ -47,30 +47,30 @@ Options:
 
 Examples for agents:
   # Decision brief (default): recommendation, tradeoffs, risks, sources
-  grok "Bun vs Node for a CLI tool"
-  grok expert --json "Compare Postgres vs MySQL for small teams"
+  ${PROGRAM_NAME} "Bun vs Node for a CLI tool"
+  ${PROGRAM_NAME} expert --json "Compare Postgres vs MySQL for small teams"
 
   # Cheapest fast answer (no web needed for timeless topics)
-  grok fast --no-web --raw "One sentence: what is a mutex?"
+  ${PROGRAM_NAME} fast --no-web --raw "One sentence: what is a mutex?"
 
   # Deep factual research with citations (Sonar, not Grok)
-  grok deepresearch "Latest stable Node.js LTS version as of 2026"
+  ${PROGRAM_NAME} deepresearch "Latest stable Node.js LTS version as of 2026"
 
   # Multi-perspective ensemble (Sonar facts + 3 Grok roles + synthesis)
-  grok multi "Redis or Memcached for session cache only"
+  ${PROGRAM_NAME} multi "Redis or Memcached for session cache only"
 
   # Tavily-style retrieval: results[] with title, url, content, score
-  grok retrieve --json "latest React 19 patterns"
-  grok expert --retrieve --json "latest Bun vs Deno benchmarks"
+  ${PROGRAM_NAME} retrieve --json "latest React 19 patterns"
+  ${PROGRAM_NAME} expert --retrieve --json "latest Bun vs Deno benchmarks"
 
   # Retrieve raw results, then synthesize a brief in one run (2 calls)
-  grok expert --output both --json "compare Postgres vs MySQL for small teams"
+  ${PROGRAM_NAME} expert --output both --json "compare Postgres vs MySQL for small teams"
 
   # Structured output constrained to your JSON Schema (schema_result in --json)
-  grok expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
+  ${PROGRAM_NAME} expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
 
   # Ground answers in specific domains (e.g. official docs + X/Twitter)
-  grok expert --web-allowed-domains developer.mozilla.org,x.com "what's new in CSS nesting?"
+  ${PROGRAM_NAME} expert --web-allowed-domains developer.mozilla.org,x.com "what's new in CSS nesting?"
 
 Sample --json output (default brief mode):
   {
