@@ -10,8 +10,8 @@ const WEB_PROVIDERS = new Set<WebProvider>(["openrouter"]);
 
 const PROGRAM_NAME =
   process.env.GROK_PROGRAM_NAME ||
-  basename(process.argv[1] || "grok").replace(/\.(js|ts)$/, "") ||
-  "grok";
+  basename(process.argv[1] || "grok-research").replace(/\.(js|ts)$/, "") ||
+  "grok-research";
 
 export const HELP_TEXT = `Usage:
   ${PROGRAM_NAME} [options] <prompt>

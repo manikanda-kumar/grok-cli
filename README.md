@@ -15,7 +15,7 @@ grok-research <mode> [flags...] <prompt>
 - **`<mode>`** — optional positional token; same values as `--mode`. Only recognized as the first non-flag argument.
 - **Flags** can appear in any order before the prompt.
 
-Dev checkout: use `pnpm grok` instead of `grok`.
+Dev checkout: use `pnpm grok-research` instead of a globally linked command.
 
 ## Modes (routing)
 
@@ -42,7 +42,7 @@ Modes choose **which pipeline runs**, not output format. Default mode is `auto`.
 grok-research deepresearch "Latest stable Node.js LTS version as of 2026"
 grok-research --mode deepresearch "Latest stable Node.js LTS version as of 2026"
 # deprecated alias:
-grok research "..."
+grok-research research "..."
 ```
 
 ## Flags (not modes)
@@ -202,7 +202,7 @@ Implementation plan: [`docs/plans/2026-05-19-web-search-integration.md`](docs/pl
 
 ## Claude Code skill
 
-Reusable Claude Code skill at [`skills/grok-research/`](skills/grok-research/SKILL.md). Teaches any Claude Code agent when/how to call `grok` (mode selection, web flags, JSON parsing, X/Twitter grounding via `--web-allowed-domains`).
+Reusable Claude Code skill at [`skills/grok-research/`](skills/grok-research/SKILL.md). Teaches any Claude Code agent when/how to call `grok-research` (mode selection, web flags, JSON parsing, X/Twitter grounding via `--web-allowed-domains`).
 
 Install for your user:
 
@@ -217,4 +217,4 @@ Or symlink so updates flow automatically:
 ln -s "$(pwd)/skills/grok-research" ~/.claude/skills/grok-research
 ```
 
-Skill assumes `grok` is on `PATH`. After `pnpm build`, run `npm link` (or `pnpm link --global`) once to expose it globally.
+Skill assumes `grok-research` is on `PATH`. After `pnpm build`, run `npm link` (or `pnpm link --global`) once to expose it globally without creating a `grok` command.

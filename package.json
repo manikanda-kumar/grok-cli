@@ -9,7 +9,7 @@
   "scripts": {
     "build": "tsup src/cli.ts --format esm --clean --out-dir dist",
     "dev": "tsx src/cli.ts",
-    "grok": "tsx src/cli.ts",
+    "grok-research": "tsx src/cli.ts",
     "test": "vitest run",
     "typecheck": "tsc --noEmit"
   },
