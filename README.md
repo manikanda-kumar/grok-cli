@@ -61,6 +61,11 @@ grok-research research "..."
 | `--web-max-total-results <n>` | Cap total search results across the request (default: 10) |
 | `--web-allowed-domains <d>` | Comma-separated allowlist |
 | `--web-blocked-domains <d>` | Comma-separated blocklist |
+| `--x` | Native X signal via Grok agent `/whathappened` (no `XAI_API_KEY`; consolidates with web research) |
+| `--x-only` | X signal only (skip OpenRouter web research) |
+| `--x-network <off\|prefer\|strict>` | Network/follow filter for `/whathappened` (default `off`) |
+| `--x-timeout <sec>` | Grok agent timeout for `--x` (default 180) |
+| `--x-max-turns <n>` | Max agent turns for `--x` (default 30) |
 | `--economy` | Cheaper model aliases. Default profile is `quality`. |
 | `--json` | Structured JSON on stdout (works with web tools). Errors are JSON on stderr. |
 | `--report` | Longer Markdown report headings instead of a decision brief. |
@@ -125,7 +130,8 @@ hint: OpenRouter web search is enabled (--no-web to disable)
 7. **Use `--schema`** to get structured JSON conforming to your own schema (`schema_result` in `--json`).
 8. **Prefer `--json`** for `answer`, `sources`, `search_results`, `schema_result`, and `usage.server_tool_use`.
 9. **Prompts that start with `-`:** `grok-research -- --not-a-flag`
-10. **Exit code:** `0` success, `1` error.
+10. **Native X:** Outside Grok Build use `grok-research --x "..."` (requires `grok` auth + X tools). **Inside** Grok Build run `/whathappened` then consolidate — do not nest `--x`.
+11. **Exit code:** `0` success, `1` error.
 
 ## Examples
 
@@ -140,6 +146,8 @@ grok-research retrieve --json "latest React 19 patterns"
 grok-research expert --retrieve --json "latest Bun vs Deno benchmarks"
 grok-research expert --output both --json "compare Postgres vs MySQL for small teams"
 grok-research expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
+grok-research expert --x "Should we adopt Bun 1.2?"
+grok-research --x-only "What is X saying about Composer 2.5?"
 ```
 
 ## Model aliases (`config.json` overrides)
@@ -202,7 +210,7 @@ Implementation plan: [`docs/plans/2026-05-19-web-search-integration.md`](docs/pl
 
 ## Claude Code skill
 
-Reusable Claude Code skill at [`skills/grok-research/`](skills/grok-research/SKILL.md). Teaches any Claude Code agent when/how to call `grok-research` (mode selection, web flags, JSON parsing, X/Twitter grounding via `--web-allowed-domains`).
+Reusable skill at [`skills/grok-research/`](skills/grok-research/SKILL.md) (also under `~/.grok/skills/grok-research`). Teaches mode selection, web flags, JSON parsing, and **native X** via `/whathappened` (in-session preferred) or CLI `--x` (shells Grok agent). Do not use `--web-allowed-domains x.com` as a substitute for real X tools.
 
 Install for your user:
 

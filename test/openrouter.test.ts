@@ -196,6 +196,29 @@ describe("callOpenRouter", () => {
     expect(body.response_format).toEqual({ type: "json_object" });
   });
 
+  it("omits json_object response format when server tools are attached", async () => {
+    const fetchMock = vi.fn().mockResolvedValue({
+      ok: true,
+      json: async () => ({ choices: [{ message: { content: "Answer" } }] }),
+    });
+
+    await callOpenRouter(
+      { apiKey: "test-openrouter-key", appName: "grok-cli" },
+      {
+        role: "expert",
+        model: "x-ai/grok-4.20",
+        messages: [{ role: "user", content: "Prompt" }],
+        json: true,
+        web: webBase,
+      },
+      fetchMock,
+    );
+
+    const body = JSON.parse(fetchMock.mock.calls[0]?.[1]?.body as string);
+    expect(body.tools).toBeDefined();
+    expect(body.response_format).toBeUndefined();
+  });
+
   it("omits json_object response format for Perplexity models", async () => {
     const fetchMock = vi.fn().mockResolvedValue({
       ok: true,

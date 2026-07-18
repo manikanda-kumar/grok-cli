@@ -1,4 +1,4 @@
-import type { CliOptions, CliWebOverrides, Mode, OutputStyle, WebProvider } from "./types.js";
+import type { CliOptions, CliWebOverrides, CliXOptions, Mode, OutputStyle, WebProvider, XNetworkMode } from "./types.js";
 
 import { basename } from "node:path";
 
@@ -7,6 +7,8 @@ const MODES = new Set<Mode>(["auto", "fast", "expert", "deepresearch", "research
 const OUTPUT_STYLES = new Set<OutputStyle>(["brief", "results", "both"]);
 
 const WEB_PROVIDERS = new Set<WebProvider>(["openrouter"]);
+
+const X_NETWORK_MODES = new Set<XNetworkMode>(["off", "prefer", "strict"]);
 
 const PROGRAM_NAME =
   process.env.GROK_PROGRAM_NAME ||
@@ -38,6 +40,11 @@ Options:
   --web-max-total-results <n>  Cap total search results (default: 10)
   --web-allowed-domains <d>  Comma-separated allowed domains
   --web-blocked-domains <d>  Comma-separated blocked domains
+  --x                        Native X signal via Grok agent /whathappened (no XAI_API_KEY)
+  --x-only                   X signal only (skip OpenRouter web research)
+  --x-network <mode>         off|prefer|strict (default: off); follow/list filter for /whathappened
+  --x-timeout <sec>          Grok agent timeout seconds for --x (default: 180)
+  --x-max-turns <n>          Max agent turns for --x (default: 30)
   --economy                  Use economy model aliases
   --json                     Emit structured JSON (compatible with web tools)
   --report                   Emit a longer research report
@@ -69,8 +76,15 @@ Examples for agents:
   # Structured output constrained to your JSON Schema (schema_result in --json)
   ${PROGRAM_NAME} expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' --json "Go vs Rust for a CLI"
 
-  # Ground answers in specific domains (e.g. official docs + X/Twitter)
+  # Ground answers in specific domains (e.g. official docs + X/Twitter pages)
   ${PROGRAM_NAME} expert --web-allowed-domains developer.mozilla.org,x.com "what's new in CSS nesting?"
+
+  # Native X signal (Grok agent + /whathappened) consolidated with web research
+  ${PROGRAM_NAME} expert --x "Should we adopt Bun 1.2?"
+  ${PROGRAM_NAME} --x-only "What is X saying about Composer 2.5?"
+  ${PROGRAM_NAME} expert --x --x-network prefer --json "Launch reception for Grok 4.20"
+
+  # Inside Grok Build: do NOT nest --x; run /whathappened then consolidate (see skill)
 
 Sample --json output (default brief mode):
   {
@@ -140,6 +154,9 @@ Agent tips:
   - Use retrieve --json when you need raw results for RAG, not a synthesized answer.
   - Use --schema when you need typed output matching your own JSON Schema.
   - Use --max-cost to cap spend, especially for multi (5 calls) or --output both (2 calls).
+  - Use --x for live X/Twitter signal via Grok agent /whathappened (native X tools; needs \`grok\` auth).
+  - Prefer in-session /whathappened when already inside Grok Build — avoid nested \`grok-research --x\`.
+  - Domain allowlist of x.com is a weak web-index proxy; prefer --x or /whathappened for real X.
 `;
 
 export function parseArgs(argv: string[]): CliOptions {
@@ -156,6 +173,7 @@ export function parseArgs(argv: string[]): CliOptions {
   let json = false;
   let maxCost: number | undefined;
   const web = emptyWebOverrides();
+  const x = emptyXOptions();
   const promptParts: string[] = [];
 
   while (tokens.length > 0) {
@@ -238,6 +256,38 @@ export function parseArgs(argv: string[]): CliOptions {
       continue;
     }
 
+    if (token === "--x") {
+      x.enabled = true;
+      continue;
+    }
+
+    if (token === "--x-only") {
+      x.enabled = true;
+      x.only = true;
+      continue;
+    }
+
+    if (token === "--x-network") {
+      const value = tokens.shift();
+      if (!isXNetworkMode(value)) throw new Error(`Invalid --x-network: ${value ?? ""} (use off|prefer|strict)`);
+      x.network = value;
+      x.enabled = true;
+      continue;
+    }
+
+    if (token === "--x-timeout") {
+      const sec = parsePositiveInt(requireValue(token, tokens.shift()), token);
+      x.timeoutMs = sec * 1000;
+      x.enabled = true;
+      continue;
+    }
+
+    if (token === "--x-max-turns") {
+      x.maxTurns = parsePositiveInt(requireValue(token, tokens.shift()), token);
+      x.enabled = true;
+      continue;
+    }
+
     if (token === "--economy") {
       profile = "economy";
       profileExplicit = true;
@@ -302,6 +352,7 @@ export function parseArgs(argv: string[]): CliOptions {
     webProvider,
     json,
     web,
+    x,
     ...(maxCost === undefined ? {} : { maxCost }),
   };
 }
@@ -314,8 +365,16 @@ function emptyWebOverrides(): CliWebOverrides {
   return { noWeb: false, deprecatedWebFlag: false, fetchFlag: false };
 }
 
+function emptyXOptions(): CliXOptions {
+  return { enabled: false, only: false, network: "off" };
+}
+
 function isMode(value: string | undefined): value is Mode {
   return value !== undefined && MODES.has(value as Mode);
+}
+
+function isXNetworkMode(value: string | undefined): value is XNetworkMode {
+  return value !== undefined && X_NETWORK_MODES.has(value as XNetworkMode);
 }
 
 function isOutputStyle(value: string | undefined): value is OutputStyle {

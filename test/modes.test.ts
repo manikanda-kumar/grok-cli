@@ -2,7 +2,7 @@ import { describe, expect, it, vi } from "vitest";
 import { modeAllowsWeb, resolveWebOptions } from "../src/config.js";
 import { addUsageCall, emptyUsage } from "../src/cost.js";
 import { DEFAULT_CONFIG } from "../src/defaults.js";
-import { runMode } from "../src/modes.js";
+import { parseDecisionAnswer, runMode } from "../src/modes.js";
 import type { PipelineResult } from "../src/types.js";
 
 function options(overrides: Partial<Parameters<typeof runMode>[1]> = {}): Parameters<typeof runMode>[1] {
@@ -18,6 +18,7 @@ function options(overrides: Partial<Parameters<typeof runMode>[1]> = {}): Parame
     webProvider: "openrouter",
     json: false,
     web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
+    x: { enabled: false, only: false, network: "off" },
     ...overrides,
   };
 }
@@ -107,6 +108,71 @@ describe("runMode", () => {
     );
 
     expect(caller).toHaveBeenCalledWith(expect.objectContaining({ web: expect.objectContaining({ searchEnabled: false }) }));
+  });
+
+  it("uses two-pass research then JSON format when --json and web are both on", async () => {
+    const decisionJson = JSON.stringify({
+      recommendation: "Prefer hybrid routing.",
+      key_facts: ["Open MoE is cheaper at scale."],
+      tradeoffs: ["Ops burden on self-host."],
+      risks: ["Token inefficiency."],
+      open_questions: ["Your daily token volume?"],
+      confidence: "high",
+    });
+    const caller = vi
+      .fn()
+      .mockResolvedValueOnce({
+        ...fakeResult("expert", "x-ai/grok-4.20", "Markdown research with facts."),
+        sources: [{ url: "https://example.com/cost" }],
+      })
+      .mockResolvedValueOnce(fakeResult("json_format", "x-ai/grok-4.20", decisionJson));
+
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({ mode: "expert", modeExplicit: true, json: true }),
+      caller,
+    );
+
+    expect(caller).toHaveBeenCalledTimes(2);
+    expect(caller.mock.calls[0]?.[0]).toMatchObject({
+      role: "expert",
+      web: expect.objectContaining({ searchEnabled: true }),
+    });
+    expect(caller.mock.calls[0]?.[0].json).toBeFalsy();
+    expect(caller.mock.calls[1]?.[0]).toMatchObject({
+      role: "json_format",
+      json: true,
+    });
+    expect(caller.mock.calls[1]?.[0].web).toBeUndefined();
+    expect(result.answer?.recommendation).toBe("Prefer hybrid routing.");
+    expect(result.sources).toEqual([{ url: "https://example.com/cost" }]);
+    expect(result.warnings.some((w) => w.includes("two-pass"))).toBe(true);
+  });
+
+  it("keeps single-pass --json when web is off", async () => {
+    const decisionJson = JSON.stringify({
+      recommendation: "Use Bun.",
+      key_facts: ["Fast."],
+      tradeoffs: [],
+      risks: [],
+      open_questions: [],
+      confidence: "medium",
+    });
+    const caller = vi.fn().mockResolvedValue(fakeResult("expert", "x-ai/grok-4.20", decisionJson));
+    const result = await runMode(
+      DEFAULT_CONFIG,
+      options({
+        mode: "expert",
+        modeExplicit: true,
+        json: true,
+        web: { noWeb: true, deprecatedWebFlag: false, fetchFlag: false },
+      }),
+      caller,
+    );
+
+    expect(caller).toHaveBeenCalledTimes(1);
+    expect(caller.mock.calls[0]?.[0]).toMatchObject({ json: true });
+    expect(result.answer?.recommendation).toBe("Use Bun.");
   });
 
   it("routes deepresearch to sonar deep research", async () => {
@@ -510,5 +576,35 @@ describe("runMode --retrieve on non-web modes", () => {
     expect(result.warnings).toEqual(
       expect.arrayContaining([expect.stringContaining("--retrieve/--output was ignored")]),
     );
+  });
+});
+
+describe("parseDecisionAnswer", () => {
+  it("parses a valid decision object", () => {
+    const { answer, warning } = parseDecisionAnswer(
+      JSON.stringify({
+        recommendation: "Go hybrid.",
+        key_facts: ["A"],
+        tradeoffs: ["B"],
+        risks: ["C"],
+        open_questions: ["D"],
+        confidence: "high",
+      }),
+    );
+    expect(warning).toBeUndefined();
+    expect(answer?.recommendation).toBe("Go hybrid.");
+    expect(answer?.confidence).toBe("high");
+  });
+
+  it("rejects bare JSON numbers (json_object+tools failure mode)", () => {
+    const { answer, warning } = parseDecisionAnswer("-1.5E-05");
+    expect(answer).toBeUndefined();
+    expect(warning).toMatch(/not a decision object/);
+  });
+
+  it("rejects non-JSON markdown", () => {
+    const { answer, warning } = parseDecisionAnswer("**Not JSON**");
+    expect(answer).toBeUndefined();
+    expect(warning).toMatch(/non-JSON/);
   });
 });

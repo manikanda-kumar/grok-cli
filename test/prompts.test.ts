@@ -1,5 +1,11 @@
 import { describe, expect, it } from "vitest";
-import { buildRetrieveMessages, buildSchemaMessages, buildSingleCallMessages } from "../src/prompts.js";
+import {
+  buildJsonFromResearchMessages,
+  buildRetrieveMessages,
+  buildSchemaMessages,
+  buildSingleCallMessages,
+  withXSignal,
+} from "../src/prompts.js";
 
 describe("buildSingleCallMessages", () => {
   it("adds web search instructions when web is enabled", () => {
@@ -17,6 +23,29 @@ describe("buildSingleCallMessages", () => {
     const messages = buildSingleCallMessages("Prompt", "brief", true, true);
     expect(messages[0]?.content).toContain("Return only a JSON object");
     expect(messages[0]?.content).toContain("live web search");
+  });
+
+  it("injects X signal into system and user when provided", () => {
+    const messages = buildSingleCallMessages("Should we use Bun?", "brief", false, true, "Camps: pro vs con");
+    expect(messages[0]?.content).toContain("X/Twitter sample");
+    expect(messages[0]?.content).toContain("## X signal");
+    expect(messages[1]?.content).toContain("Live X/Twitter public conversation");
+    expect(messages[1]?.content).toContain("Camps: pro vs con");
+  });
+});
+
+describe("withXSignal", () => {
+  it("returns prompt unchanged when no X markdown", () => {
+    expect(withXSignal("hi")).toBe("hi");
+  });
+});
+
+describe("buildJsonFromResearchMessages", () => {
+  it("asks for decision JSON grounded in research", () => {
+    const messages = buildJsonFromResearchMessages("Q?", "Research text", ["https://a.example"]);
+    expect(messages[0]?.content).toContain("recommendation");
+    expect(messages[1]?.content).toContain("Research text");
+    expect(messages[1]?.content).toContain("https://a.example");
   });
 });
 

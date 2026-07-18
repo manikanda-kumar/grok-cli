@@ -150,6 +150,7 @@ describe("resolveCliOptions", () => {
         webProvider: "openrouter",
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
+        x: { enabled: false, only: false, network: "off" },
       }),
     ).toMatchObject({ mode: "research", profile: "economy" });
   });
@@ -168,6 +169,7 @@ describe("resolveCliOptions", () => {
         webProvider: "openrouter",
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
+        x: { enabled: false, only: false, network: "off" },
       }),
     ).toMatchObject({ mode: "expert", profile: "quality" });
   });

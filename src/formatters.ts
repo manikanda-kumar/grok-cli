@@ -2,11 +2,11 @@ import { formatCost } from "./cost.js";
 import type { DecisionAnswer, PipelineResult, SearchResult, UsageSummary } from "./types.js";
 
 export function formatMarkdown(result: PipelineResult): string {
-  return `${withSources(result.content.trim(), result.sources)}\n\n${warnings(result.warnings)}${footer(result.usage)}`.trimEnd();
+  return `${withSources(result.content.trim(), result.sources)}\n\n${xSignalAppendix(result)}${warnings(result.warnings)}${footer(result.usage)}`.trimEnd();
 }
 
 export function formatRaw(result: PipelineResult): string {
-  return `${result.content.trim()}\n\n${footer(result.usage)}`.trimEnd();
+  return `${result.content.trim()}\n\n${xSignalAppendix(result)}${footer(result.usage)}`.trimEnd();
 }
 
 // Tavily-style markdown for --output results (non-JSON). Lists each result with
@@ -66,6 +66,15 @@ export function formatJson(result: PipelineResult): string {
   if (result.schemaResult !== undefined) {
     payload.schema_result = result.schemaResult;
   }
+  if (result.xSignal) {
+    payload.x_signal = {
+      markdown: result.xSignal.markdown,
+      report_path: result.xSignal.reportPath ?? null,
+      session_id: result.xSignal.sessionId ?? null,
+      cost_usd: result.xSignal.costUsd ?? null,
+      warnings: result.xSignal.warnings,
+    };
+  }
 
   return JSON.stringify(payload, null, 2);
 }
@@ -115,6 +124,14 @@ function warnings(items: string[]): string {
 function withSources(content: string, sources: PipelineResult["sources"]): string {
   if (sources.length === 0 || /(^|\n)## Sources\b/i.test(content)) return content;
   return `${content}\n\n## Sources\n${sources.map((source) => `- ${source.title ? `${source.title}: ` : ""}${source.url}`).join("\n")}`;
+}
+
+/** Append HTML report pointer when model brief may have omitted it (not full dump). */
+function xSignalAppendix(result: PipelineResult): string {
+  if (!result.xSignal?.reportPath) return "";
+  // Avoid double-printing if content already mentions the path
+  if (result.content.includes(result.xSignal.reportPath)) return "";
+  return `## X report\n- ${result.xSignal.reportPath}\n\n`;
 }
 
 function formatAnswer(answer: DecisionAnswer | undefined) {

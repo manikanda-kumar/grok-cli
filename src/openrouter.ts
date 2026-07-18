@@ -97,7 +97,14 @@ export async function callOpenRouter(
   };
   if (call.temperature !== undefined) body.temperature = call.temperature;
   if (call.maxTokens !== undefined) body.max_tokens = call.maxTokens;
-  if (call.json === true && supportsJsonObjectResponseFormat(call.model)) body.response_format = { type: "json_object" };
+  // Do NOT combine response_format json_object with OpenRouter server tools.
+  // On Grok + web_search, constrained JSON often collapses to garbage like
+  // "-1.5e-05" after large tool context (observed 2026-07). Prefer:
+  //  - tools without response_format, or
+  //  - a second no-tools pass that formats into JSON (see modes.ts two-pass).
+  if (call.json === true && supportsJsonObjectResponseFormat(call.model) && !tools) {
+    body.response_format = { type: "json_object" };
+  }
   if (tools) body.tools = tools;
 
   let lastError: Error | undefined;
@@ -169,7 +176,8 @@ function retryDelay(attempt: number, response?: Response): number {
 }
 
 function handleSuccess(json: OpenRouterResponse, call: OpenRouterCall): PipelineResult {
-  const content = json.choices?.[0]?.message?.content;
+  const rawContent = json.choices?.[0]?.message?.content;
+  const content = normalizeMessageContent(rawContent);
   if (!content) {
     throw new OpenRouterError("OpenRouter response did not include message content");
   }
@@ -262,4 +270,23 @@ function mapOpenRouterError(status: number, text: string, model: string, toolsRe
 
 function supportsJsonObjectResponseFormat(model: string): boolean {
   return !model.startsWith("perplexity/");
+}
+
+/** Coerce message.content to a single string (handles rare non-string shapes). */
+function normalizeMessageContent(content: unknown): string {
+  if (typeof content === "string") return content;
+  if (content == null) return "";
+  if (Array.isArray(content)) {
+    return content
+      .map((part) => {
+        if (typeof part === "string") return part;
+        if (part && typeof part === "object" && "text" in part && typeof (part as { text: unknown }).text === "string") {
+          return (part as { text: string }).text;
+        }
+        return "";
+      })
+      .join("");
+  }
+  // Number/boolean (e.g. model returned bare JSON number under json_object)
+  return String(content);
 }

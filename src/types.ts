@@ -79,6 +79,38 @@ export interface ResolvedWebOptions {
   blockedDomains?: string[];
 }
 
+/** Network filter for /whathappened when --x is used. */
+export type XNetworkMode = "off" | "prefer" | "strict";
+
+export interface CliXOptions {
+  /** Shell out to Grok agent /whathappened for native X signal. */
+  enabled: boolean;
+  /** Skip OpenRouter web research; return X signal only. */
+  only: boolean;
+  network: XNetworkMode;
+  timeoutMs?: number;
+  maxTurns?: number;
+}
+
+export interface XSignalOptions {
+  topic: string;
+  network?: XNetworkMode;
+  timeoutMs?: number;
+  maxTurns?: number;
+  grokBin?: string;
+  /** Suppress progress on stderr. */
+  jsonQuiet?: boolean;
+}
+
+export interface XSignalResult {
+  markdown: string;
+  rawText: string;
+  reportPath?: string;
+  sessionId?: string;
+  costUsd?: number;
+  warnings: string[];
+}
+
 export interface CliOptions {
   prompt: string;
   mode: Mode;
@@ -92,6 +124,7 @@ export interface CliOptions {
   webProvider: WebProvider;
   json: boolean;
   web: CliWebOverrides;
+  x: CliXOptions;
   maxCost?: number;
 }
 
@@ -175,6 +208,8 @@ export interface PipelineResult {
   // Populated when --schema is used: the parsed JSON object the model returned
   // constrained by the user-supplied schema.
   schemaResult?: unknown;
+  // Populated when --x runs /whathappened via the Grok agent.
+  xSignal?: XSignalResult;
 }
 
 export interface OpenRouterMessage {

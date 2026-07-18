@@ -31,6 +31,13 @@ const result: PipelineResult = {
     serverToolUse: { webSearchRequests: 2 },
   },
   web: { searchEnabled: true, fetchEnabled: false },
+  xSignal: {
+    markdown: "Window: 24h. Pro camp loud.",
+    rawText: "full",
+    reportPath: "/tmp/whathappened-reports/whathappened-bun.html",
+    warnings: [],
+    costUsd: 0.02,
+  },
 };
 
 describe("formatters", () => {
@@ -55,6 +62,16 @@ describe("formatters", () => {
     expect(output.usage.server_tool_use).toEqual({ web_search_requests: 2 });
     expect(output.web).toEqual({ search_enabled: true, fetch_enabled: false });
     expect(output.sources).toEqual([{ url: "https://example.com" }]);
+    expect(output.x_signal).toMatchObject({
+      markdown: "Window: 24h. Pro camp loud.",
+      report_path: "/tmp/whathappened-reports/whathappened-bun.html",
+      cost_usd: 0.02,
+    });
+  });
+
+  it("appends X report path to markdown when present", () => {
+    expect(formatMarkdown(result)).toContain("## X report");
+    expect(formatMarkdown(result)).toContain("whathappened-bun.html");
   });
 
   it("formats raw with footer", () => {

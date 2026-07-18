@@ -142,6 +142,31 @@ describe("parseArgs", () => {
   });
 
   it("defaults outputStyle to brief and retrieve to false", () => {
-    expect(parseArgs(["Prompt"])).toMatchObject({ outputStyle: "brief", retrieve: false, webProvider: "openrouter" });
+    expect(parseArgs(["Prompt"])).toMatchObject({
+      outputStyle: "brief",
+      retrieve: false,
+      webProvider: "openrouter",
+      x: { enabled: false, only: false, network: "off" },
+    });
+  });
+
+  it("parses --x and related flags", () => {
+    expect(parseArgs(["--x", "Bun launch"])).toMatchObject({
+      x: { enabled: true, only: false, network: "off" },
+      prompt: "Bun launch",
+    });
+    expect(parseArgs(["--x-only", "Composer"])).toMatchObject({
+      x: { enabled: true, only: true, network: "off" },
+    });
+    expect(parseArgs(["--x-network", "prefer", "Topic"])).toMatchObject({
+      x: { enabled: true, only: false, network: "prefer" },
+    });
+    expect(parseArgs(["--x", "--x-timeout", "90", "--x-max-turns", "20", "Topic"])).toMatchObject({
+      x: { enabled: true, only: false, network: "off", timeoutMs: 90_000, maxTurns: 20 },
+    });
+  });
+
+  it("rejects invalid --x-network", () => {
+    expect(() => parseArgs(["--x-network", "loud", "Topic"])).toThrow("Invalid --x-network");
   });
 });
