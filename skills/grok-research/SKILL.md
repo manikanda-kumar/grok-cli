@@ -1,16 +1,19 @@
 ---
 name: grok-research
-description: Web-grounded research via grok-research CLI (OpenRouter Grok + Sonar), with optional native X signal via /whathappened (Grok Build X tools). Use for decision briefs, tradeoffs, cited facts, real-time signal, X/Twitter-grounded answers, multi-perspective synthesis. Triggers - "grok this", "ask grok", "x grounded", "research via grok", "deep research", "decision brief", "deepresearch", "with X signal".
+description: "Web-grounded research via grok-research CLI (OpenRouter Grok + Sonar), plus the user's TweetSmash X bookmarks and optional live X signal via /whathappened. Use for decision briefs, tradeoffs, cited facts, saved tweets, twitter bookmarks, related bookmarks, real-time X opinion, multi-perspective synthesis. Triggers on: grok this, ask grok, what have I saved, tweetsmash, x bookmarks, saved tweets, x grounded, deep research, decision brief."
 ---
 
 # grok-research
 
-CLI: `grok-research` (repo `/Users/manik/Github/grok-cli`, linked as `grok-research`). OpenRouter web search is **server-side**. Native X uses **Grok Build tools** through the installed **whathappened** skill — not `XAI_API_KEY`, not domain-filtered web.
+CLI: `grok-research` (repo `/Users/manik/Github/grok-cli`, linked as `grok-research`). OpenRouter web search is **server-side**. Personal X bookmarks use **TweetSmash REST** (`--bookmarks`, no `ft`). Native public X uses **Grok Build tools** through **whathappened** — not `XAI_API_KEY`, not domain-filtered web.
+
+This skill owns bookmark recall. Do not load a separate tweetsmash skill for “what have I saved?”.
 
 ## Prereq
 
-- `OPENROUTER_API_KEY` for web/Sonar legs (env or `~/.config/grok-cli/config.json`).
-- For X: Grok Build session with `x_keyword_search` / `x_semantic_search` / `x_thread_fetch` / `x_user_search`, and skill `whathappened` installed (`~/.grok/skills/whathappened`).
+- `OPENROUTER_API_KEY` for web/Sonar legs (env or `~/.config/grok-cli/config.json`). Not needed for `--bookmarks-only`.
+- `TWEETSMASH_API_KEY` (fallbacks: `TWEETSMASH_KEY`, `TWEETSMASH`, `TWEETSMASH_TOKEN`) for bookmarks. Already set as an Amp **personal secret** (`amp secrets list --user`); orbs inject it. Laptop env is not inherited.
+- For public X: Grok Build session with `x_keyword_search` / `x_semantic_search` / `x_thread_fetch` / `x_user_search`, and skill `whathappened` installed (`~/.grok/skills/whathappened`).
 
 ## Two ways to get X signal
 
@@ -30,7 +33,21 @@ CLI: `grok-research` (repo `/Users/manik/Github/grok-cli`, linked as `grok-resea
 | `multi` | Sonar + 3× Grok roles + synthesis | Sonar only on research leg |
 | `retrieve` | Tavily-style `results[]` | web forced on |
 
-## X flags (CLI)
+## Route first
+
+`--x` / Grok Build is **public X opinion**. Bookmark recall is **TweetSmash HTTPS**. Amp orbs do not have `grok`, `ft`, or `~/.local/bin/grok-research`. Use the bundled script there.
+
+| User job | Local machine | Amp orb |
+| --- | --- | --- |
+| “What have I saved about X?” | `grok-research --bookmarks-only --json "<topic>"` | `node ${SKILL_DIR}/scripts/search-bookmarks.mjs --json --related "<topic>"` |
+| Decision / eval + my saves | `grok-research expert --bookmarks --bookmarks-related "<q>"` | Run the script, then answer from those hits + web/docs |
+| “What is X saying?” | `/whathappened` or `grok-research --x` | Not available (no Grok Build X tools). Say so. |
+
+`${SKILL_DIR}` is this skill directory (the folder that contains `SKILL.md`). If unknown, `find` `search-bookmarks.mjs` under the loaded skill path.
+
+`--bookmarks` is the user's library. `--x` is a public conversation sample. Never mix those up. Never invent bookmarks. Soft-skip if `TWEETSMASH_API_KEY` is missing.
+
+## X / bookmark flags (CLI)
 
 | Flag | Effect |
 |------|--------|
@@ -39,6 +56,9 @@ CLI: `grok-research` (repo `/Users/manik/Github/grok-cli`, linked as `grok-resea
 | `--x-network off\|prefer\|strict` | whathappened network filter (default `off`) |
 | `--x-timeout <sec>` | Agent timeout (default 180) |
 | `--x-max-turns <n>` | Agent turns (default 30) |
+| `--bookmarks` | Inject the user's TweetSmash X bookmarks via REST (`TWEETSMASH_API_KEY`). No `ft`. Works in Amp orbs. |
+| `--bookmarks-only` | Bookmarks only (no OpenRouter web) |
+| `--bookmarks-related` | Also query related authors/tags/terms |
 
 Env: `GROK_BIN` overrides grok path. Nested spawn blocked when `GROK_RESEARCH_X_ACTIVE=1`.
 
@@ -109,6 +129,8 @@ grok-research expert --x --x-network prefer --json "Launch reception for Grok 4.
 - Deep factual citations → `deepresearch` (Sonar)
 - **X opinion / “what happened on X” only** → `/whathappened` or `grok-research --x-only` (not domain allowlist)
 - **Decision + social signal** → in-session hybrid above, or `grok-research --x`
+- **Your saved tweets / TweetSmash recall** → `--bookmarks-only` (direct) or `--bookmarks` (with research)
+- **Decision + your saved tweets** → `grok-research expert --bookmarks --bookmarks-related`
 - Multi-perspective → `multi` (can combine with in-session X inject)
 - Static / no-internet → `--no-web`
 - Structured parsing → `--json`

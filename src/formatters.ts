@@ -75,6 +75,15 @@ export function formatJson(result: PipelineResult): string {
       warnings: result.xSignal.warnings,
     };
   }
+  if (result.bookmarks) {
+    payload.bookmarks = {
+      query: result.bookmarks.query,
+      skipped: result.bookmarks.skipped,
+      reason: result.bookmarks.reason ?? null,
+      hits: result.bookmarks.hits,
+      related: result.bookmarks.related,
+    };
+  }
 
   return JSON.stringify(payload, null, 2);
 }

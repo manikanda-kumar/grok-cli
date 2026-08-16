@@ -32,6 +32,14 @@ describe("buildSingleCallMessages", () => {
     expect(messages[1]?.content).toContain("Live X/Twitter public conversation");
     expect(messages[1]?.content).toContain("Camps: pro vs con");
   });
+
+  it("injects saved bookmarks into system and user when provided", () => {
+    const messages = buildSingleCallMessages("agent skills", "brief", false, false, undefined, "- @matteocollina — Skills");
+    expect(messages[0]?.content).toContain("saved X bookmarks");
+    expect(messages[0]?.content).toContain("## Saved bookmarks");
+    expect(messages[1]?.content).toContain("User's saved X bookmarks");
+    expect(messages[1]?.content).toContain("@matteocollina");
+  });
 });
 
 describe("withXSignal", () => {

@@ -66,6 +66,12 @@ grok-research research "..."
 | `--x-network <off\|prefer\|strict>` | Network/follow filter for `/whathappened` (default `off`) |
 | `--x-timeout <sec>` | Grok agent timeout for `--x` (default 180) |
 | `--x-max-turns <n>` | Max agent turns for `--x` (default 30) |
+| `--bookmarks` | Search your TweetSmash X bookmarks and inject them (needs `TWEETSMASH_API_KEY`; no `ft`) |
+| `--bookmarks-only` | Bookmarks only (skip OpenRouter web research) |
+| `--bookmarks-related` | Also pull related authors/tags/terms from first hits |
+| `--bookmarks-limit <n>` | Bookmark hits to inject (default 8) |
+| `--bookmarks-author <user>` | Filter by author handle |
+| `--bookmarks-tag <label>` | Filter by TweetSmash label |
 | `--economy` | Cheaper model aliases. Default profile is `quality`. |
 | `--json` | Structured JSON on stdout (works with web tools). Errors are JSON on stderr. |
 | `--report` | Longer Markdown report headings instead of a decision brief. |
@@ -84,6 +90,8 @@ grok-research retrieve "latest React 19 patterns"
 grok-research expert --retrieve --json "latest Bun vs Deno benchmarks"
 grok-research expert --output both --json "compare Postgres vs MySQL for small teams"
 grok-research expert --schema '{"type":"object","properties":{"winner":{"type":"string"},"reason":{"type":"string"}}}' "Go vs Rust for a CLI"
+grok-research expert --bookmarks --bookmarks-related "agent skills for coding agents"
+grok-research --bookmarks-only --json "what have I saved about MCP?"
 ```
 
 ## Web search cost notes

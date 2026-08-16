@@ -1,4 +1,13 @@
-import type { CliOptions, CliWebOverrides, CliXOptions, Mode, OutputStyle, WebProvider, XNetworkMode } from "./types.js";
+import type {
+  CliBookmarkOptions,
+  CliOptions,
+  CliWebOverrides,
+  CliXOptions,
+  Mode,
+  OutputStyle,
+  WebProvider,
+  XNetworkMode,
+} from "./types.js";
 
 import { basename } from "node:path";
 
@@ -45,6 +54,12 @@ Options:
   --x-network <mode>         off|prefer|strict (default: off); follow/list filter for /whathappened
   --x-timeout <sec>          Grok agent timeout seconds for --x (default: 180)
   --x-max-turns <n>          Max agent turns for --x (default: 30)
+  --bookmarks                Search your TweetSmash X bookmarks and inject them (needs TWEETSMASH_API_KEY)
+  --bookmarks-only           Bookmarks only (skip OpenRouter web research)
+  --bookmarks-related        Also pull related authors/tags/terms from first hits
+  --bookmarks-limit <n>      Bookmark hits to inject (default: 8, max 20)
+  --bookmarks-author <user>  Filter bookmarks by author handle
+  --bookmarks-tag <label>    Filter bookmarks by TweetSmash label
   --economy                  Use economy model aliases
   --json                     Emit structured JSON (compatible with web tools)
   --report                   Emit a longer research report
@@ -83,6 +98,10 @@ Examples for agents:
   ${PROGRAM_NAME} expert --x "Should we adopt Bun 1.2?"
   ${PROGRAM_NAME} --x-only "What is X saying about Composer 2.5?"
   ${PROGRAM_NAME} expert --x --x-network prefer --json "Launch reception for Grok 4.20"
+
+  # Your saved X bookmarks via TweetSmash REST (no ft, works in Amp orbs)
+  ${PROGRAM_NAME} expert --bookmarks --bookmarks-related "agent skills for coding agents"
+  ${PROGRAM_NAME} --bookmarks-only --json "what have I saved about MCP?"
 
   # Inside Grok Build: do NOT nest --x; run /whathappened then consolidate (see skill)
 
@@ -157,7 +176,8 @@ Agent tips:
   - Use --x for live X/Twitter signal via Grok agent /whathappened (native X tools; needs \`grok\` auth).
   - Prefer in-session /whathappened when already inside Grok Build — avoid nested \`grok-research --x\`.
   - Domain allowlist of x.com is a weak web-index proxy; prefer --x or /whathappened for real X.
-`;
+  - Use --bookmarks to inject YOUR TweetSmash saves (TWEETSMASH_API_KEY). No ft. Works in Amp orbs.
+  `;
 
 export function parseArgs(argv: string[]): CliOptions {
   const tokens = [...argv];
@@ -174,6 +194,7 @@ export function parseArgs(argv: string[]): CliOptions {
   let maxCost: number | undefined;
   const web = emptyWebOverrides();
   const x = emptyXOptions();
+  const bookmarks = emptyBookmarkOptions();
   const promptParts: string[] = [];
 
   while (tokens.length > 0) {
@@ -288,6 +309,41 @@ export function parseArgs(argv: string[]): CliOptions {
       continue;
     }
 
+    if (token === "--bookmarks") {
+      bookmarks.enabled = true;
+      continue;
+    }
+
+    if (token === "--bookmarks-only") {
+      bookmarks.enabled = true;
+      bookmarks.only = true;
+      continue;
+    }
+
+    if (token === "--bookmarks-related") {
+      bookmarks.enabled = true;
+      bookmarks.related = true;
+      continue;
+    }
+
+    if (token === "--bookmarks-limit") {
+      bookmarks.limit = parsePositiveInt(requireValue(token, tokens.shift()), token);
+      bookmarks.enabled = true;
+      continue;
+    }
+
+    if (token === "--bookmarks-author") {
+      bookmarks.author = requireValue(token, tokens.shift()).replace(/^@/, "");
+      bookmarks.enabled = true;
+      continue;
+    }
+
+    if (token === "--bookmarks-tag") {
+      bookmarks.tag = requireValue(token, tokens.shift());
+      bookmarks.enabled = true;
+      continue;
+    }
+
     if (token === "--economy") {
       profile = "economy";
       profileExplicit = true;
@@ -353,6 +409,7 @@ export function parseArgs(argv: string[]): CliOptions {
     json,
     web,
     x,
+    bookmarks,
     ...(maxCost === undefined ? {} : { maxCost }),
   };
 }
@@ -367,6 +424,10 @@ function emptyWebOverrides(): CliWebOverrides {
 
 function emptyXOptions(): CliXOptions {
   return { enabled: false, only: false, network: "off" };
+}
+
+function emptyBookmarkOptions(): CliBookmarkOptions {
+  return { enabled: false, only: false, related: false };
 }
 
 function isMode(value: string | undefined): value is Mode {

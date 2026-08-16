@@ -15,6 +15,7 @@ import {
 import { mergeRetrieveResults, parseRetrieveContent } from "./retrieval.js";
 import type {
   AppConfig,
+  BookmarkSearchResult,
   CanonicalMode,
   CliOptions,
   DecisionAnswer,
@@ -24,6 +25,7 @@ import type {
   SearchResult,
   XSignalResult,
 } from "./types.js";
+import { fetchBookmarkSignal, formatBookmarksMarkdown } from "./bookmarks.js";
 import { fetchXSignal } from "./x-signal.js";
 
 interface ModeCall {
@@ -103,11 +105,41 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     deprecatedWarnings.push(...xSignal.warnings);
   }
 
+  let bookmarks: BookmarkSearchResult | undefined;
+  if (options.bookmarks.enabled) {
+    if (!options.json) console.error("Bookmarks: searching TweetSmash library...");
+    bookmarks = await fetchBookmarkSignal({
+      query: options.prompt,
+      related: options.bookmarks.related,
+      ...(options.bookmarks.limit === undefined ? {} : { limit: options.bookmarks.limit }),
+      ...(options.bookmarks.author === undefined ? {} : { author: options.bookmarks.author }),
+      ...(options.bookmarks.tag === undefined ? {} : { tag: options.bookmarks.tag }),
+    });
+    if (bookmarks.skipped) {
+      deprecatedWarnings.push(
+        bookmarks.reason === "no-api-key"
+          ? "TweetSmash token missing; --bookmarks skipped. Set TWEETSMASH_API_KEY."
+          : `TweetSmash bookmark search skipped: ${bookmarks.reason ?? "unknown"}.`,
+      );
+    } else if (bookmarks.hits.length === 0) {
+      deprecatedWarnings.push("TweetSmash returned no bookmark hits for this prompt.");
+    }
+  }
+
+  if (options.x.only && options.bookmarks.only) {
+    throw new Error("Cannot combine --x-only with --bookmarks-only.");
+  }
+
   if (options.x.only) {
-    return buildXOnlyResult(options, mode, web, deprecatedWarnings, xSignal);
+    return attachBookmarks(buildXOnlyResult(options, mode, web, deprecatedWarnings, xSignal), bookmarks);
+  }
+
+  if (options.bookmarks.only) {
+    return buildBookmarksOnlyResult(options, mode, deprecatedWarnings, bookmarks, xSignal);
   }
 
   const xMarkdown = xSignal?.markdown;
+  const bookmarksMarkdown = bookmarks && !bookmarks.skipped ? formatBookmarksMarkdown(bookmarks) : undefined;
 
   // Schema-guided output: takes over the single-call path regardless of mode.
   // When web is on, use two-pass (research with tools, then schema format without)
@@ -126,7 +158,7 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
       const research = await caller({
         role: "schema_research",
         model,
-        messages: buildSingleCallMessages(schemaPrompt, "report", false, true, xMarkdown),
+        messages: buildSingleCallMessages(schemaPrompt, "report", false, true, xMarkdown, bookmarksMarkdown),
         temperature: 0.2,
         web,
       });
@@ -149,7 +181,7 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
         warnings: [...research.warnings, ...formatted.warnings],
         usage: mergeUsage([research.usage, formatted.usage]),
       };
-      return attachXSignal(normalizeSchemaResult(merged, options, mode, web, schemaWarnings), xSignal);
+      return attachContext(normalizeSchemaResult(merged, options, mode, web, schemaWarnings), xSignal, bookmarks);
     }
 
     if (!options.json) console.error(`Step 1/1: Generating schema-constrained output (${model})...`);
@@ -161,18 +193,26 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
       json: true,
       web,
     });
-    return attachXSignal(normalizeSchemaResult(result, options, mode, web, schemaWarnings), xSignal);
+    return attachContext(normalizeSchemaResult(result, options, mode, web, schemaWarnings), xSignal, bookmarks);
   }
 
   if (options.mode === "multi") {
-    return attachXSignal(await runMulti(config, options, mode, web, deprecatedWarnings, caller, xMarkdown), xSignal);
+    return attachContext(
+      await runMulti(config, options, mode, web, deprecatedWarnings, caller, xMarkdown, bookmarksMarkdown),
+      xSignal,
+      bookmarks,
+    );
   }
 
   // Retrieve mode (or --retrieve / --output results|both on a Grok mode): run a
   // retrieval-focused call that emits Tavily-style results[].
   const retrieveRequested = mode === "retrieve" || options.retrieve || options.outputStyle !== "brief";
   if (retrieveRequested && modeAllowsWeb(mode)) {
-    return attachXSignal(await runRetrieve(config, options, mode, web, deprecatedWarnings, caller, xMarkdown), xSignal);
+    return attachContext(
+      await runRetrieve(config, options, mode, web, deprecatedWarnings, caller, xMarkdown, bookmarksMarkdown),
+      xSignal,
+      bookmarks,
+    );
   }
   if (retrieveRequested && !modeAllowsWeb(mode)) {
     // --retrieve / --output results|both was requested on a non-web mode
@@ -189,11 +229,11 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     const result = await caller({
       role: "deepresearch",
       model,
-      messages: buildResearchMessages(options.prompt, options.outputFormat, options.json, xMarkdown),
+      messages: buildResearchMessages(options.prompt, options.outputFormat, options.json, xMarkdown, bookmarksMarkdown),
       temperature: 0.2,
       json: options.json,
     });
-    return attachXSignal(normalizeResult(result, options, mode, web, deprecatedWarnings), xSignal);
+    return attachContext(normalizeResult(result, options, mode, web, deprecatedWarnings), xSignal, bookmarks);
   }
 
   const role = mode === "auto" ? "expert" : mode;
@@ -207,7 +247,14 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     const research = await caller({
       role,
       model,
-      messages: buildSingleCallMessages(options.prompt, options.outputFormat === "raw" ? "brief" : options.outputFormat, false, true, xMarkdown),
+      messages: buildSingleCallMessages(
+        options.prompt,
+        options.outputFormat === "raw" ? "brief" : options.outputFormat,
+        false,
+        true,
+        xMarkdown,
+        bookmarksMarkdown,
+      ),
       temperature: 0.2,
       web,
     });
@@ -233,23 +280,31 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
       ],
       usage: mergeUsage([research.usage, formatted.usage]),
     };
-    return attachXSignal(normalizeResult(merged, options, mode, web, deprecatedWarnings), xSignal);
+    return attachContext(normalizeResult(merged, options, mode, web, deprecatedWarnings), xSignal, bookmarks);
   }
 
   if (!options.json) {
     const webStatus = web.searchEnabled ? " (web search enabled)" : "";
     const xStatus = xMarkdown ? " + X signal" : "";
-    console.error(`Step 1/1: Calling ${modelAlias} model${webStatus}${xStatus}...`);
+    const bookmarkStatus = bookmarksMarkdown ? " + bookmarks" : "";
+    console.error(`Step 1/1: Calling ${modelAlias} model${webStatus}${xStatus}${bookmarkStatus}...`);
   }
   const result = await caller({
     role,
     model,
-    messages: buildSingleCallMessages(options.prompt, options.outputFormat, options.json, web.searchEnabled, xMarkdown),
+    messages: buildSingleCallMessages(
+      options.prompt,
+      options.outputFormat,
+      options.json,
+      web.searchEnabled,
+      xMarkdown,
+      bookmarksMarkdown,
+    ),
     temperature: 0.2,
     json: options.json,
     web,
   });
-  return attachXSignal(normalizeResult(result, options, mode, web, deprecatedWarnings), xSignal);
+  return attachContext(normalizeResult(result, options, mode, web, deprecatedWarnings), xSignal, bookmarks);
 }
 
 function withXInSchemaPrompt(prompt: string, xMarkdown?: string): string {
@@ -264,6 +319,54 @@ function attachXSignal(result: PipelineResult, xSignal: XSignalResult | undefine
     xSignal,
     warnings: dedupeWarnings([...result.warnings, ...xSignal.warnings]),
   };
+}
+
+function attachBookmarks(result: PipelineResult, bookmarks: BookmarkSearchResult | undefined): PipelineResult {
+  if (!bookmarks) return result;
+  return {
+    ...result,
+    bookmarks,
+    warnings: dedupeWarnings(result.warnings),
+  };
+}
+
+function attachContext(
+  result: PipelineResult,
+  xSignal: XSignalResult | undefined,
+  bookmarks: BookmarkSearchResult | undefined,
+): PipelineResult {
+  return attachBookmarks(attachXSignal(result, xSignal), bookmarks);
+}
+
+function buildBookmarksOnlyResult(
+  options: CliOptions,
+  mode: CanonicalMode,
+  extraWarnings: string[],
+  bookmarks: BookmarkSearchResult | undefined,
+  xSignal: XSignalResult | undefined,
+): PipelineResult {
+  if (!bookmarks) {
+    throw new Error("--bookmarks-only requires a TweetSmash search result.");
+  }
+  const content = `# Saved Bookmarks Brief\n\n${formatBookmarksMarkdown(bookmarks)}`;
+  const sources = [...bookmarks.hits, ...bookmarks.related.flatMap((group) => group.hits)].map((hit) => ({
+    url: hit.url,
+    title: hit.author ? `@${hit.author}` : hit.postId,
+  }));
+  return attachContext(
+    {
+      mode,
+      profile: options.profile,
+      outputFormat: options.outputFormat,
+      content,
+      sources,
+      warnings: extraWarnings,
+      usage: emptyUsage(),
+      web: { searchEnabled: false, fetchEnabled: false },
+    },
+    xSignal,
+    bookmarks,
+  );
 }
 
 function buildXOnlyResult(
@@ -301,6 +404,7 @@ async function runRetrieve(
   warnings: string[],
   caller: ModeCaller,
   xMarkdown?: string,
+  bookmarksMarkdown?: string,
 ): Promise<PipelineResult> {
   const model = resolveModel(config, options.profile, mode === "fast" ? "fast" : "expert");
   if (!options.json) console.error(`Step 1/1: Retrieving web results (${model})...`);
@@ -324,8 +428,14 @@ async function runRetrieve(
     const sourcesBlock = searchResults
       .map((r) => `- ${r.title ? `${r.title}: ` : ""}${r.url}${r.content ? `\n  ${r.content}` : ""}`)
       .join("\n");
-    const synthUser = xMarkdown
-      ? `Query:\n${options.prompt}\n\nRetrieved sources:\n${sourcesBlock}\n\nLive X/Twitter sample:\n${xMarkdown}\n\nSynthesize the answer (include ## X signal if relevant).`
+    const extraBlocks = [
+      xMarkdown ? `Live X/Twitter sample:\n${xMarkdown}` : "",
+      bookmarksMarkdown ? `User saved bookmarks:\n${bookmarksMarkdown}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n\n");
+    const synthUser = extraBlocks
+      ? `Query:\n${options.prompt}\n\nRetrieved sources:\n${sourcesBlock}\n\n${extraBlocks}\n\nSynthesize the answer (include ## X signal / ## Saved bookmarks if relevant).`
       : `Query:\n${options.prompt}\n\nRetrieved sources:\n${sourcesBlock}\n\nSynthesize the answer.`;
     synthesis = await caller({
       role: "synthesis",
@@ -443,6 +553,7 @@ async function runMulti(
   warnings: string[],
   caller: ModeCaller,
   xMarkdown?: string,
+  bookmarksMarkdown?: string,
 ): Promise<PipelineResult> {
   const researchModel = resolveModel(config, options.profile, "research");
   const expertModel = resolveModel(config, options.profile, "expert");
@@ -451,7 +562,7 @@ async function runMulti(
   const research = await caller({
     role: "research",
     model: researchModel,
-    messages: buildResearchMessages(options.prompt, "report", false, xMarkdown),
+    messages: buildResearchMessages(options.prompt, "report", false, xMarkdown, bookmarksMarkdown),
     temperature: 0.1,
   });
 
@@ -498,6 +609,7 @@ async function runMulti(
       research.sources.map((source) => source.url),
       options.json,
       xMarkdown,
+      bookmarksMarkdown,
     ),
     temperature: 0.2,
     json: options.json,

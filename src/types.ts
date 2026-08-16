@@ -92,6 +92,55 @@ export interface CliXOptions {
   maxTurns?: number;
 }
 
+export interface BookmarkHit {
+  postId: string;
+  url: string;
+  text: string;
+  author?: string;
+  authorName?: string;
+  postedAt?: string | null;
+  tags: string[];
+}
+
+export interface BookmarkRelatedGroup {
+  term: string;
+  via: "author" | "tag" | "term";
+  hits: BookmarkHit[];
+}
+
+export interface BookmarkSearchResult {
+  query: string;
+  hits: BookmarkHit[];
+  related: BookmarkRelatedGroup[];
+  skipped: boolean;
+  reason?: string;
+}
+
+export interface BookmarkSearchOptions {
+  query: string;
+  limit?: number;
+  related?: boolean;
+  relatedLimit?: number;
+  author?: string;
+  tag?: string;
+  timeoutMs?: number;
+  apiKey?: string | null;
+  env?: NodeJS.ProcessEnv | Record<string, string | undefined>;
+  fetchImpl?: typeof fetch;
+}
+
+export interface CliBookmarkOptions {
+  /** Search the user's TweetSmash X bookmarks and inject them into research. */
+  enabled: boolean;
+  /** Return bookmark hits only (skip OpenRouter web research). */
+  only: boolean;
+  /** Also query related authors/tags/terms from the first hits. */
+  related: boolean;
+  limit?: number;
+  author?: string;
+  tag?: string;
+}
+
 export interface XSignalOptions {
   topic: string;
   network?: XNetworkMode;
@@ -125,6 +174,7 @@ export interface CliOptions {
   json: boolean;
   web: CliWebOverrides;
   x: CliXOptions;
+  bookmarks: CliBookmarkOptions;
   maxCost?: number;
 }
 
@@ -210,6 +260,8 @@ export interface PipelineResult {
   schemaResult?: unknown;
   // Populated when --x runs /whathappened via the Grok agent.
   xSignal?: XSignalResult;
+  // Populated when --bookmarks searches TweetSmash REST.
+  bookmarks?: BookmarkSearchResult;
 }
 
 export interface OpenRouterMessage {

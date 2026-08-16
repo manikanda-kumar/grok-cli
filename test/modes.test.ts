@@ -19,6 +19,7 @@ function options(overrides: Partial<Parameters<typeof runMode>[1]> = {}): Parame
     json: false,
     web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
     x: { enabled: false, only: false, network: "off" },
+    bookmarks: { enabled: false, only: false, related: false },
     ...overrides,
   };
 }

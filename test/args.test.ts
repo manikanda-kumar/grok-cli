@@ -147,6 +147,7 @@ describe("parseArgs", () => {
       retrieve: false,
       webProvider: "openrouter",
       x: { enabled: false, only: false, network: "off" },
+      bookmarks: { enabled: false, only: false, related: false },
     });
   });
 
@@ -168,5 +169,21 @@ describe("parseArgs", () => {
 
   it("rejects invalid --x-network", () => {
     expect(() => parseArgs(["--x-network", "loud", "Topic"])).toThrow("Invalid --x-network");
+  });
+
+  it("parses --bookmarks flags", () => {
+    expect(parseArgs(["--bookmarks", "agent skills"])).toMatchObject({
+      bookmarks: { enabled: true, only: false, related: false },
+      prompt: "agent skills",
+    });
+    expect(parseArgs(["--bookmarks-only", "MCP"])).toMatchObject({
+      bookmarks: { enabled: true, only: true, related: false },
+    });
+    expect(parseArgs(["--bookmarks-related", "--bookmarks-limit", "5", "--bookmarks-author", "@addyosmani", "skills"])).toMatchObject({
+      bookmarks: { enabled: true, only: false, related: true, limit: 5, author: "addyosmani" },
+    });
+    expect(parseArgs(["--bookmarks-tag", "AI", "Prompt"])).toMatchObject({
+      bookmarks: { enabled: true, tag: "AI" },
+    });
   });
 });

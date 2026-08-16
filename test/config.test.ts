@@ -151,6 +151,7 @@ describe("resolveCliOptions", () => {
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
         x: { enabled: false, only: false, network: "off" },
+        bookmarks: { enabled: false, only: false, related: false },
       }),
     ).toMatchObject({ mode: "research", profile: "economy" });
   });
@@ -170,6 +171,7 @@ describe("resolveCliOptions", () => {
         json: false,
         web: { noWeb: false, deprecatedWebFlag: false, fetchFlag: false },
         x: { enabled: false, only: false, network: "off" },
+        bookmarks: { enabled: false, only: false, related: false },
       }),
     ).toMatchObject({ mode: "expert", profile: "quality" });
   });

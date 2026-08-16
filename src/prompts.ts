@@ -12,20 +12,30 @@ export function buildSingleCallMessages(
   json = false,
   webSearch = false,
   xSignalMarkdown?: string,
+  bookmarksMarkdown?: string,
 ) {
-  return [
-    { role: "system" as const, content: systemPrompt(outputFormat, json, webSearch, Boolean(xSignalMarkdown)) },
-    { role: "user" as const, content: withXSignal(prompt, xSignalMarkdown) },
-  ];
-}
-
-export function buildResearchMessages(prompt: string, outputFormat: OutputFormat, json = false, xSignalMarkdown?: string) {
   return [
     {
       role: "system" as const,
-      content: `${systemPrompt(outputFormat, json, false, Boolean(xSignalMarkdown))}\nGround every factual claim in current sources. Include citations when available.`,
+      content: systemPrompt(outputFormat, json, webSearch, Boolean(xSignalMarkdown), Boolean(bookmarksMarkdown)),
     },
-    { role: "user" as const, content: withXSignal(prompt, xSignalMarkdown) },
+    { role: "user" as const, content: withContext(prompt, xSignalMarkdown, bookmarksMarkdown) },
+  ];
+}
+
+export function buildResearchMessages(
+  prompt: string,
+  outputFormat: OutputFormat,
+  json = false,
+  xSignalMarkdown?: string,
+  bookmarksMarkdown?: string,
+) {
+  return [
+    {
+      role: "system" as const,
+      content: `${systemPrompt(outputFormat, json, false, Boolean(xSignalMarkdown), Boolean(bookmarksMarkdown))}\nGround every factual claim in current sources. Include citations when available.`,
+    },
+    { role: "user" as const, content: withContext(prompt, xSignalMarkdown, bookmarksMarkdown) },
   ];
 }
 
@@ -51,14 +61,19 @@ export function buildSynthesisMessages(
   sources: string[] = [],
   json = false,
   xSignalMarkdown?: string,
+  bookmarksMarkdown?: string,
 ) {
   return [
-    { role: "system" as const, content: systemPrompt(outputFormat, json, false, Boolean(xSignalMarkdown)) },
+    {
+      role: "system" as const,
+      content: systemPrompt(outputFormat, json, false, Boolean(xSignalMarkdown), Boolean(bookmarksMarkdown)),
+    },
     {
       role: "user" as const,
-      content: withXSignal(
+      content: withContext(
         `Original question:\n${prompt}\n\nGrounded research:\n${research}\n\nSource URLs:\n${sources.join("\n") || "None provided"}\n\nRole analyses:\n${analyses.join("\n\n---\n\n")}\n\nSynthesize the final answer.`,
         xSignalMarkdown,
+        bookmarksMarkdown,
       ),
     },
   ];
@@ -66,15 +81,28 @@ export function buildSynthesisMessages(
 
 /** Inject live X sample into the user message for consolidation. */
 export function withXSignal(prompt: string, xSignalMarkdown?: string): string {
-  if (!xSignalMarkdown?.trim()) return prompt;
-  return `${prompt}
+  return withContext(prompt, xSignalMarkdown);
+}
 
-## Live X/Twitter public conversation (from /whathappened via Grok agent native X tools)
+/** Inject X public signal and/or the user's TweetSmash bookmarks. */
+export function withContext(prompt: string, xSignalMarkdown?: string, bookmarksMarkdown?: string): string {
+  const parts = [prompt];
+  if (xSignalMarkdown?.trim()) {
+    parts.push(`## Live X/Twitter public conversation (from /whathappened via Grok agent native X tools)
 Treat this as a sample of public conversation on X — not ground truth and not a substitute for docs, changelogs, or benchmarks.
 Prefer web/docs for product facts and versions. Use X for reception, sentiment, controversy, and first-party launch chatter.
 When writing the brief, include a short ## X signal section summarizing camps and linking key receipts when relevant.
 
-${xSignalMarkdown.trim()}`;
+${xSignalMarkdown.trim()}`);
+  }
+  if (bookmarksMarkdown?.trim()) {
+    parts.push(`## User's saved X bookmarks (from TweetSmash REST)
+These are posts the user already bookmarked. Cite them as prior saves, not as live public opinion and not as official docs.
+When they are relevant, include a short ## Saved bookmarks section with @handle + URL. Do not invent bookmarks.
+
+${bookmarksMarkdown.trim()}`);
+  }
+  return parts.join("\n\n");
 }
 
 export function buildRetrieveMessages(prompt: string) {
@@ -131,7 +159,16 @@ export function buildSchemaFromResearchMessages(prompt: string, research: string
 const X_SIGNAL_INSTRUCTION =
   "A live X/Twitter sample is provided below. Frame opinion as public conversation on that sample. Do not invent posts. Include ## X signal when X materially affects the recommendation.";
 
-function systemPrompt(outputFormat: OutputFormat, json: boolean, webSearch: boolean, hasXSignal = false): string {
+const BOOKMARKS_INSTRUCTION =
+  "The user's saved X bookmarks are provided below. Treat them as prior personal context. Do not invent saves. Include ## Saved bookmarks when they materially affect the recommendation.";
+
+function systemPrompt(
+  outputFormat: OutputFormat,
+  json: boolean,
+  webSearch: boolean,
+  hasXSignal = false,
+  hasBookmarks = false,
+): string {
   let prompt: string;
 
   if (json) {
@@ -152,6 +189,9 @@ function systemPrompt(outputFormat: OutputFormat, json: boolean, webSearch: bool
   }
   if (hasXSignal) {
     prompt = `${prompt}\n\n${X_SIGNAL_INSTRUCTION}`;
+  }
+  if (hasBookmarks) {
+    prompt = `${prompt}\n\n${BOOKMARKS_INSTRUCTION}`;
   }
 
   return prompt;
