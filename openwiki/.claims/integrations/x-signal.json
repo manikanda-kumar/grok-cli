@@ -1,0 +1,260 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:30ab04621c826f6f4f87bbbf3072a74040c626feef8255f119d72ef2c828112d",
+  "claims": [
+    {
+      "id": "claim_f18c3bb96f374647bf847f9d86cf387a",
+      "statement": "The --x integration shells out from Node to the headless Grok agent binary (grok) to run the /whathappened skill with native X tools (x_keyword_search, x_semantic_search, x_thread_fetch, x_user_search) and returns a structured X signal; it requires Grok Build auth plus native X tools on the grok binary, not XAI_API_KEY or OPENROUTER_API_KEY.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L52-L56",
+          "version": "repo-lines-v1:sha256:924c5ae552a1c56901ffcf975a4beb57f97e94e105a3e5f765e1664580cc6efc:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2NhM2Q2NWIwNmZlOGU3MGNlMTE4OGQyODI2YWRhMzZkNjBiMjYzYzljODkxNmM4ZjNlNWY4M2EzNjZjYzBiMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzIwOTZiNDljNTgwZmExZWViMjZjYTFkYjI2NGY5Mjk2NjEwOTRiZDg1ZDk2Y2JhOWVkZmYwYmExY2FiNTBkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjZkZTBiNDhhYWNmYTc4YzEzY2I5YzJhZTMxNjkyOWQwYmQ0NzA5YmRmYmMxM2IyMjFkZTVkODE4YzlmYjMzNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2VhZWVjMmVlNGY0N2VmM2ViZmZjZjNjZjU5NDJmZmY3M2MzMzA2OThhNGFiMDE5NzZhMDcxOWExYWUxYjc5NyJ9"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L99-L102",
+          "version": "repo-lines-v1:sha256:3a2f24fffb7edc7dded31c599788644f9984a1fe4fa58473c59ee47eca16febe:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWFmMjJjZjA3MzI1OTJjMjQ3MTQxY2JlNjFlZmExMTAxMjYxMmY1YTMxMjJiOWFmOWJiYWY1MmY1NzI0ZDE5NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTcyYTQyOTM4MmIyZTE0NzE4ZTBlMzdiMDU3MGE4YTE3MDI5OTFmY2Q4NDk4Y2Q4NDA2MGE4YmY0ZjA1MDE3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzM0NzQwMzUxYmJkMDYyNDc0MTViZGNjZWI5NjhkZjRkMjUwM2ZjZTQ2ZjU4ZjA5YTY4YWNlMzVmZjU1ZjUwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjM1YTI3NTJiNWRmYjBjOWQxN2ExZDI4MTYyZTY3ZWU5YWVlMTIyYWRkODhlMWNhNDMzMWIzOTNlZjY3MDc5ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7846e5a838104770a0c721c7aae2dfbb",
+      "statement": "Every --x* flag both enables the feature and is self-contained: --x enables the signal, --x-only returns only the signal, --x-network <off|prefer|strict> (default off) sets the follow/list filter, --x-timeout <sec> (default 180) converts seconds to milliseconds, --x-max-turns <n> (default 30) caps agent turns; setting --x-network/--x-timeout/--x-max-turns also enables --x, and invalid --x-network values throw.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L280-L310",
+          "version": "repo-lines-v1:sha256:5bc55fe630ee33c953169b44f21a6c273e0c7609226810f6af94d3e1675767af:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUxMzE2MmJlZWU2MzMyNGI5NTcwZTA2NzE1ZTdmOWY2YTMxNjc4MzEyZGM0OGUwZWY2NzRlMzRjM2Y4M2RlMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3ZjdjNmYxYTFjMGNjOWUyZmI0ODYzYmNhMDEyZTMwZmYyNjMwOWY5NTZhM2Q1YzIwMzExMDljOWIxNDJkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwZWFiMDEyNjZkMGI5ZjZiMmRiNjE1N2E3ZmJhNDQyMDVmZThmMDhiZmI2ODhlZDcxNDliOTU3NDZjY2Q5MmIifQ"
+        },
+        {
+          "resource": "repo://test/args.test.ts#L154-L172",
+          "version": "repo-lines-v1:sha256:80318ba472691a4d37d4edf3d7acc993214ba6d41468ae89fe0f3880544d97b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQzNTkzMGQ0MzlkNTE1ODJkYTJlMDY2OTg3MjVlYTVlMDRjZGY0YmM2NjcyNjZmZWM4NzNmNzhlN2U5YjdhZTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxNjQ4YmMyYWEyODlkNmM2YzcwZmQ2ZjIxMmY1OGQwMDU5YmYzMjUzMWU0YTQ1M2RlNzc2NjMyOTZmZDE1MzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM4MzMxZDg3ZDdkNjk3YjQ2OWY5MzI5MmM5MzcwYTI2M2IxNjg1NjFkYzFmMjcxYTliY2NjYTI3MWY3ODRhZTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_898590b21b4d4bc69a47391502baccc6",
+      "statement": "The headless agent defaults are DEFAULT_TIMEOUT_MS = 180 000 ms and DEFAULT_MAX_TURNS = 30 in src/x-signal.ts, applied when no --x-timeout / --x-max-turns override is provided.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L7-L8",
+          "version": "repo-lines-v1:sha256:e777c9081793aa8d223be16c1debf33bcaabcc369df85ef40b40195d1fa88418:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiM2MwZDg0MGM4ZjI2NjRkYzE0ZDE0NTg0M2QxNjVjNWM4ODU2YmFiOWI1Njk4YzQyNTU0Njk0ZTkyNGViMGJkOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDM4NDg2NmU3ZjViYjQ4MjA0YzJiNWVkYWEwMTljZWZjNjQ2NWQxZGExMmUxYzcyMzIwZjkyZThlYWU5NWE5NyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDE5ZTUyMmI1ZmNlYTljNTg0MmZjMWU5ZGQ5MWEyNTRmMjdjMTgzNWVlZmRlZWVhOWNkYTZkNjMwOTZkZjQ5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzQ4ZmQ4Yzg4NGQzYjNiNzM2MmFkNDI0MzNhMjBlYWQxNTE5MGYxZDdjMjZjMWJkYmYwYWZlNDA2ZTUzZGViNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f512d8d634e44ff780fd9ee08e255ba5",
+      "statement": "resolveGrokBinary picks the agent binary in strict order: GROK_BIN env (trimmed, non-empty), ~/.grok/bin/grok, /usr/local/bin/grok, /opt/homebrew/bin/grok, then the literal \"grok\" relying on PATH; the caller can override via options.grokBin.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L85-L97",
+          "version": "repo-lines-v1:sha256:c0af3f4a1b127866b00fe57b177cce511ccc35c367f5b9aaa5197f7104c01da3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4MzFhMTdhNTUyZDBkZjZmZWMyZmQ1NjExOWFhMDMxYzZkYWYxMmRhN2I2YjVmNWI2MDhlYmFmNTk5OGI0MWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzOWE3YWMwODdhMDJlMjZkMjc3ZGUwMTMyYjc3OWRkNTc3ZTJmNGI4NGZjMTgwMzljOGYxNmNjMmIwZDlhNjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxMGMxODU3ZDRiZmZkYzI3MGRiMDhkOGNkNjIzNTA5NjRhNzQ2MWRmMmQ5YTIxYjRiNzJjZWRmM2EzYmJmZWQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a32a13f7579e4e99a010a5d66a6cec04",
+      "statement": "fetchXSignal throws XSignalError when env GROK_RESEARCH_X_ACTIVE === \"1\", instructing nested agents to run /whathappened in-session instead of shelling grok-research --x; the child spawn always sets GROK_RESEARCH_X_ACTIVE=1 in its own env so a nested grok-research --x fails loudly at the second level before spawning anything.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L113-L118",
+          "version": "repo-lines-v1:sha256:49b5968d8f89a6d1c04fdd1226a2c1b8a7a27b3e06356d72f374eb3ae5c2bef2:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGYyODc0M2Q0YWFhMDEyYzIwMjNiZDQ3ZTZlMmQ3NzhiMTVhMmQ0NDBiZWEyOWIxNTUyMzdjZTZkYmQ5YmJmYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjk2MWNiNmMyZjY1MjAyYjhmMWQ1YThmMDYxYzRmMjZlOWU2Y2M1YzJiNzkxYmFlNzRlNmU5NzUxYzdlODRmNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWRmNTVkYjVjM2Y4Y2U0MTI4MzczNzJmMjc5NzhlN2YyNzkwMGY4YWE5NzkxOGRhZDYyOTZkZjNlMDdmNDkyMiJ9"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L140-L144",
+          "version": "repo-lines-v1:sha256:1ffde3d968e41976b3387b8074d39f7bf2bb2f05907308f084d9324fdd4a753f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTM0MjUxMDYwZTUwYWEyMjUzMWM2OTkwYmI3OGMwYjk2N2IyZjc4YmIyOWU5NTNjYWJhNDU1OTY1ZDIyZmY0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDJhMmNiMjVhMTIyYjQ0MjIxYTYyMzRlYzY2MGE3YjVmYjdmOWJkZTdiM2I5ZTJiM2M1NTlhMGQ5NmZhYzczOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2U2NzU4MmY1ZmMxZDVjNDczN2UyNTk1Nzg0OGIxNWY4M2ViMjVjMTJhMDA0ZjQ4MTU3MWMwMjI2OTg1ZmYwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGNjMTlmMzVmMDA5NjkyNDFmMTE4YWUwZGY3NTkxYTk2M2FiZDE0ZjdlMTQxMjljMmYzYzRiYWRiY2YxYzJjNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a738756358704d658483c4b74ecb942b",
+      "statement": "fetchXSignal spawns the resolved binary with args ['-p', prompt, '--always-approve', '--output-format', 'json', '--max-turns', String(maxTurns)] and stdio ['ignore','pipe','pipe'], capturing stdout and stderr into buffers; a progress line 'X signal: invoking Grok agent (<bin>) for /whathappened...' goes to stderr unless jsonQuiet is set (runMode enables it for --json runs).",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L126-L149",
+          "version": "repo-lines-v1:sha256:ce64fd19d0e88102383fd8611ceb7f9361c3ba1a922a4dfd44eb5cd2244059ea:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1YWUzZGUzZWEzNDUzNWM5NTUyMDhkYzcyMDYxNzU5YThkODllYmE4NjExZTQzNzY1MmZlNjRlNTk0MDRkOGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5ZmUzMGIzZGVhY2FjMjJlNzRmN2IyZDQzNmU2YWVmZjVkNTFlN2I4OTBjMzFkMDEwZGZmYzg3ZTBlNzVkM2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZmMWRmY2M4NTExMjUyYmVlOWM5YzRjNDgyYzY2Y2NlMjljY2NkYjJiYWFlYjUyOTU2ODVmNWM3NjU0ZGEyYzQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e9717b251e114fe5a7fa955d31340ca5",
+      "statement": "runProcess rejects with XSignalError when the child exceeds the timeout (default 180 s), killing it with SIGTERM and then SIGKILL after 2 s (kill timer unref'd); the settled flag makes close/error/timeout resolution mutually exclusive.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L240-L262",
+          "version": "repo-lines-v1:sha256:ac58e5e9870fe1af86c3fc7e8a3fa974033e13ee459fb8b700aaec1e29ec9079:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiM2MyMWUxYjhjNmJiNjFhNzYyYTdlMjA4M2FhMWJiNTljYWJhN2FkNjg0YzNmZDkxYTE3OGM3M2JkMzFjYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2NmZkNTdlNWE0N2JkODg5ZDZkYTM0MDc4YTc1YmJmNmZjN2I5YjEyZWM5YmVmYjAxNzEyMTAwOWJiMWIxMjUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0ZGRjMjJiNjU5NjM4NmQzNzY4OWI1ZjQ5NDM5YzM2NjQyMTA5ODk5MTRhODU1ZTAxYjQyN2ZhZDJmNjZmMWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg4MjZiYjczMDEwNzE1YTlkYzU3MGRiOThiNTJhZjg5NmEyMzUwMmI4ZjMzNDAzNDkzZGFjYjM5OTIxOGJkNDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2a4014b2a9044da4be0bbd79f565e6ad",
+      "statement": "Agent failures are hard errors: spawn failure throws XSignalError with install/authenticate-or-set-GROK_BIN guidance; non-zero exit with no stdout throws XSignalError including stderr/signal/exit detail; empty parsed text throws XSignalError. Non-zero exit with stdout is tolerated as a 'partial X signal may be incomplete' warning, and a missing marker block adds a fallback warning; XSignalError propagates to cli.ts's catch, which formats it on stderr and exits 1.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:74dc23c79e83ffa26b6bccf0ec61799a6094ea7fca1a5db50e90bc52beb62b93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYmY4Mzg3NTM2ODk2NmYzMTNhZTYzOTUzOWM0MDM3MDA0NWJhNTNlMmUyY2VlOTNiYjY3ZDVkYTE3Yjk4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWJhMWFmNzUzZDhlYjFiOTVkYjNlMTcwMDhmNzE3YTBjMDFhMWNkYzU4MDA0YjJmYjE3YzJjMWEyMTEyMTlhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTliZDJkMTZlNzQ5Y2VlNzQwNGQ2NDNiYWViZDNkZTM5ODA4NzQ0NDEyNjYzNGM1ZjMzZGM5M2FhNjg4NmMwYyJ9"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L151-L171",
+          "version": "repo-lines-v1:sha256:1ec2691b05e5abfda1fe51a35d74efbd637887763a48171161b2a8bc1515bb5e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4M2VhNjc3ODk5OTk2OTY2Zjc1OGI4NTg1ZjA0MTFiMTM4ODAxNGFlNzE0ZGNiY2E0MTY5NWExOWIzNThjYjMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjOWQ0MGYxOTdlM2EwMjU3MjUyYmQ4NmIyMGQ2OThhNzY1YTgxYzFlODU5Y2U3MTc4YTQzNmE2ZGE4ZWRkNTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZjMWE5OWZmNDU2NDAxOWJjNjZmYmIxMmM1ODZkYjBmMjZmMTRjZWMxY2JkNDFlODVmODQxMTEwMjBiYzkyNDAifQ"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L273-L283",
+          "version": "repo-lines-v1:sha256:293bd5e186bedcc93ccb7d5feaa158f29be6bff0e69043a405801a8ec9c03ce6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmZjE3YTA3NTRlZTQwOTkzYzRkMTAwNGIzODk3Yjk2OWRmYzYxYjYwOGI0NzZlM2Q3YWNiNjBlMjIxNjY1N2QiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxZGQ4NWNlOWU5YTFjZWQ5YTI2ZWY5MmVjNGU3ZmM2MTAxYWQwZDVlOTUzOTk2MWMzNGZiODg5N2RkMjdiM2MiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ2YjY4YjM0NmY2YjQ3ZDE5MTJiYjkyNTZjYmIzNTdmMGE2ZTMzNzA2MmQ3YTM5ZjQ3OGZjOWE2MDczYzQ3MTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8107b21773f7437c9678b2a0deb3b1b0",
+      "statement": "buildWhathappenedPrompt emits '/whathappened <topic>', names the ~/.grok/skills/whathappened skill, imposes hard rules (native X tools only for public opinion/event narrative, no invented posts/handles/engagement/URLs, at most one web lookup for entity identity), one network line per mode (off = global X, prefer = boost followed/list members, strict = only followed/list members except official origin), and requires the ## X_SIGNAL_MARKDOWN ... ## END_X_SIGNAL machine-readable block (window/mode/confidence/network, what happened, conversation frames, opinion camps, 5-10 receipts with @handle + x.com status URLs, gaps, under ~1500 words).",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L20-L56",
+          "version": "repo-lines-v1:sha256:363dff4a9e9e46a46720ee8c9fe63bb9f0cacca6f873b86843a984c532bc2b5b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2MTExNmI2YjYwYTY2YjY4NTU3Y2U3MTBiZWQ2NTM1NmE5NTIwNTg4YTZiYTZlYTZmNmM3MTFhYzk5MDdiODciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdkODc0MWVmOTc4ZTlmNWU2YTczMmVhZmE3ZWVjMWNkNDcyYzI5MGY3OTBiNjU5OWNjMzMxYTE0MTY1YzExZmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3bcd1b8aac7f42ff8e7b6e8ad22c5a9b",
+      "statement": "parseGrokHeadlessJson tolerates three agent output shapes: empty stdout falls back to trimmed stderr with a warning; JSON candidates (whole-line objects first via extractJsonCandidates, else a pretty-printed object) are tried in reverse so the last JSON object wins, reading a string text or result field plus optional sessionId and total_cost_usd/totalCostUsd (finite numbers only); unparseable stdout is treated as plain text with a warning.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L184-L238",
+          "version": "repo-lines-v1:sha256:683007431296b14cd3ff278eb9cb742b8ff79b78091850b10a6b9a7043b92491:eyJzZWxlY3RlZExpbmVDb3VudCI6NTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ0NTk0ZWU3NmE3Y2U4ZTI5NmU5ZDk4YWI5NjU3ZTcyNGNmYmVkNWJmNmJlZjE1YWFmMWE2YWE1M2UwM2ExMjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhNDYxNjgxNzhiYzEwNzAxMzY4NjEwOTBlOTc1ZjBkMzU5ZDdmYzdiMTMxNzQ4NGNlNzVhYzM1ZGU1MTAyMjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2ZmRjNTc3M2E2ZDRiMGJhYzZlODMwNjQ4YjE5ZmY3OGQ2ZjU4Zjc5MWExZDg1YzBiMmEzNmEwN2Y5MWJkMzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_62e6b7c29f3a430a9fecbc5437f45301",
+      "statement": "parseXSignalText slices the trimmed markdown between the ## X_SIGNAL_MARKDOWN and ## END_X_SIGNAL markers when both exist in order; when either marker is missing it falls back to the full trimmed text with usedFallback=true, which fetchXSignal surfaces as the warning 'X signal marker block missing; used full Grok reply as X markdown.'",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L165-L168",
+          "version": "repo-lines-v1:sha256:ee8b4db6e6f375b437f2800ce740088edeff8bd76632cadfda03ae7b06cf8bce:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjJiYmRiZThiNWE0NGVlNTM2OTAxOWQ3ZWQ3YTA4NGRiNzZhNmQxZWM4NWIzNDNmZjc3Mzg2Yzg1ZDUwMDBmYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjk5MjY4ZDlhZDA2MmM4OTIyZDg3NTMyOGYwMDg4MGVhOGJiYjQ5YWQ0NjZlNDk2MzE3YWQ3NzgzMDRjNmUyNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGExZTRjMjllMDhiMmJiNGI4NDMzNWRiMjAyZThhZDAxNjg0ZjFmYTRlZjEzODM0ZWVkODFjNzFlNGUyMzFlOSJ9"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L58-L74",
+          "version": "repo-lines-v1:sha256:76e8f314d5247044c9151673a96a001222072ac79eaf78b8b86fc5745a65c08c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlNzI2YWU5MzVlZjVjNzI4OTc2MmZjNDk1NTY0YWIwNWY5NGI1MDUzYWU3OGU2NmQwZDU2ZDZhYzhmZjdlN2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZlNGJhNmZiNjI1ZGFiYjI1ZGQyNzVkNmU5ODFiMzllZjFmMGJjZjYyNTdiMWNhODEwMGEwNTJjMmMwMWY3ZmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwODgyN2ViNGY5M2UyOGEwNTdlZWE4NjVkNTk5NDViOTllZDY3OWEyOTZjNTEzMTMwMmIwYTQxOTU5YTBhYTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f810e68648a64bbab85c99d4518bfe5b",
+      "statement": "extractReportPath finds the HTML report path via a labeled regex ('**Report:** path.html' or 'Report: path.html', case-insensitive) and falls back to a free-text regex matching whitespace-delimited paths starting with /, ./, or ~/ that contain 'whathappened' and end in .html; the path becomes XSignalResult.reportPath and later the ## X report appendix and JSON report_path.",
+      "evidence": [
+        {
+          "resource": "repo://src/x-signal.ts#L76-L83",
+          "version": "repo-lines-v1:sha256:362928b218ee82ce735c98fef265cb08feb2d35036f9362bb076f4372d3756ca:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzMwZWJjYzZhNzIwMWExYjFkZDM2ZjBjZDllZmJjZmI1NzE3MTQzZGY3ZTk3MDBhMzg1OWU1MmIwM2ZkMTIwMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDU0M2MyZGI4YmM0ZGQxYmU1N2RlYWQxYmM2OGRhMGViZDAwYThiMGZhZmVhOTdkNTBiYTdjMDBlNDhkM2JlNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGU1MTNkYTFjNzI2Y2MwNGI3NDAxN2FkY2I2MmI2NGE0MzdjZGZkZWNjMzFiY2Q2ZGExMzk0Y2FhZjQwYmMxZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2d456d8f4c34d7b824b4aad70eb249d",
+      "statement": "XSignalOptions (topic, network, timeoutMs, maxTurns, grokBin, jsonQuiet) and XSignalResult (markdown, rawText, optional reportPath/sessionId/costUsd, warnings) are declared in src/types.ts together with CliXOptions and the XNetworkMode union 'off'|'prefer'|'strict'.",
+      "evidence": [
+        {
+          "resource": "repo://src/types.ts#L144-L161",
+          "version": "repo-lines-v1:sha256:c7da23c9fd4189d467fae833eee03ba4f9f11ad44435ff1823dc7a676981b02f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3Y2ZkYjAzZDI2NTY3MTAxY2EyMmE3OTE0Y2M0ODVlOTI3YzhiMTIwOGViNmFlYTE1OTM4ZTM3ZDFmNWE0ZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNkNWIzYWNhZjIwMGE3N2U0YTdiN2JjMjUzMWIzYTY2OWQzNThkNjJhNmI0MTQ2YzdkOWMyMzFiZjcyNjBkZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk3NmY0MzYzZDBjZGRkNDQ5ZTlhNjUwMjQwMTUwMWViNWRlZDhlZTA0MTQwNzQxMTkwOTI4N2MzOWM3ZDdlNGQifQ"
+        },
+        {
+          "resource": "repo://src/types.ts#L82-L93",
+          "version": "repo-lines-v1:sha256:b162822fc71d20ef53f14c2b85f85b81db9a815bf89d856fc5669ce16b89de79:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY0N2M3ZGNlNWU5MzExNWZlYzY3ODFhZTVlNWNiN2M4YjA5N2MyYmQ4NDQzZmM4OTIzY2ViM2U5NjgyMTdiNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc0YTZmMzJhZTIzOGUxN2RlZWU0NDFmOTY3OGZiMjkxMmFlNmE5Zjg4ZjFkNWYzYWUwM2E5M2RjOTBhYjhlYzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4ZmFhODYyMzY4M2NjOGFkNTVmNzM2ZDk2NDk1MjkyNjA5YjMxZmY1NWU0ZjQ0NmZkMzg4OGFmOWYwNjFiZjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_45a2704cb1984a30822752afc1906011",
+      "statement": "The --x-only short-circuit (buildXOnlyResult) returns a PipelineResult with content '# X Signal Brief' plus the X markdown and an '**HTML report:** <path>' pointer when a report path exists, emptyUsage(), empty sources, web off, deduped warnings, and the xSignal payload attached; it throws '--x-only requires a successful X signal from the Grok agent.' when the signal is missing, and combining --x-only with --bookmarks-only throws 'Cannot combine --x-only with --bookmarks-only.'",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L129-L135",
+          "version": "repo-lines-v1:sha256:2313d83be0d027a0072a583de75448cf9679d5986f838c36f0007c01d39747e5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWEwMjhkMjBiNGI0MjEwMWMwYmM0ZmU2OTU4NTI3OWZmZWQ1NTkzN2EyNTk5NDNiNmRlZWJiMDRkYjMyN2JjYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTdkODYzMmU1NGU5Mjk4YWJiOTU4NzI3ZTJkNTE0MDhhYmFmMTM2NjAzNTM3OTEwMTQwYWJmNjViMzBhYjYxMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTI4ZTJkMjRhOWE4ZDFiNGU1Njk5MjRhY2VhYzY3YWEzMjFjMDQ2YWVlYzNhNTFhN2FhYmYzOTVjY2JlMzYzNCJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L372-L397",
+          "version": "repo-lines-v1:sha256:5db65a62fe3a9646ca181c3f396207626bfca442aba813712377edf5bc968411:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0ZGUyZGNkMTVjMGMzZGE5Mjc5MDdmNGVhZGMwMDhlMDIzNTJkMjIwM2Q1ZDIzMmY0YmY2Y2IwMTE0NjUzYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5OWUxMDU5NDFkZWU1MmY2YjRlOWVhNzVjNjE4NzZjYmYxMDk0ZDFkNDA4ODc1YjhjNTk3MDRmZWU4NjU4ZjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9f4ca1340bed420bb21e8fc9b3c04367",
+      "statement": "runMode gathers the X signal before any OpenRouter model call when options.x.enabled, forwarding topic, network, timeoutMs, maxTurns, and jsonQuiet (options.json) to fetchXSignal, and folds the signal's warnings into the run's deprecation-warning list.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L95-L106",
+          "version": "repo-lines-v1:sha256:c2d3ee29494249513905c4d1165ff0224b561f52b98b98d5e58d74d8fadd68f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NDE2ZDJkYTNlN2JiMmRhMDNhOGQ4MWI1YzllZWJjNDdkOTY2MWFkMDQzM2FmMzQ0Yzk0Y2QzOTNhOTg5MzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4NjA1OWYxYmIyNzNhYmE4MGZkNWNmN2FiMTNmNWQzMWY3MjZmNjQwOWQ2NmIxMTE4YTc2MTEyZWRiZmQ0MDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYzYzI2YjUzYTAwY2E2MmNlNjQwOWZlZjhmMmFiZTVlZTg1ZTYwMjhkZjlmZWI1MTNkYThiMTUyYWExNWNlMjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_123216991e654b09b75495d9902aa888",
+      "statement": "When consolidating (not --x-only), runMode passes xSignal.markdown into every prompt builder (single-call, research, synthesis, and schema research passes) via withContext, which frames the block as a '## Live X/Twitter public conversation' sample — not ground truth, web/docs authoritative for product facts, X used for reception/sentiment/controversy, include a ## X signal section — and the system prompt gains X_SIGNAL_INSTRUCTION; --schema prompts instead append it via withXInSchemaPrompt and the retrieve --output both synthesis labels it 'Live X/Twitter sample:'.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L141-L142",
+          "version": "repo-lines-v1:sha256:a5337a0da3a1cdae7d816abdc42432a39cdbe5e0e1e3c7b805637f16a7f22263:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGQ0MmMzMzcxMTY5NmJlOTVkMThjZGE1NjQzNDNkOGJhODJjOGQ1ZDk1YWNkYTAzZGJiZmZjYzQ4ZDAyM2M3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTYyM2FhMjc2ODEwMTI5ZWE0NTQ4MjRhN2ZhYWYyODM0ZTc0OTQ0MGU5MzU4NmE0ODM4ZjUyNGU2NjVhNWFkYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzJkYTk2ZWEwZWNhYWFjN2Y3OTRlOWM1OGUzYWVjZjczMDk5YjlmMTZhYzk2MzZkOTU2ODE2NTM0NDIwMmJlZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGQ1OTE3Nzk2NmE3NmE4ZDQyNGY5OTQ0ZWNkY2JkODhjNWJlM2M0M2ZjY2Q3NWFmMDI4MmMyNzJhMDAwNmZlMCJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L310-L313",
+          "version": "repo-lines-v1:sha256:cba3f1367fd2115d7f9d4530a9a0d9ade22f96f75b536295d8e4b7a27d0dfdff:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTU1OWFkMTY0OTdkZjgyMGQ3NDU4Y2U4MGVhMDRlOWYwMjY5NWI3MDM5YWJhZWQzMTJkZGJlNzM1ZmZmYmZkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWZmYWE3MzlmNmRmYzMxNjU3MjJhY2U3MmQ5ZTk2MDZiNGUwODMyYjVmYmFhZWIzNGRjMjVhZTJlMGZmYWE4MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjJlYjQ1MGY5Mjg0NTkwZjY4Y2UxOTNkMmFiZTFmZGM5MmE3NTQ5NTU5OTRhM2FkZjE0MDQ5NzFhODIxYWQ0ZiJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L431-L438",
+          "version": "repo-lines-v1:sha256:e6f412457122376ff91aaff85adf0b295f93307087a70b951e0aab49c20589f3:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWY0OTRmOTkzZjNiY2RjMGIzNzI1ZTAzNDYyYmFlYzg1YzIxNmFhZjMyODIxNmQxZjdjNjNkMGM0NDM2NmI1YSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjY0MWYzN2E5ZjExMDcyYTA2YWI2NDcwM2Q2NWZiOGM5ZTg5ZjYwZTNmODA3YjlmMjVhMzkyNTkyNmUwZjQyNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2QzNWMzMzhkMzhhODM5NGI4ZWY4NGMxZDRiZTgwMjFmZDE3MGZhMWNmNDRkNzQ0NDA4N2ZjMWJiNWMwNWM4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2YwNDRlMjVkOTdmODBjYjJlYjAyODE3YjU1NzkwNWZiNmVhNDU4MGUxMDA2ZmIwMTYwN2M2MWRmZDIwYzVjMSJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L159-L160",
+          "version": "repo-lines-v1:sha256:07bffe3eb6497321e3aa3926bfbd6f7c30df8a2ccce7126e411e41180fd3dc79:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE3MWMzZGMxMjVjZjMxZDRjNTEyOTNiYjJmYjBkODE4ZjEwM2YwOGMxMmUzNTczOTZjNDNmYWI1ZjIwMWI4ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTg5MDFmNjYwNDdlMzc0ZTllYjk1ODk3Yjg4ZjA0NTZjYTBiODVmMzQ3ZTQ5ZmZjMmQ1ZTNmMTQ5MGVlMzI4ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTQwMDUyNGZkMmM5ZTA3NWE3NDZiMzcxNzQzYTAyMWY0NjQ4OWQ2NjBhMzE2MDViOTM1MDYyNzI4NmMzYzY4ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTdhZDRhNDZjNzRiOTg2NjMwNWI4NGFiOWE0NzI4MWM0ZmE2MDgwOGFkZjU4ODA2MTIxM2U4MzEwMDcwNjBhYyJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L190-L192",
+          "version": "repo-lines-v1:sha256:602a514078663c8817464bf03c818fe7cdc6deecca660a01a517147491c4db10:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTc5NmQzM2UyYmUzNDFjMjNjZTc1NzBmNWVjZGVkYWZmYjIzYmQ0N2U0MjAxMWYyYTg2ZDRjMmZjNzhiMDI1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTA4MWEyZGM5ZTc1ZDg4MDQ1NDM5MzZmNDRkMWI5Yjk1MmE4MzNmNWE4YzAwMDFlMmY1NGE1ZTQ4NTlmYzk5NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDM0MmZmYzk5Njk5OTQ5NGIzYjQ5NzI1ZDhkMjE1YTk4NzRiODFiMzcxNzQwNWVlMWFhNjBkYWRhZjAzODI5YSJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L82-L106",
+          "version": "repo-lines-v1:sha256:46f6649ee120daf0ffe32edc6b1aadd5060f96732fbcf4614594cd616a46cf44:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNhMWUwZGI2OTZjNmRkMjcxODAwMDhkMjI0ZGJhYTM4ZTUxYTdmZTAzYjZmZWIzYjkxMTBjNWZkOTkwMjZiZDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0MDA1MjRmZDJjOWUwNzVhNzQ2YjM3MTc0M2EwMjFmNDY0ODlkNjYwYTMxNjA1YjkzNTA2MjcyODZjM2M2OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjZTY4MDYwNDhjMmQ3MTM3NWZmNDE1NWNmMzMxYThkNzM5NWNmNWM1ZjI4NGZkNTc5YzViMTcwNjFhY2UwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f5e1d547c787474f9d00e8bab848463d",
+      "statement": "attachContext/attachXSignal attach PipelineResult.xSignal and fold deduped X-signal warnings into result.warnings on every non-short-circuit branch; the two-pass --json+web and --schema+web format passes do not re-receive the X markdown because the research pass already consumed it.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L315-L339",
+          "version": "repo-lines-v1:sha256:6336cbc40cfabfb16db40d524e6b9e6934e316f4f401631b243b118958242bc5:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NGI2ZTcyYTg0NjYxZmQ5NjJlYmU0MTg3YWQ1MmJlMTFhODA4YmEwYWM1M2FmN2I1MTM3OWZlZDdlNjFhZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmNGE1MTMzMTA5MDYxNGJkNGNmNDlkZTQ0MWNkNGJiNDJlYTc0ODllZWU2Y2RmZDU2NTQ5Njk0NmI5NzcyNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4MTk2MDQ2M2Q5MGNlMTQzY2RjMDFjYzNjYjRjNjQzMWE4Zjk2YTYzYmE5OTMyZDhhMDkzNzg0ZDhjMTI4YzkifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L130-L157",
+          "version": "repo-lines-v1:sha256:f20e43347fa3a18ef018a6332cdab3b9df0050c78ba31d26b3d07cbeceb576b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkzOTc0OGRhNzVmYjQ2ODczMjJkYjAzZjgwNjExYzIzZjZhYzFiNGUwZDNhM2RiNmZmZjBhNjQwYTM4MzhlYzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU4MzZjYjE1ZDExMzRhZDMzYjE3Y2M1YzQ2N2YyYjk2YjE2YzNmYjRmMzgzMjM5NmRmMjcwNDVkOGEwMWE2YmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5NTQ5NDdiZTVhMDYzZjQ2ZGY4MWJmNjVmNzdiNzFkNDNlMTg0ZDcyMjIzMDgzYjY0OGQwNDQ4MTk4OTgwOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b8e1602c0b474f17ac31ecba9b82dd2e",
+      "statement": "formatJson emits x_signal { markdown, report_path, session_id, cost_usd, warnings } with nulls for missing values only when xSignal is present and never includes rawText; xSignalAppendix appends '## X report\n- <reportPath>' to markdown/raw output only when reportPath exists and the content does not already contain that path.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L139-L144",
+          "version": "repo-lines-v1:sha256:a478cb21f397fca5c08714c0520ee4f53fae51323d865218f969cade8f5e1d5d:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyOTY3ZWQzMmQ4NWY1MDdhNjBkZjBmNWE4MzNiYzIwMzFjODc4OTdiNzE0ZDc3ODEwM2VjYTdkNzQwNzA1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg4YTJiMGExNTE0ZWY4YTQzNmE3MjVlMTAwMzg4OTc4NzRjMzM5YjE3M2Y0YzJkODQ2MWZkZGVlMGYyM2NmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmRjZTY4Mzg0MzQ4MDU1YmVjMTk3NTQ3YjRmY2QyODczZTc5MGE3YmFiYjU2ZDNhNTRjNWQwOGJiY2I2NDljOSJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L69-L77",
+          "version": "repo-lines-v1:sha256:06124a373f34aafec0657e717e1834f29012e6b0d556a121413cd551b2c7f450:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmE1M2U3OGMxMGQyOTA1YmJkZGRkNmRhY2Q2YjljNjgxODRhYzRmYjMzYTNjMmEzMmYzNGU3ZTkxZDY5NDgyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2ZlMzk5MTg4NDA4ZTNmYWNjNjBiYWI3NWI0MDEzNGZlYjkyNzJmY2IzMGM2MTQyZDE0NjIxNWVjN2UzNDc2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTUxNjY5YTI1NmJkMjMwYjExZWVlZjcxYTkwMzRjNjkxYWQ3NjA3ZWQxNjViZWJmNDYzNmIzYjRiMDYzNDBlNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_722bcb32cde94981a4ef61c889ee1c3d",
+      "statement": "test/x-signal.test.ts pins the /whathappened invocation line, the required X_SIGNAL_MARKDOWN/END_X_SIGNAL block, the network-filter lines for prefer/strict, marker-block extraction with a labeled report path, the full-text fallback when markers are missing, and the free-text report path regex.",
+      "evidence": [
+        {
+          "resource": "repo://test/x-signal.test.ts#L8-L55",
+          "version": "repo-lines-v1:sha256:cce39ef17e3bbb209287830f71d56ca604fb1b7b11ab99d7ddf83e4cf63da20c:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdmOTQxOTk5ZjdlNWQ0MDhhNGJkYzVjOTY4MjE2ZjJmNTI3MWVlMWIyZWRmMzBhZWQ5YzFjM2QxZWI3ZGZjOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk0ZWFhNGFiNDU4NTEzZTA5NTc0MWM1NGFiY2FjNTI3ZjliMTFmMDU2M2M4ODgzMGUxZGMwYmE5Mjg5ZjFmZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

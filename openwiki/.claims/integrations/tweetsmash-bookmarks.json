@@ -1,0 +1,214 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:0c2bbe872c55a2c2481869eda6361ebdbb0ff3963a6198fb53ea7ccf7ba6e5cf",
+  "claims": [
+    {
+      "id": "claim_153af9e43ba54ad0bf582e539c683ffc",
+      "statement": "The TweetSmash bookmarks feature is a native REST integration in src/bookmarks.ts: it calls GET https://api.tweetsmash.com/v1/bookmarks with Bearer auth, sending both q and vector_search_term (keyword + semantic) set to the user's prompt, with a 12-second AbortController timeout and User-Agent grok-cli/0.1; no ft, MCP, or Python is involved.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L1-L23",
+          "version": "repo-lines-v1:sha256:1a7495b77acffdbd2fc9d6abcc6ee8ff93451e5adfab7b4672de20fb8936a293:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzY2M3YmMzZmM3Y2U3YjY0YzU5ZWM3ZDNmMjVhY2YxMTIxYzQxNmJmY2Q3NWRkZTlhMzFjYjY3MTg1ZjYwZTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIwMmMyNGJmNjA3NjU1NjQwZTMwNjViODQyODFiNGFlZTQxNjM5ZTEwMjgxYzYyOGQ4MGEyOTBiMWE1MTRlMTQifQ"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L130-L173",
+          "version": "repo-lines-v1:sha256:993fe3cf8f5ba460d22f1cd343b543bd8aa22b9addc087ce332c9b3aa5ef718d:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE4MGVjYWM1NGE3N2ZkN2UwYTZlNGIxOWIxZjE4NjYwYmM1MGJkNzFhOWI0YjFjN2U4ODI2Yjc4Mjg3MDZlNWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFlZWJmNWVmMjljYWQzODFhNjhkOTcxODFiYjJhOWFlZDFhMWU2MGJlZDE5YzY0ZWE4MmYyOWU2NTg2MjQ5NTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwYzE2N2Q2NjA5ZDA3MGIyMmExZjFjZmJiNGUyNjZmNmMyNTRmMGRiZjZiMDJkZGE0ZTk0NDVmMWI0MWIyODkifQ"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L188-L196",
+          "version": "repo-lines-v1:sha256:623a81e1c58e5d78aedbb3f0ffa52527bbfb0ce249f9248bb2a5814b5e95cf62:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjUwY2FhZmVjNWYzYjE1M2VkMTcyZWJkMzRlMzhiMzdiYTljNmFmYzZlMmU3YjEyMDNlNzNlZGQ5ODhkOWZkMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmMwNjdiNmY2OTEzYzc5Yjc3OGI1NmQ1NjUwNTNkMTVlNTY2NzBiNzQ2N2QwOTk0N2E3NTdiYTIwMTg0MzhkMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGEyODU1NmRjNmY0OGVhYTQ2NDJjMWY5MTUyMjhjMGEwNTNjMDdmY2M3ZGI3YTk3NDQ1NjYyODA3YWY2MjA0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTY5ZjRlMTU4ODVlZDAyNmRhNTdmODE5MDU2ODA2NjY4NDUxNDZmZTYyMDk0MTY2OTk0YjJlY2M2MWI3OTkzOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f2521445e9c8438e9449e2e67fb076be",
+      "statement": "tweetsmashApiKey resolves the API key by scanning exactly four env candidates in order — TWEETSMASH_API_KEY, TWEETSMASH_KEY, TWEETSMASH, TWEETSMASH_TOKEN — returning the first non-empty trimmed value; the precedence order is pinned by test/bookmarks.test.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L23-L23",
+          "version": "repo-lines-v1:sha256:03cc7bc3fc7ce7b64c59ec7d3f25acf1121c416bfcd75dde9a31cb67185f60e8:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDNjYzdiYzNmYzdjZTdiNjRjNTllYzdkM2YyNWFjZjExMjFjNDE2YmZjZDc1ZGRlOWEzMWNiNjcxODVmNjBlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDNjYzdiYzNmYzdjZTdiNjRjNTllYzdkM2YyNWFjZjExMjFjNDE2YmZjZDc1ZGRlOWEzMWNiNjcxODVmNjBlOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDJmNjQ2NjZmNTZhZjE0ZjBiNTAzNDdmYjMzMzNlMmJhNjI0YWMzN2M0YTYzYTczNWJhNTA2OTYxMDkxNGNiZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjAyYzI0YmY2MDc2NTU2NDBlMzA2NWI4NDI4MWI0YWVlNDE2MzllMTAyODFjNjI4ZDgwYTI5MGIxYTUxNGUxNCJ9"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L52-L58",
+          "version": "repo-lines-v1:sha256:4885b9b947c20d250400b59199aa98e48138f2059fc5c34134bc39b72cf542a3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2I5NWY3Y2IyYmMxYzhiZjNiMjA4N2E2ZWY5ODJiYzBlOWRhZGQ3OWJkMGQwMzIzODY5ZjEwOGY1YmI3ZjE4NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTk4ZWIyYTNlMWMwYzkyNWIwMDMwODBhZjFkNDZjZTRhNWJmMzBiZGVmMjg1NmNkMGJhOTBkNzRmODhjOWU2ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTUxMzllZDQzYjZiNjkyNzZkYTcwYzViMzExYjRhMTM4NzA3ODllYjc1MWJhYzliZGI2MzZhMGFhMDU4ZmZkOCJ9"
+        },
+        {
+          "resource": "repo://test/bookmarks.test.ts#L26-L32",
+          "version": "repo-lines-v1:sha256:be1eea6c0853863264bbecca4dce0475cc8d71b9fdc5231f09066bb586b182e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDc1YzI3Nzk1MTZhN2I1MWY5YzUyY2RmZTJiOWRjZWM5ZDEyNGVhNGE2MTdkMDc4OTYzZTExOTE2Yzg2MzlmMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWU3N2I5MTNjMTA5YmQ3NjQ0NzcyOTBhNTM4MjI2ZWMzNzUyMjViZTc1MmM3Nzk3MjI4NzE5MzE3NjQzZjBlZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_abaf4e06cb354d41a0bf2b13533678b5",
+      "statement": "searchBookmarks clamps the primary limit to 1..20 (default 8) and relatedLimit to 1..10 (default 3), returns a skipped result for an empty query or a missing apiKey, and appends author (leading @ stripped) and tag query params when provided.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L175-L196",
+          "version": "repo-lines-v1:sha256:5f6f81a7c7a56b8b792c600ebcb27621bd2aa79e735d22b4cd14253e2f593260:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjZDUxNGVmNmQyOTAzMzQ1MmI5NTFiNmQ0N2M4MGQ4YjYzNGYyZDQxNDk3MDZjYzg2ZDZmNDE1MGM2M2I3NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjMDY3YjZmNjkxM2M3OWI3NzhiNTZkNTY1MDUzZDE1ZTU2NjcwYjc0NjdkMDk5NDdhNzU3YmEyMDE4NDM4ZDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE2OWY0ZTE1ODg1ZWQwMjZkYTU3ZjgxOTA1NjgwNjY2ODQ1MTQ2ZmU2MjA5NDE2Njk5NGIyZWNjNjFiNzk5MzgifQ"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L20-L21",
+          "version": "repo-lines-v1:sha256:e596eda39d13e4f7dfdeb4f75d2050074d037927f0ea3a5abecf67df758d0c72:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWQxYTYzZmVhN2E1MDdiZTdiZTE4NjYxMTdjMTkwYWU3NjJkZjJlYjYzYjI4ZjcyOGNmZTU1YWI5MWQ0MGQxZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjFmZDA4YTJhYzZkNDQzY2RmOTA4ZmM1MGZjMmMwY2UwNzNjZGVjZWNkYWMzOTA3YWMzYjU2ODlkNWQxNTgyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjBhZTczYzk5Yjc1ZWFkNTYxNTVmNTU4ZmJlODNlZGE5NTQ1MTkxZWUxMTFhOGVlYzZlNjQ5Y2UxNjJiNGRlZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2U3OWI0ZmY1MWY3YmU2ZDQ5MWM0MDY3Y2YyODQwNzY2OTJjNzZhNmFiNjVkMGM1OGIzNzE0YzU0NTJmY2Q3ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_960e11a690704f3eae01945e176cc459",
+      "statement": "requestBookmarks maps HTTP failures to BookmarkSearchError with verbatim messages: 429 rate limit (100 req/hour), 401/403 unauthorized, other non-2xx with a 200-char body preview, falsy status / non-array data as unexpected payload with the server message, AbortError as timeout after timeoutMs, and any other fetch failure as network error.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L151-L169",
+          "version": "repo-lines-v1:sha256:f7b805b6423c5db75367f4c06e6d47b0feadf9e90dcd2cb86181ac86206a7e07:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc5M2EwYWE3MTE2YTU0ZDRiNzYwNWU4MjZkZjA3OWRlYzVlNDRkMzBkMTlmNTFmZDUzYmFhNTM4NDRmMDIzZDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM2Mjk3MmU4MTZlNDVlMWVjMmQxMjM0YmQ1Y2ZhYzQ3MjAxYzNmOWM5OTIwMGYyMDg5NmU3ZDI1ZTFiYTFiYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViODExMGEyOTEzNWZhYzNkY2FiYzJiODllZjk2OWVjY2M0ZmUyNzU4NmUyNjVmYjUzMzQ2MTAxNjkwZjkxYzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU2MmRhMjRiNzgzMWUyODhhNzA0NTQ5MDYyZTc3N2E2ZmVmMmNlNjQ5MDIzOWNiZTJlOTFhYTViYzhiZDdlY2YifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_540e8afd0f9447179b17ccb90fb4ab7c",
+      "statement": "mapPost converts a TweetsmashPost into a BookmarkHit by trimming post_id (dropping hits without one), preferring tweet link over a synthesized https://x.com/<handle|i>/status/<post_id> URL, collapsing and truncating tweet text at 400 chars, and carrying author/authorName/postedAt/tags; tags keep only truthy entries.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L67-L101",
+          "version": "repo-lines-v1:sha256:a1572f4f162899b47e508f432a1c262125d568414ac79ab05f043fbce292e874:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlNTFkMTE0MDZhYzFmNTlmNmVmYTgwMDc3MDlhMjY5NmE3MzU0YjI2MzY0OTA0ZWNhNjg3N2Q1OGEwMTRjOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiZjAwMTEyMWJkODkyMjE2Nzg1NWEyOTM1YWEyN2IwMWFjYzRlM2Y5YWMyODQ4OWQxYTQ3OWI3OTQ5MDkyZjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fabbaeca73a6460db558ec2a696adbc5",
+      "statement": "The related pass (options.related with at least one primary hit) derives up to 6 unique terms via relatedTerms — hit authors, hit tags, then up to 3 query words longer than 3 chars after splitting on / : and , — and re-queries each term with relatedLimit, routing it as author= when it matches a hit author, tag= when it matches a hit tag, else q+vector_search_term; groups are deduped by postId and author-routed groups reject mismatched authors.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L103-L124",
+          "version": "repo-lines-v1:sha256:4e1ced81153b10a48f50b599c1cc6d37d14f7cd4b43d2b0c2aec302a38ae7def:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU4NjkyNDMyYzQwNzNiMWMwMGEwZTJjOTJjMzA4YjM2NzI1MDZjMTgyZjdmNTJjZmE3N2YyMDhhN2Y2MDZmMjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZmMwYzVkMzJkNmIwZWE3ZTEwYWY4ZDM3OGU5ODMxN2M5ODczZTNkNmIxZDBkZTc2YTA5NDM0ODFiOGY3NTUifQ"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L200-L230",
+          "version": "repo-lines-v1:sha256:e30486967f472f19c72e65b71051184a5a6bd2c1bc5cf4b0b4101d293bf55f38:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5ZDUzNGIyNDY0ZmRhODBmODM1Y2Q2YmZlNmVjNDg3ZDQ3NGViMWMyMTczMDA0OTFlNjRiMzQwNjVkNDljZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE2OWY0ZTE1ODg1ZWQwMjZkYTU3ZjgxOTA1NjgwNjY2ODQ1MTQ2ZmU2MjA5NDE2Njk5NGIyZWNjNjFiNzk5MzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYxMGVkOTBjNzc1OTQwYjNiMDM4YThmMDhkNmZhNzA2M2Q4NjMzMTdhMmIwNTg4NzY4NGI0MjFjY2JjZTNlZTUifQ"
+        },
+        {
+          "resource": "repo://test/bookmarks.test.ts#L73-L94",
+          "version": "repo-lines-v1:sha256:6929163d481b451bb4e7f4f48e0df60a8db6d535a4e6eb59ad79c6241da43d4e:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUwNDc2NDMzZGFjOTBmNjIwNzk5ZmU1OGVjYWM5MGRkNDRlNDRmZDI1YjU5ZTg2ODhjZTdiZjFkMDY5ZmJhZWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2NzY2MWM0ZWI0MTU2ODUyZDQ3MjIwZWJlM2I5ZGYyYzMxMGFjZDgwZTRmOTFlZmQ3OTg2YzA3YWViMjNlN2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU2ZDM4YTg1MWVjZWE4YjZmMTc2M2JhMDc0YzUwYzM4Mzc0NzQ0ZGJhNDJjMGZjMTY1NzBhYzFjNTM0ZDgwYmMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c848a7d4c6d94f9aa9bcca7f9ff4751f",
+      "statement": "fetchBookmarkSignal never throws: it wraps searchBookmarks in try/catch and converts any request failure into a skipped BookmarkSearchResult whose reason is the error message; combined with the early empty-query and no-api-key skips, this yields exactly three skip reasons surfaced as warnings: no-api-key, empty-query, and a request failure captured by the catch.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L126-L128",
+          "version": "repo-lines-v1:sha256:fa57e27e7abb278ca948b09f2d9566bbc3746b85b353545f00f01d2fe70a7a0e:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTFiMTUwNTAzMjJlMWI3NDU2NGE4MGZkZmJmOTM1ZTlmYWU3NjJiZTVkODYzOGEzOWIyYTIwNzYxM2MyMzlkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzBiODM1Njk4ZTYzNDEwNzMxODczYTNhNTYzMWEwZjMxYTBiYzFjMTkwYmI5MDZiMzZhYWMwOGIxYTVjOGE0NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2UyY2MxNjFmMmFjNGQ0ODJjM2JiNjY4MDJkZGRmZDE4MThmM2RmZjFmMDI0YmEwZDFkYmE5NDJkNjhmMTcyMyJ9"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L175-L181",
+          "version": "repo-lines-v1:sha256:55e86463c9882352bb95fc92339f7c36df758575f4b3a64eebb1ef7035831ffa:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmNkNTE0ZWY2ZDI5MDMzNDUyYjk1MWI2ZDQ3YzgwZDhiNjM0ZjJkNDE0OTcwNmNjODZkNmY0MTUwYzYzYjc0NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTliM2M5NjIyOWMxY2U3MDM5N2FmY2VhNTFhODRhNjM1NGUzYjhmY2VmMjM0YjI0YjI0MDIzMzE3NmU4NDliYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzdlYjRkODZmNTFiMDFjMjJlNzQ5NmJlNDlkMjM4NjdiY2NjYjI3NzIxNWJjOGMwNWQyMzkyYzNlN2U5MDYyNSJ9"
+        },
+        {
+          "resource": "repo://src/bookmarks.ts#L267-L279",
+          "version": "repo-lines-v1:sha256:df9ae5c614a6f2e82fc1d8f8ff47a22e6eba26b418b525297c4ca2549fc05220:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM4MzRkZGUzYjliODkxZDJiZjA0NDg1ODYyZjk5YjQyMTRmODllZWQ1NmY3N2IwNTc0NzI0MjM4MGE5ZjdmZmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhiYjQ4NDJkMmUyYWVkY2Q4NzE4MGVkNTliOGU3YTU1MzAyNjkwMjBhMDFmOTM3ZmZhZjI0YTk0NjI0YmUxN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_9758cf09bb5548258b66f41bc38e0e41",
+      "statement": "runMode degrades bookmark failures to warnings, never hard failures: no-api-key produces 'TweetSmash token missing; --bookmarks skipped. Set TWEETSMASH_API_KEY.', other reasons produce 'TweetSmash bookmark search skipped: <reason>.', and a successful zero-hit search produces 'TweetSmash returned no bookmark hits for this prompt.'",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L108-L127",
+          "version": "repo-lines-v1:sha256:499753f675c7947801848c5d7bdcf0caf6c5e5cf87f75cf50746de8b7986faa7:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxZjBlNjY0Nzk5NTQwODNkN2QyMTE2Yzg5MTNjMDI5YjM0NjU2YTZjMjA4ZGU2YzJmZDI3ZjY0MjNiYmMxZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkODE1MzYyN2M2ODMzZGFlOWExMmI2OWVhMWU0NTc2YjhmM2RlNjk1NWNmNjUxNDNiMmQ1ZDFiMTM1OWE0ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFiMDFlMTZlZjNiZWNlMzY0YWM1YTRmOWE3NTczNWYxYTJiNTI4ZWZlYTU3N2RiMjk3N2I4ZGRmN2RmOWMxMzMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_486826372e8e41869b4fe7bddbef0e87",
+      "statement": "formatBookmarksMarkdown renders skipped results as a token-missing or 'TweetSmash search skipped (<reason>)' line, successful results under '## Saved X bookmarks · <query>' with '- @handle — text' plus indented URL and tags lines, empty hits as 'No keyword/semantic hits in the TweetSmash library.', and related groups with hits under '## Related saves' as '### <via> `<term>`' sections.",
+      "evidence": [
+        {
+          "resource": "repo://src/bookmarks.ts#L235-L265",
+          "version": "repo-lines-v1:sha256:afceb9387ee4bafd2481a0766d64f0ec168922a2ed558a2284258bad1ac5a6e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxYjMyOTI1MjdkZjYyM2M2MDE0NmU1NzY4NTczNjE3NTFiZWM1ZDgwYzI1NWZjYmEwNjVkZGE0ZmY1ODVkZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwZGRkMzI4ZDEzNTc4ZGQ2ZTcyMjI1ZGIyYTY1NTk5ZmI5ZGNhMDg2OWZjNDcwMmExODk5NmRiYTY5ZGI0YjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY4YzlmNDJlZTI1OWFkMmNkZTcxMTg5ODJjMmU5YzJkMGY0OGFlMGI5YjFmODIwNWZhZjJhZWFlNDRjMWUyYjgifQ"
+        },
+        {
+          "resource": "repo://test/bookmarks.test.ts#L97-L123",
+          "version": "repo-lines-v1:sha256:c9df6c4d675c359770fa5d77fb3170c71cef1298c05c731e5e0351b706bae2e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc1MzA1N2IxM2EzZDc0ZWUyZWUwMmYyYTBkY2I5ODE2YjdmM2FjYzA5OWE0MTM4ZDJkZmY1MmQ1MDUxNTJiYzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e60c2e5d7e0445b1a2f710970ec24b46",
+      "statement": "The rendered bookmark markdown is injected into every prompt builder — buildSingleCallMessages, buildResearchMessages, buildSynthesisMessages, and the schema passes — through withContext, which frames the block as '## User's saved X bookmarks (from TweetSmash REST)' prior personal context and instructs the model to cite saves as prior context, not live public opinion or official docs; the system prompt gains the BOOKMARKS_INSTRUCTION to include '## Saved bookmarks' when material.",
+      "evidence": [
+        {
+          "resource": "repo://src/prompts.ts#L162-L163",
+          "version": "repo-lines-v1:sha256:1e7cfc24582600d388d5e768b7a01d77ec9370cbd3bc60e78e16bb0e06069956:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODBlY2JmZjYxNjVkOWM3YjQyYzdjNTFmNzViN2I0OGVlZGEwYjU5MmJhYTdkYmQwYWJiMzVmNzEyNDU5ZjI1NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ4MjA4NzFlNjY4OTEwOGVhOTk3YmUxNDA3OTI3ZjAyMzcyYTY5NzkxZjM0MTkxYzBjYjIwMDRmYTlhMDNjNSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWY2MjhmOTYzZmM4N2UyZTVhNjhiYTFmMjRhYzAyYjc4MDVmY2U0NWUxNTM4NWEzMmExOGRhNzI1ZjkyODQ5NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmMxNTE5YjVhNjFkY2NlMGNkZTE1YjhhNjRlMjRmOTM0YWQ5MDEwMWRmZjI1MDBlM2E0NjViNzFkYTY5N2JiZSJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L190-L195",
+          "version": "repo-lines-v1:sha256:13549310a082123f02ec69210e35013fadade3ca4afe6fd55b6f9cb63a7014f6:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTc5NmQzM2UyYmUzNDFjMjNjZTc1NzBmNWVjZGVkYWZmYjIzYmQ0N2U0MjAxMWYyYTg2ZDRjMmZjNzhiMDI1MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTA4MWEyZGM5ZTc1ZDg4MDQ1NDM5MzZmNDRkMWI5Yjk1MmE4MzNmNWE4YzAwMDFlMmY1NGE1ZTQ4NTlmYzk5NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODFmMTM0N2FlOTI4ZDE2ZjVmNTY5ZDE3NDgzZmEyZTU0N2IyMTg1OTFhMjFmODI0MWU3OTYwNGY4YjcyMDA2MyJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L88-L106",
+          "version": "repo-lines-v1:sha256:e6947eddc9e2663c53e558038babbd0c03107c16c810da6e226a3a93eeaa1381:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmOTc3NjQ4MWRmZTI4NzdjZDJjZmMyMWE2YmNiYWE4YTA1Yjg5ZGUwMjU2Yjk1ZmM5YzI5YjgxYmFhZTZhNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhZDI3OWM1ZjY3MDliMjhlZWYwMTUyNGE4Yjg4YzYzMjM2YjUyMjI1ZjZjOTNkNTliNmNjMWQ5YTg4MDFkMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjZTY4MDYwNDhjMmQ3MTM3NWZmNDE1NWNmMzMxYThkNzM5NWNmNWM1ZjI4NGZkNTc5YzViMTcwNjFhY2UwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_98d50da25f5e4c1cb2fc1ad8083c349a",
+      "statement": "--bookmarks-only short-circuits in runMode via buildBookmarksOnlyResult: content is '# Saved Bookmarks Brief' plus formatBookmarksMarkdown output, sources are derived from hits and related-group hits, usage is emptyUsage() with zero OpenRouter calls, web is off, and it throws '--bookmarks-only requires a TweetSmash search result.' when no search was performed.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L137-L139",
+          "version": "repo-lines-v1:sha256:7c64241450bcfb1ad84b2af1d8c8420f0d9509b7332639b2454ad8c9ce2853ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIwYTJlY2IyZjRiMmRkOWIxOWJhMTgzYmQzZTU3YzBmN2NlNGJkN2JmNmMxYmZkNGY2ZjJlYWQ4MGQyYTAwYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWYxMzJkM2Q2MWFhMjViMDEzOTVkYWFkYzZhY2QyNDIwNzljMDBkZWMyMzVhM2MyMDQ5MDI4OWU0Y2ZmOTQ3NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWQyNTg4MTkxY2E3NTM4MjY4N2Q2MWM5MjMxYmZiZTFjNmQyZjVkZTFiMmU2M2IyZGJmYjcwYjk4YjY1YmY2MCJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L341-L370",
+          "version": "repo-lines-v1:sha256:f8019a8cb1f8a524d4e3441fde249820ebe7d7ac104bb9c6ae7c8e3f7f6dee65:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViNmMzYzBhN2EyYzc5MmNkNjBhZTJjZWU5YWUyZTQ5ODI2OTg3NzAwN2ZmYjZmYzVmYmJhYjE2N2U1Yjg4ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiMGRhMDhhODJmZDE5ZTQ2MjQ5NWVkOTdkOWU1NDZkM2U1ODU4ODFiMTAzYzI1M2UyMGVjNDViNzNkMzM3OGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1Nzk4ZTllNzM5ZmM3Mzc2MTBmZWU1NDAzM2Y4NWQ1ODljNWQyYWZkZDkxY2FlMzY0YmIzYzJmZTkzNTJlZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_058f715ba21b437a988278a233e5ea14",
+      "statement": "Combining --x-only with --bookmarks-only is rejected in runMode with the hard error 'Cannot combine --x-only with --bookmarks-only.' thrown before any dispatch; each --*only short-circuit additionally requires its own signal.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L129-L139",
+          "version": "repo-lines-v1:sha256:f370adf1e16af37e64c99f4e383a9ef48eac5f9b0b6e8d092f8fdc83a464d601:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMDI4ZDIwYjRiNDIxMDFjMGJjNGZlNjk1ODUyNzlmZmVkNTU5MzdhMjU5OTQzYjZkZWViYjA0ZGIzMjdiY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkMjU4ODE5MWNhNzUzODI2ODdkNjFjOTIzMWJmYmUxYzZkMmY1ZGUxYjJlNjNiMmRiZmI3MGI5OGI2NWJmNjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0faa6c1fe9d44d9a7059894f1ad95f0",
+      "statement": "The full BookmarkSearchResult travels through PipelineResult.bookmarks and is emitted in the --json payload by formatJson (query, skipped, reason, hits, related); attachBookmarks folds its warnings into result.warnings via attachContext.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L78-L86",
+          "version": "repo-lines-v1:sha256:912563fd11c94077289c836d145c72c3733eceadadf4ece75377907499403902:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjI4ZDdiYjI4ZWY2MzQ3MzhkYjBlNjgzODM5ZjRhZTczMTE5OTViZGY3NzQ2NDgzOTdhODNjOWQzYmIzNDEwYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzhmNjI3ZGZiNGUwYTRlODMyMzg5MjU0MTc1YjEyMzVhNDZlNmM2ZjFmNjBkYTk3YjE3M2Y1ZmFmNzVhZTcwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjdiZWJlMGFiYzVkM2NkZjQ4NWNlZGIxMTNmYjBmODNmOTVhYmJiMmMyNzU3ZGQ1Y2ZmN2U5OGQyYTI3YzM4MyJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L324-L339",
+          "version": "repo-lines-v1:sha256:b66ed8370e9e29d5feb8ead07cb3259a493686f1e7ff724d242d75217c86ba67:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyMjc1YzdlZDFkNjY4Nzk5ZmNkYjg3MWVlYmRhMWI1ZmM4YmUyYWZmZTIxZDE0NjhiNjFjNDdiNTRkMTY0YTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4MTk2MDQ2M2Q5MGNlMTQzY2RjMDFjYzNjYjRjNjQzMWE4Zjk2YTYzYmE5OTMyZDhhMDkzNzg0ZDhjMTI4YzkifQ"
+        },
+        {
+          "resource": "repo://src/types.ts#L111-L117",
+          "version": "repo-lines-v1:sha256:fc5957f3bdf52ca5742cf80a36bdf07d4af279597320e295cf91c0e754489f5f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY5MmU5YTZiMmU1MzhkMDliZDFmYjQ4ZjU1NzIyMTI0NzUxMWE1MDQxNjBkNGI0ZGQwNWY3Mjg3ZGVhNDBjOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWEyMzBlZGQ1YzU3ZDNiYzRmZWVhMjAzODU2N2RjYTNkYzcxZTQ2MDRhOWM0ZWVlY2ZiMTU1NmY5Y2ZjMGI4OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2ZhMDdiNjRiMDA2M2UyOTU3MjkzYWNlZGVmZDY2MGRiZjUzZjU3OGJkMDNjZGRjNzE2ZjE0ZmRhNDFiNmVlOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a3a62b2e61df42c5abcd9a66540b4e61",
+      "statement": "The --bookmarks* CLI flags each set enabled and are parsed in src/args.ts: --bookmarks-only additionally sets only, --bookmarks-related sets related, --bookmarks-limit requires a positive integer, --bookmarks-author strips a leading @, and --bookmarks-tag takes the raw label; parse combinations are pinned by test/args.test.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L312-L345",
+          "version": "repo-lines-v1:sha256:e0d474d83dd7b7cce72e8eb15ed79e421d43f760b277cccb733a9553e1bf62be:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZDcyOWViMjk0NjI3NDllNjM1Y2E4ODgwZjdjY2M5MjY1ZTM4OWI1MzJlNDc0ZWFkNjQxMTNjYTk2MzE4YzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImM3ZjdjNmYxYTFjMGNjOWUyZmI0ODYzYmNhMDEyZTMwZmYyNjMwOWY5NTZhM2Q1YzIwMzExMDljOWIxNDJkZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkNDlkNTY0MzEyNGNkMWMxY2EyYTQ2MjVmMjU4MDcyZTk1YTk5MTEyNTY3ZjI3ZTMxMDE1OTQ5ZGZjOTZmZTYifQ"
+        },
+        {
+          "resource": "repo://test/args.test.ts#L174-L188",
+          "version": "repo-lines-v1:sha256:e0d96741a719a159a24e7ae0587be1b1089db3a6188ad314c9b8dfaf587ccc5b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjNjc0ZDU3NmJjNTAyNGI2ZDc0MmYxNzFiNDBhZjM1NzNlNGFkYzAxYTNhZWE2YWE2YWM2ODU4Y2RlMDBlZDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ3MGRkNDIxYmRiOGJjMTMyZGEwNGEyYmQ0ZWRmNGJiY2VjODVjNTA4MThmYWJmNWFiNjM3MzU4MmM5ZmQzNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

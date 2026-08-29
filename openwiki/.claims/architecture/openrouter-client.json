@@ -1,0 +1,204 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:7d2a6343a889ab1fa6f962e6542dcd2d2d9d808561b636abad0db62e01b9d188",
+  "claims": [
+    {
+      "id": "claim_bbf69e18dfc3455990cef1fd8d847db1",
+      "statement": "callOpenRouter in src/openrouter.ts is the single OpenRouter chat.completions wrapper: cli.ts wires it into runMode as the ModeCaller at startup, so every pipeline mode (single-call, schema two-pass, multi, retrieve, deepresearch) performs its model HTTP requests through this one function. It POSTs to https://openrouter.ai/api/v1/chat/completions with Authorization Bearer (apiKey from OPENROUTER_API_KEY env or config file), Content-Type, and identity headers HTTP-Referer (config.siteUrl ?? repo URL) and X-Title (config.appName); a missing apiKey throws OpenRouterError before any network I/O.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L14-L35",
+          "version": "repo-lines-v1:sha256:21f9da94857511a6df5945a0503545724244ebae29d13f0311c16a889a072f81:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNDQzYzYzZTczODFhMDJmNDUxMmEyYTdhODRkMDcxNWVlNWEwNjdlZWY1ZWI3ZDM2M2U5NGZmM2ZkMzVmNTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyMDlhMmYyZjY1YjBhOTExZWU4ZWM0MGQyNzlmNmE1ZWJjOTM0YWY3MDU5NDMzZTRlN2Q5ODE3ODI5M2M3NjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwZDg5ZTc0OGY0MTk3YTU4NDAzNzI2MTQyZDdiNmNkNGYxZjg4OWJmZjU4NDQxMjI4NDE0ZGNhYTBmODkyY2UifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L84-L122",
+          "version": "repo-lines-v1:sha256:ad1ecc6a5b7afe790ae7ae3fee5f76f2b5e409d8bea22ca300fd5d708dd7fb23:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczYmQwZThlOTQ0YzJkNTEwNmFjOGVjMDUyOWMwMWQ5YWE5NDIxNGJhZTk0M2Q3NmZkZmRjOWYwZGUzZGFhYTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxN2FmMTEwMWM5N2I3YzJmNTI1NDA3ODJlNjM0Y2M0NDQwZjBlOTcwMzQxZTUyZjk3NTIzMTFkNzhiN2Q3ZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1OTRkMzg5NzZhMjNhMjYxODkwYTgyZTE4Y2E4OWRhZTVjM2RhMDRiODJkZGY2NDkyOTg3NGI2Zjc2OTBjYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwNDMyNDMwOWZiYzAxOGU5MzA4ZDY5N2M4NDI5YjM5YWZjZTMwMWMxY2IyODM2ZDFhZmU4MzU2N2QxOGYxOGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c66a4384acf4410399547e507f740277",
+      "statement": "buildTools attaches OpenRouter server tools only when web is enabled for the call and the model is not a perplexity/ model: openrouter:web_search parameters are engine (omitted when 'auto'), max_results, max_total_results, allowed_domains, and excluded_domains (blockedDomains maps to excluded_domains), while openrouter:web_fetch uses max_content_tokens and blocked_domains — the domain-list key names deliberately differ between the two tools.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L37-L66",
+          "version": "repo-lines-v1:sha256:832ffdefded9a220e4c0e9bae7508dbd8fcbd096d68bfc7e7715c17e8717846e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkYzU5NTU3NTRmZGNhYzY3NzFmMTRjNDUyMzIzOWFmMTIzYzA4MTM3ZjgwZGIxZDY2NmVkYmFkMGZmNDViOTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYxZDQyNmExY2U4M2M2Yzc1NWZhNzU5NzM2MDAzOTNhOWEyMDYzNDM0M2EyNGY5MTFkYzE0ZThmYTk2NjdmNjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1cac8a1a1ee348799fba51e71e6a5f10",
+      "statement": "response_format { type: 'json_object' } is sent only when call.json is true, the model supports it (perplexity/ models are excluded via supportsJsonObjectResponseFormat), and no server tools were attached; the client never combines json_object with OpenRouter server tools because observed responses on Grok + web_search collapse to garbage JSON such as '-1.5e-05' under constrained decoding.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L100-L108",
+          "version": "repo-lines-v1:sha256:6cc6af3618a77975863c63bce5c2ab71486c3f00b8b7ffe20f1a0bd5dd1ecb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgyMzQwMWIxMjI5ZDc0MDZiNTk4MmRkZmFmM2EyM2MyMzc1M2M2NzM4MTNlNDk3OWYwNDkwNTkyNzAwM2U4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQwYTMyOWRiZmM5NmQ4YmNjMDFjMzY3MDQzMjkzYTAzZDIxNTMwMGJhZDJiMGJhNWQ2M2IxM2M5OTdhZGFhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTg4YTM0YWYxNGVlOWFlNjc4MjY5ZTkyOGRlOWJmZjgwODc5OTk3Y2Y2NGQ2OGZlZjE2NTViMDg3N2NiMzAyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmU4NGY0NDQ5OTdlNTY2MWU0MjQ3OTQzYTExYWNhOTgwOTUwNDZhZDRlMTg4ZTFiM2ZhYmE1MDc0ZDhlZTE4YSJ9"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L271-L273",
+          "version": "repo-lines-v1:sha256:9be0867404cf3b2222f26fb6e1d6dd3d115f7aad346b0dbecc42845ef622cc1b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRiZWVjNWRiMjkwMmM1NGE4MDZjNDc1NjY4NzdiNmI4ZTQ2NGE1ZTM4YjMwMzczZjA0ZjhjNDRjNGZjZTM2OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTExZWVlMmYwNWU5YWEzMzYwMDU3NTI4YWQ3N2RhNTI5YzRjMzZiZWViZTdkNTcwOWJhOGE0YzllM2I1ZGJjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWI1MmE4NTMxYzk3ODkyMTMyM2ExZDllZGI2MjIxNzBmMWZkNDJhMmYxZjc1MjVmY2NhYTgzNjE0ZTBlNDkxYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_b9bf9b4057684fd0b9e17719cd65d2b1",
+      "statement": "When JSON output and web search are both required, the pipeline in modes.ts runs a two-pass pattern instead of one combined request: a first tools-enabled research call, then a second no-tools call that formats the retrieved content into JSON (buildJsonFromResearchMessages for --json, buildSchemaFromResearchMessages for --schema), merging both calls' usage with mergeUsage.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L156-L196",
+          "version": "repo-lines-v1:sha256:7a256538f8547c0b79fa98183bb6000d6c53122a83377c9ceaec7401aec8dbcc:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MjhiYTJjMjE2ZmQzMzExNjUxNzRhMWM3OWIzMDAwMTU1NTFmNGFlYWQ1Y2FkZmU3YWQyODMwN2YwMmM4YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2MzNkMjFhN2NjMzcyYTM5NzVkNTZkZTA3YWEzYTI2NDRhZTQxZTA3ZDU0MjhmYjY5ZTIyMzAyMGNjNjI3OTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhN2U1Y2MyNTBiZGViYjE1ZDczYmY0ZGQxMTEwNWU1M2VkODE5NWJkY2MyZTFhNzczM2YwYTgxZDlkNmVmNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE3NTNiMmVmNGViOTM2OTViOGJjZmYyNDc1ZjEyZmVhMDk4MzllOTRlNjU3NGJkMjE5NzVmZDVhYzZhNjNkZmIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L243-L283",
+          "version": "repo-lines-v1:sha256:b22b76b27dd62fd33884fc6d24eb6fd03c1e8de3cc9c7302fc54aa5b5bac6206:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDVjYmJmNjAzY2U2NWE4MzEyMThiZTkyNzJhODM4ZGVlY2E4MWRmNGU5ODQ4YjIxZTY5MjYxMjBhZWM3NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyY2E1NjI1ODBjYjZhNTgzZTk2NGUxMTUwNzBlMmQ0M2FhNDljZWI3ZTE4MWU3NWFhNjFlMzI3MjQ5Mjg1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2Mjg4NTQ1NGI4NDYwZDA5NTcyODk0MDY1MjNhZDZmMjEyZmU4NDAyYTA4MjVjNWU1YTBhMGEwNmQ4MTAwMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwY2M2OWUyMmNjZjEyZDY1MGFhYWMyYzg2YTZjYjg1MmI1ZTQwNjlhMzMyODdmMjVkZjNmMTY5ODU2NzkxYWIifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L126-L141",
+          "version": "repo-lines-v1:sha256:58d337eb725d7d8a9896a65ebdaa47c8876ac1d8e7ff1cf36e0f387a24d298ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhZjIyY2YwNzMyNTkyYzI0NzE0MWNiZTYxZWZhMTEwMTI2MTJmNWEzMTIyYjlhZjliYmFmNTJmNTcyNGQxOTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0MDA1MjRmZDJjOWUwNzVhNzQ2YjM3MTc0M2EwMjFmNDY0ODlkNjYwYTMxNjA1YjkzNTA2MjcyODZjM2M2OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNjMDViYTRjZTU4NmU1M2M3MDcyYWZjNzBkMzEzNmNiNThkMjlhM2Y1ZWZiZGZiNWUwOTU2MGJiNjNjZmRjNWIifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L147-L157",
+          "version": "repo-lines-v1:sha256:2680735e3bd8bbf6218d66366bb5e1291563545830a150b06758b26fecf76073:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4M2YyNDQ0ZjQ1MGE3YTU3NWM4NThjOTZjMTBjZDI5YWM5YjBiYTE3ZThmMjlkMWMzMDQ5YTQ2N2Y2MDhmZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ2YjA4NGQ4Y2JlODljMjAxZDEzOTBjZjE1Nzg0MDdmN2MzZjg4YTdiNzQyYTJkZTJhNmNkZjIwNTU1YzhmMjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ5NTQ5NDdiZTVhMDYzZjQ2ZGY4MWJmNjVmNzdiNzFkNDNlMTg0ZDcyMjIzMDgzYjY0OGQwNDQ4MTk4OTgwOWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1a3382e961284cebb4ff2aac38bb5760",
+      "statement": "callOpenRouter retries up to 3 attempts: retryable conditions are HTTP 429, status >= 500, or a fetch TypeError; backoff is 2^attempt * 1000ms (2s, 4s) with a Retry-After header (seconds) winning when larger; non-retryable statuses (401/403, 402, 404) fail fast; an invalid JSON body on a 200 response throws OpenRouterError('OpenRouter returned an invalid JSON response. Please retry.') with the parse error as cause without retrying; after three failed attempts the loop throws the last recorded error or a generic failure.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L110-L156",
+          "version": "repo-lines-v1:sha256:bf0a48a19c6ec375e850c14f7670cbaabe9b23d024e44ca854b27c2c00b9be9f:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1NzZkMTFiZmU4MjdkNjVhNmNmZDIxYzM0ODE5MDY1NmNjMjQ0ZGRmMGIyZDZjODM3MTMyNjA4MmM4ODQ1ZDIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmMTdlOTdmMGJhYjM4ODc0NGYxMWJkNmExZDc1ZjFiNmM0ZjhlNGI2OWQ0OTA5NWJhOTI4ODAwMDFlOWFiZjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJkZjAzM2Y4NmI1NTYxMmNmZGU3MGQ5MTFiZDljODIwM2NmNDVhZTE2OWYzODhlMGIzZTgxNTQ2YmJhYmQ1OTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyZTdmZmQ5YjczMjUyMjJlMTlhZWRiMDcwNmMyOGY2MGM1ODcxNjA0OGUxNzg3NjI2Nzg5NGIxZDU0ZDExMTAifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L159-L176",
+          "version": "repo-lines-v1:sha256:9d007728223ba607a40dd2f68cd0d670370cd5ff05a45efe9de07c2e8c6e5f50:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4YjUyYWIwNmZjOTIzOGFlYWU5ZTEzZTg1ZWUxZjY2NTE5M2RjZTcwODUwNmVhYTg3Y2Y3MGE0YTUwYTYwNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA2MjAzYjZkMmI5ODVlMjdlMTcwNzgyY2QyZDEyZjBmNGU0ZmJhOGYyZGM2MTdiYjJmZGI5ZGUwNWExOTRmMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhMWJiMjg0ODYwZDRiMWJkYzQ5NmQ2ODE0YzlkZDg5ODJjYjFmNzA0NjAyZjEwNzQ2ZDYyZWM2NzY2NGUzYzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cb2328340d764bf1ade13f64cc2a6a94",
+      "statement": "mapOpenRouterError classifies failures in strict order: 401/403 → auth error, 402 → credits/quota error, 404 or tool-use text while tools were requested → 'Model does not support OpenRouter server tools' (checked before the model-unavailable branch, so a 404 with tool-use text maps to the server-tool message), 404 or model/endpoint text → 'Model unavailable', 429/>=500 → retryable provider error, else a generic fallback that preserves the provider detail; every branch produces an OpenRouterError carrying the HTTP status.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L241-L269",
+          "version": "repo-lines-v1:sha256:f60c94c320104618ae5b2b8b0710ea6ce0ca06419813c9c06d30a5fa4bb0a3b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzNzBjMGE3MDZjYTNmMjJkNmJiMDYxODEzMzBlMjFjNWEyYjcyYjUwNWE2ZjliYjBmZThhYzRkYjcyZDZmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyOThiMjIxNDVkMWFmZTBhZGUyOTliYjBlYzhlNGQ5YTkxODhkZDcyZWU3OWFmMGY0ZjkzNjg2YjQ5MGVjNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1Zjc5YWFlNjY0ODY4ZWE5NWM2YjFkM2Y5NTIzMDNjYzU0NzU3YWYzZjhlNTExNGVjYmJhMzA3OWJjMmIzODMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6ebf01035c48443db4d9d2d5cb5cdbed",
+      "statement": "handleSuccess normalizes each successful response: content is coerced via normalizeMessageContent (strings pass through, null becomes '', arrays concatenate string/{text} parts, bare scalars like a JSON number are String()-ified) and missing content throws OpenRouterError; the per-call UsageCall records role, response model (falling back to the requested model), prompt/completion tokens defaulting to 0, costUsd only when usage.cost is present, and serverToolUse mapped by mapServerToolUse which keeps only counts that are present and greater than 0.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L178-L215",
+          "version": "repo-lines-v1:sha256:2082245761d363398470dbe8fb41eb9689fe7dd2013732f71c915fc6dc458f39:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU2MWQ4YjZkMDE3MzNlYzE5NWU2ZWZmZDcwOWE5ZDQyMjI2MjYzMjE0NDY1M2Q3OGU0ZmRhYTQ2NzA2NmYwMTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY1NDE3Y2JhYTBkMDRkMmZkNzI3NmFlMzZlMTRhZWY3MGM1ZjBkYTQwODEzYjIzYzdjZTJhZjY0YTk0M2RhMjMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI1NGQ1OTQ0ODQzYzRjNzk1NjYwMGU5YTRmZjY5YjQ0ZGFmM2NlZDczYWMwODY2MWNmOTg0MTQ3MWRkYTVjMjgifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L230-L239",
+          "version": "repo-lines-v1:sha256:24a58030a9af627c5fb294c6cb83d544808cd63a2427ea292131d60328780251:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZjZWExOTM5YjBmYThjODRjZDYwMmIzYzRlY2M5MGEzNjFiMjEyNjYxNTk2ZjUyZjkwNDY3NjQzZTdmYjAwNmYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc3YzY4YzM3NzMzNmJmNTdlY2NlZjY1N2Y0ZTVjYjhmMjI0MmRlNzQ3NzI2N2E0ZWUwYmM3ZjA5Njg1MDMyYzEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhYTMyMzg0YjgzZTBlMTJiMWE2Y2YzMTE4OTllYTE2MzQwNzI4MjBmOGE5MzE3ZTU3ZWVhOGQ0ODNlZGFlNjMifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L276-L292",
+          "version": "repo-lines-v1:sha256:b99aa41069faac7aa70e2e8bf0089bf1825e30c06a567838418fe6c31d2c8a58:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ZmY4NzBmZWIxMmI0ZmQxNGQxNDQzNzQ4MmQyYTc4OTZjMTNjNmYyODM0OGUwYTUyMmU5MTU1ZTkyNzJmNmMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRhZDMwZjY3MTllMDE1NjA5NGI5NzgyNjI5MDkxNzkzZWFmOWRkNjc0ZDAxZmMxZGY4ODkzNzIwMzZiM2M5MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b2d9ed57210c4f0bac4d74bce6d9700c",
+      "statement": "extractSources builds the deduped Source[] list from both the top-level citations array (URL strings → {url}) and choices[0].message.annotations url_citation entries ({url, title?}); entries are keyed by URL so duplicates collapse, non-url_citation annotations and annotations without a URL are skipped, and mergeSource folds a title in when available without dropping an existing one.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L217-L228",
+          "version": "repo-lines-v1:sha256:148783776e621b0ba78ab09a87ff6b7ef9bd93d8bec875d6e5d5960d69cea8a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZiNzk3YzM1ZDlhMDMzN2Y4ZjE3MjQ1MzUxNTc4MjkyYmVjMDNjYWRiOGRlMjRhM2NkZjA0NWJmY2NkNzVkNTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmMGExZDk0ZGQzNzA0MzhhY2U5NzUwMDUxNmIwZWI1MzYzMjhmZDJhNjZjMGRjYjEyYzI0NWRlMzdlZTNhNTkifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L68-L82",
+          "version": "repo-lines-v1:sha256:1e8cbe2b138ebd5d5828b73f68dc72a6693c7c563ee7577f3051a81673e785fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4MjYxOWQ0OWY4OTQ3ZWFmYzRlMmRkYmQ2NDhiZjRjZjY1MWVhYjJhMTAwNTc3ZWE5ZTFmMGYxNmFkZGEyMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzNDZmMWQxZjljMjU5YTIwNGQyZDlhNTgyYTk4MTRkZmVjNWFkZmMzMmRkMzc1Y2EzNDJiYjlhNTkyY2Q1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2ZTkwNDY1NmM0M2FhNWI0YzRhOTI0OWQ1YTAyMjI0NWY2ZDEzOTQ4MjVlYzk2NTlkOWQ3MTFkOTgyMWZhNTcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_40f7c2ea1ba94405bf3f927441b7635a",
+      "statement": "cost.ts aggregation invariants: addUsageCall appends to an immutable call list and recomputes token totals; summary costUsd is present only when every call in the summary reports costUsd (a single unknown-cost call makes it undefined); serverToolUse counts are summed across calls via mergeServerToolUse (fields disappear only if never present); formatCost renders 'unavailable' or $<4-decimal USD>.",
+      "evidence": [
+        {
+          "resource": "repo://src/cost.ts#L3-L37",
+          "version": "repo-lines-v1:sha256:241382368042bbc6b152fba8ed722745e3fc707b0451b9c8d343f7bea5d4737c:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhNDhlZTVlNGZiM2UxODk2ZDIxMDBlZGFkYWRmM2MyMjcyOGJhZDQ3Y2NjNGJjOWU0MmI2NWFjNDI3YThmYTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjMTQyMGQ1MDJiY2Y5MDM1MjZhMTc2YmM1NmE3OGZjZmZhYWQ2ZWNlZjdjM2Q0MmJlMjQ0NGEyYjY4ZTUyZGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZjM5ZTcxNzVmNjMxNjg4NzUzZDI5MTljNzhhNmZkZThkNDY2ZTAxOTQ2MzlkOTEwZWUzZGYxM2ViMTRhMTgifQ"
+        },
+        {
+          "resource": "repo://src/cost.ts#L39-L55",
+          "version": "repo-lines-v1:sha256:4137d299462519f26114c897c6f56b81028181ef98e81e09776b46ce4a8f0f54:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI1YzI5NTY0ZDhmZGJiZjhhZDEzZDdmNzYzZDdlNGE2YjMzYjY2YjA2NzVkNGM0Y2UzOWZhMmQxNTc1MWNjZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgyZTQ5OTMwYmNiOTVjNDAyNjY4NWJiZDk3OGVmZjgzOTRiMDgxZDA2ZDQ5NzEyNmQ5MTAxYTdlZjA2N2NlOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7db1829975cd492f888f2dd19cf4da20",
+      "statement": "mergeUsage folds any list of per-stage UsageSummaries into one by replaying every call through addUsageCall, so totals add, tool counts sum, and costUsd survives only if all constituent calls reported costs; modes.ts uses it to combine two-pass research+format calls and all multi legs (research, 3 analyses, synthesis).",
+      "evidence": [
+        {
+          "resource": "repo://src/cost.ts#L29-L33",
+          "version": "repo-lines-v1:sha256:163be993d15cba14da316a7f40e592e724abe679003786e2531fd2dfd8b5f0b0:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQ0YTYzNzIwMzY0YTI0ZTA3MTY5MTE2NWFkNmUyZGIyZWVlMTU4MDU4MjlkMWYzMDUxZDQwYzNjZGY0OWVmMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzQyNDQ1ODQwMTNjYThmZmMyMGJlZmFhYmMzM2ZlODJkOTE5NWRkNDIyMjEyM2JlMDQwOTYyOTZiNWRmNjhkNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTY2ODI4ODI4ZGQwZmE1MDUwM2I4YjFmMGE0NzRjZjVmNGM3NTVmMjk2MTdhZTI4MWYyYzNiY2Q5MTdmNTVhMSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L453-L458",
+          "version": "repo-lines-v1:sha256:e77e89ed47eeb421b2302e38b77f5607c3097c2e6c14f4f24e6c5e3c2f3a05d6:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE3OTE3YWJkOTI3OGMxNDI1NjI4MmJjZmNkNjVlM2E5NGM2NTZjODI2NzRiZGYxYzAxNzQ2MGQ1NjM4Mzc0ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODE5OWVlYWFmZDI0NGJiZGZmYTRjNTEwOGYyNzM2MzU5NGUzMmI1NDlmNWNmZjhkZGYxNTEzMDE4OTM4MWVlOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWUxMmI2MTE4OTQzZTMwYzAwNjgzM2U3ODE2MzBhNTNiMzJmNDE3ZWY1Zjk3OTVjM2YxMmYzMzA4MDI0YzVkOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmJhMDY4ODc5ZTE0M2Q1YmQwYmNkYWZkMDM0M2RjODJmZDlkZDY3MmRjZjkyMjEyM2EzOWU2NmZkYmIyMDA2NiJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L618-L627",
+          "version": "repo-lines-v1:sha256:1b284a114042dc98ea08f3cbaea26481522f0203ca2c1599d4aa71ac3cf199d9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhlMDFjODRhMTY3MmNiMzk3YjQ1MGUyN2RlMzhjYmRhYTVlYTQ2YzNmMTBmNTM2NjM1YjMzY2MyNDI3MDY2YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NTBkMjdjZWVlZTdmNTUxZGNmZTBiNDI0ZDljMDJmM2NkODZmNThlN2UwN2U2OGM5ZmYyZDQ3YzYyZGE3N2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmZjNkNjI1NjYyMDJhZGIwOWE5ODFlZjQ4MWY2OTQyNzUxODI3MjY2YjVkYWFjYWVjMGI1ZmE4YTI3M2E4MjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b1c7f51a5a8640f6857f68da85a95442",
+      "statement": "The costUsd-only-when-all-known invariant is load-bearing for --max-cost: withBudget in modes.ts enforces the cap only while every call reported a cost (a pre-check skips the next call and a post-check throws MaxCostExceededError), and once a call's cost is unknown it stops enforcing; cli.ts then prints a warning that the limit could not be applied when result.usage.costUsd is undefined.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L36-L40",
+          "version": "repo-lines-v1:sha256:f87aae72577305c953874ebc3b78a7e44f29480c399a5aab8118c1d068856f9f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWJhM2MyZTY4MDRlZjE1ZjJmY2NkZWQwYjRkNDlkNjNhYjYxZDVmMTZlMjYyYmIxZWY4ZTU2OWY0OTAxZGNlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJhMGI2OTEyY2I1ZTYzZTVlZGQ2Y2Q1NWM0Zjc2NDhhZTJjYTY3Y2UzZTQ4MzU5ZTk3MTliNjMwMDExZTgxMyJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L53-L66",
+          "version": "repo-lines-v1:sha256:8f0ccbc80fb940ec744f385030b8ff98f7705529360302e5ea2f0dfb2ea43237:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmZmE4MDM5ZjQxYzAxMGI1ZDk1MTkyOWE3MjQ2Mzk3MDU3NjQ4ZTQ2MDZhYzQ4NGVjZjhlZjE5YzA2NGE3OTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1ZTU5YTU2ZWFmNjJmNzMzNzBlNDY4NzZjZmRiYjM2ZGRiNWJjODVmNzYwMmMzYjNmYzg4MGU1MWVkYWZmZTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e9dc4a0ae715471499bc13a4d6941869",
+      "statement": "OpenRouter server tools run entirely on OpenRouter inside one HTTP round trip with no client-side tool loop, and config.ts guards the failure mode before any call: assertWebToolsCompatible throws when web is enabled for a web-capable mode whose resolved model does not support server tools (perplexity/ prefix check via modelSupportsServerTools), while a runtime 404-with-tool-use text from the API maps to guidance to use a Grok 4.x model or run with --no-web.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L59-L61",
+          "version": "repo-lines-v1:sha256:5a84140d9d80765ff2b05c88c2dd97abb43c3d26441e17b468788d6f6665f3d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGNjNDk4OTAxNDAxMDhmMjQxNGM1MDJjMGFjODVhZjhiZDdlODVjNDI5YWI2NmE1MzRjMDIwZWFiZTJmYzljNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTg3MjgwNzcwMzllN2RhNzE0ZDlhZGZmNGI2ZjE4MGNmNTExMGEyMGVjODc3YjE4Mzg0NzljMDZkYzcwZmU5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTg5ZmZkNWU2MWI5OWE0MmZjZjQ5OWJlNWI3ZDJlYTJhODhiYThjMTkzZGEyYzlkNGYyYmQzYmVlNzdhODgyZSJ9"
+        },
+        {
+          "resource": "repo://src/config.ts#L80-L95",
+          "version": "repo-lines-v1:sha256:c89550ac7144a92e074b63fe9fc4251d0338cec9688fd3796932f99ec7cd971e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjNTkyYmVjMzdiNTcxMzRmYjcyYmM3ZTM5NDJmZDM2YWE1NGFlODBmNzRhYTk3NDc5MmRhYzc0NWJjZDc3NTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5M2U3MjUyNTcwZWRmMWVlMTMxNjU5ZDcwYjMxYmZmNzNjN2JiYWU1ZjczNzU1YTVlZDgzMGQxYWZjZDIzZmQifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L253-L258",
+          "version": "repo-lines-v1:sha256:0925c2c1eadc902b74dd7db1a69358903c14c06cf7d47e076fca052c780ab998:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmUwNzcwMTQ3ZjQ5YjQ4ODEyODk5ZjljZDM3ZjYwYmQ1YWRlZGY4NzBiZmM3YTBjZGZlOWRmYjc2ZDY2YmY5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMThiMDZlNGM0ZTZhNzNlYjFkZDU4MjJjYzcwYzMyOTU2YzdkZGU2YzU5MDhhYzc1ZTIzYjRhYzM4ZGQ3OTc4NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2NlOGQ2ZDRjMTMzNWExMDYwNjBlODEyNmZhM2Y0OGVjNzY3N2VkZmIzZmU2YTUwYTAzOGI2YjkxM2EyN2RkMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a1f42361760e4554a4e5cdce7253e543",
+      "statement": "retrieval.ts re-exports extractSources and derives Tavily-style search_results from sources heuristically: resultsFromSources/mergeRetrieveResults assign scores by citation order (score = rounded 1 - index/count), and model-emitted results take precedence over citation-only entries which get empty content.",
+      "evidence": [
+        {
+          "resource": "repo://src/retrieval.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:bcedb9db96754668c30120eb6cce758bd20a4341f78e9bb5373412ca5ee283b5:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE4MGFiNzE0MjNkZDNjZjE3MzkxZjk1ZWNkZmM2NTM5M2JiY2IwOTYyMzQwYjliYmQ5YjlhMDFhZTQ5MTI1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjg0NWJkNjA1NDI0Y2Q0YzlkMjlmOTg0OTIxOWEyNGI5ZDdmMWJiZjc1ZmRhZTgzNjE0ZWYwODMyNjMxMTkwYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzY3MmQ4ZDU5NmM3MjY0NzA0MTY0ZmZiMjM2NzI2YzI5NDFiN2FlMzQwOWIzMTJkZmJjMzUzODc5YjU0YjY2ZSJ9"
+        },
+        {
+          "resource": "repo://src/retrieval.ts#L55-L86",
+          "version": "repo-lines-v1:sha256:b86b07152e0361a4ef327966de40109c75f3ef3caa9892ac9e46ec0cbe43530d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiMzUyYjE4ZWYzMDEyODZlMmFhOTZlYWMzOGMyNGNjZDYzMzljNGZhYWZkODJlOWZkYjIwZWRmYjFhY2NhZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0ZDIzNmUwMmVhZjg3NmNiMzEzZTMyMTFlNzI2Yzc2Y2Q1OTkxM2FjNWE3YmZkNTc0OThlZWY5YTg2N2JjMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4N2ExMDM0MGFlOTZmYmJkM2VmM2VmOTZjZGNiN2MxZDVjYjA0ZTBhZjU0OTAxZGE1ZWY1OGYyY2EzZjI1YmEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

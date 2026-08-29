@@ -1,0 +1,236 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2809145c9602fd2888bbeac22fc74e0fb0b1c733c6dd85926138bd4b2d9eecbf",
+  "claims": [
+    {
+      "id": "claim_1d44046c82da4775a2ab305a381f36b7",
+      "statement": "callOpenRouter makes up to 3 attempts against the OpenRouter chat completions endpoint; retryable conditions are HTTP 429, any status >= 500, and network failures surfacing as TypeError whose message contains \"fetch\", and a retryable condition that never succeeds throws the mapped lastError.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L111-L161",
+          "version": "repo-lines-v1:sha256:510c0939c17480ec9f9b5400cf7d1e54807cf72261498a0534ea09cf469d19d2:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkYjBhYTBhZDE3MWIyNmUzNmVmYWZiZTZhOTcwN2EwOTYxMjhmZjU2MDNlODFiZWVjMGM0ZTIwZGQwY2Q2ZTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzYWM2NWI3ODQxM2ZlMGIxYzEwNTk1Y2YyMjRmYmY5MTE5ZDVkODY0MmM3MjAzNGEyMGE4MWE3YmFjMDM5OTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiYmY2NTY1MTljOGI4MGI4NzYzYjA5NmEwNjU0YjlkZGI0ZDU0MWI5M2YxNzcxMjMzZTNmZTRjZDFhYWIzYmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_41368060234045b29ea2a59d7bde4ece",
+      "statement": "Retry backoff is 2^attempt * 1000ms (2s, 4s), but a server Retry-After header on a retryable response wins when larger via Math.max(backoff, seconds * 1000); the header is read through optional chaining so mocked responses without headers.get are safe.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L163-L176",
+          "version": "repo-lines-v1:sha256:b175aef167dd62c064c7c89797057ba424543223f7cd2aa74bb35d7fe55928e1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyMzk0OTZmN2I4MDgyZjVjZDllNWQwYWI3OTQ1MGE1YWFmMjU3YTRkMDdjMWViMDkzY2NhNGEwZDZmNGMxNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg0ZGI3MmQ1M2NjYzRmZjc3NDViYjNmMWIzODRlZjhiN2M5OGY1MjBlY2RkM2ZlN2UyNzczOGMwNTY5M2RjNjUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlhMWJiMjg0ODYwZDRiMWJkYzQ5NmQ2ODE0YzlkZDg5ODJjYjFmNzA0NjAyZjEwNzQ2ZDYyZWM2NzY2NGUzYzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2dfc6eb31afd49bfa542212a19a1934e",
+      "statement": "Non-retryable OpenRouter failures fail fast with mapped OpenRouterError messages (401/403 auth, 402 credits/quota, 404 tool-support or model-unavailable), and a 200 response whose JSON body fails to parse throws \"OpenRouter returned an invalid JSON response. Please retry.\" without retrying.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L124-L154",
+          "version": "repo-lines-v1:sha256:2ba305599d8ef3794bfa50d73d19ebe16791b7d31e822fac9d6c439425a72f34:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4YzVkYTc3ZjcxMzlhNDlmZTMxN2U2MGU4OTEyNDFhOTJlMGYxZDMyZDQ4NDQ3MmE5ZTNkNWYwNjUyZTgzOWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxMTBkNzQ4NWJkYmVhMzFiODMzMTFlYjVkODhjMTdmMDQ0MzhhMTA0NDcxNmY2NTE4ZGNjMmU2ZGRmMTU3MWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4NWQ4MTRlODc1ODA5OTllNTExMjA5MTQ4NjY4ZDFkNGZhMDE3NjkyZTJhZDI2NjU4YjYyOGMzNTQyNWM4NjAifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L241-L269",
+          "version": "repo-lines-v1:sha256:f60c94c320104618ae5b2b8b0710ea6ce0ca06419813c9c06d30a5fa4bb0a3b2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzNzBjMGE3MDZjYTNmMjJkNmJiMDYxODEzMzBlMjFjNWEyYjcyYjUwNWE2ZjliYjBmZThhYzRkYjcyZDZmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyOThiMjIxNDVkMWFmZTBhZGUyOTliYjBlYzhlNGQ5YTkxODhkZDcyZWU3OWFmMGY0ZjkzNjg2YjQ5MGVjNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1Zjc5YWFlNjY0ODY4ZWE5NWM2YjFkM2Y5NTIzMDNjYzU0NzU3YWYzZjhlNTExNGVjYmJhMzA3OWJjMmIzODMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f8079b35caf5400a954a94e4540536f6",
+      "statement": "The retry loop deliberately replays the non-idempotent POST to chat completions because the endpoint has no side effects; the reliability plan cautions against extending retry to mutating endpoints.",
+      "evidence": [
+        {
+          "resource": "repo://docs/plans/2026-05-20-reliability-hardening.md#L61-L63",
+          "version": "repo-lines-v1:sha256:e91c91e0033955e31691be971f1ec5791220f56bf1be6684539d7914ed7eb9ce:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWMzMjVhNGE2NmQ0OWFiMjhkM2NiNGUwZTFjYjQ5YTBmNmFjMjg0NTc1ZmUxMDdkOGU1YjgxYTkxMDM2ZDI0OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTRlZGZkYTczN2JjY2M0YWNkNDg3MDE1NGVjYTA3NDMwN2FhOGU1NGVjNjRmYjZkM2U1ZmNhNGMyZDIxMzEzZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmM5Mjk0MGQyYzg3NGViZmMzNWNhNjdiYzIxZTE1MjIyODIwNTE0NjNmMTJjNTBhNjE4NjQwZWFhMzRiMzUxMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_4ec5879d107546889799eaf5bd49cd44",
+      "statement": "The reliability plan records a known gap: retry backoff has no jitter, so bursts of parallel CLI instances share a thundering-herd risk under shared rate limits, and Retry-After mitigation only applies when the server sends it.",
+      "evidence": [
+        {
+          "resource": "repo://docs/plans/2026-05-20-reliability-hardening.md#L56-L57",
+          "version": "repo-lines-v1:sha256:996b17f3a73b983ca572c0e72b6fee46210cf0eeef14e06f267202acb5a29bc3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmZmYzM0MWVhMWFmYzE5NzE5M2NiNWE4N2YzMjE1MTg3OGRkM2VhYjI4YTBjYzIzYTdhYjFiZWVjMjkzOWY3MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzg1YWYwMDcwNTY3MGQ5Y2YzNGQ3YzQxN2I0ZTFiOWMyN2NmNzg4N2JhYWJmMWM0NDY5MWJhOWJmYjE4YjcwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmMxNTEzOWZhY2RiNDk3YzRlMDVmMmRhMzk1NjFlOTVhYWIyNTY3ZWZkMTdkMDY1Mzg5ZTE2NGQxODY4YTlmMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTRlZGZkYTczN2JjY2M0YWNkNDg3MDE1NGVjYTA3NDMwN2FhOGU1NGVjNjRmYjZkM2U1ZmNhNGMyZDIxMzEzZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5042fb5e161e4dfbb036c670ccf3dce9",
+      "statement": "--max-cost <n> requires a finite number greater than 0 (otherwise \"Invalid value for --max-cost\") and is carried as CliOptions.maxCost into runMode for enforcement.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L379-L385",
+          "version": "repo-lines-v1:sha256:a6aa92af680e43cd9a38a8e76644226ca2a0d4e6f31ca7b6eb2745ab0f334c73:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2E4YzEyNzM5MzJkYjQ3MWVhZDIxMzA3NzhlNzM2NDdmMGM3OTU3Y2U1ZmM0ZGM0MWQyOWYyMDNiOTJmMzQ3MiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzdmN2M2ZjFhMWMwY2M5ZTJmYjQ4NjNiY2EwMTJlMzBmZjI2MzA5Zjk1NmEzZDVjMjAzMTEwOWM5YjE0MmRlMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzU1MjNjNTUxYThjZmRjYTU5YzEyMWUwNTZmOWY0MDBkMmEyM2M5MjM0OTFmMDJlMGM5YjliZmZhMjA2YzQ2MiJ9"
+        },
+        {
+          "resource": "repo://test/args.test.ts#L95-L98",
+          "version": "repo-lines-v1:sha256:ae16989d6e60d6bbf6ce91b104e4367504ad7191fd52d630421761b068a9483a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTM2NjQxMzk0NGYzNzM2MTUxNzRkODQ4Zjk3NjEyZjNjZjRkZGQ1NzVhYTkzNTY4ZTVlMWNhN2NhNzEwMmFhOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODk0N2E1Mjg5NDQ3NTkxNjI1YTA2OThiYmE0NTMwMDg3NGE1NTI4Nzk4N2YyNzhmYzZiNTgxOWFjODc2ODBjZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjE2NDhiYzJhYTI4OWQ2YzZjNzBmZDZmMjEyZjU4ZDAwNTliZjMyNTMxZTRhNDUzZGU3NzY2MzI5NmZkMTUzMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmFkNzU2MjRjNzUzNDUzNjQ5ZWM2OTIyMWY5YWQyNmUzZDJiNGIyOTY5ODI5NDNkYmM4OWJhMGE0Y2UzZDMwYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c65d91e667f04936bdbe23b613592029",
+      "statement": "withBudget enforces --max-cost preventively around every call: a pre-check throws MaxCostExceededError before dispatching once cumulative spend crosses the cap, and a post-check throws immediately after the call that crosses it, with the message \"Cost $X exceeded limit of $Y (aborted after \\\"role\\\")\"; because a call's cost is only known after it completes, the leg that detects the overrun is always billed.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L43-L66",
+          "version": "repo-lines-v1:sha256:a7ec205fb31dcac93f6d295f19e684ba59420c4091232fa90ccb9c4c9f8df8a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMDJlOTk4Y2M1ZjEzNmEwNTMwYjBjMDg5M2M5NDg5YzdjNDJjOTM4NmEzMjgzNDEyY2IwYTk2ODQ3OThiYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViOTRlYzM3NDg2MTNhYTE2NDlkMTU5NTlmOGVmMTAyN2YxNmIzOGRkZTc5MTcxMGViOWUwNGQ1NDhkYTEyNzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4b5c87b5a31c4ea0bbe1a19b106ef8d8",
+      "statement": "Under --max-cost, multi mode's three analysis legs run sequentially via runSequential (instead of parallel Promise.allSettled) so the budget pre-check stops dispatching billable legs the moment the cap is crossed; a MaxCostExceededError in any leg is rethrown as fatal (synthesis skipped), and the test asserts only [research, engineering] are dispatched under a cap that trips at leg 2.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L579-L588",
+          "version": "repo-lines-v1:sha256:8f4faadf7be4f485f36425352a05e1ebc498da3197b955ea23c2eb29f581fa1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMDViNmM5Y2FmY2YyOGM3Y2E1NTRlYTJjNzM1M2Q5ZGUzMTRhZGZhYjVhYjk0NDNhZTYxZWJlYmJiNjM2NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhZDAzZmIwNjdjNTAxOWVjNjU0ODVmOTRmNTYwY2VkZjE3NDBlMjcxNDhjN2RjNTM4YjIxYTJiNGE3M2Q4MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwZjRmOTUwYWEyNDZkZTkxOWQ1YmZkYmMyZjZlZTNkNzk5MTMxM2Q0MTIzZWY2NzcwMmUxMGUyZWEwZDU3NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlMDVlZTlhZDUzMzAxNTkzZjA5OTViZjZkODE5MmRjOWE2OWMyNDY3YTBhYjUzYmQ0Y2NjZDA5ZGI2M2Q0NDgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L70-L84",
+          "version": "repo-lines-v1:sha256:7fc20e904d0b540aae849d22b128de45286a8459f943a0631b075cb8a7313688:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2M0ZTlhODE4YTdlNDY4OTIzYTY0YjllNGM4NDUzMzc4MDFmZWQ3ZjhhYjA0MzAxZmI5MWUyYzMyNDQ3MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4Mzk0NWQxZDVkMDU4YjMyNjU0ZTQwMjQ3NThiZmRjZGEzZDNjMjY5ZjY3YjQzM2RkYTBjZWRiMzJjNjIyZGEifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L265-L276",
+          "version": "repo-lines-v1:sha256:5b21d84f36acf4c182dcb8d5abc8833d7be73717b28a4255bd8257f5aa9877a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZjczZWVjMTk2M2EyNDdmZTNmYjgyY2JiMTVjNDQxOGJhNDUyOGFhMzk3MDUxMDQ3ODk1YzZiZjAyNjA0ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxNTlmYjBlMzFlYmJhNWZiYTIxZTliYmRmZTlhYTQ2NmE2YjM4ZjdmODNjNTg3MGIzZDU3YzgxMjZjOTM4ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxZDA4OGQzYWRlMjk3ZWY3ZGQyNDg5ODQzNzM2Yzk0M2I3NjA0N2FjNmE1NjViMjMwMWQwMGMzYmZmMGY5ZmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b3520f38ea3e4d0d88c24694548c39c2",
+      "statement": "When any call returns no costUsd the withBudget wrapper stops enforcing (costKnown flips false), and cli.ts then prints an always-on stderr warning \"--max-cost set ($X) but OpenRouter returned no cost; limit not enforced\" after a completed run so a silently-unenforced cap stays visible.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L36-L40",
+          "version": "repo-lines-v1:sha256:f87aae72577305c953874ebc3b78a7e44f29480c399a5aab8118c1d068856f9f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWJhM2MyZTY4MDRlZjE1ZjJmY2NkZWQwYjRkNDlkNjNhYjYxZDVmMTZlMjYyYmIxZWY4ZTU2OWY0OTAxZGNlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJhMGI2OTEyY2I1ZTYzZTVlZGQ2Y2Q1NWM0Zjc2NDhhZTJjYTY3Y2UzZTQ4MzU5ZTk3MTliNjMwMDExZTgxMyJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L57-L63",
+          "version": "repo-lines-v1:sha256:473dbd001b11c149c27eaaa8243a43dfa1eb193ac89a3efc37d87265a6642652:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWY3NDllZTM4YTNjYjJkYzEyYmJkMDE2ZmRhY2NhOWYzMDY3MjNkZjgzNjBlZGI3NjM4OGE2NzAzYmVjN2Y5OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODQ3YTIzZTFlZGZiMGJkM2U4ZWYwZjk3MWQyN2I2ZTA5OGNjMThjNTA4MTg1ODIzY2ExMDA1MDY3MWU0OTRkMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjFhZjRkZjE4MTQwNzA0MDQxMjVhMzNkZGFiYzQ1MDNiM2ViZmZkODMyZmUyYzAwMzMwMGQ5Nzk4YzEzMTZmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTFiNDA0MDBiYTQzNzZhNjZmMzAxZDMyOGM2YTExMDZlMjg0NTZmZmRmMGU0YTU4ODdjMGVjZjdiZWM2MDAwNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_49ce99150c1d4d1785ddd1b5a16acb66",
+      "statement": "src/cost.ts only sets the aggregate usage.costUsd when every call so far reported a cost (calls.every call.costUsd !== undefined); mergeUsage replays calls through the same rule, and formatCost renders \"unavailable\" otherwise.",
+      "evidence": [
+        {
+          "resource": "repo://src/cost.ts#L11-L37",
+          "version": "repo-lines-v1:sha256:52ce6b1d2038f84c0aa2b97a014a035bd23cfb28362f1fb4033a6c37874e7638:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTc1Y2Q1NGRkYmFmNjJlMTFhNTY4NWJhODE5NzMwODA1YjRhZjJiODNhZTdmZGRiNDgwMjIyYTYwNzVlMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJhZjM5ZTcxNzVmNjMxNjg4NzUzZDI5MTljNzhhNmZkZThkNDY2ZTAxOTQ2MzlkOTEwZWUzZGYxM2ViMTRhMTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_1efc5deb6b6f4537aeba6a0964a4694e",
+      "statement": "cli.ts prints \"hint: OpenRouter web search is enabled (--no-web to disable)\" to stderr before the run whenever web.searchEnabled is true.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L30-L32",
+          "version": "repo-lines-v1:sha256:f6d0186b315635d867345239ebb38c84901d7d6f607ed3a680ff34d91c3e3f5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQyOGJhMmMyMTZmZDMzMTE2NTE3NGExYzc5YjMwMDAxNTU1MWY0YWVhZDVjYWRmZTdhZDI4MzA3ZjAyYzhjOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWM5NzUyMjA0MmFmOGZjZWJiMjZjMmU0MDZhNWE5YmQ3NDgwOWI5ZDQ1ZDEwMDRiYjg5ZmNkYWJkYmRlNTM3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3dfe2c533ad94325b13502ffba40f631",
+      "statement": "Pipeline progress lines (Step 1/1, Step 1/2..2/2, Step 1/3..3/3, \"Bookmarks: searching TweetSmash library...\") print to stderr gated on !options.json, with two exceptions: the two-pass --json + web Step 1/2 and Step 2/2 lines print even under --json, and the --x spawn line is gated on jsonQuiet (options.json passed through from runMode).",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L103-L110",
+          "version": "repo-lines-v1:sha256:4e9b88109f17064fdfbbd7af03de228764d5d91f0034e4c77e8e90e876bb36c5:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmJhYmQyZTlhZTMzM2MzNjBlNjlkN2NiYTg2N2JmMDA3ZDcyOTA0N2U1OGE3YTk1MjA0ZjJkNWFjZmU1NzI0ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmU0Njk4NmNmZThkZDE0Y2M3NDI3ZGJiM2U4NGYzYzRkMmJlMjkwNGEwZmI0YmEzYmM4Yjk4ODhiNDg4MDgyMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2M1OTNhNDE2Yjc4MTU5NWFkOTBjOWYzODllMTAzMzYwMzljNDY4ZTNhNzRmMzViM2FmNjBiMWEwZWVkZTk1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDU1YzkyZTU5YTZjZTQ3NTNkMjBjNzNkOWMwN2VjNTUzZTJjNmYzM2JiNjc1NmFjMjRkYTE3M2UzNTYxZGRjMSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L245-L262",
+          "version": "repo-lines-v1:sha256:40a35531fb6287c2e6d5a0d0c358ed5f2bc39f77ee62f8a274097e3d490bb299:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwZDg4ZDFhNzQwYzE2Yjc0ZmQ2NGU2NjIzZjY2ODVkZDMzYzVmNzhkN2E3OTI1MzQzOWUyZDExY2Y1MDk1OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3OWE4NGYyMGNkYzE4NDVmN2MxNjU4NjViYWU4NjE5NGUxNjc1NGM2Mzk2NmU4MmMzYjcxZGY3ZWM4M2Q0YzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhYTM5M2E1YmY0ZDYzY2QzYjUwNWE0ZmViMmJlOTY0ZDM4Nzg0YzE3MjYwZTJlYzhhNTJhNGUzMGI1ZmU1M2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhN2IxOWJkZjJhMjJlNjJlMjIxYzlkYmM1ZmNhNjJhZDRmMTRmNDQ3YzZhNTg4NGEwMDdkZDc1OTg2OWRhMTEifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L286-L291",
+          "version": "repo-lines-v1:sha256:3632ea0cb0bd05ee9979c156cbc1da64a17ae4692ae5be04b1f0e07e426b3d7a:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmQ3MGJjNmYwYmZmODk2ODBmZTIwM2VjYjQ4YmQ2MmZlOTNjY2Q5YTgzZDAzYTBkYzI5ZGNjYzVmNjUyYmZhMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTZhZjgwN2RiMjA1OGYwNjM4YzRjNWFhNjJhYmExNTQxZTdkYTAwYTUyY2Q1YWU4ZTAyNzM2ZGFkNzlmYmM0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGExZmU5YzgxZmVhN2RhMjgzYWE3YjYyY2FlZjkxM2VhZDA4OTY5OThmMGFiMDk5YjA4MGZiYmUzNjhiOTNhYSJ9"
+        },
+        {
+          "resource": "repo://src/x-signal.ts#L136-L138",
+          "version": "repo-lines-v1:sha256:7727661caf58225cc60910b370823b6b2f08e015f6d15f62f64e4a5c3a7b8be5:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjc5OTJjMDUwNjczYWFlOTA3OGQ5ZjliYmIxMGMyZWEzNTMwYmJjOWFhNWRkODBmOGMwYTRhY2I5NzVjZDUxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGQ0ZDYyYjJiMzVhNmRlYzRiNzJiMTNhYmQ5MGFjZmFiMzIyNzFlMWQzNWQ1ODU0NmU0MjIwM2JlYTQ5OThkZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmIzMTlhOGIxOTMwNjAyMjFlODVhYTNkMWJjMDUwYTE2Y2M0NDdkODIxNDhkYzM4OGQzMTFhYjhmMWExOGI4YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d8fd791be75d4af4a4a0afac73c96815",
+      "statement": "Deprecated-flag and ignored-flag warnings (--web deprecated, research mode deprecated, --retrieve/--output ignored on non-web modes) print as \"warning: <msg>\" lines on stderr only in non-JSON --raw runs, while the --max-cost unknown-cost warning is always on; all warnings also ride inside the result's warnings array and the ## Warnings markdown section.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L42-L46",
+          "version": "repo-lines-v1:sha256:91511fcdecef6a4d5810f3f99b588c2f563739b19767b9150ee48935e495d6cf:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjc3OTJkMDMzMzhiMDVkZGZiNWM5NTIwYjg4MjRkNGM0NzA3ZWE0MTQ0Njg1ZWNlOTcwODQ5NGEzZjAxZjFlYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjExY2JiNjc2NzRlZjlmY2EyMGIxZjliYjAyMWNhZTcxNzY5OTkyYThhYWNiMjUyMTg1YzQ1MDM4M2MzYzJiYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWRhZmFkMGIwZTAwYTEwMzAyOGZmYTA3ZmI1MGMxYWMwZmU1MTU5NzkwZGUxMTE1NmI5N2E0Y2JkZDg5NWYyOCJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L217-L223",
+          "version": "repo-lines-v1:sha256:c5ac69afe16e4b8bfb1040a9e33f69e3140641df923f76f08c1252860077bde5:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGE4ZDZlYjMwNTliNjA3YTcxZTJjMGIwYjQ5M2I2NmM2OTg0MjQwN2FjNmIzMWJhZDE2MmNkZGRjZTEzM2Q5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGNiZTJhOTNjOTc5YTJhMDVmNDU2NzRkOGE3ZDNmN2RhZDVkNjg0OWFkNGQ4Y2U5MTRkYjAxMTEzOTM0M2ZmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTUwZDE0ODU0NzM3ZjZiMTk1MzU3YTg4NDg2MTY4MzIzNDA1YmQwM2ExZjhkNDYxMWIzZDEyNjY0YjEzZDNjZSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L88-L93",
+          "version": "repo-lines-v1:sha256:d4d01c5bf623197e304fd2ccdd58862a9f462159ddafbb2bb746abb5efe6d5ba:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNjk1ZGI2MjA5ODkzYzIwMGFhOWNiNWFiZWI0ZjZiMmM4YWViYjAwZjk0ZmRlYjVlNmU2NTAzNDMxYTAyZDM3NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQwMTkwYTMwNThkOWIxZTc2YjNjNTUzN2U3MjdiNWJjMzZkYjA1NTRiODcxZTUwZGJiOGRjOTViODY5ODI2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTgzOTQ1ZDFkNWQwNThiMzI2NTRlNDAyNDc1OGJmZGNkYTNkM2MyNjlmNjdiNDMzZGRhMGNlZGIzMmM2MjJkYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWM0YzNiMTk2NWU5MGY3Y2RkMmI3ODU3ZTc3ZGU4MzNiYWM4ZTEyNTA5NzdlYTk3MWYyMDVhNTY1NTQyMWY4YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3147149d4db644aba9553c9e6497483f",
+      "statement": "Errors are always rendered by formatError: a plain \"Error: <message>\" line, or {\"error\":{\"message\":\"...\"}} (2-space pretty) on stderr when --json was requested, decided by a wantsJson pre-scan of the raw argv so parse-stage errors are still JSON-shaped; the process exits 1 via process.exitCode.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L417-L419",
+          "version": "repo-lines-v1:sha256:5944a59495dd34c9c4194fff01de968058f9fa1f12d0ffae59cba8f8dd46cb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQzNTVhYTNhMmE5ODk4ZjQzNDRhMGY5OWI3NzcyNTc3MmU1OTM0ZDUxNzVmN2RkZTI0NDQ3NmNjZmViZTcxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJiYzg3MDIyNTZjOWQ3YTI5MGMxMTEyMzA5ZjdlNmNkYmI3MDA4ZGEzNzA1NTI2YmQ0YjEyOTA1NTZkMmZlMSJ9"
+        },
+        {
+          "resource": "repo://src/cli.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:74dc23c79e83ffa26b6bccf0ec61799a6094ea7fca1a5db50e90bc52beb62b93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYmY4Mzg3NTM2ODk2NmYzMTNhZTYzOTUzOWM0MDM3MDA0NWJhNTNlMmUyY2VlOTNiYjY3ZDVkYTE3Yjk4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWJhMWFmNzUzZDhlYjFiOTVkYjNlMTcwMDhmNzE3YTBjMDFhMWNkYzU4MDA0YjJmYjE3YzJjMWEyMTEyMTlhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTliZDJkMTZlNzQ5Y2VlNzQwNGQ2NDNiYWViZDNkZTM5ODA4NzQ0NDEyNjYzNGM1ZjMzZGM5M2FhNjg4NmMwYyJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L91-L95",
+          "version": "repo-lines-v1:sha256:a918e034de44a4e47e346294632d7c0fe13d97c71a21f519e6343c3ab4275351:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNkMzQ4YWRlMjVkOGM5ZjYwZThjNzIxMTM1OWViZTNjMTY0YmI5ZmUzMzVlYWNiZDVmYzZjMDdmMzIxNDQyYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmNmZGQ3MTZjN2JhN2Y5ZDU3ZDU1ZGJkYjFhMTM2ZDg5MTU5MjQ1NzViMzM3OGNjMTY4NzNkNGUxZmY3Njk1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzUzMWZiNDFiYjZlYjhmMzI1Y2Q4MmU0NjI4MDNmNmIzMjk3MzU2ZGY5MTA0NGFjNTYzMzEyZGUzMjc1ZTUwNSJ9"
+        },
+        {
+          "resource": "repo://test/cli.test.ts",
+          "version": "repo-file-v1:sha256:63afde2ae020fbbe8fc4615bfab7357efd76c3d3473dc17265d01f9b45031b3b"
+        }
+      ]
+    },
+    {
+      "id": "claim_ca546e4548ea4fb690fa5c59e9e3febf",
+      "statement": "Exit-code contract: 0 for any run that produced a PipelineResult (warnings, degraded JSON parsing, and skipped integrations included) and for -h/--help (HELP_TEXT to stdout), 1 via process.exitCode for every thrown error (missing prompt, unknown flag, web-option conflicts, missing API key, OpenRouter/provider failures, MaxCostExceededError, fatal multi conditions).",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:74dc23c79e83ffa26b6bccf0ec61799a6094ea7fca1a5db50e90bc52beb62b93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYmY4Mzg3NTM2ODk2NmYzMTNhZTYzOTUzOWM0MDM3MDA0NWJhNTNlMmUyY2VlOTNiYjY3ZDVkYTE3Yjk4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWJhMWFmNzUzZDhlYjFiOTVkYjNlMTcwMDhmNzE3YTBjMDFhMWNkYzU4MDA0YjJmYjE3YzJjMWEyMTEyMTlhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTliZDJkMTZlNzQ5Y2VlNzQwNGQ2NDNiYWViZDNkZTM5ODA4NzQ0NDEyNjYzNGM1ZjMzZGM5M2FhNjg4NmMwYyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_382bc07efb314e639672531c8852d8e1",
+      "statement": "package.json defines the dev workflow: pnpm dev and pnpm grok-research both run tsx src/cli.ts (checkout invocation), pnpm build produces dist via tsup src/cli.ts --format esm --clean, pnpm test runs vitest, and pnpm typecheck runs tsc --noEmit; the bin grok-research maps to dist/cli.js with Node >= 20.",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L6-L15",
+          "version": "repo-lines-v1:sha256:dae4039f72db175ab8d71cac0c4e9f1b9a714a77b5f9a81f07fd1307804b8271:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YzE0NzU3YjhlMWU5ZDZhN2RlZTk5MDJlOTA0MDdhZDhjZjY3M2IzZThkNzYzZTI3OTUwZDE5ZDA2NzhkNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViNGY2YTQ2MmQxMmUxMTM3NTBiNjU0M2M0M2M0MzA0ODYyMjkxMTViMjVhNWU3YTNhNWMxZDU3MmE1NWY5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYThkMmFjNzE5ODlmYmVkZTM1ZjFlYTAyMDM2Y2NiNTE1ZjRjZmJiZGJlNTc1ODM1NzVmODkxNzk2OTAwY2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_718f1b4344a0446b8f0823d873b5a4ea",
+      "statement": "docs/plans/2026-05-20-reliability-hardening.md is the canonical record of the retry/backoff/Retry-After, --max-cost preventive enforcement, and stderr progress features added after the original build and web-search plans, and its verification recipe is pnpm typecheck + pnpm test + pnpm build.",
+      "evidence": [
+        {
+          "resource": "repo://docs/plans/2026-05-20-reliability-hardening.md#L3-L24",
+          "version": "repo-lines-v1:sha256:801aa670cf20b178e8327b2fa13fccb13b360b9e268be950b61ada67389d6445:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY3NjRkMGExMWJmOGY3MTNjYjc3NjE4OWI1MWM4ZjVkOGE0NzFhMDBkODFjY2ZkMzk5ODg1ZjJjNjgzODYwZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZmMDcwNTRjMDYyY2QxMGQ1M2E3YTY3YmI4OTE4N2M1ZGQ2ZjI2ZGM0MjNhNjc2YTI1ZDY0ZjdmMzVkNGJmZWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNkMDNmMDJjZmNlZWQwNzQyODNlNmIyYjVlYzkzNWU4MzBlY2I1NmYyNzRjNjA3YjEyMjVmM2Y1ZTZjZjAzNTMifQ"
+        },
+        {
+          "resource": "repo://docs/plans/2026-05-20-reliability-hardening.md#L66-L72",
+          "version": "repo-lines-v1:sha256:22b473ca8625827cfdeb66e5dd069dd06416f7e758d9c16f4c77ab0961e3a278:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY3YTA4NDcyNTJlM2QxY2JhOTFjNTgzMjA0ZDFjOTkxZDBkNjJjMzc4YjEwNjI4ZDM1NGRhYTMyZjk5ZjEzOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDdjMDZjNTYxZDVjMzI3MzQzNjg1MjY4YTQ2YjMzOTFmMzk5OGVlZTg5MGQyYmU1MWYwZDIxY2M0YTUzYWU2ZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDAxZjJlYzE3NTkzYzEwNTRlYjQ2MzY3ZDg0NTNlZjI0YTE3M2NlOTZiNzExN2Q5MWY5YTY4ZDQ0ZmVmOGIwMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

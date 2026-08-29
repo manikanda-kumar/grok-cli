@@ -1,0 +1,4 @@
+# Files
+
+- [TweetSmash bookmarks integration (--bookmarks)](tweetsmash-bookmarks.md) - How grok-cli overlays the user's saved X bookmarks via the TweetSmash REST API — flag surface, env key candidates and skip reasons, the keyword+semantic GET /v1/bookmarks request, the --bookmarks-related pass rerouting authors/tags/terms, timeout and error mapping, markdown formatting, prompt injection, and the --bookmarks-only / --x-only short-circuits.
+- [X/Twitter signal via Grok agent (/whathappened)](x-signal.md) - How grok-cli's --x / --x-only / --x-network / --x-timeout / --x-max-turns flags shell out to the headless Grok agent for /whathappened — binary resolution, the GROK_RESEARCH_X_ACTIVE nested guard, marker block parsing and fallbacks, report path extraction, timeout handling, --x-only result shape, and prompt injection of the X signal.

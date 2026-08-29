@@ -1,0 +1,272 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:72f667c1d2f7f97977884c250823ac7ef4a1a91167434da22e179080856786bf",
+  "claims": [
+    {
+      "id": "claim_ae043de9adf247f58da699e791bfe0e4",
+      "statement": "Every run of the CLI produces one PipelineResult object (src/types.ts) that all mode pipelines build; src/formatters.ts renders it into four stdout shapes (brief/report Markdown, raw, retrieve results Markdown, --json payload) selected by src/cli.ts in strict priority: --json wins, then --schema pretty JSON, then retrieve/--output results markdown, then --raw, then the default brief.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L48-L59",
+          "version": "repo-lines-v1:sha256:4579d662dd241b406186e52be2b34fed7760bed61483201a5db202ff0cc68367:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiYThjNDM0ZTg3ZDc2NTg0MTdiNjg5ZTFmNWRjMDY1ZjVjOTQ2NDIzZjdkOWJlMWNmOTM4ZDRmZTQ5Y2NmNjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0YjlhMGIxNmI5OTEwYmFhNWQwYTRkY2FmZjhhNjBjNDI5NjMzYmYyYWUzY2JhY2M4MjAyOTA3NTgwZDEwY2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwNWU4ZjUwMjIyYzQ0MWU4ZTQxYzY0YzViZWVhNTk4Y2ExN2M2YWM0YjMxNjM0N2M3OGZmYTU4NmNmMWMzZTIifQ"
+        },
+        {
+          "resource": "repo://src/types.ts#L245-L265",
+          "version": "repo-lines-v1:sha256:f0a2d5239591932f27027ae4748ca266cd6a6cb5756848450580e97431b74f0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxZGIxZDdiYjZlODk3MjhhNDZhZjVhYmY4ODgyYTMzMGE3MDkxZjg5ODExMjMxMmRkYTVjZjk5MTU1NzE0ODQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4NTk3NjcxNTg3YTU4YzliYjMyZTU1MGIzMjVkNDk5NWM1YTEzMzVjZTQ0NTQyNjQ1YTA1NDVmZTU1ZGU3YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkOTNjNWY5OGUwNjk4ZjEwZmNlODRkMDE5ODIwMWJlMGRkMDUwMTgyMTI5Yzc5MzRhNDk3NGI5MjI4YWM5NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_845bba6f85914ffebc06d5a61a579c90",
+      "statement": "PipelineResult requires mode, profile, outputFormat, content, sources, warnings, and usage; web is always present after normalization as { searchEnabled, fetchEnabled }, false/false for modes without OpenRouter web tools (deepresearch, multi) and for the --x-only / --bookmarks-only short-circuits.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L341-L397",
+          "version": "repo-lines-v1:sha256:c6371bf89b5e74626332bbcc4e5478026e4e4687b4cd1b2e85cc7a346abbe104:eyJzZWxlY3RlZExpbmVDb3VudCI6NTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViNmMzYzBhN2EyYzc5MmNkNjBhZTJjZWU5YWUyZTQ5ODI2OTg3NzAwN2ZmYjZmYzVmYmJhYjE2N2U1Yjg4ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZiMGRhMDhhODJmZDE5ZTQ2MjQ5NWVkOTdkOWU1NDZkM2U1ODU4ODFiMTAzYzI1M2UyMGVjNDViNzNkMzM3OGQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5OWUxMDU5NDFkZWU1MmY2YjRlOWVhNzVjNjE4NzZjYmYxMDk0ZDFkNDA4ODc1YjhjNTk3MDRmZWU4NjU4ZjgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L466-L498",
+          "version": "repo-lines-v1:sha256:685cab669892608c4c648364603181fbe5c3fc38b456a95ac6d2f1c593847311:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YTZjMjBmNTc2YTdmZDg3NjkwMDE3OWRlODY4YWM0MDA3ZGQ2OTgxMzM1ZGVlM2FjY2JlYzhhNTE2NTU4YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ3ZDQ4NGRkYzhiNDc3MTIzNjUxM2ZjNWJmNjAwZTYwZGE3OWI1ZWQ4MmYwMWZkNTcwODI2ZmM3ZjYwNGQxYjIifQ"
+        },
+        {
+          "resource": "repo://src/types.ts#L245-L265",
+          "version": "repo-lines-v1:sha256:f0a2d5239591932f27027ae4748ca266cd6a6cb5756848450580e97431b74f0a:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMxZGIxZDdiYjZlODk3MjhhNDZhZjVhYmY4ODgyYTMzMGE3MDkxZjg5ODExMjMxMmRkYTVjZjk5MTU1NzE0ODQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4NTk3NjcxNTg3YTU4YzliYjMyZTU1MGIzMjVkNDk5NWM1YTEzMzVjZTQ0NTQyNjQ1YTA1NDVmZTU1ZGU3YTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkOTNjNWY5OGUwNjk4ZjEwZmNlODRkMDE5ODIwMWJlMGRkMDUwMTgyMTI5Yzc5MzRhNDk3NGI5MjI4YWM5NzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7352a5e6554b4cdcafa878257975d9f9",
+      "statement": "normalizeResult, normalizeRetrieveResult, and normalizeSchemaResult in src/modes.ts stamp mode/profile/outputFormat from the user's resolved options, overwriting the 'auto'/'quality'/'raw' placeholders the OpenRouter client puts on per-call results, and each combines the mode's own warnings with extraWarnings through dedupeWarnings.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L466-L530",
+          "version": "repo-lines-v1:sha256:43ea8e28595e499ed8380bd10b74b82cf4627a69f0a13de2392db31c3246b5a9:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YTZjMjBmNTc2YTdmZDg3NjkwMDE3OWRlODY4YWM0MDA3ZGQ2OTgxMzM1ZGVlM2FjY2JlYzhhNTE2NTU4YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVkNzZmYWUyZGI2ZmIyYzExODllMWM2OGIyOTM3YmExOTExOTgxOWRiZDgzYzE5ZDRjM2FjNmUyNmI5NzhkN2YifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L635-L672",
+          "version": "repo-lines-v1:sha256:79a087b0dbeb6c75e968e560ca547a05bd7f67df09a5865fb5ee9bcbb0847dee:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViYTIyZGU1YWVlZjMzODRmMDQwZjFmNGE2MTM1YmM0ODc5NDAzODE3ZTQ2YzMzODE2YTc2ZWMwZTdjZTJjMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YTZjMjBmNTc2YTdmZDg3NjkwMDE3OWRlODY4YWM0MDA3ZGQ2OTgxMzM1ZGVlM2FjY2JlYzhhNTE2NTU4YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MzQ1NDFlZjllNGRlM2Y4ZjFmOTRlMTEwZmFkNjVhMTJmZWQ1NmExY2Y3NWJkYTZkMjUwMjA5MzkyZDRiN2QifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L745-L747",
+          "version": "repo-lines-v1:sha256:6b4a16d73843bb9c55634f39baac7426c881a36ca91669c2e9837df68bbbfd99:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzRkZWU1MmM4NjliYjRmMTdkNDljNGRmZGEwYTcwMzM4NDU5ZDlhOGRjNDViYzQzNjFiNjUwMGZjYzA5ZTM1NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTY2OWI1MmU2NTg3N2ZhOGI4NDdjNjE4MDg0YjkzNTM5YzkwYTI2MjI5ZDBjOTZmYmZhODdlZjVmNzBmZTcxYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_0edc340aba4e4b398c36b2ea33fa23f0",
+      "statement": "The optional PipelineResult field answer is populated only on --json brief-style single/merged Grok runs: normalizeResult parses content with parseDecisionAnswer only when json is set, schema is unset, outputStyle is brief, --retrieve is off, and the mode is not retrieve; retrieve and schema normalizations deliberately drop answer.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L466-L498",
+          "version": "repo-lines-v1:sha256:685cab669892608c4c648364603181fbe5c3fc38b456a95ac6d2f1c593847311:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE0YTZjMjBmNTc2YTdmZDg3NjkwMDE3OWRlODY4YWM0MDA3ZGQ2OTgxMzM1ZGVlM2FjY2JlYzhhNTE2NTU4YjkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ3ZDQ4NGRkYzhiNDc3MTIzNjUxM2ZjNWJmNjAwZTYwZGE3OWI1ZWQ4MmYwMWZkNTcwODI2ZmM3ZjYwNGQxYjIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L501-L531",
+          "version": "repo-lines-v1:sha256:0dd232474307dac0bb5709e4d970102aa2c9e82eaa999b38c7de5eff9930f9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4OWFiMmVmOGM0MjUzZjJiYWJhZGNkNjdlNWEzNGRmOTZjYTMwOTI2MjYxNmNkMTA2NDQxMWNlMjA0ZTIxYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxMGM4NjIwNGJmNDE2YWNmNzVlMzhmZGNkNzA0Njc4YWJkYzhmOWVjODQyNjM5MWVhNzRmZjYwZmFjNjE1ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MzI4NzUxM2NmMWJhOWJhNjFjOGFiZDJlNWUwOTBhYTQxOGI4ZDc2YzZjZTYzYmM1MjkwZDVhM2JlOWFjNzIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L663-L670",
+          "version": "repo-lines-v1:sha256:6887402ddbd62f043f39c5337c75e63495531e300cb5e6820039e1ea90070b5f:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzRlYzNhNWUyZjIwODUzZDYxNDE0YzA4Y2U4Yjg3ZTZkZjk0NWZlZTA4YzE0ZWY1N2VmYjBmODQ3MDM0YTNhYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWRlYTJmYTNiYTIwZGZkMjc3MWJhZDFhYTM3ZWQyMTVkZWMyMWYyNDUzYzhlODVkNzE0YzZkMzI2MThkODJkNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzhjZTZlYzBjYTYwODA3ZjllM2Y2MjJhMjIzNTBhN2FkMTM3ZTY0ZTFlYzZlZTZiZTI2Mzk0ODZhNjUxY2JjYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_22e69208019e4f07a5e8e55d2580840a",
+      "statement": "searchResults is populated by retrieve mode, --retrieve, or --output results/both on web-capable modes: parseRetrieveContent parses the model's { results, answer } JSON with empty-safe tolerances, mergeRetrieveResults overlays citation-derived sources and assigns heuristic citation-order scores rounded to 3 decimals (1 - index/count, spanning (0,1]), and normalizeRetrieveResult enforces --output semantics (results: content is the optional answer or empty; both: a second no-web synthesis call replaces content).",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L399-L498",
+          "version": "repo-lines-v1:sha256:258a161e05a37c48c34b6ab65f6fb05c529b546805db2956600e84741aa1592d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAwLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI3N2I4MjI3NGEwYjExNDI3YzA2NzljMWRkODQ0ZDdiM2RmNmRiMTQ5Nzg4ZTkyNTcxZDc5OWJjMzIxOTE5N2FmIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiIxNGE2YzIwZjU3NmE3ZmQ4NzY5MDAxNzlkZTg2OGFjNDAwN2RkNjk4MTMzNWRlZTNhY2NiZWM4YTUxNjU1OGI5IiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiI5MjA0MGUwOTVhOTRlMmFkYTc0ZTQyMWYzNzE4NzUxYTkxYTgxMGJmZDY2ZjQ4ZjRlOTM5YzdiNzQ4MGViNjcwIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiJkN2Q0ODRkZGM4YjQ3NzEyMzY1MTNmYzViZjYwMGU2MGRhNzliNWVkODJmMDFmZDU3MDgyNmZjN2Y2MDRkMWIyIn0"
+        },
+        {
+          "resource": "repo://src/retrieval.ts#L16-L86",
+          "version": "repo-lines-v1:sha256:6c51fc88ff90531f3d9b372dfbf01f5aa381b54b92a965b039674b270c6ad4d1:eyJzZWxlY3RlZExpbmVDb3VudCI6NzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiYzViODE2NGI3ZDY2MzY3NDRjMzkwNWU1ZDk0MmIzYTk5YTExYmI4MjY4NTJiZGE1NGI2ODc2ZjJmZTVhNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhNWUwMjQ2NzgwZDEzZDM5NDU3MjAwY2EwM2YxMDYzNjJkMmU5ZmMzMDM5MzIxM2NiMTU3MjcyNTlmZjA3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk4N2ExMDM0MGFlOTZmYmJkM2VmM2VmOTZjZGNiN2MxZDVjYjA0ZTBhZjU0OTAxZGE1ZWY1OGYyY2EzZjI1YmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff15aa5029a341bdbd9a1329c5a0d1aa",
+      "statement": "schemaResult is populated only when --schema is used: normalizeSchemaResult JSON.parses the emit call's content, sets schemaResult on success, and on failure leaves it unset while adding the warning '--schema output was not valid JSON; schema_result is omitted. The raw model text is in content.'",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L501-L531",
+          "version": "repo-lines-v1:sha256:0dd232474307dac0bb5709e4d970102aa2c9e82eaa999b38c7de5eff9930f9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4OWFiMmVmOGM0MjUzZjJiYWJhZGNkNjdlNWEzNGRmOTZjYTMwOTI2MjYxNmNkMTA2NDQxMWNlMjA0ZTIxYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxMGM4NjIwNGJmNDE2YWNmNzVlMzhmZGNkNzA0Njc4YWJkYzhmOWVjODQyNjM5MWVhNzRmZjYwZmFjNjE1ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MzI4NzUxM2NmMWJhOWJhNjFjOGFiZDJlNWUwOTBhYTQxOGI4ZDc2YzZjZTYzYmM1MjkwZDVhM2JlOWFjNzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb527829e6a0483aa2289553e572e653",
+      "statement": "xSignal is populated when --x succeeds: attachContext/attachXSignal append the XSignalResult to the mode result and fold its warnings into the deduped warnings list; the --x-only branch builds a '# X Signal Brief' result from xSignal.markdown with an '**HTML report:**' line and empty usage.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L315-L397",
+          "version": "repo-lines-v1:sha256:e61c2f4c62543f23f33960a6b413de3148d9103350cc2fe6615f60e43956a404:eyJzZWxlY3RlZExpbmVDb3VudCI6ODMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0NGI2ZTcyYTg0NjYxZmQ5NjJlYmU0MTg3YWQ1MmJlMTFhODA4YmEwYWM1M2FmN2I1MTM3OWZlZDdlNjFhZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNmNGE1MTMzMTA5MDYxNGJkNGNmNDlkZTQ0MWNkNGJiNDJlYTc0ODllZWU2Y2RmZDU2NTQ5Njk0NmI5NzcyNDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY5OWUxMDU5NDFkZWU1MmY2YjRlOWVhNzVjNjE4NzZjYmYxMDk0ZDFkNDA4ODc1YjhjNTk3MDRmZWU4NjU4ZjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f14988765f5e4c45a2c210df0ff3ca35",
+      "statement": "bookmarks is populated when --bookmarks ran a TweetSmash search (skipped or not): attachContext/attachBookmarks append the BookmarkSearchResult and surface skipped/zero-hit states as warnings; the --bookmarks-only branch builds a '# Saved Bookmarks Brief' from formatBookmarksMarkdown with sources derived from bookmark hits and empty usage; combining --x-only with --bookmarks-only throws.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L108-L139",
+          "version": "repo-lines-v1:sha256:62060e7c74af29a3912f72981ed738737c09d6b2d54a7690d7f3384d76dc4c30:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxZjBlNjY0Nzk5NTQwODNkN2QyMTE2Yzg5MTNjMDI5YjM0NjU2YTZjMjA4ZGU2YzJmZDI3ZjY0MjNiYmMxZjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkODE1MzYyN2M2ODMzZGFlOWExMmI2OWVhMWU0NTc2YjhmM2RlNjk1NWNmNjUxNDNiMmQ1ZDFiMTM1OWE0ZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkMjU4ODE5MWNhNzUzODI2ODdkNjFjOTIzMWJmYmUxYzZkMmY1ZGUxYjJlNjNiMmRiZmI3MGI5OGI2NWJmNjAifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L324-L370",
+          "version": "repo-lines-v1:sha256:4a228338509c56621854c3cafb51a41452a60a7912520deca8a09beba84e3e23:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYyMjc1YzdlZDFkNjY4Nzk5ZmNkYjg3MWVlYmRhMWI1ZmM4YmUyYWZmZTIxZDE0NjhiNjFjNDdiNTRkMTY0YTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1Nzk4ZTllNzM5ZmM3Mzc2MTBmZWU1NDAzM2Y4NWQ1ODljNWQyYWZkZDkxY2FlMzY0YmIzYzJmZTkzNTJlZGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f694608e12cc40f9b5ffd4c401441728",
+      "statement": "parseDecisionAnswer (src/modes.ts) never throws: non-JSON content, JSON that is not a decision object (including bare numbers like -1.5E-05, the observed json_object plus web-tools failure mode), and empty/garbage decision objects each produce a warning with answer omitted; field coercion is defensive (stringValue, stringArray, confidence defaults anything except 'low'/'high' to 'medium') and fenced JSON is unwrapped by stripJsonFences before parsing.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L676-L743",
+          "version": "repo-lines-v1:sha256:0a6c18062b8a1fde33f9266195c54cbb25a014388ccb443a6906fe31ffd8ace7:eyJzZWxlY3RlZExpbmVDb3VudCI6NjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4ZTMwZjE4OTkxMThlOGZlMzIyMGUzNTI0ZDk3NzI3ZTgyODFhYzg4YjE1NmNmZjdmMTY5MWJkZmUxNTIzYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY1MzQ1NDFlZjllNGRlM2Y4ZjFmOTRlMTEwZmFkNjVhMTJmZWQ1NmExY2Y3NWJkYTZkMjUwMjA5MzkyZDRiN2QiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjJlMGYyYTZlMjdmYzc5MGYxMzlmMDQzZjE5OTlhZmVkYmRiM2I2YWU1MmUyODYzOTQwNWFiZDRmN2M2MDM3YTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b022aa50da2f4634b1476dbf4e30fd9e",
+      "statement": "formatMarkdown renders content, appends a '## Sources' section only when sources exist and content lacks a '## Sources' heading (regex /(^|\\n)## Sources\\b/i), then the X report appendix, bulleted warnings when present, and the footer; formatRaw renders content plus the X report appendix and footer only.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L128-L136",
+          "version": "repo-lines-v1:sha256:c8e0501c0ee61d0ae34fc824cc09e7b4753df1187f5ad294bef475fffd1e3679:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjczNTFjNjE1NjQ1YzlmODA2N2IwM2I2NTNlYTNjNzI1YTBlM2JmM2E3NTkwMzgxY2QyNmY3MjZkNjQ0ZjQwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODY3ZjA4YjY0NjljY2Q0NDNlMzQ2YjU0MzViZjFhMjU5ZmIxM2QxNWZiZGVkNjE0NWJjYmEyYmE0ZDA2MDUyMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGZlNjRiMDM1YTViM2RjYzcyMWYwNzAxYjdlM2FjMDhmZGQyODk0YWFjMzIwOTAyM2QzZGFjOWRjMTc1MTRjZiJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L4-L10",
+          "version": "repo-lines-v1:sha256:67d524859129b120fa6464c6dd39d1e1a3c052187c3ecd2d069dd1d0758933fb:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTE4YmEzNWMzODI1ZGYyM2UwMWE3YzViZDhhZTMwNWIyNGM0YTA5Y2U2ZTU4ZTc2NTI0ZjBjZGZhNzgwZTg2ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2MxYzUxNDgxYjY5YTFlODkzNDljYjFlMGZiZmMzZjVjYTY5OThhN2FiMGQwODdlZjk4YTc4YTM4ZTFiZTNmMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjA2NmE4ZjU4YjAzNjE1ZmZlNTA5ZTZmMzcxNTViMjgzYTAxOTQ4ZDQzZGZkMjViMTljNjc0MDlhZjM5ZDk1NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_af018637b8624821906a012134897cd5",
+      "statement": "The footer line is '---\\nCost: <formatCost> | Models: <distinct models or unavailable> | Tokens: <prompt in> / <completion out>' plus '| Web searches: N' / '| Web fetches: N' segments only when serverToolUse counts are present and greater than 0; formatCost renders '$<4-decimal>' when costUsd is known else the literal 'unavailable'.",
+      "evidence": [
+        {
+          "resource": "repo://src/cost.ts#L35-L37",
+          "version": "repo-lines-v1:sha256:c356158ba2be82ab13d6b246b5f402dc4d844ee11d8db5750c9a4878ca52da87:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGRhYTFkODQzNzRlNzc2YzFjZTZmODZhYTVmNmM0M2Y0ZWQ5YTNmYTljYTM5Yzc1ZTExNjhjZWUxODIyZjY4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIzMjg2ZjdlMGYxNWI4ZTlmYmEzYjBiYTcyYTU1OGRjNGYzMDcyNmZkMGViMjIyNzM2MjVhNDNlNzFkMjlmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmFmMzllNzE3NWY2MzE2ODg3NTNkMjkxOWM3OGE2ZmRlOGQ0NjZlMDE5NDYzOWQ5MTBlZTNkZjEzZWIxNGExOCJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L109-L118",
+          "version": "repo-lines-v1:sha256:39593ccfc17349d7f7582957331f1f03c211e8e0f97277c5e725f83233f33b36:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYwY2NiZGI3ZmY2OThkYWYyY2NiZGRlZDk1NTZjMjI0OTJkNDVlMjVhZDhlYWUyY2FkN2EwNDJmNGEyNTEyODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQyNzliNjgwNTIwZWQ1MjZkY2M0YzhhYTM3MzUyNzU5MGUyODE5NWU0MGZiZTYxMDdlMWU1YjQ5NWE0NTc3MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQwMmFmYzY3N2M3M2YyZTNhNDM1ZjA5YjljMWQwOWE3NGQxNzcwMjM5NDE4OTg5ZWI5NTRkMDBlNTA1Zjg3MjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_a00530ab2a104d568e841511d968c33a",
+      "statement": "The X report appendix appends '## X report\\n- <reportPath>' only when xSignal.reportPath exists and result.content does not already contain that path, preventing a doubled pointer; it is deliberately not the full X markdown dump.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L139-L144",
+          "version": "repo-lines-v1:sha256:a478cb21f397fca5c08714c0520ee4f53fae51323d865218f969cade8f5e1d5d:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTUyOTY3ZWQzMmQ4NWY1MDdhNjBkZjBmNWE4MzNiYzIwMzFjODc4OTdiNzE0ZDc3ODEwM2VjYTdkNzQwNzA1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg4YTJiMGExNTE0ZWY4YTQzNmE3MjVlMTAwMzg4OTc4NzRjMzM5YjE3M2Y0YzJkODQ2MWZkZGVlMGYyM2NmOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmRjZTY4Mzg0MzQ4MDU1YmVjMTk3NTQ3YjRmY2QyODczZTc5MGE3YmFiYjU2ZDNhNTRjNWQwOGJiY2I2NDljOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_f9be05bb383649ab82ec89013a0d3568",
+      "statement": "formatRetrieveMarkdown renders an optional content block, a '## Results' list with '- **Title** (score: N)' bold labels (score suffix only when defined, URL fallback title, snippet line only when content is non-empty), then warnings and the footer.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L14-L30",
+          "version": "repo-lines-v1:sha256:b02814ae2106134fe2166d346c6354091bbae920b309b8e9f9b4a673f58ae624:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0ODY1NDgzZjlkMzZjMjMwZmI4NzRiOTJjNmFlMzI1YzczMGFlMTI4MTVhNzk2NjRlMWQwMjEwN2U5NjQ3M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNjZhOGY1OGIwMzYxNWZmZTUwOWU2ZjM3MTU1YjI4M2EwMTk0OGQ0M2RmZDI1YjE5YzY3NDA5YWYzOWQ5NTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZGM0NTRlOGMzNzBjNzkxNzkzN2U5NWQ3MWNmMGVmZjQ5NTAwYTNiYTQxMDk1ZWQyOWI5MGUyNDZiYTExMjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ec945dcc9226417ab3f3ada9c02d251e",
+      "statement": "formatJson emits 2-space-indented JSON with keys mode, web ({search_enabled, fetch_enabled}) when present, profile, output_format, answer (snake_case DecisionAnswer; undefined renders as null), content, sources, warnings, usage (totals, cost_usd null when unknown, server_tool_use, calls[]), and conditionally search_results (only when non-empty, keeping score/raw_content/favicon when defined), schema_result (only when schemaResult !== undefined), x_signal (markdown, report_path, session_id, cost_usd nullable, warnings; never rawText), and bookmarks (query, skipped, reason, hits, related).",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L146-L157",
+          "version": "repo-lines-v1:sha256:1b3b4d8f2b059522789fee2f85e7aa61a2ecb2fd21bcca18b24f1e2636b40f26:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwNDJjM2MzZDMwNjU0MWUxY2VhYmZkM2RmMDExMGQ5ZWRhYTRkZDNkYmYyNmU3NTU3Nzg4MGU2YzYwN2NhODYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhlMDA0MGIwYzkwYzFlMTQ1NGZlNjA2NjI4NDA0ODk5NTBmNjA0MTZhYjUyYzE5OTgxOGNhNzg4NGM1ZTgxZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L32-L89",
+          "version": "repo-lines-v1:sha256:e846e77ef98952ad2a2245c5bce01778e2d9921eb638825a1ea2807cc38fac58:eyJzZWxlY3RlZExpbmVDb3VudCI6NTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyYmIxMjNmNjU1Y2RiZWNkOWFiY2M5ZWJlOWI5Y2EwOWJiMTQ3YjcxYjM4NWU1M2E3Y2Q0OWIwMWZkYjE3NjAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzNjQyOTA4N2RlOTQyYmEzMWIxNjAxYmMyZmQ2YTI2OGJkMTZhNzg4YmMxNWQ2ZDE2Mjk0M2Q0ZWMwZDM2YWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0Y2ZlNjc0Y2JkZGJkMzU0M2M0ZWFjODVhNjUyMDM1NWRhMmVkN2IyMDFmNjVhOTAxYmUwODViNWVlYjQ0MTMifQ"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L97-L107",
+          "version": "repo-lines-v1:sha256:759bbbce4efb82e061aa72b7202979dc00a948e0c574752fd4fa70373acee69a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwYjdkNGE4ZTk2MzFkNjA4OTVhZDEyNWM2OTRkNWUyNzg3ZGUyM2JkZTQ5Mjk1ZTRhODZjNmI2ZTZjODUyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyYmRiMjhmNzk1ODg4ZWU3ZDMwZDFiMjViZjBlMDhlZDJmYzMwN2NiNGE1Zjc4MTdlMmJiNThmNGE4MDRkZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxOTVmMGRiMjlmZGNjYTJhNjRlZTU0MDg0YTEwZDZhNGExODk1YjI0YmU1MzgzZjM5YmNmZDA1ZWU4NGZiN2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cd65fbc793cd4251a229d0e59d841b89",
+      "statement": "formatError emits a 2-space-indented JSON object { error: { message } } on stderr when --json is set, else a plain 'Error: <message>' line; cli.ts exits with code 1 on errors and 0 on success, and wantsJson scans the raw argv for '--json' so parse-time errors are still formatted as JSON when the flag was present.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L417-L419",
+          "version": "repo-lines-v1:sha256:5944a59495dd34c9c4194fff01de968058f9fa1f12d0ffae59cba8f8dd46cb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQzNTVhYTNhMmE5ODk4ZjQzNDRhMGY5OWI3NzcyNTc3MmU1OTM0ZDUxNzVmN2RkZTI0NDQ3NmNjZmViZTcxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJiYzg3MDIyNTZjOWQ3YTI5MGMxMTEyMzA5ZjdlNmNkYmI3MDA4ZGEzNzA1NTI2YmQ0YjEyOTA1NTZkMmZlMSJ9"
+        },
+        {
+          "resource": "repo://src/cli.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:74dc23c79e83ffa26b6bccf0ec61799a6094ea7fca1a5db50e90bc52beb62b93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYmY4Mzg3NTM2ODk2NmYzMTNhZTYzOTUzOWM0MDM3MDA0NWJhNTNlMmUyY2VlOTNiYjY3ZDVkYTE3Yjk4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWJhMWFmNzUzZDhlYjFiOTVkYjNlMTcwMDhmNzE3YTBjMDFhMWNkYzU4MDA0YjJmYjE3YzJjMWEyMTEyMTlhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTliZDJkMTZlNzQ5Y2VlNzQwNGQ2NDNiYWViZDNkZTM5ODA4NzQ0NDEyNjYzNGM1ZjMzZGM5M2FhNjg4NmMwYyJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L91-L95",
+          "version": "repo-lines-v1:sha256:a918e034de44a4e47e346294632d7c0fe13d97c71a21f519e6343c3ab4275351:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNkMzQ4YWRlMjVkOGM5ZjYwZThjNzIxMTM1OWViZTNjMTY0YmI5ZmUzMzVlYWNiZDVmYzZjMDdmMzIxNDQyYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmNmZGQ3MTZjN2JhN2Y5ZDU3ZDU1ZGJkYjFhMTM2ZDg5MTU5MjQ1NzViMzM3OGNjMTY4NzNkNGUxZmY3Njk1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzUzMWZiNDFiYjZlYjhmMzI1Y2Q4MmU0NjI4MDNmNmIzMjk3MzU2ZGY5MTA0NGFjNTYzMzEyZGUzMjc1ZTUwNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cb47c0a1b95c49aaabc761e7f96fb849",
+      "statement": "stderr carries all diagnostics: the 'hint: OpenRouter web search is enabled (--no-web to disable)' line when search is enabled, console.error step/progress lines from modes.ts (suppressed for most --json paths but not the two-pass --json + web steps), warning lines echoed in --raw non-JSON runs, and the always-on '--max-cost set but OpenRouter returned no cost; limit not enforced' warning.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L30-L46",
+          "version": "repo-lines-v1:sha256:f87525476ad84216c4676d9489b42cbf1a694ff672ea67bc51008722223e2e44:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MjhiYTJjMjE2ZmQzMzExNjUxNzRhMWM3OWIzMDAwMTU1NTFmNGFlYWQ1Y2FkZmU3YWQyODMwN2YwMmM4YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjOTc1MjIwNDJhZjhmY2ViYjI2YzJlNDA2YTVhOWJkNzQ4MDliOWQ0NWQxMDA0YmI4OWZjZGFiZGJkZTUzN2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFkYWZhZDBiMGUwMGExMDMwMjhmZmEwN2ZiNTBjMWFjMGZlNTE1OTc5MGRlMTExNTZiOTdhNGNiZGQ4OTVmMjgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L156-L165",
+          "version": "repo-lines-v1:sha256:a374785787dd61bfda377068dcfde4c55b7435baff319bf2129402b593ca95c8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MjhiYTJjMjE2ZmQzMzExNjUxNzRhMWM3OWIzMDAwMTU1NTFmNGFlYWQ1Y2FkZmU3YWQyODMwN2YwMmM4YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhNjkwYzIyNTBjMmI2MGM5NDJkZTkxNmQwYjQ2MjFiMjg4MThjZGUwNThjZDg5YzljNjA5YTRkZTZkZTA3NDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhN2U1Y2MyNTBiZGViYjE1ZDczYmY0ZGQxMTEwNWU1M2VkODE5NWJkY2MyZTFhNzczM2YwYTgxZDlkNmVmNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJjMTA5NGE5ODE0NjFhM2M2M2IwYzMxMzQwNDI3NTc5YTE5YjdlM2E0ZWUxNzRiNDhjNTM2ZjMyZWVmYzVjMjYifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L245-L262",
+          "version": "repo-lines-v1:sha256:40a35531fb6287c2e6d5a0d0c358ed5f2bc39f77ee62f8a274097e3d490bb299:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwZDg4ZDFhNzQwYzE2Yjc0ZmQ2NGU2NjIzZjY2ODVkZDMzYzVmNzhkN2E3OTI1MzQzOWUyZDExY2Y1MDk1OWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE3OWE4NGYyMGNkYzE4NDVmN2MxNjU4NjViYWU4NjE5NGUxNjc1NGM2Mzk2NmU4MmMzYjcxZGY3ZWM4M2Q0YzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhYTM5M2E1YmY0ZDYzY2QzYjUwNWE0ZmViMmJlOTY0ZDM4Nzg0YzE3MjYwZTJlYzhhNTJhNGUzMGI1ZmU1M2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhN2IxOWJkZjJhMjJlNjJlMjIxYzlkYmM1ZmNhNjJhZDRmMTRmNDQ3YzZhNTg4NGEwMDdkZDc1OTg2OWRhMTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3c8c196271245dc82ff663ff41cf48e",
+      "statement": "cli.ts stdout dispatch: --json always formats JSON (beating --schema and retrieve shapes); --schema without --json pretty-prints JSON.stringify(result.schemaResult ?? null, null, 2); retrieve/--output results print formatRetrieveMarkdown; --raw prints formatRaw; otherwise formatMarkdown prints the brief (--report sets outputFormat to report which changes the system prompt headings, not the renderer).",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L48-L59",
+          "version": "repo-lines-v1:sha256:4579d662dd241b406186e52be2b34fed7760bed61483201a5db202ff0cc68367:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRiYThjNDM0ZTg3ZDc2NTg0MTdiNjg5ZTFmNWRjMDY1ZjVjOTQ2NDIzZjdkOWJlMWNmOTM4ZDRmZTQ5Y2NmNjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTNmNDBlMzc4MWViODk2YzgyZDA0NmEwODA2N2ExMWUzNWNkZjJmMWRmYWYyNmZlYTkwYjhkYjY2NzY0MTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA0YjlhMGIxNmI5OTEwYmFhNWQwYTRkY2FmZjhhNjBjNDI5NjMzYmYyYWUzY2JhY2M4MjAyOTA3NTgwZDEwY2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwNWU4ZjUwMjIyYzQ0MWU4ZTQxYzY0YzViZWVhNTk4Y2ExN2M2YWM0YjMxNjM0N2M3OGZmYTU4NmNmMWMzZTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d3b153a6c0e543d68739ce3d4decfc96",
+      "statement": "The retrieve path runs a single JSON-instructed call (RETRIEVE_INSTRUCTION asks for { results: [{title,url,content}], answer }), and --output both adds a synthesis call with web intentionally off because grounding is already in the retrieved sources block; usage merges across the calls via mergeUsage.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L399-L463",
+          "version": "repo-lines-v1:sha256:c47c47fc7f1cdbc70b237d99bc670c56fa833e63b67f384440b391b9d72a14bb:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YjgyMjc0YTBiMTE0MjdjMDY3OWMxZGQ4NDRkN2IzZGY2ZGIxNDk3ODhlOTI1NzFkNzk5YmMzMjE5MTk3YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkYmMwMThhY2RlMGYwYjM1MWMyZWJkMzE2M2I5OTJiM2I5NGYwNDg5Y2U0NjRhYWJkYjVjYjBhN2E1ZjQyNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyYzc4Yzc3ODg2ZDM5OTIwYmVmOGFmNjIyYTY3ODdiNmUwY2ZlNjk0OTAzMWJmMjVhZmNiOTFjNWI0ZTA4YmYifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L6-L7",
+          "version": "repo-lines-v1:sha256:86a992beb34b95740af61bec6968d6ab056bc9613499ccc6a6a3233d933047b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTRjMTY4ZDhiMWQ5MDAwOTg1OTc4YWEwMWRiMWRiY2QwNDk4NGU3Y2U5OTk0ZjZiZTkxOWRiYmVkY2JlN2E1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzExMDJiMTdhNDMwZmZiOTEyZjc2NTFhNWIxZDEwM2E4MDY5NTRhN2JjOWMwMDRhN2I5M2MwZGQ4N2JiNjQ5ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDE5NmZjNWVjZjUxZDZhNDcyZmI2Yjc2MGY3MjVmNDg1YWJkZWJiZTQ0NDdjZDAzZTBkNWY0MzUzNGRiZjY0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDZlNDFkMjZiOTM4OWMyNzY5YjkyMjUzOGI5OTM1YjQ2NTE4OWZhM2ZjNWIyZDRiNDEwNzNhODM0ODU2N2ZlZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a640f99044744b9980f8a9962d61c1c0",
+      "statement": "parseRetrieveContent tolerates malformed model output without throwing: invalid JSON, non-object payloads, non-array results, and entries missing a url yield empty or filtered results so the pipeline still surfaces sources and usage.",
+      "evidence": [
+        {
+          "resource": "repo://src/retrieval.ts#L16-L49",
+          "version": "repo-lines-v1:sha256:c39686fecefd857be531e292581cc26d364d3b281025f2e5e0b4c25d811d25fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiYzViODE2NGI3ZDY2MzY3NDRjMzkwNWU1ZDk0MmIzYTk5YTExYmI4MjY4NTJiZGE1NGI2ODc2ZjJmZTVhNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhNWUwMjQ2NzgwZDEzZDM5NDU3MjAwY2EwM2YxMDYzNjJkMmU5ZmMzMDM5MzIxM2NiMTU3MjcyNTlmZjA3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmMDI1NWY3MTM0MTRjNjU1ZjQ0ZmE1YmUzOWU0MjJlYWIwZGMyYTBmYTJhZDc0ZWUxMmI5ZjBkYzU5Y2MzNzkifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

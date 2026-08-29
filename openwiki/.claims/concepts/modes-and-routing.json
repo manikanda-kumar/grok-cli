@@ -1,0 +1,382 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:283703fb824f1f6b6b009e3cf88b71cef91aba134124ec1bf632c93582295e98",
+  "claims": [
+    {
+      "id": "claim_63c39531aaa4472c98ff32bcfec21d50",
+      "statement": "canonicalizeMode normalizes the deprecated Mode token \"research\" to the CanonicalMode \"deepresearch\" and returns the warning 'Mode \"research\" is deprecated; use \"deepresearch\" instead.', which runMode folds into PipelineResult.warnings; every other mode passes through unchanged.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L47-L53",
+          "version": "repo-lines-v1:sha256:58048b0995967a62ddabb9a764c4991c0971ea879294893a3f964cb6ac599197:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDI1NTA4ZDQ5YzJhNTE5ZWQ4YmJjMDYzZDIxNGJmZDdmMDZmNGFiMjE1ZjBkMjgxYzFmYzllODI3M2IxMmJiMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDVjYWZkZjFlZTRkYjJiODQ5NGZkMjA1ZDU0NTBkZDE3MGQ2MzI5NzVmMGZmYjk5ZjllYjZiYTRkNmY1ZGEzYyJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L196-L207",
+          "version": "repo-lines-v1:sha256:978e5aee4dea409cd8219c1c9d1576570fcfda4f1040646e665dcad48d4f5411:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlMmQ2OGFiNDRkOWZiODUwNGY1NjUxZDhlNjhiMTA1OTg3MjMxYmMyOWFiZDlhYmVmYjQ1YTFlNDFhOWYwMGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjYjFiZDhhNmJiYzc2NzM2ZTYxZTM2NGQzYzE1ZTljYWQ4NGQyODM1ZmJkYjRjY2FiYjc5YWNlYTJjMmQzMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYwMGZlMWIyNmZiMDhiY2ZmNDMxNzliY2ExNzdlNmU2YTI1YzVjM2JlODczYzExMDM3MGNiNzFmNmQ4YTUxOWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_02f15f3904264194bb9749904965fcec",
+      "statement": "resolveModel(config, profile, alias) is a plain table lookup into config.models[profile][alias]; DEFAULT_MODELS defines the quality and economy profiles each with the five aliases fast, expert, research, deepResearch, nativeMulti, where economy collapses expert to x-ai/grok-4.3 and both research and deepResearch to perplexity/sonar-pro, while quality uses x-ai/grok-4.3 (fast), x-ai/grok-4.20 (expert), perplexity/sonar-reasoning-pro (research), perplexity/sonar-deep-research (deepResearch), x-ai/grok-4.20-multi-agent (nativeMulti).",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L161-L183",
+          "version": "repo-lines-v1:sha256:97fa275d1f5ebad9ec68be420528e24cb7b4a8a79addfc7a46f3c4e3aa009e11:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZmNTFmZTkxMjk4OTM4Y2I5M2IzMjdkN2MzZGMwOGUzNjBiOGJlNTE1MGYyMWIyODUwM2E0MjA2NzFlMmQ1NDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY3ZDMwMDE2MzMxOTU0MDAwN2UyZjgwMmRjZDQ0M2ZmNTk0YThjOWJhYzVlMDFiNmQ0ZGY4ZTQyNGY2YWI4ZWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNlMTJkN2Q3NDU4NWQyMWQ2ODVmZDE1YzdmNTRkYWMxYzFhMjk4YzA1MGVmNzAxMzdmMmQxNjYyNWQ4YmEzMWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVjMGRkYTQ4NDBlYTE4Mzg4YzA0YjEzMGQzOWU0ZmJkMjg5MzYwYWE3ZmJlNzNlZDdhMTNmMzdlMjFkZTk0NmQifQ"
+        },
+        {
+          "resource": "repo://src/config.ts#L35-L37",
+          "version": "repo-lines-v1:sha256:423ffc5605c3763dcf12f7b5567e246e0ebff6af9794615c4cc38480852723f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgxNmNlYmMxNjY1MmNkMWU3YzliYmNkNmU5ZjAxNjdkMGEzMTg1ODY0MmI4ODc4N2RjM2FhNWY5N2M3MDI0YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiM2M1Y2IyOGM2YjlkN2QwZWM1MTY4NzIxNDhmZjViZTEzYjY0OWRjNWI2ZTBkMDk3NjhkMzJmYWQ5NzUxZGY0MSJ9"
+        },
+        {
+          "resource": "repo://src/defaults.ts#L3-L18",
+          "version": "repo-lines-v1:sha256:3dc6c0e6c39cefa11f0cf25be5fd09d3d344f5924b0cb1be5c5d523b58df2909:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZDZkOWJjYWI5NzZlYjY3YmFjZWQwZDk3ZDJmN2FjZDE5ZWY3YWZjZTgxY2Y3ZjIyMjlkZjY5MWM3YTM3MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1MzRlOWZiMzMxM2E0NjQwZjdkZjZiMDUzYjViMDE2YmE5NjQyMmQ1ZmY1ZmFhZGIyYTE5MTAxY2JkMDE0MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMDA1NDdmYjllMmU1YjU1MzVjYTM3MTA3YjIzNDIzMzgwNGY5ODkwMTVlZmViZWM4ODAxMzZkOTU5OWM1NTYifQ"
+        },
+        {
+          "resource": "repo://test/config.test.ts#L16-L50",
+          "version": "repo-lines-v1:sha256:af9ac309a1cee8443486a7c88b07a59cc31af960f3c326760973eb2736015a7f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlNmJjZjc0MGY5MGI0YWY3MzNmNTBiODdmZjRkYjFiNjk3Y2RlZjM4OTllNWMzZWJjZTI5NGM3ZjdjYzIzMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI3N2UwNzZhMDlhYmE0ZDI1YzBiNzE5Zjc5ZGI1YzNjNWNmMjM3OGQ1YWRlYTZhNWU2ZjBhYTU4ZWEwMWQyM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQxOGYzYTI2MjU4Mjg1MWVkZGM1MWU4NWZiMzBjNDc4YmNlYmZjMzRiMTg4MGY5YzZmYWRkMTliNGI1ZGMyYTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ec7a03b3202b488e99853fa9c0df435b",
+      "statement": "DEFAULT_CONFIG sets defaultMode to \"auto\" and defaultProfile to \"quality\", and resolveCliOptions fills mode and profile from these config defaults only when the CLI did not set them explicitly (modeExplicit/profileExplicit), so --economy and positional/--mode tokens always win over config.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L39-L45",
+          "version": "repo-lines-v1:sha256:142ac0305a9ae49fd546d393847b5fa8fe9430dc219009fc2a238b91a5534a41:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAyMjYwYjU0YWEzZTM5YWYzZWUyNjYyZWRlNzE0ZDJhNjA5MjZlNjA5MWI1MjE2MmJjYTk1OTQ1M2U5NTg5YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiM2JlYThhNDQ1MDA5MjE1NjBiODFkOGM0N2JmNWY5OGE2MjU4YjY4ODM4OTM1Y2M1MTQyY2M0ZDdkODY2ODcwMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWM5MjMyMDhlOWVlZTUyY2M4ODc2NTFlMDY0MDhiOTEwYzAyN2ZkZjI0OGM3NGU1MTkxZDcyNzlhYmRlNzcwMCJ9"
+        },
+        {
+          "resource": "repo://src/defaults.ts#L34-L43",
+          "version": "repo-lines-v1:sha256:2fe4e10c2e7802c09126aa496c312371f6283026b481a7bfb4fe1f2987a444d6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMzQ1YzgzMTU5Y2Y2ZTQ2M2RjNzE3MjE4NDg5MTdiMmRmOWY3ZTM0NDEyMGRhNjM3ZjBmMTViYWQzMjE0MTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJhMzhlZTljYzczYzlmMWYyYzhmOGM1NmQwMGJkMDBkZTViMDczNjlmMTJlMDgwYWJiZDc5YzhjNDM3NTZjMTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExNGRhN2E2Yjg4ZDhkZTlhZDZkYzE4YmE0OWI4MzdhMzkzNTJiNTMyNDEyNmE1ZjM4OThjNjBiYWQ3NmU5MmEifQ"
+        },
+        {
+          "resource": "repo://test/config.test.ts#L136-L178",
+          "version": "repo-lines-v1:sha256:41cd6377548c774757cf8c52a4cea3b5df0cc50f90b7ee1eed3f0589c28859e0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY1NmFlNjdhMTlmZGMxNWQyY2M2MGI3ZTlhNTExYzdiNmJjYWQ0Y2RiNGExM2VlZWY2MGQ1NDZmNzUzMmZkYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a60f9ba2fc4408dbb60b6c3fef2fe55",
+      "statement": "modeAllowsWeb returns true only for the modes auto, fast, expert, and retrieve; deepresearch and multi (and the deprecated research, which is canonicalized to deepresearch before the check) never allow OpenRouter web tools.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L55-L57",
+          "version": "repo-lines-v1:sha256:5f6c4b262a4da660a9513ee863abac9e79ccea18462a241f0d216f24681a5e23:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkxOTIzODI3YjllYzhiNjdkZmU4ODljNTY5NWY0NzJiZTA2OTZkODFjZTJkZmNmZWIzYjM0ZjBjNmYzNGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzliZDY5MzgzN2UzZTdmOWE2YzY3MmE5M2ZjOTA0ODU2ZDY2NmM4NjNkNTNiZmZkZjE0Njg2YzQ2YWVhM2U1MSJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L46-L54",
+          "version": "repo-lines-v1:sha256:e564c4a1b4a4cac39ed2e9bdc853ae7dec75d36ac93c870f9a357f2620294728:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBjZmVlZjYyMDMzOWU4NzZlNzY4OGYwYzQyMjcyNmY4NjI2Mjg0ZjNhZTQzM2M3Y2E0ZWE2ZWYzZWI5MDBjMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjZmNWI0MGIxNTg0NTdkMTc4NjRmMjE3OTA3ODZkZDVhMmVjZGI2NGI2NmE2NTFmNzg4ZDRlMjVjZDMzMDNkMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjJkZDZiMTA3MTVhNTFmYWVhNDU0MDc0ODEzZmJkMjQzMjJhODk3Mzk1NjQyM2YxZGQwMTFjY2ExYTFlYzNhNyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8979d9795ae74ac7b14c27969e7e7b13",
+      "statement": "resolveWebOptions computes searchEnabled = modeAllowsWeb(mode) AND (retrieve ? true : config.web.search.enabled) AND NOT cli.noWeb, so CLI --no-web overrides config web.search.enabled on every web-capable mode including retrieve, retrieve mode forces search on even when config disables it, and deepresearch/multi can never enable search regardless of config or flags; fetchEnabled requires searchEnabled and additionally needs config.web.fetch.enabled or the --web-fetch flag, and CLI engine/limit/domain overrides fall back to config web.search/web.fetch values.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L97-L119",
+          "version": "repo-lines-v1:sha256:918bd042af65dd32cf3edebf413dce74d53cbb512823594bbf085b36b8a43e92:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjMjY5M2Y3Yzg0NTBkMDMzZWYwYjdhNjBmOTYxOGYyNDQ3ZWIzNzNiYTc2ZGZmYWFlZGIxNjZhYWJmYzczODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5ZDcyYmViMTBkODA5MmJjOTFhMTViNzY2ODk3MzQ1ZTBlMDYwMjM5OWJmY2NlNmMyOGRkMjg5YTA4OWRmMTIifQ"
+        },
+        {
+          "resource": "repo://test/config.test.ts#L58-L90",
+          "version": "repo-lines-v1:sha256:6ee4b530c4ea1ff8fec260c5b61bda960dcb7930d22262713a3a4d4ddeb9ae6f:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYWE4YjZmZTk1MDY1OTNiMWM4MDNkYzhhYmQxYzUyODU5MmI3OGEzY2UxM2M4MTdmN2E2NzBiYmYwMjFjZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiNzgxYTlhNjUxNDlmNjA2MjZiYjgyYmI3NTdkZjk4ODdhNzgxNzU5MGE3M2JjNzZjYjRkOWJlZDBhOWQ5MzcifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L56-L74",
+          "version": "repo-lines-v1:sha256:967ca5d47b78ab17778e5abeeab1653cbf929ecd902e17965737c8f0f9e11b7c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzYWE4YjZmZTk1MDY1OTNiMWM4MDNkYzhhYmQxYzUyODU5MmI3OGEzY2UxM2M4MTdmN2E2NzBiYmYwMjFjZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA3ODNkNTU2NjEyZDk2MmZiNGYzOGNjNWNkZTNmM2MxMDNmMGU3MDM2ZjVkMjFkMjcyODQ2OGY1ZGJlNTY2YjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b0f59c44eb89406e9c044126fe13cc5f",
+      "statement": "validateWebOptions rejects two run-time conflicts before dispatch: combining --web-allowed-domains with --web-blocked-domains (error 'Cannot combine ... Use one list only.') and passing --web-fetch while web search is disabled (error 'Flag \"--web-fetch\" has no effect without web search.').",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L69-L78",
+          "version": "repo-lines-v1:sha256:2b3075bc976e9d3da7c5d853a54ddf4ebc3f7403abaea4fa5d6c37604f2f3256:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhYjA5ZGRkZTZjODFjYWVlOWM0OGJhMWYyOTBkYmVmODNmZTVlMWRhNTk5ZDBmNzdlYzJjYzc3NTc2NjhhYmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQxMWRiYTc1NWM5ZjI5MGI5YjE0OWVjZmZkNWQzYzVlZDZmNTBjZGFjM2ExM2Y3YzY2N2E3NjNkZWY1MTU5NTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU3ZTI2YzBkOGFjNmJlMjU2ZmE2OTViZmY3ZDBkYzIzNTBlNjBhNGMzNTBiNDNmZjM5MjJlMDE1NjM0NjQ5YjQifQ"
+        },
+        {
+          "resource": "repo://test/config.test.ts#L92-L112",
+          "version": "repo-lines-v1:sha256:fda7fdbb10a3f3ccbdbba63440fd155ccf8b01f453ea391c22d290b54c083849:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4ZGFmMGQzYzVkZmZmYjM1YmQ0MDJkZTI2MzEzYmUzODM4NmFjMTdhYzA3ZGE3ODExNDNhZWYzNTU0ZTU5MGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1NDRjMjU1MThkMmEzMzhiYzdhNzcwZTAxMjYwODliNzQxMzcyYjk4NDljNzI1NWRmNDBkOWViOGEzZDNjZDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ab02169a880344d89de8a77663548ec1",
+      "statement": "modelSupportsServerTools returns false for any model starting with 'perplexity/'; assertWebToolsCompatible (called from cli.ts before runMode whenever search or fetch is enabled on a web-allowed mode) resolves the mode's web model and throws `Model <model> does not support OpenRouter server tools. Use a Grok model alias or run with --no-web.` when a Perplexity alias is configured with web on.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L26-L34",
+          "version": "repo-lines-v1:sha256:6f7c7153924578feb4a50d99cde426c25a6d97d8f906127c563004749dbe532d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmU1OGE3YzFmN2NhZWZkNTJkMDQ1NWMxMWNjNjRjYjQzZjU0ZWZiOGNhZDdlOWQ2NjRkZGUxN2Q5NWMwNmJkYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYxM2JmY2Y4ODIzYjk4ZWJjNTEwNTcyZTk2MTE5NzM0YmFiM2ViNGM0MDBhNDc2Mzc0YzQwN2Q5M2VhZjAxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjVlNjYyOGRlZTYyMTU4ZjgzZTM1OTdlYzc4MDU1MGY0ZDJkZTU3MzFmNzFkMzMyMTRkYjEwYzQ2M2E1MTg5OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWIyNWI4NzEwMDgyN2JmYzkxZjU0ODI1ZDQ4MjQxMTdjMTlmY2ZkZDg3N2E4Y2MzNmQ4NWUwM2VkNmQ0ZTY5ZSJ9"
+        },
+        {
+          "resource": "repo://src/config.ts#L59-L95",
+          "version": "repo-lines-v1:sha256:3d2378c849871805e7169d915436c23618f8f7f521ca9cc7ee8846e08aadaa99:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRjYzQ5ODkwMTQwMTA4ZjI0MTRjNTAyYzBhYzg1YWY4YmQ3ZTg1YzQyOWFiNjZhNTM0YzAyMGVhYmUyZmM5YzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU4NzI4MDc3MDM5ZTdkYTcxNGQ5YWRmZjRiNmYxODBjZjUxMTBhMjBlYzg3N2IxODM4NDc5YzA2ZGM3MGZlOTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5M2U3MjUyNTcwZWRmMWVlMTMxNjU5ZDcwYjMxYmZmNzNjN2JiYWU1ZjczNzU1YTVlZDgzMGQxYWZjZDIzZmQifQ"
+        },
+        {
+          "resource": "repo://test/config.test.ts#L114-L134",
+          "version": "repo-lines-v1:sha256:4ca10ca368ee7a5bcbabead0843636bb8394a24dccf1197adbad14a06853fd7c:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg5MWJlNTdiYjZkNzdhYjYyZTc0OTA0YzRhMWI4YmZlZWFiMzE5ZTBlYTZiNDI2N2ExNDg4ODhhMDkzZWMyNGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxNGMzNDhhOTU5ZWFjM2JiNmUzYjg0ZWMwMjdkYTNhMjI5YzRmZWNjNDlmYjgwNmM4M2EyNTU5NGI4YTdlZjgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_07d8708c8a4c4973951916de2d12674e",
+      "statement": "buildTools in src/openrouter.ts returns undefined tools for Perplexity models (model.startsWith('perplexity/')) even when web options are enabled, mechanically enforcing the same server-tool incompatibility in the client; the client-side behavior is pinned by tests asserting no tools are attached for perplexity/sonar-reasoning-pro.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L37-L41",
+          "version": "repo-lines-v1:sha256:919c5c59751fa0e394390fcf4a915dca02ce1ae94dd2eb159d8331a2ce15d6e7:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmRjNTk1NTc1NGZkY2FjNjc3MWYxNGM0NTIzMjM5YWYxMjNjMDgxMzdmODBkYjFkNjY2ZWRiYWQwZmY0NWI5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzk4NmQ2NzM5M2E2MWRiYjAyOTk5MjI5MTBlYWE3ZTEyZmVmODQyNTg0NjI2ZmE5NDhmMTA0MmU0NmFjOWI4OSJ9"
+        },
+        {
+          "resource": "repo://test/openrouter.test.ts#L26-L32",
+          "version": "repo-lines-v1:sha256:ed4a8a51934821641eb8fa98018ae922e61f9be3c9f64654c603953f2dd1707b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzBiYThlYWQyMzFmYjZlMDBmZmRjOTZkMGU0NjA3ZDIwZjMzZThkYWEzZmI2NDRjZjFmY2M0YWQ2MzY5OTNjMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMmJkYmYyYTU0NzE0MjM1YjU3ZWI2ODZiMjg0OGNhOTQyNTRiOGZmYTVmOGRkMjMyNTBlNzJjMjE5NzRmMTdmMCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjZmZTRiOGI4ZjgyMWExMTJmMjRjMTdhN2ZhYThiNzA1NTg1NTZjMGRmNjQ3YTEyOTA5MzBmODA1OWE1NmI0NCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_7a1fa3166699402caae8d77ba23d847e",
+      "statement": "resolveWebModel(config, profile, mode) picks the alias for the web-tool compatibility check as role = (mode === 'auto' ? 'expert' : mode) and alias = (role === 'fast' ? 'fast' : 'expert'), so auto routes to the expert alias and only fast routes to the fast alias; the single-call, retrieve, and schema pipeline paths use the same auto→expert / fast→fast / expert→expert alias mapping in src/modes.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L63-L67",
+          "version": "repo-lines-v1:sha256:3d12d3ba7cb351edb433b54038cc78d655fd36ce417be1635623866416105f0b:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzU1MjViNmRhZjZiMmUzZmFhNjQyMTlkOGQ3NjE3ZjIyNjY3YmVjM2YyZDI5ZWQxODBiODI2NWFjNGNjY2ZlNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzNmNmJhNmJlZjIxNWEwODQxYzUxYjc2YjM5YTk0OGY3NjI1M2M1OWZjZDY0ZGUxMjYyZjliMTVhMjViOTY0ZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzdhOWQ5YzUyMDdkYjUyZDE0MWZkOGVjMjFmZGU0OTA0NzM5MTdjYTIxMjIyZmJlZTljZDYxMjFiOWRiMDBmNSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L147-L197",
+          "version": "repo-lines-v1:sha256:5f788e75c9a40b8667df6bb0fbaabaf49e116fe14e62edda392342e90c734904:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1YzQwZjE0OGQwMDU5OGMyMDFjNzU2YmM3ZDA4NmE5NjhmOGE1MWUyMTExMTIyYmZmYTY4MGQ3NmI5MmFkZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwMTk5OTg4NGNhN2M5MjExNjBiYjk2MWM3ZDM1OGRmMjViZmNkNGU0MWVhZjhhNTNjNTkxNmI3OTBiNDM0ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjODVhMjVhOTBjODU1MGI2OGQxNThlODc2YjMzMjg2ODk2MDc5YzAwMTU5MWE2ZGRlNTgxYjFhNDIwNjQ2YjgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L239-L241",
+          "version": "repo-lines-v1:sha256:a8f4c964e49cc8189a95aea9e3c9f2f1d2f17fd33dc09433a7e74e298d5df562:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNGYzMGU4NzBkMGI5NDEyN2VlODlmYzI5MTQyNWY2MGQzMGI2NjIwY2M5MTcyYWJiYjFhNGY3ZjIwZWFiMTE2MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjU0YjcxYmMxNzU4M2RiNTE0MGFjMDRmMjA3ZmQwZTc2MGExYjJjZDNiNWUzZGNiZDhmYjc1YzBiYzBhNzIyYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWQyYjJjYTM1NjEzMGU2ZjNjZTQyMzkyNzY4OGQ0YzgxNmUxODA5ZTQ1MWIzZDgxM2RiOTBkMzNhMDgxMjYxNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGFhMzkzYTViZjRkNjNjZDNiNTA1YTRmZWIyYmU5NjRkMzg3ODRjMTcyNjBlMmVjOGE1MmE0ZTMwYjVmZTUzYiJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L399-L419",
+          "version": "repo-lines-v1:sha256:726addbe5493c7ebb347ed0ffc01ccf47d4aa6482c0b9828a84916959a84fb19:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YjgyMjc0YTBiMTE0MjdjMDY3OWMxZGQ4NDRkN2IzZGY2ZGIxNDk3ODhlOTI1NzFkNzk5YmMzMjE5MTk3YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjOTMwODJhZTIyY2ZjYTdiY2RhZGYzYjUxMTkxYmU0NmQ3MDU3NzRjZjY3NTcwYWI3MjYzN2IzMWI5MjI5MGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b6eb8e3b7df3476389d7088677116ac6",
+      "statement": "runMode dispatches in strict priority order schema → multi → retrieve → deepresearch → single Grok call; auto/fast/expert each make one Grok call (buildSingleCallMessages, temperature 0.2) with OpenRouter web search on by default, while --json combined with web switches the tail to a two-pass research-with-tools then tool-less json_format pattern (2 calls) and --json without web stays a single call.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L147-L307",
+          "version": "repo-lines-v1:sha256:2db09f9ddcc4827c0cd0cbe082de0c589d1667c02a4caadd877313077197efd4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNWM0MGYxNDhkMDA1OThjMjAxYzc1NmJjN2QwODZhOTY4ZjhhNTFlMjExMTEyMmJmZmE2ODBkNzZiOTJhZGUyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0OTU2N2JhOGZjZjQzN2U2NDgxZjI5NzEzMDA3NzJlMjEzMDYxMDgzYTNiNGFkMTBlMjlkMWI4ZjczNDMwODVmIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlMDE5OTk4ODRjYTdjOTIxMTYwYmI5NjFjN2QzNThkZjI1YmZjZDRlNDFlYWY4YTUzYzU5MTZiNzkwYjQzNGU5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIzZTc2ZDc3OTMxZWIxYTJjODgzNWQ1ODMyZjVjOTMzNzVjMjlmNjM0ZWU1OTkxMThkZjEzMDVkNjA2NWI2MmYwIn0"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L84-L177",
+          "version": "repo-lines-v1:sha256:331f069ff9b282e1d381fc4fd2131cfd4d9255f52c206cf4c80e6effe623d010:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViOTQ2NjVkZjc4ZDkxNjI2YWZmYjQ4OWNiZDc1YTEzODM2YjE4OTQ2NmVkYmZkNWM3NWEwZmNlZjExNDRiNTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhNjQ1MjBiNGFjMTg1NjFlNWQ0ZjM3NjNkNmMyZDdkY2I3ZTI4Yzc4MDM5ZTZiODg3NTEzNTY5OGYzMjI2ODYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0MDQ4NDJjMDQ0ZjVjZjVkODQ0MWFmOTRmOWIyM2I0MmU0YzVhMTczNDJjODZkOGI3MDM1M2UwNTUxYTA1OTQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ac1a1aa70eeb4a729e10001e5d39398e",
+      "statement": "deepresearch mode makes exactly one Sonar call (role 'deepresearch', buildResearchMessages, temperature 0.2) resolved from the deepResearch alias — perplexity/sonar-deep-research on quality, perplexity/sonar-pro on economy — with Sonar's own native research and no OpenRouter web tools; the deprecated research mode token maps to this same routing.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L225-L237",
+          "version": "repo-lines-v1:sha256:9d425a3cdbc1dee752a795be30e99951160e14c14f0b00787341b25213e2a331:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2NTQzNGYzNDI4MTYxMzM1YzY2ZDAwMWY0ZDJiYTIyZjE1N2UxOGI1N2NlNmM1NzFkMWNjZDc3MWYxYmU1MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4MjA0MjliYzc1NTJlZDJiMWY1NGJkOWU2YWMxZGUxMTM0N2VjNmU5YTE0MTk1NmY3Y2U1ZDRlOTBhYjBhNjgifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L179-L218",
+          "version": "repo-lines-v1:sha256:d5ad6789fae4d1a2a3bfc13c0ac4724734636d89b77c7370b7351447edb64f23:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NzE4NjUzNGM3Y2JlNDIxODM2ODVlODQxNThlY2Y3YjA4N2M1YTAzYjdmNjJmMDE5YWEyZjBiNjUwYTlmNDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNhMzhmNjQ4NjcwNzE2MjJkNjlkZDE5NGU1ZDVhMzc4YThkZmE3MDgxYzY4MGYwNzczNzcwOGM5NzQ5OTljODUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRmOWRlMDdhNWJhZGFjNjExNmZiOTYxMjAxZjNkNWU3ZDE5OTc4N2YyOTRiOWMyNzg3YzhjZDljNTdjZmUyM2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_25f7027a8f9a4c5a89881724e3c1201d",
+      "statement": "multi mode is a 5-call ensemble: 1 Sonar research pass using the research alias (perplexity/sonar-reasoning-pro on quality), 3 Grok role analyses (engineering, product, skeptic) and 1 Grok synthesis call using the expert alias, with no leg carrying OpenRouter web tools; analysis legs run in parallel by default but sequentially under --max-cost so budget overruns stop dispatch.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L548-L633",
+          "version": "repo-lines-v1:sha256:9b18c84620d50b8cb5dcac6882a816c597cb9f90098f8f02bb0587d195fa26bc:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2N2FmNzkwM2YzNDg5N2U4MGEzMTVlMjFiZjAxMDI5NjczYzIxZWU0YWVhMzVjY2FkZGEwZjM5NjJjNWQ0MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3YmU2ZTZmYjEyZGEyYWRjNmU2YmRmNjc4ODNlMTQ2NGJhMTAzMjFiMjg5MDBhZGNhNzYwMThkZTdmOTdlYzEifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L579-L588",
+          "version": "repo-lines-v1:sha256:8f4faadf7be4f485f36425352a05e1ebc498da3197b955ea23c2eb29f581fa1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMDViNmM5Y2FmY2YyOGM3Y2E1NTRlYTJjNzM1M2Q5ZGUzMTRhZGZhYjVhYjk0NDNhZTYxZWJlYmJiNjM2NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhZDAzZmIwNjdjNTAxOWVjNjU0ODVmOTRmNTYwY2VkZjE3NDBlMjcxNDhjN2RjNTM4YjIxYTJiNGE3M2Q4MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwZjRmOTUwYWEyNDZkZTkxOWQ1YmZkYmMyZjZlZTNkNzk5MTMxM2Q0MTIzZWY2NzcwMmUxMGUyZWEwZDU3NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlMDVlZTlhZDUzMzAxNTkzZjA5OTViZjZkODE5MmRjOWE2OWMyNDY3YTBhYjUzYmQ0Y2NjZDA5ZGI2M2Q0NDgifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L233-L255",
+          "version": "repo-lines-v1:sha256:30202283cf82cd86589c2a17f232227a2b19e93aca6b098f6739ba61be390d71:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyZWNjNDgzMTI3MGZkZDNiZGIyYWE1YTlkOTEyNDJmMThjZTY1NTRiNjhiOWE0MDM1ZjM2NThiZDRjNWMwYTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2ZDM5MjQzNjdhMzUxYjU5OGU5NmJiZTZkOGE5NDljYzE2NGZkNmU3NDFiOGI4NDkzZTkzY2EwOWJiZGU5OGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwZDg0ODk4YjE1YWIyOTZjYTBmZjkwNzQxNDU2ZjU0ZWJlOGI3ZDEyNmZkN2E2Yzc0ZjU5YzZhNTQ4NzYzZTgifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L265-L276",
+          "version": "repo-lines-v1:sha256:5b21d84f36acf4c182dcb8d5abc8833d7be73717b28a4255bd8257f5aa9877a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZjczZWVjMTk2M2EyNDdmZTNmYjgyY2JiMTVjNDQxOGJhNDUyOGFhMzk3MDUxMDQ3ODk1YzZiZjAyNjA0ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxNTlmYjBlMzFlYmJhNWZiYTIxZTliYmRmZTlhYTQ2NmE2YjM4ZjdmODNjNTg3MGIzZDU3YzgxMjZjOTM4ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxZDA4OGQzYWRlMjk3ZWY3ZGQyNDg5ODQzNzM2Yzk0M2I3NjA0N2FjNmE1NjViMjMwMWQwMGMzYmZmMGY5ZmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b15441b9693048d3b7b7a62768db80c5",
+      "statement": "The retrieve path fires for mode retrieve and also for --retrieve or --output results|both on any web-capable Grok mode: one call (role 'retrieve', buildRetrieveMessages, json true, temperature 0.1) emits Tavily-style { results, answer } parsed into searchResults, web search is forced on per resolveWebOptions, and --output both adds a second synthesis call without web tools (2 calls total).",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L207-L223",
+          "version": "repo-lines-v1:sha256:eb3aa6df75601daa720c2ebcdde48cb28e791aa725195cdb41515f687158d7de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkN2FlYjlkODNjNTRkNTZjODY1NDM5NDc4MGMzYWRlZGU2MjhmYWYxYzUzZDBjYmRiMzE5MDQxZjU0ZWEzNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L399-L464",
+          "version": "repo-lines-v1:sha256:4a45ab68d06285e42a843d728e1ede09cca385fcb458c55623eb7e7dcd36dd62:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YjgyMjc0YTBiMTE0MjdjMDY3OWMxZGQ4NDRkN2IzZGY2ZGIxNDk3ODhlOTI1NzFkNzk5YmMzMjE5MTk3YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxOTk1YTgyN2ZkNzc5YWRiNmQ1NDcxMDMwODg1ZGViNGNiMDQyMTY1ZTM2ZWRkYzEzOGM1ZmE2ZjgyNTdlY2YifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L358-L462",
+          "version": "repo-lines-v1:sha256:fdfbe8a365996c1f5fb7714f4b308fd75dbd549a80fda8a838a3f1245a6293fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTA1LCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiI5ODg1ZjM5MzRkNzdjZjNmMGRiYjA4MzE1YTczZTg5ZTNhNjc3NjYxYWIxZGZjMTM2NTRhM2Y5ZjBlMTJmZjZiIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJmNmY1YjQwYjE1ODQ1N2QxNzg2NGYyMTc5MDc4NmRkNWEyZWNkYjY0YjY2YTY1MWY3ODhkNGUyNWNkMzMwM2QyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJiNzc5ZDExOGQ2ZTNjYmY0NTA1Mzk3NDhkZWU3YTQzMDdhY2JlNjQ0NmNiYTI5N2YyNzYwZmE1ZDBiYmExYmMyIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiI4MDM3NDkzZjc2YjA4NjFjYzBlNTgzMTk1ZDEwNWY5OWExNDMzMmE4NzliOWNlYzYwYTZhMDZhOTc3NzU0YmViIn0"
+        }
+      ]
+    },
+    {
+      "id": "claim_84bde2aa0b404f518eedcd2ee78b4909",
+      "statement": "Passing --retrieve or --output results|both to a non-web mode (deepresearch or multi) is ignored with the warning `--retrieve/--output was ignored in <mode> mode; this mode does not use OpenRouter web tools.` and the run proceeds as the normal mode pipeline.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L209-L223",
+          "version": "repo-lines-v1:sha256:7dc5be4257e148b9c1f594ea75786f8060c8169597cb9c2bcf15dcdded3ca34d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5ODczZjM3MDA2MmIwZDZmOTNkOWYzNTEwNzRkZjIxZjFmNGViMDk5NmJiYTY0ZTA5YWQyOTA3ZDIzY2VhODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4NWE2ZjA0MjAwZjA0YjZlYTZjMTU1ZmE2OTcyOGQ3OThlYzkxOTgxNzIwZmFjNGM1MzBjZDI5Y2U3NzVmYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L555-L581",
+          "version": "repo-lines-v1:sha256:b5cf3faed62a5a554876c2361f13ca056a62f52484ff94cbf22f02938ffd53a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0NGRkMDRmNDQ1NzJhYjhmOTRiMzk3ZGNlODEwODQ5YzIyMGViM2RiMDkwM2VlMGI2NmJmNTBmODkyZmQwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3OGJmYjc2OTgyMmFjYjNkNGU0YmJmOTdmNmZmMTk4NDY4N2QwNDc4ZWUyYTY1ZWI3NDUzNTM2ZGFkYzc5ODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_53b4afbea649458ea8182c5731d87299",
+      "statement": "The --web flag is a deprecated no-op: runMode appends the warning 'Flag \"--web\" is deprecated; web search is on by default. Use --no-web to disable.' to the result warnings while web state is untouched.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L90-L93",
+          "version": "repo-lines-v1:sha256:f32f1d8e6e2aae52cf69ec8281ff87b79b09fe65dc1256606e7e3c6ecadbee28:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDY0ZDRjNGZjMWVmZDlkYjQzZDcxODllOGEyNGFlYTU3MjMwNWYyZTBjMjIzMzQwNjhmMzVmNTQyZTQwMmZhNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDQwMTkwYTMwNThkOWIxZTc2YjNjNTUzN2U3MjdiNWJjMzZkYjA1NTRiODcxZTUwZGJiOGRjOTViODY5ODI2MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODZhMjk3ZmZjNTQ3ZjdjMmI3NzJlNjBlYWNkMjQ2ZDVkZjFlZjZjNDJiODhhOTRhNGZmMjgxY2UwYzk2MWRlMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWM0YzNiMTk2NWU5MGY3Y2RkMmI3ODU3ZTc3ZGU4MzNiYWM4ZTEyNTA5NzdlYTk3MWYyMDVhNTY1NTQyMWY4YSJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L220-L231",
+          "version": "repo-lines-v1:sha256:93580491cc56201d647b1c124eec5e71095dc2e8039c4dae78c8189321b37679:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmMzRlNmQzNTE3ZGU1MTIzYjU1M2VmZTZmNzA1OGIwZTVhNjVjMWE3ZWRmYTY3ZTI1MGYyNWE1NDE1Yjk5OTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiMTYyMDdhZjUzYzczZjdjYzMwNzE3ODBmMjZlMWZiZWU4NzBlYTc1ZDhkZDBkMTUxNmQ3YzJjNTcwOWQ3MzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI2MTEzNDMxY2Y0YTJiODUzZTU2Y2Q4MzgzZTViZGQ5NjViYzlkOGJjNzE1YjU5ZGZlNGMxOWJhMTI3MWIzNzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_cba3055050de46df95b029de393e984a",
+      "statement": "When --json is combined with web search, the pipeline never sends one request with both response_format json_object and server tools (observed Grok + web_search garbage JSON like -1.5e-05): it runs a research pass with tools (json false) then a json_format pass without tools (json true, temperature 0.1) built by buildJsonFromResearchMessages, merges usage/sources/warnings, and adds the warning 'Used two-pass --json + web (research then JSON format) to avoid json_object+tools failures.'",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L243-L284",
+          "version": "repo-lines-v1:sha256:3a91920889869fafcaa3c5030f8dd7d4731eec9a498b2ecf2ddf1dca41f648d0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDVjYmJmNjAzY2U2NWE4MzEyMThiZTkyNzJhODM4ZGVlY2E4MWRmNGU5ODQ4YjIxZTY5MjYxMjBhZWM3NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2Mjg4NTQ1NGI4NDYwZDA5NTcyODk0MDY1MjNhZDZmMjEyZmU4NDAyYTA4MjVjNWU1YTBhMGEwNmQ4MTAwMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiNjI3MGEyODM1ODRiOWFhMzFkYjExNjQ3NjYwMTUxNmZmNTcwYTQ1NDJkMDQ5YjRmOGFiN2Y1MTQxMjE5YWYifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L100-L108",
+          "version": "repo-lines-v1:sha256:6cc6af3618a77975863c63bce5c2ab71486c3f00b8b7ffe20f1a0bd5dd1ecb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgyMzQwMWIxMjI5ZDc0MDZiNTk4MmRkZmFmM2EyM2MyMzc1M2M2NzM4MTNlNDk3OWYwNDkwNTkyNzAwM2U4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQwYTMyOWRiZmM5NmQ4YmNjMDFjMzY3MDQzMjkzYTAzZDIxNTMwMGJhZDJiMGJhNWQ2M2IxM2M5OTdhZGFhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTg4YTM0YWYxNGVlOWFlNjc4MjY5ZTkyOGRlOWJmZjgwODc5OTk3Y2Y2NGQ2OGZlZjE2NTViMDg3N2NiMzAyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmU4NGY0NDQ5OTdlNTY2MWU0MjQ3OTQzYTExYWNhOTgwOTUwNDZhZDRlMTg4ZTFiM2ZhYmE1MDc0ZDhlZTE4YSJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L114-L151",
+          "version": "repo-lines-v1:sha256:acaf31503c381021f848ce6be71ec01ed393b94d7b809f3faacf29ebb9ec8db4:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE0OWEwZmMxYjM4MDFkYWZjZjI5MTVlM2U4MDFiZDA0ZGE3NTUwMTM2NzY1ZTAwOWZmYjc0ZDUwNmY2ZjNmMWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJhZWI0NjVhMWViN2QxOWY3NzZmZjdmNmY0ZjA5MTkyNmQ1ZmZmZWE2ZTg1MGI1MmQwY2M1NjZjZjgxMTkzMWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIxNzhkNmI0ZjEyNzFkYTgyMDgyNTlkMzZlOWNiNzE5OWUzMjA2OWZmNGExMmVmZTNkOTg5YmM2NjkzY2ZiMzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8cade6aa96e044f2af496089b3c919df",
+      "statement": "The --schema branch takes over the single-call path regardless of mode, resolving the fast alias for fast mode and the expert alias otherwise, and warns '--schema overrides <mode> mode; using a single Grok call with schema-constrained output instead.' when the effective mode is deepresearch or multi; with web enabled it runs a two-pass schema_research (tools) then schema (no tools, json true) sequence, and with web off a single schema call with json_object.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L147-L197",
+          "version": "repo-lines-v1:sha256:5f788e75c9a40b8667df6bb0fbaabaf49e116fe14e62edda392342e90c734904:eyJzZWxlY3RlZExpbmVDb3VudCI6NTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1YzQwZjE0OGQwMDU5OGMyMDFjNzU2YmM3ZDA4NmE5NjhmOGE1MWUyMTExMTIyYmZmYTY4MGQ3NmI5MmFkZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwMTk5OTg4NGNhN2M5MjExNjBiYjk2MWM3ZDM1OGRmMjViZmNkNGU0MWVhZjhhNTNjNTkxNmI3OTBiNDM0ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjODVhMjVhOTBjODU1MGI2OGQxNThlODc2YjMzMjg2ODk2MDc5YzAwMTU5MWE2ZGRlNTgxYjFhNDIwNjQ2YjgifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L464-L553",
+          "version": "repo-lines-v1:sha256:52f2264cd273e3aba7f30d9a8835da2d5d6fd2d8de2401410f7777818ec50429:eyJzZWxlY3RlZExpbmVDb3VudCI6OTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyYWRmNTRhY2EyMDYzNjE3MjNmZjA4Y2JkYTExNmM2NDdmZGQ5NDIxNjEzMGYyNmI3ZTBjMDE0MGMyNTU2MmQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjllZjMyMzg5Nzg2N2NmNWEzMzI4YzZmYjQ2NzFlMjM1ZTgzMzBjOTFhZDRlZWQ0M2UyNTJhODQyNTZmNDJiZGIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d8b700c0006d4648a6b03654f19d918c",
+      "statement": "callOpenRouter sends response_format json_object only when call.json is true AND the model supports it (everything except perplexity/ via supportsJsonObjectResponseFormat) AND no server tools were attached; tools and response_format are mutually exclusive in a single request, and Perplexity models never receive response_format.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L100-L108",
+          "version": "repo-lines-v1:sha256:6cc6af3618a77975863c63bce5c2ab71486c3f00b8b7ffe20f1a0bd5dd1ecb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgyMzQwMWIxMjI5ZDc0MDZiNTk4MmRkZmFmM2EyM2MyMzc1M2M2NzM4MTNlNDk3OWYwNDkwNTkyNzAwM2U4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQwYTMyOWRiZmM5NmQ4YmNjMDFjMzY3MDQzMjkzYTAzZDIxNTMwMGJhZDJiMGJhNWQ2M2IxM2M5OTdhZGFhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTg4YTM0YWYxNGVlOWFlNjc4MjY5ZTkyOGRlOWJmZjgwODc5OTk3Y2Y2NGQ2OGZlZjE2NTViMDg3N2NiMzAyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmU4NGY0NDQ5OTdlNTY2MWU0MjQ3OTQzYTExYWNhOTgwOTUwNDZhZDRlMTg4ZTFiM2ZhYmE1MDc0ZDhlZTE4YSJ9"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L271-L273",
+          "version": "repo-lines-v1:sha256:9be0867404cf3b2222f26fb6e1d6dd3d115f7aad346b0dbecc42845ef622cc1b:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTRiZWVjNWRiMjkwMmM1NGE4MDZjNDc1NjY4NzdiNmI4ZTQ2NGE1ZTM4YjMwMzczZjA0ZjhjNDRjNGZjZTM2OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTExZWVlMmYwNWU5YWEzMzYwMDU3NTI4YWQ3N2RhNTI5YzRjMzZiZWViZTdkNTcwOWJhOGE0YzllM2I1ZGJjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWI1MmE4NTMxYzk3ODkyMTMyM2ExZDllZGI2MjIxNzBmMWZkNDJhMmYxZjc1MjVmY2NhYTgzNjE0ZTBlNDkxYSJ9"
+        },
+        {
+          "resource": "repo://test/openrouter.test.ts#L199-L236",
+          "version": "repo-lines-v1:sha256:a5adfd4df49b38429b2ec9e4e6bdf4288b895724aa1f209c095f6e4960c0643d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4YWE2OWYwYjIyODY1ZDAyNTRhMTYzOTk5YzlmNGZiMDJhYjgzMjkzMDI2ZTQ0NGRkNDI0Y2NkNjdhYTNlMzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEwNzVlZTBiMDk2MmY2Y2ZkNTlhYzMwMjgyNjgxYTAyNTM1Yjc3OTZhMmNmMWJhMTA3YzUwMTFmYmJhM2JjMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2MDVkZmM3NmJkNDdhYWYyZDA4NGUxNThkMWE1NTU2YzhhMzY3NzQyYTAwNWZjYTdjYjIzZTFlZmM5MzQ2NzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7cbf41bd1f8849e6a8ae7493c795d5cb",
+      "statement": "mapOpenRouterError maps a 404 or tool-use error when tools were requested to `Model does not support OpenRouter server tools: <model>. Use a Grok 4.x model, or run with --no-web.`, giving the same incompatibility guidance at the HTTP layer.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L241-L258",
+          "version": "repo-lines-v1:sha256:9e7e1487f07c4cef3d3c698b369d5fc13934c098c04e8fc9cf9638cbf40a8fa7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzNzBjMGE3MDZjYTNmMjJkNmJiMDYxODEzMzBlMjFjNWEyYjcyYjUwNWE2ZjliYjBmZThhYzRkYjcyZDZmMmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMyOThiMjIxNDVkMWFmZTBhZGUyOTliYjBlYzhlNGQ5YTkxODhkZDcyZWU3OWFmMGY0ZjkzNjg2YjQ5MGVjNGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjZThkNmQ0YzEzMzVhMTA2MDYwZTgxMjZmYTNmNDhlYzc2NzdlZGZiM2ZlNmE1MGEwMzhiNmI5MTNhMjdkZDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_117eb7aa83aa49f684dd46a908df0782",
+      "statement": "The result normalizers (normalizeResult, normalizeRetrieveResult, normalizeSchemaResult) stamp mode, profile, outputFormat, and web onto every run, re-deriving web from the canonical mode via modeAllowsWeb rather than trusting call.web — non-web modes always report { searchEnabled: false, fetchEnabled: false } — and merge/dedupe the branch, deprecation, x/bookmark, and parse warnings.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L466-L531",
+          "version": "repo-lines-v1:sha256:065875ebffbdf27ffce16bf6954a2f8617c03f0018241815dfe863d4b546e96a:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MzI4NzUxM2NmMWJhOWJhNjFjOGFiZDJlNWUwOTBhYTQxOGI4ZDc2YzZjZTYzYmM1MjkwZDVhM2JlOWFjNzIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L635-L673",
+          "version": "repo-lines-v1:sha256:a97685c00243ed7f7727413755be74b3b3006a343055d80f79284658b818fbf0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViYTIyZGU1YWVlZjMzODRmMDQwZjFmNGE2MTM1YmM0ODc5NDAzODE3ZTQ2YzMzODE2YTc2ZWMwZTdjZTJjMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYmRkMTFkODY1MmQ2ZGYyMDhiNWIzNWQwNzQxNWFkM2MzZDBlNTdjZTJiYjFmMWVjMTQ0ZjIxNDZlYzliN2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_92df5fa83b204dad8c06d7f21587ad70",
+      "statement": "The nativeMulti model alias is defined in the quality/economy alias tables but unused by any pipeline branch: multi mode fans out to three single Grok calls via the expert alias instead of the nativeMulti model ID.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L548-L577",
+          "version": "repo-lines-v1:sha256:84534c8cbdabe58aa87301b37ee707048af8d7ca310b1c9b90bc4a9a635dbea0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2N2FmNzkwM2YzNDg5N2U4MGEzMTVlMjFiZjAxMDI5NjczYzIxZWU0YWVhMzVjY2FkZGEwZjM5NjJjNWQ0MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyZDExY2FmNDNlOTdlZjM2OWU2YmVlZDFhMjY4YmQwNTgzOGYyOWI5ZGQyNTRiZjY5YmE2NDg4NDE0NzIzNGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE2NmIxYWVmMzk2YTFhODk0MzVhNTk4OTMxNWQwNzYwNjVjZTgwNTZmY2YzYjUwZmM2OTk3MjY2NDVmNmZlZDUifQ"
+        },
+        {
+          "resource": "repo://src/types.ts#L13-L15",
+          "version": "repo-lines-v1:sha256:a53a0ba3f1760b648c09d59f7736a929e00a7994de102971a5354891afd5a735:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVkNDMzNTBjYzhlYmFkZWIxMjZkOTEwNjQ1ZmJlYWIyZDE3YmE3MDU1NzQwNThiMWZjODg2N2E1YjJhNTQyMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmE3NDkyNDgzYTRiNGYyNzFlN2ZlY2M0Nzc5NTVkYTYzNTBjZWIyNzU3MjIyZjJkZjdlOTIyMDhhYTY1Y2RhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTg1NDRlOThlODdmZWIwMTI1ZmI1YzIzOTRmNGU0ZTYyYTY0N2RhMTIyYmYxZDM3NGFkNDk4ODYwYmZlMTc2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmE0NjQ4ZjljOWE5YzA4YmRlMDIxNGI0MmIzNTE5YjVmMjk2YWNlMjU3YzQzNjQwYmIzZWJiZTBlMzgzYmVlZSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_68bda8e27cb0412a886d4f605c2787a3",
+      "statement": "When web.searchEnabled is true, cli.ts prints 'hint: OpenRouter web search is enabled (--no-web to disable)' to stderr before the run, so agents see that grounding is active on auto/fast/expert/retrieve runs without inspecting output.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L30-L32",
+          "version": "repo-lines-v1:sha256:f6d0186b315635d867345239ebb38c84901d7d6f607ed3a680ff34d91c3e3f5d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTQyOGJhMmMyMTZmZDMzMTE2NTE3NGExYzc5YjMwMDAxNTU1MWY0YWVhZDVjYWRmZTdhZDI4MzA3ZjAyYzhjOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWM5NzUyMjA0MmFmOGZjZWJiMjZjMmU0MDZhNWE5YmQ3NDgwOWI5ZDQ1ZDEwMDRiYjg5ZmNkYWJkYmRlNTM3ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_687a0477405f48549f5faa7f2d918fab",
+      "statement": "OpenRouter server tools (openrouter:web_search, openrouter:web_fetch) run entirely server-side inside a single HTTP request with no client tool loop, but attaching them adds prompt-token overhead even when the model runs zero searches (~1.8k tokens vs ~140 baseline in the spike), so --no-web is recommended for static or cheap prompts; searches inject context that sharply raises prompt tokens and cost, and engines like Exa or Parallel may bill separately.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L97-L103",
+          "version": "repo-lines-v1:sha256:05b42838f352e43b49b009feea521032da1bd8a561f5c4893aa39790728c6b7c:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjY5YzE4MjdiMWFhMWU2MGM3MzA3NjI1ZGJiN2VmZGQxN2Q4MDQyMWFkYzM1MGI5NzAxOTAyMWNiYmFhOWQ4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODA4MmNjM2QzM2U0MDFiNTg5NTE5NTUwZTE5ZTY4YjI1OTEyYTYwOTM2ZTQzMDMxYzZiNDQ3YjE2MmNmNDhkZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjk3NWZmYjgzMTZhNjU4MDJiYTNiYmI2MDYzNmQ0ZTRmM2M0MmNkNWNhNDhlZjYzOGJlZTU2OTU2ZGE4ODRhMyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjA0ZGEyMTQ1YTcxMTc4OGU2NjZlZDAxNWNlZTNjZjE1OTNjNTY4NGIwYjZhM2ViMDAzY2Y1YzIzZTVmMmQ4ZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_63063cc78d064227bec7e0b7ecb86b07",
+      "statement": "Operational mode-choice guidance: use auto/expert/fast for decisions and tradeoffs (web on by default with a stderr hint each run), deepresearch for deep factual research instead of default Grok, multi for multi-perspective synthesis, and retrieve or expert --retrieve for raw Tavily-style results[] suitable as RAG input.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L130-L142",
+          "version": "repo-lines-v1:sha256:48b2f38089a74120aeee14dfb7d12a7effe0927d0a60d09a8e5580c28f6dc2d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlODYxZGViZDk5YmNiZWI3YzhmMDE5YmJlNTNkZTc3MDhkMjlmZTQ1ZWM4NGVjZmE4ZTE1ZjdiY2JhY2MzMmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNkOTI4NDVjYmM1MzQ1OTM3YTNhNGJjNTgzNWVmNDg2MjZmODE1YjVlZTU1OWJkYmQ0NzM0OTNmNTM2YWFhNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwYmVhMTMxMWQwM2QyYTA2ZGNlM2U4M2Q4MWM3NzM1MTBiYTQ5NmUzMjM1NTNmOTAxODhiZjAxZTE2ZDNlZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwOTg5Y2FlYTU4ZjIzOTg4NWYxZjk0NzliZjc0NzNlMTZhY2UyMjZmNGMwZGYwYzI0YTJmNTUzMDg1OWYxNjQifQ"
+        },
+        {
+          "resource": "repo://README.md#L34-L39",
+          "version": "repo-lines-v1:sha256:b64f29b5c3a738a0d1b83db0ce34cda37ce93da257f32423506a0dc720321e83:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWI3YmFiNWQ0ZmY2YWM1YjJhODEyOWUwZGIwZGU5OTgwZGJlN2Y0NjY1ZGE2YzVlOGIwMGU0OWZiNDg5ZTM2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2U2Mzc3NDE0NjRhM2ZiOGY2ODQ5OTI4M2IwMjNiNjhiZWRiMzQ3M2UyYTBlMzJmZmVhYjExN2Y1MTkyZmY1MyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjBkYWJiMjJlNjEyOGRiMGU4ZDM2N2JhNjJkMmQ1NGJhZjQ0MmZkMTNhNTJmNGYwMmI5YTc3MmQxMjAxNjYwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTllNThiNGMyNzI2ZWFiOGNjYTRkYTI5Zjg0NmRmMjhjNWE2MGU1Mjk4NDIxNmZiM2M3ZmVkN2RjOTBlMWJmZSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

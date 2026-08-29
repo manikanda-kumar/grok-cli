@@ -1,0 +1,286 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:cc815a89f0b5206d0cd2c6a416223ba96e5097474fd02eba7f461d5a904de0b9",
+  "claims": [
+    {
+      "id": "claim_2a55c2b367b14402989d8b352cca6de4",
+      "statement": "runMode dispatches multi before retrieve, deepresearch, and the single Grok call, but after the --schema branch, so --schema overrides multi with a warning and replaces the 5-call ensemble with a single schema-constrained Grok call.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L147-L205",
+          "version": "repo-lines-v1:sha256:6f9c3f0c37029bedf858046fe3ba31a778dd6be489c4b8197c4bc7813d23b084:eyJzZWxlY3RlZExpbmVDb3VudCI6NTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1YzQwZjE0OGQwMDU5OGMyMDFjNzU2YmM3ZDA4NmE5NjhmOGE1MWUyMTExMTIyYmZmYTY4MGQ3NmI5MmFkZTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwMTk5OTg4NGNhN2M5MjExNjBiYjk2MWM3ZDM1OGRmMjViZmNkNGU0MWVhZjhhNTNjNTkxNmI3OTBiNDM0ZTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI4NWE2ZjA0MjAwZjA0YjZlYTZjMTU1ZmE2OTcyOGQ3OThlYzkxOTgxNzIwZmFjNGM1MzBjZDI5Y2U3NzVmYTYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f914ac04aa754118833f6caba724585a",
+      "statement": "multi is a non-web mode: modeAllowsWeb returns false, so resolveWebOptions never enables OpenRouter web tools for any leg, and --retrieve / --output results / --output both passed to multi are ignored with a warning while the normal ensemble still runs.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L55-L57",
+          "version": "repo-lines-v1:sha256:5f6c4b262a4da660a9513ee863abac9e79ccea18462a241f0d216f24681a5e23:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkxOTIzODI3YjllYzhiNjdkZmU4ODljNTY5NWY0NzJiZTA2OTZkODFjZTJkZmNmZWIzYjM0ZjBjNmYzNGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzliZDY5MzgzN2UzZTdmOWE2YzY3MmE5M2ZjOTA0ODU2ZDY2NmM4NjNkNTNiZmZkZjE0Njg2YzQ2YWVhM2U1MSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L209-L223",
+          "version": "repo-lines-v1:sha256:7dc5be4257e148b9c1f594ea75786f8060c8169597cb9c2bcf15dcdded3ca34d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5ODczZjM3MDA2MmIwZDZmOTNkOWYzNTEwNzRkZjIxZjFmNGViMDk5NmJiYTY0ZTA5YWQyOTA3ZDIzY2VhODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4NWE2ZjA0MjAwZjA0YjZlYTZjMTU1ZmE2OTcyOGQ3OThlYzkxOTgxNzIwZmFjNGM1MzBjZDI5Y2U3NzVmYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7add2107f21a44db9bf2106854e28115",
+      "statement": "runMulti resolves two model aliases: the research alias (perplexity/sonar-reasoning-pro, or perplexity/sonar-pro in economy) for the Sonar pass, and the expert alias (x-ai/grok-4.20, or x-ai/grok-4.3 in economy) for all three Grok role analyses and the synthesis call.",
+      "evidence": [
+        {
+          "resource": "repo://src/defaults.ts#L3-L18",
+          "version": "repo-lines-v1:sha256:3dc6c0e6c39cefa11f0cf25be5fd09d3d344f5924b0cb1be5c5d523b58df2909:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZDZkOWJjYWI5NzZlYjY3YmFjZWQwZDk3ZDJmN2FjZDE5ZWY3YWZjZTgxY2Y3ZjIyMjlkZjY5MWM3YTM3MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1MzRlOWZiMzMxM2E0NjQwZjdkZjZiMDUzYjViMDE2YmE5NjQyMmQ1ZmY1ZmFhZGIyYTE5MTAxY2JkMDE0MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMDA1NDdmYjllMmU1YjU1MzVjYTM3MTA3YjIzNDIzMzgwNGY5ODkwMTVlZmViZWM4ODAxMzZkOTU5OWM1NTYifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L558-L559",
+          "version": "repo-lines-v1:sha256:e9ed811ca43bc8fb1158cb1be8f871e96c2b4f67f845f2efe0423c129672a493:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmJmYjFmYTlhOTRhYjllZTQ2ZjBkYjRkMzljOGRiY2UyZjk3OTlmZmMyYTRlMjhlOWQzYzRmODIyYmI4YTc1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmI2OTBkNDZlZGE5YjhiZjIxMDA5NjNiMmNjMDM3ZTllM2M3ZDAwNGY5M2EzNDNhNWU0MWEzMWVkYjk4N2Y1NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTFlMzk1MjdjZGZjNjRkOGU2NDQzYTE5OWY4Y2EzNjYxMzMzOGI5NmI1MzBhZDYyMTA0MjIwZGEyODc4YmM0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmE0N2VhODg1NzA0ODZiYjQwYTEzMDNmNjNjYzQ3MDZiYWNlOWFlOTBlMWFhOWFkNzIwNmY0MWViMWI1MTUyMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d6df388bdf214b5881e648a82fe9bd58",
+      "statement": "The unused nativeMulti alias (x-ai/grok-4.20-multi-agent) is not used by multi mode, which fans out to three plain single Grok role calls instead of a native multi-agent model.",
+      "evidence": [
+        {
+          "resource": "repo://src/defaults.ts#L3-L18",
+          "version": "repo-lines-v1:sha256:3dc6c0e6c39cefa11f0cf25be5fd09d3d344f5924b0cb1be5c5d523b58df2909:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZDZkOWJjYWI5NzZlYjY3YmFjZWQwZDk3ZDJmN2FjZDE5ZWY3YWZjZTgxY2Y3ZjIyMjlkZjY5MWM3YTM3MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1MzRlOWZiMzMxM2E0NjQwZjdkZjZiMDUzYjViMDE2YmE5NjQyMmQ1ZmY1ZmFhZGIyYTE5MTAxY2JkMDE0MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMDA1NDdmYjllMmU1YjU1MzVjYTM3MTA3YjIzNDIzMzgwNGY5ODkwMTVlZmViZWM4ODAxMzZkOTU5OWM1NTYifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L569-L577",
+          "version": "repo-lines-v1:sha256:9e5398ae83cc7c53d69a3c4eca0a1dc2a042a4246e671512b45fbf8aa8467622:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzg3NTdiZDFhMTNlNzAzMmFiYTE1MGJlODZjZDk1Yzk0NjBiMzVhMGIyNTY1YThjODkwMDhiYTcyYThmNmY0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJkMTFjYWY0M2U5N2VmMzY5ZTZiZWVkMWEyNjhiZDA1ODM4ZjI5YjlkZDI1NGJmNjliYTY0ODg0MTQ3MjM0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzI3YjBhOGI2OWNhOTg0ZWJiYzc2OTMxMmZmODM5NGJkYzQ1NmE4Y2FjNjMwNmU4Mjk1MjQ2NzBkN2NhNTQ0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTY2YjFhZWYzOTZhMWE4OTQzNWE1OTg5MzE1ZDA3NjA2NWNlODA1NmZjZjNiNTBmYzY5OTcyNjY0NWY2ZmVkNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e8177fa0dbb34bae9b350c856dfc24c4",
+      "statement": "Pass 1 of multi is a single Sonar research call with role 'research', messages built by buildResearchMessages with the report output format, temperature 0.1, no web tools, and an injected system instruction to ground every factual claim in current sources; its content and sources feed all downstream roles, and a failed research call fails the whole run.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L561-L567",
+          "version": "repo-lines-v1:sha256:94dab15a5fe3fdcff8c85baa78f956731d75ddc2896014c4d1fe3f5847242282:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM2MTJmMjEwMjYwOTZkNjA1MTE1ZmE4Yjg4N2UwMTI3NzgzN2YyYTM0YzJmNzk4ZTgzOTgxMTQ1ODljYmZhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODBiZGRhYzU5ZGUxYzI5NDc3MjVlOTk3YTUyMDU4YjY2ZDlkOTdlMmRkODU0NmMwMDZhOGJkMWZjMDUzNmRlNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjNlN2FhZmQ0OTJkNDlkMTg0MDY2NGFhMGVjMmI4OTAxZDAzNjNkMDg1NjUzNDUzMWY0Y2ExNWU3ZDYzMjYwZiJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L26-L40",
+          "version": "repo-lines-v1:sha256:61b4d7039ce1be889b63ba6c9ebddbe520081622e58b2d19a4b199942d37dfb6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3NTcyNWJkZWJiODRjNzU0YWY0OTFjMmY1YzA4ZGZmNzQ3YWU3NzYzZDQzOWY1NDM2MmM1MmY0MTRmNDVmMGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0MDA1MjRmZDJjOWUwNzVhNzQ2YjM3MTc0M2EwMjFmNDY0ODlkNjYwYTMxNjA1YjkzNTA2MjcyODZjM2M2OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcwMzc5ZWRjYzJlZTkyNDA1MDU1NmQ5NWE4NzE0NDdhNDI0MGQzZGQyMDcxZmJmMWYyYTc0ZWY5YzM5M2ExMWMifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L348-L355",
+          "version": "repo-lines-v1:sha256:a8e0ffff214d7604f53b1d317ff2eb742c8fa0c00cf54326f4032b0f8e912c54:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTBiZGMyNjAzNTlhYzA2ZGY1ZGRlMTNiNzA5ZmM4ODE2YzkyNDQzYTBjOWZjNzExMjhmM2MzYzE1ZDU0NWExYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDA2OTAyNjMwZGY3NzRjMDlkNjc4NzY3ZjIzNTYwODQ2NGEwZWVkZjljNGEwYTkwYzI3MzM0NTRhMDA0NDc3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDA5NjIwNjMwMDIzMWE0ZGY0MDE4YTg4ZGY4MzliMzJjYzE0MWU2Yjk2ZGYzZDM1ZGNjNjQ3ZWE5ZWQ4NDcxZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffb14a1b24064957a4214d28860a3b01",
+      "statement": "The three Grok role analyses (engineering, product, skeptic) are built by buildRoleAnalysisMessages, which pairs a role-specific system instruction — engineering feasibility/implementation/maintainability/ecosystem/operational risks, product user value/business tradeoffs/adoption/differentiation/roadmap, and skeptic weak assumptions/missing evidence/hidden costs/security risks — with a user message containing the original prompt and the grounded research, all at temperature 0.2 on the expert model.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L569-L577",
+          "version": "repo-lines-v1:sha256:9e5398ae83cc7c53d69a3c4eca0a1dc2a042a4246e671512b45fbf8aa8467622:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzg3NTdiZDFhMTNlNzAzMmFiYTE1MGJlODZjZDk1Yzk0NjBiMzVhMGIyNTY1YThjODkwMDhiYTcyYThmNmY0OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjJkMTFjYWY0M2U5N2VmMzY5ZTZiZWVkMWEyNjhiZDA1ODM4ZjI5YjlkZDI1NGJmNjliYTY0ODg0MTQ3MjM0YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzI3YjBhOGI2OWNhOTg0ZWJiYzc2OTMxMmZmODM5NGJkYzQ1NmE4Y2FjNjMwNmU4Mjk1MjQ2NzBkN2NhNTQ0ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTY2YjFhZWYzOTZhMWE4OTQzNWE1OTg5MzE1ZDA3NjA2NWNlODA1NmZjZjNiNTBmYzY5OTcyNjY0NWY2ZmVkNSJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L42-L54",
+          "version": "repo-lines-v1:sha256:70676bb8ca23d4a78998d0e101f5114f4521571730adb52a11b418d0d868ac69:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhYTlkOTFjMDViNjQxYjNiZDFhNzQ4YzJjNmNhODYwZTcxOTBkOWNmMzhjMmFkMTk4MzViNGU5OWQ3N2ZiZWMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0MDA1MjRmZDJjOWUwNzVhNzQ2YjM3MTc0M2EwMjFmNDY0ODlkNjYwYTMxNjA1YjkzNTA2MjcyODZjM2M2OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkNWEzM2IyYTgyYWM5NGFlOTk0NzI2OWM3YmQzZWQyYTQwZjAxMzRiY2ZjMDQxYzg2NmZlMWZmYTJkY2VkN2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8d3e6bdeed354f29980c84272c7663ac",
+      "statement": "The synthesis pass is a single Grok call built by buildSynthesisMessages, whose user message concatenates the original question, grounded research, source URLs, and the three role analyses and asks the model to synthesize the final answer; it runs at temperature 0.2 with json set to options.json and webSearch hard-coded false in its system prompt.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L601-L616",
+          "version": "repo-lines-v1:sha256:7c6f38c759d47912c9ee690ea4dae7a343575b2312362751ca61be4cccc44a5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNWI2MmI1MzRkMmMwMzcxYWY0MmU2OGIxZmIyZjM5OGEwZjY0OWJiMmQwMzY4YWZlYjY4YmUwNTVlMWQwYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjM2ZkNmM4ZTM5NzMwZjI2Y2JmMjM3NDllYWU3N2QwNzNjMjdiYWU2ODlhODZmNmZlNjE3NzExMzA1M2E4YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0OThmMzE0Y2RhYTJjOGNiMzdmZjM0OWI2NDAxNjEwNTc5ZmFlODY5NmI4ODE5ZWUyNWQwNjAyODAzYmQ5MjYifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L56-L80",
+          "version": "repo-lines-v1:sha256:d6825575d54b12d9026b50a44a038b0fc1f3e01554ced887a7df4d888df51249:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM4ODRlOTU2ZjhkYWFiZTg5NTAxMzU2ZDRhN2I5YjdmNGEyMzFlNThiY2U4ZmY0OGQ2OTc3OWUxMjI4NTNiOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU0MDA1MjRmZDJjOWUwNzVhNzQ2YjM3MTc0M2EwMjFmNDY0ODlkNjYwYTMxNjA1YjkzNTA2MjcyODZjM2M2OGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxNzg0ZmU0NmUxNjI4ODAyOTRkMjMxOTc5ZmU1MGM2OTM2YjIwMzhkMjI2ZmI3ZjllZWZlNDRhYmFiZDU1NTIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f06dc4965084b38b0068033d420f955",
+      "statement": "The three analysis legs run in parallel via Promise.allSettled by default; when --max-cost is set they run sequentially via runSequential, which stops dispatching further legs the moment one throws MaxCostExceededError, so the withBudget pre-check prevents any further billable leg once the cap is crossed.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L579-L588",
+          "version": "repo-lines-v1:sha256:8f4faadf7be4f485f36425352a05e1ebc498da3197b955ea23c2eb29f581fa1e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMDViNmM5Y2FmY2YyOGM3Y2E1NTRlYTJjNzM1M2Q5ZGUzMTRhZGZhYjVhYjk0NDNhZTYxZWJlYmJiNjM2NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhZDAzZmIwNjdjNTAxOWVjNjU0ODVmOTRmNTYwY2VkZjE3NDBlMjcxNDhjN2RjNTM4YjIxYTJiNGE3M2Q4MzEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwZjRmOTUwYWEyNDZkZTkxOWQ1YmZkYmMyZjZlZTNkNzk5MTMxM2Q0MTIzZWY2NzcwMmUxMGUyZWEwZDU3NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRlMDVlZTlhZDUzMzAxNTkzZjA5OTViZjZkODE5MmRjOWE2OWMyNDY3YTBhYjUzYmQ0Y2NjZDA5ZGI2M2Q0NDgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L70-L84",
+          "version": "repo-lines-v1:sha256:7fc20e904d0b540aae849d22b128de45286a8459f943a0631b075cb8a7313688:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2M0ZTlhODE4YTdlNDY4OTIzYTY0YjllNGM4NDUzMzc4MDFmZWQ3ZjhhYjA0MzAxZmI5MWUyYzMyNDQ3MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4Mzk0NWQxZDVkMDU4YjMyNjU0ZTQwMjQ3NThiZmRjZGEzZDNjMjY5ZjY3YjQzM2RkYTBjZWRiMzJjNjIyZGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cbb322510494474b565c75d7563908d",
+      "statement": "With per-call cost of $0.001 and a $0.0015 --max-cost cap, multi dispatches only the research and engineering legs before throwing MaxCostExceededError; product, skeptic, and synthesis are never dispatched.",
+      "evidence": [
+        {
+          "resource": "repo://test/modes.test.ts#L265-L276",
+          "version": "repo-lines-v1:sha256:5b21d84f36acf4c182dcb8d5abc8833d7be73717b28a4255bd8257f5aa9877a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAwZjczZWVjMTk2M2EyNDdmZTNmYjgyY2JiMTVjNDQxOGJhNDUyOGFhMzk3MDUxMDQ3ODk1YzZiZjAyNjA0ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxNTlmYjBlMzFlYmJhNWZiYTIxZTliYmRmZTlhYTQ2NmE2YjM4ZjdmODNjNTg3MGIzZDU3YzgxMjZjOTM4ZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxZDA4OGQzYWRlMjk3ZWY3ZGQyNDg5ODQzNzM2Yzk0M2I3NjA0N2FjNmE1NjViMjMwMWQwMGMzYmZmMGY5ZmEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc51606d006141fbba02f435993d4662",
+      "statement": "A MaxCostExceededError from any multi leg is fatal: runMulti scans the settled results for a budget-abort rejection and rethrows it, skipping synthesis, rather than demoting it to a warning; the error message pins the abort point as Cost $spent exceeded limit of $limit (aborted after \"role\").",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L43-L48",
+          "version": "repo-lines-v1:sha256:49a58bb8919c7374170e031e804ea17700f03aa006e6ead1a3306fce4978c95f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjAwMmU5OThjYzVmMTM2YTA1MzBiMGMwODkzYzk0ODljN2M0MmM5Mzg2YTMyODM0MTJjYjBhOTY4NDc5OGJjOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWI5NGVjMzc0ODYxM2FhMTY0OWQxNTk1OWY4ZWYxMDI3ZjE2YjM4ZGRlNzkxNzEwZWI5ZTA0ZDU0OGRhMTI3OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWE5ODJjY2IzMmYxOWRjYmQzZDNlNTdmY2Y2YmQ1NWE2YzhhMDBmOTE4N2RjODVkNjhmNGQzNzNkNjA5N2U0ZSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L586-L588",
+          "version": "repo-lines-v1:sha256:ab22360a7a88f4edf8c2a53e656e5cf9935e0a2652fd5d1bc828f2a10e5ab118:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmUwOTc5ZmY1NDg1MjY0ZmQxNzAyODQ5OTJlMmU0NmU4MDc3MTlmYWIzY2M0Yjg0NWQ0ZTBhOWYwN2Q3ZjdlOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWFkMDNmYjA2N2M1MDE5ZWM2NTQ4NWY5NGY1NjBjZWRmMTc0MGUyNzE0OGM3ZGM1MzhiMjFhMmI0YTczZDgzMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTdmNDdiMjI3MjFhYTc3NDJjYTI1MTUyMTk1NTk5OTZkMGZlMDc1YTFiMzJmZDc4MmEzOTQzNmM3YzMwZDIzMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGUwNWVlOWFkNTMzMDE1OTNmMDk5NWJmNmQ4MTkyZGM5YTY5YzI0NjdhMGFiNTNiZDRjY2NkMDlkYjYzZDQ0OCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_bed3eac6f31747eba2aa17290caedbca",
+      "statement": "Per-role failures in multi become warning lines of the form '<role> analysis failed: <reason>' mapped by settled index, and synthesis proceeds with the surviving analyses; a failed product leg yields a successful final content with the warning and a usage.calls length of 4 instead of 5.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L590-L594",
+          "version": "repo-lines-v1:sha256:258bf2e4692c22ce5609d11a54dce6e9806a7f54373ef7608b88146d077093e4:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjYzNmE5YTFhYjEwY2NiOTU5NWJiMGJlN2U0ZTA3NGVkNzczMGVmOTRhYmY2ODI1ZmQzNDM3MDQyMzhlZmFhMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDMyMDUzNWEzNTBlYThiOTgzNDczODRmNGMyMjMzZjE2ZTQ0Y2M2NGExODhmYzc5NWUzOWJmOWRiMGQzYThiNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTI5NTBiNmRmMzVkMDFlYjAxNzAyNGMwNWI5ZTA1ZGRiMTQ3NGMzMTJjZGQ2ZWY3ZGRhZmM5MDUwN2FmMzRhYyJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L315-L333",
+          "version": "repo-lines-v1:sha256:3f020af86fbc5218e8aab8d6c044d9d9d834ffd4ae0eedc1684fa92972d15fc2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliZWY0NGUzM2Q2MmVkOWRhMmQ0ZjRlMTc1YzhmM2RlYmY1MTUxNDk4NDVjZjM4ZDM4ODNlOGMwNzE2ZDYxNTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2ZDM5MjQzNjdhMzUxYjU5OGU5NmJiZTZkOGE5NDljYzE2NGZkNmU3NDFiOGI4NDkzZTkzY2EwOWJiZGU5OGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwMDNlNjE3ODNlOTRhMzlhZTY1NzhjMWJmMmJiODA4NzY4NDc2N2ZkNWFlMjkwYzNjYTgyM2RmNmZiNTFkMzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3e38209306254e8294c94ab561b72c7f",
+      "statement": "If all three Grok analysis roles fail, runMulti throws 'Multi-agent mode failed because all Grok analysis roles failed' instead of synthesizing an empty ensemble.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L596-L598",
+          "version": "repo-lines-v1:sha256:96cd9f67da8066d17d7e721986883cbb27c05d0422126d30a0f4052c057a562d:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTRiYWFlOTRlNzk2MjAwZDRjYTE5ZWYwODY2MjBhNDU5ZGM5OTk4MTI5MTJmM2RjMmVkMDZlMWJiYmRmNmExNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGZjNjVhM2Q3ZWNiMGVmNWZmNTdmMzFkMjU4ODFmYzViMDMyZWU5YjUyY2NiNGRkYjJmZmFlN2QyYjlhNTE3YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDM0NmI1MWIwYmQ1NWQ5YjEyODYzNjRmN2I4MzgzMmZiNzk1MTdiOGY5Y2IxMjNmNTRmYWU3ODAxMDFjYTFjYiJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L335-L346",
+          "version": "repo-lines-v1:sha256:638384a5841c3e396cfca6f80c209968ed3e42767c03bf8f35455f1b1883a013:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk3NGY1Yjg5ZmZiMDYzODBmNGU0NWUzN2FhOWRkMmQzYmNhZGE0NmRmYjcwMWVjYmJlMDY4MmQ5NTgxZGM4NTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk5ZmVjMTY1ZjlhMTE0ZjJhYjg0MTdiYTY2MDYxYzhmN2Q4ODI0OGE5MTMxMGYwZmI4N2E0N2U3ZWM2ZTVlYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU3MjgxNTFiOWYyMWNkZDVjZWI3ODU4NzhlNTczODhmOTc0NjdlY2UzZTUwN2NiZjMyNzE3MjNhNDQwMTFjNjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_587704d04f4443ed98eadd29cb07374b",
+      "statement": "runMulti merges results on top of the synthesis result: sources concatenate research.sources with synthesis.sources, warnings concatenate research, role-failure, and synthesis warnings, and usage is mergeUsage over research, all analyses, and synthesis in call order, before normalizeResult stamps mode 'multi', profile, and outputFormat and dedupes warnings.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L618-L632",
+          "version": "repo-lines-v1:sha256:4dc802f043c9730acb4add12004715c4e73ec26acb5b28bd2d296d7ee32be47d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhlMDFjODRhMTY3MmNiMzk3YjQ1MGUyN2RlMzhjYmRhYTVlYTQ2YzNmMTBmNTM2NjM1YjMzY2MyNDI3MDY2YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1ZWYwMWJjMDhkYmMzYjYzZTRlNzVlYTNkMjZhNWI5NDE4OTE4NzdlMjdhZDg5MTMyOWM4NDExZDdkOGRjNGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NTBkMjdjZWVlZTdmNTUxZGNmZTBiNDI0ZDljMDJmM2NkODZmNThlN2UwN2U2OGM5ZmYyZDQ3YzYyZGE3N2EiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI5ODMyZDRlMzE4NWJlN2Y0MDgzYTE1MjdjN2M0ZmVhYWMyNjg3ZTU0ZDQxYjY5MzExNjlkNzRjMGY4ODYzZjEifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L635-L661",
+          "version": "repo-lines-v1:sha256:3ec7aadc65ae6d05eb20ffc7fc7d287f429bcd35ad0181fce7914c08c7b27ac9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViYTIyZGU1YWVlZjMzODRmMDQwZjFmNGE2MTM1YmM0ODc5NDAzODE3ZTQ2YzMzODE2YTc2ZWMwZTdjZTJjMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYTJjYjI1YTEyMmI0NDIyMWE2MjM0ZWM2NjBhN2I1ZmI3ZjliZGU3YjNiOWUyYjNjNTU5YTBkOTZmYWM3MzkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhMzdkNTYzMWJhYTcwOWI1NTE4OGFiYjhmMWU4MjUyMDZhZDNhNTQ4NjQ1YjY2MWMxZTlkODMzNTg1MDRlMzkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_88a724bb8d814f79b6d97238cf3f3ee6",
+      "statement": "mergeUsage replays every call through addUsageCall, so the aggregate costUsd exists only when every call in the merge reported a cost; when any multi leg omits costUsd the aggregate is undefined and a set --max-cost degrades to the cli.ts stderr warning that the limit was not enforced.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L36-L40",
+          "version": "repo-lines-v1:sha256:f87aae72577305c953874ebc3b78a7e44f29480c399a5aab8118c1d068856f9f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWJhM2MyZTY4MDRlZjE1ZjJmY2NkZWQwYjRkNDlkNjNhYjYxZDVmMTZlMjYyYmIxZWY4ZTU2OWY0OTAxZGNlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJhMGI2OTEyY2I1ZTYzZTVlZGQ2Y2Q1NWM0Zjc2NDhhZTJjYTY3Y2UzZTQ4MzU5ZTk3MTliNjMwMDExZTgxMyJ9"
+        },
+        {
+          "resource": "repo://src/cost.ts#L11-L33",
+          "version": "repo-lines-v1:sha256:f294ca04014fa9b9b0646b1edadb5bd352aa1cdc691a7176a56354bafd3dec59:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTc1Y2Q1NGRkYmFmNjJlMTFhNTY4NWJhODE5NzMwODA1YjRhZjJiODNhZTdmZGRiNDgwMjIyYTYwNzVlMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2NjgyODgyOGRkMGZhNTA1MDNiOGIxZjBhNDc0Y2Y1ZjRjNzU1ZjI5NjE3YWUyODFmMmMzYmNkOTE3ZjU1YTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_29024ab1008244c5ad4e77e2d9fd40b0",
+      "statement": "Because multi never attaches web tools, --json in multi is a single-pass synthesis call (json set only on the synthesis leg); the two-pass --json + web research-then-format pattern does not apply to the ensemble.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L243-L284",
+          "version": "repo-lines-v1:sha256:3a91920889869fafcaa3c5030f8dd7d4731eec9a498b2ecf2ddf1dca41f648d0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDVjYmJmNjAzY2U2NWE4MzEyMThiZTkyNzJhODM4ZGVlY2E4MWRmNGU5ODQ4YjIxZTY5MjYxMjBhZWM3NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2Mjg4NTQ1NGI4NDYwZDA5NTcyODk0MDY1MjNhZDZmMjEyZmU4NDAyYTA4MjVjNWU1YTBhMGEwNmQ4MTAwMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiNjI3MGEyODM1ODRiOWFhMzFkYjExNjQ3NjYwMTUxNmZmNTcwYTQ1NDJkMDQ5YjRmOGFiN2Y1MTQxMjE5YWYifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L601-L616",
+          "version": "repo-lines-v1:sha256:7c6f38c759d47912c9ee690ea4dae7a343575b2312362751ca61be4cccc44a5a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNWI2MmI1MzRkMmMwMzcxYWY0MmU2OGIxZmIyZjM5OGEwZjY0OWJiMmQwMzY4YWZlYjY4YmUwNTVlMWQwYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjM2ZkNmM4ZTM5NzMwZjI2Y2JmMjM3NDllYWU3N2QwNzNjMjdiYWU2ODlhODZmNmZlNjE3NzExMzA1M2E4YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0OThmMzE0Y2RhYTJjOGNiMzdmZjM0OWI2NDAxNjEwNTc5ZmFlODY5NmI4ODE5ZWUyNWQwNjAyODAzYmQ5MjYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_23a00b23726347dfba19417b8d6c7ea4",
+      "statement": "The multi progress contract prints 'Step 1/3: Researching grounded facts...', 'Step 2/3: Analyzing perspectives (engineering, product, skeptic)...', and 'Step 3/3: Synthesizing final answer...' on stderr, each gated on !options.json so --json stdout stays pure.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L561-L561",
+          "version": "repo-lines-v1:sha256:5c612f21026096d605115fa8b887e01277837f2a34c2f798e8398114589cbfaf:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM2MTJmMjEwMjYwOTZkNjA1MTE1ZmE4Yjg4N2UwMTI3NzgzN2YyYTM0YzJmNzk4ZTgzOTgxMTQ1ODljYmZhZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNWM2MTJmMjEwMjYwOTZkNjA1MTE1ZmE4Yjg4N2UwMTI3NzgzN2YyYTM0YzJmNzk4ZTgzOTgxMTQ1ODljYmZhZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODBiZGRhYzU5ZGUxYzI5NDc3MjVlOTk3YTUyMDU4YjY2ZDlkOTdlMmRkODU0NmMwMDZhOGJkMWZjMDUzNmRlNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNmQ1NWY3MTZlMDY0ZTIwY2Y0ZTAxOWE4Y2VjMDIyZThjNWZiNGM0MWFiYzM3MWVmYzgwNDI4YzlkNDc2NzI0NiJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L570-L570",
+          "version": "repo-lines-v1:sha256:a5824491b4b170342ac68f960fa525d297b787ab440b202a07c5381ef0e74511:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTU4MjQ0OTFiNGIxNzAzNDJhYzY4Zjk2MGZhNTI1ZDI5N2I3ODdhYjQ0MGIyMDJhMDdjNTM4MWVmMGU3NDUxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTU4MjQ0OTFiNGIxNzAzNDJhYzY4Zjk2MGZhNTI1ZDI5N2I3ODdhYjQ0MGIyMDJhMDdjNTM4MWVmMGU3NDUxMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjIyYzExZTg0ZDc1NDc1ZjMxYTBjNjNlZjkwZWVmOTVjZDQ5YmQ2NzVmNzA1YzAxYzkxNWUzYmYxOGU2YTMyZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzNiN2IzOGI5YTgxYmNiNDc0NmE2NmY0YWE1M2I1ZThkZWYzZjI3ZTdlYzUzMzRkMmQ3ZTliOGEzYTZjYjM0NCJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L600-L600",
+          "version": "repo-lines-v1:sha256:6b44dc6e28610a4075ed22a2c19a40e6fe2b945b277f5b98596acc5b7793349b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmI0NGRjNmUyODYxMGE0MDc1ZWQyMmEyYzE5YTQwZTZmZTJiOTQ1YjI3N2Y1Yjk4NTk2YWNjNWI3NzkzMzQ5YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNmI0NGRjNmUyODYxMGE0MDc1ZWQyMmEyYzE5YTQwZTZmZTJiOTQ1YjI3N2Y1Yjk4NTk2YWNjNWI3NzkzMzQ5YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzhiZDYwMjg3YzFjMzM0ZTgzZDUwYzBlYjg4MzgwNGViYzlkYzZkNGYyZjUyOTcyZGM0NjliZjExNjYzOTBkMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzI2YzZjMGQ1Y2ZmOGJlMmEzZTAxMjM5YzA4ZWFmZTk2MGFjY2YyOTI1ZTYzOWEyYWZmN2ZjNjNhMTliN2YwZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_65a7da05219248a8a75110b7058b631a",
+      "statement": "The HELP_TEXT agent tips recommend --max-cost specifically for multi because of its 5-call fan-out, and the sequential-under-cap semantics make the cap preventive rather than merely reactive on the ensemble.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L170-L180",
+          "version": "repo-lines-v1:sha256:e2c9ef9f45835089e99a7d4c929882b31165419bd6b6785fa39c8fa1ed5c55c5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhiZTBjODU2YTY3ODRjMzc4NDE0MWRiYWFjMjc1YTUxY2YxMjAxYzBkYTgzNmI3ODM4MGVkNjRlOTU0ZWEyYjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI0ZTdmZTk1NWQ5MDZmM2NmZWRlOGI4MDg5NDFjYzM4YTI0ZTJiNTA2YWZlZTRiZjEzNWQ2YzI1ZTRmYzg5ZWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRjNzE2MjkzZGFlNWFhYmYwNWE0ZTk3YTEzZjExMmRiNTM2MjM1MjMzODQ0YmI1ZWI2YmE5YTIwMjk5OTk0ZDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ZjljZTFmOTcyNDE2YTM0NzUzMDZiNjE0NTJmMTUwZmNhNzA2YzAyM2JlNzVkNTZmMDM5NWRkNWE4ZTA4MTMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fa9156d7825941628706a3925df13dbc",
+      "statement": "When --x or --bookmarks are enabled, their rendered markdown is injected into the research and synthesis user messages as sample context, and attachContext subsequently attaches the xSignal and bookmarks payloads while folding their warnings into the deduped warning list of the multi result.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L199-L205",
+          "version": "repo-lines-v1:sha256:87abc378a8efa64cf409dde8b53297f4ed464f1292039c136f4b8febff5698f4:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjlkMjdkMjFiYjcwM2YxMzVhYjJkMDc2NTMxM2M4MjgwNWE2NTJhYmRlNDJiZTlhNzNiZDNkZjRkNzFhOWZhMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDc2NTNlMTFiOGNkMjBjMjYwZWM2ZDcxM2E2Y2Y0MzkyNTc1ODU0NDZhOTllZjAxNGFkNzNkZDEzOWU0ODU1MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjg1YTZmMDQyMDBmMDRiNmVhNmMxNTVmYTY5NzI4ZDc5OGVjOTE5ODE3MjBmYWM0YzUzMGNkMjljZTc3NWZhNiJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L333-L339",
+          "version": "repo-lines-v1:sha256:5bcb733792cc34e449bf8bda5cb35d7c344945833fb41459fa63a44a5c912993:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmUyZjY5OGQ2M2U4NjM3NjBiYzRkYzIxZDNjNWUyMWQxMjA2ZDc5ZWNjNTI4MmZkYzk3NGIxMmM5NjBhNTBiNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzgxOTYwNDYzZDkwY2UxNDNjZGMwMWNjM2NiNGM2NDMxYThmOTZhNjNiYTk5MzJkOGEwOTM3ODRkOGMxMjhjOSJ9"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L88-L106",
+          "version": "repo-lines-v1:sha256:e6947eddc9e2663c53e558038babbd0c03107c16c810da6e226a3a93eeaa1381:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmOTc3NjQ4MWRmZTI4NzdjZDJjZmMyMWE2YmNiYWE4YTA1Yjg5ZGUwMjU2Yjk1ZmM5YzI5YjgxYmFhZTZhNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhZDI3OWM1ZjY3MDliMjhlZWYwMTUyNGE4Yjg4YzYzMjM2YjUyMjI1ZjZjOTNkNTliNmNjMWQ5YTg4MDFkMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjZTY4MDYwNDhjMmQ3MTM3NWZmNDE1NWNmMzMxYThkNzM5NWNmNWM1ZjI4NGZkNTc5YzViMTcwNjFhY2UwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_631e2897ce174b14a93e4a5f589c2258",
+      "statement": "The multi happy path is pinned by tests asserting exactly 5 calls, web undefined on every call (no tools anywhere), content equal to the synthesis output, usage.calls length 5, and result.web.searchEnabled false.",
+      "evidence": [
+        {
+          "resource": "repo://test/modes.test.ts#L233-L255",
+          "version": "repo-lines-v1:sha256:30202283cf82cd86589c2a17f232227a2b19e93aca6b098f6739ba61be390d71:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIyZWNjNDgzMTI3MGZkZDNiZGIyYWE1YTlkOTEyNDJmMThjZTY1NTRiNjhiOWE0MDM1ZjM2NThiZDRjNWMwYTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU2ZDM5MjQzNjdhMzUxYjU5OGU5NmJiZTZkOGE5NDljYzE2NGZkNmU3NDFiOGI4NDkzZTkzY2EwOWJiZGU5OGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwZDg0ODk4YjE1YWIyOTZjYTBmZjkwNzQxNDU2ZjU0ZWJlOGI3ZDEyNmZkN2E2Yzc0ZjU5YzZhNTQ4NzYzZTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0edce93fa2ae47e595ffcbb5f770a3a8",
+      "statement": "--schema overrides multi mode with the warning '--schema overrides multi mode; using a single Grok call with schema-constrained output instead.' and dispatches exactly one schema call rather than the 5-call ensemble.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L147-L152",
+          "version": "repo-lines-v1:sha256:d451eee73dcf9508a52763a4ef9845299c35d245d967b796af98409f56e8beb4:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjVjNDBmMTQ4ZDAwNTk4YzIwMWM3NTZiYzdkMDg2YTk2OGY4YTUxZTIxMTExMjJiZmZhNjgwZDc2YjkyYWRlMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU2ZWUzODczMTMwYThiYjhiZmUyMTU4MDMxMTBhMzcxM2JjMjUyYzU1ZTAzNGY1N2U3YzgzZDc1Mzc0M2ExMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTAxOTk5ODg0Y2E3YzkyMTE2MGJiOTYxYzdkMzU4ZGYyNWJmY2Q0ZTQxZWFmOGE1M2M1OTE2Yjc5MGI0MzRlOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWE3ZTVjYzI1MGJkZWJiMTVkNzNiZjRkZDExMTA1ZTUzZWQ4MTk1YmRjYzJlMWE3NzMzZjBhODFkOWQ2ZWY2OSJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L525-L539",
+          "version": "repo-lines-v1:sha256:4a237c994450e1dac0c460b40b64cbb01a29a75b93d72733eb0f7c71c3f6f312:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRkMjVkNzZjODMzNDcwMTU3YmNjMmJmYzgzODAzN2U4YzRhZDFlNmE1NTc4MGE4NWVjNzA2ZmNlYjA5YjBjYzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVjNDAyZGUwYTc1OWY2Y2EyM2E2MDRiMWM1NTc3OTg2MTNhYTg1NmE1MGU0NjJlY2Y0N2RhMWQzMTgxNTJlNTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE0NTk1NjEzNzViZGM5MjBkMWQ5MzcxM2E2ZDFlYjcwOWNiNTg2MGNjZDc4Yzk1MDg1NGZkMDBhYmU1OTMyNTcifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

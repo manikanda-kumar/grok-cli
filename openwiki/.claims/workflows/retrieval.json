@@ -1,0 +1,208 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:4fb0510e6de40b7b3961751f84c5200b0e43e7067e30c8c2244fa13d400492f3",
+  "claims": [
+    {
+      "id": "claim_461eaca2d3f74bb385b2275d52e5729e",
+      "statement": "The retrieve branch activates when mode === \"retrieve\", when --retrieve is set, or when --output results|both is requested, on any mode where modeAllowsWeb is true (auto, fast, expert, retrieve); on non-web modes (deepresearch, multi) those flags are ignored with the warning \"--retrieve/--output was ignored in <mode> mode; this mode does not use OpenRouter web tools.\" and the normal pipeline runs instead.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L55-L57",
+          "version": "repo-lines-v1:sha256:5f6c4b262a4da660a9513ee863abac9e79ccea18462a241f0d216f24681a5e23:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkxOTIzODI3YjllYzhiNjdkZmU4ODljNTY5NWY0NzJiZTA2OTZkODFjZTJkZmNmZWIzYjM0ZjBjNmYzNGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzliZDY5MzgzN2UzZTdmOWE2YzY3MmE5M2ZjOTA0ODU2ZDY2NmM4NjNkNTNiZmZkZjE0Njg2YzQ2YWVhM2U1MSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L207-L223",
+          "version": "repo-lines-v1:sha256:eb3aa6df75601daa720c2ebcdde48cb28e791aa725195cdb41515f687158d7de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkN2FlYjlkODNjNTRkNTZjODY1NDM5NDc4MGMzYWRlZGU2MjhmYWYxYzUzZDBjYmRiMzE5MDQxZjU0ZWEzNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L555-L581",
+          "version": "repo-lines-v1:sha256:b5cf3faed62a5a554876c2361f13ca056a62f52484ff94cbf22f02938ffd53a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0NGRkMDRmNDQ1NzJhYjhmOTRiMzk3ZGNlODEwODQ5YzIyMGViM2RiMDkwM2VlMGI2NmJmNTBmODkyZmQwOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3OGJmYjc2OTgyMmFjYjNkNGU0YmJmOTdmNmZmMTk4NDY4N2QwNDc4ZWUyYTY1ZWI3NDUzNTM2ZGFkYzc5ODgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7325befe9f694c55a35755b398cb9b76",
+      "statement": "resolveWebOptions forces web search on for retrieve mode even when config web.search.enabled is false; --no-web is the only escape hatch that disables it, and fetch is never forced because raw_content extraction from openrouter:web_fetch is not wired into SearchResult yet.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L97-L104",
+          "version": "repo-lines-v1:sha256:81d78accfbc68dcbd6f05956a19646e96b506c74ab43b1f5ac4c535c86651faf:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGMyNjkzZjdjODQ1MGQwMzNlZjBiN2E2MGY5NjE4ZjI0NDdlYjM3M2JhNzZkZmZhYWVkYjE2NmFhYmZjNzM4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzA4MGM4ZmZiMTdhYTNlY2YzY2VjNDk2NTMxMWYzZWVkMjUyMGQ1ODFmNjgyOGVkN2JkNmIzNWY5MTVhYWY4MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzk1OTU2YmQzNzQyOTU0NzQ1Y2E5YWQ5Mzg2NTdmYzQ0YTk5ODM0YjI1ZTIxZWI1ZjRjMzAyZTI1ZWYyOWQxYiJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L381-L397",
+          "version": "repo-lines-v1:sha256:d45b6f19b7ccad76608aac43a9e80820e76e7dee46421d4e9fe5aa707d136b1d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAzMzY1MDViMTg5MGIzZjJjZWViNWM3Yjk0OWFiNTRmYTAwN2Y0OTkxM2MzZDg3YjgyOGVjYzMzY2VmNWU4NWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYyMzQ3M2RmOWZjMDA0OWJmNDhjZTg0YWZhOGEzMTk3ODNiNjQwYjZkNWVlZGI4MjhhMzRhMTMzYmQwMTQwNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3YTdmOWFhNzA3ZmMxYmQxZjNkM2MwNDZjMjMzZmFlNzBhZjU0NjRmNzE1NzE4MWVhYTY0NzUxNjBhNTE4NzgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_88ea7002b4684d449759be5398b49355",
+      "statement": "The retrieve call runs with role \"retrieve\", messages from buildRetrieveMessages(prompt), temperature 0.1, json: true, and OpenRouter web tools attached; the model resolves to the expert alias, or the fast alias in fast mode.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L409-L419",
+          "version": "repo-lines-v1:sha256:743964b132c19a7cecdfadea101827df4db84c1db1c8808db04d643f4bdbc650:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1OWRlYTAyOTJhOTg0MjI4YmNjMmQyN2I1ZWRiMjIyYzg1OTFjZTI4ODdiN2Q1Y2FiMTBjNjBkZTc1ZmFkOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxZTM5NTI3Y2RmYzY0ZDhlNjQ0M2ExOTlmOGNhMzY2MTMzMzhiOTZiNTMwYWQ2MjEwNDIyMGRhMjg3OGJjNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdjOTMwODJhZTIyY2ZjYTdiY2RhZGYzYjUxMTkxYmU0NmQ3MDU3NzRjZjY3NTcwYWI3MjYzN2IzMWI5MjI5MGQifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L108-L113",
+          "version": "repo-lines-v1:sha256:7308c0bb87aac3292679d84e4d20cf16f2c6a9d6838dda3d2451b0cf061dc4ae:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmVhNmQ4ZGQxMzJhNDEyM2Y4YzZlNmM0NTM4YzY0NWI1ZmE4Y2FiNjhjY2JkYzJhYWE5MWYwOTk4MGQ5OWQwMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2FhZmJlZjNkNjAwNTY5NmVhYTcwNTUwMDgwMWMxNDAyNjdiYWUzMTgwOTVlNWI1NWJmZDVlNzI3M2ZlNWE3NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjc3NDZmMjkyNTFjOTgxYjYwNDQ1NjNjMjFiZmU4NDI4NzUwZDBkNjBmMWJiNDhiNjczMzE5NGQ4ODM4YjhmMiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_cd8ceb024cca4e1ba037b2f5d9c75bb7",
+      "statement": "RETRIEVE_INSTRUCTION is the retrieve JSON contract the model must return verbatim: { \"results\": [{ \"title\": string, \"url\": string, \"content\": string }], \"answer\": string } with one entry per distinct source ranked by relevance, 1-3 sentence snippets in content, a 2-4 sentence answer or empty string, no text outside the JSON, and no Markdown fences.",
+      "evidence": [
+        {
+          "resource": "repo://src/prompts.ts#L6-L7",
+          "version": "repo-lines-v1:sha256:86a992beb34b95740af61bec6968d6ab056bc9613499ccc6a6a3233d933047b3:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTRjMTY4ZDhiMWQ5MDAwOTg1OTc4YWEwMWRiMWRiY2QwNDk4NGU3Y2U5OTk0ZjZiZTkxOWRiYmVkY2JlN2E1ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzExMDJiMTdhNDMwZmZiOTEyZjc2NTFhNWIxZDEwM2E4MDY5NTRhN2JjOWMwMDRhN2I5M2MwZGQ4N2JiNjQ5ZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDE5NmZjNWVjZjUxZDZhNDcyZmI2Yjc2MGY3MjVmNDg1YWJkZWJiZTQ0NDdjZDAzZTBkNWY0MzUzNGRiZjY0YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDZlNDFkMjZiOTM4OWMyNzY5YjkyMjUzOGI5OTM1YjQ2NTE4OWZhM2ZjNWIyZDRiNDEwNzNhODM0ODU2N2ZlZCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b5d4ca8ed8c49859d557ca28544a937",
+      "statement": "parseRetrieveContent never throws: invalid JSON, non-object payloads, or a non-array results field yield { results: [] }; entries are coerced per field — a non-empty string url is required or the entry is dropped, non-string title/content become \"\", score is kept only when a finite number, raw_content is preserved when a string, and answer is kept only when a string. Unlike parseDecisionAnswer it does not unwrap Markdown-fenced JSON.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L721-L724",
+          "version": "repo-lines-v1:sha256:eefb8ce70cbbc32c5adca0e60a55444bc951e85c6a4b248a1c256604582af85d:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTA2Y2ZjMzljNWY0YjIxZTRjYzIyMjRjMDBkYjUwNmRjYTdhOGY5YTlhN2NhY2FhMzIzOGQyNjg2NzE3ZDc3ZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDk2YWNlYWI4MDFiNjViZTMyYjk3MTg2YmE5ZDZmNTc3ZDNjZDgzYWRiMjMzYTgyMWU4MjljMDRjNmEwNWIwZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNWI3ZmI1MTlhMmEyMTAzNWVlYTE3MTBjNjEwZDIyOGJjNjI3NGEzNzI0YTM1ZTRlNGYyMWNlMmU5NDFlNmZkNyJ9"
+        },
+        {
+          "resource": "repo://src/retrieval.ts#L16-L49",
+          "version": "repo-lines-v1:sha256:c39686fecefd857be531e292581cc26d364d3b281025f2e5e0b4c25d811d25fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJiYzViODE2NGI3ZDY2MzY3NDRjMzkwNWU1ZDk0MmIzYTk5YTExYmI4MjY4NTJiZGE1NGI2ODc2ZjJmZTVhNTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBhNWUwMjQ2NzgwZDEzZDM5NDU3MjAwY2EwM2YxMDYzNjJkMmU5ZmMzMDM5MzIxM2NiMTU3MjcyNTlmZjA3ODEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRmMDI1NWY3MTM0MTRjNjU1ZjQ0ZmE1YmUzOWU0MjJlYWIwZGMyYTBmYTJhZDc0ZWUxMmI5ZjBkYzU5Y2MzNzkifQ"
+        },
+        {
+          "resource": "repo://test/retrieval.test.ts#L24-L45",
+          "version": "repo-lines-v1:sha256:918d7e8603b0f810cc88c9aa286d58612f1c032706260a00e649e9afa219e7a9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjZTNjNjVhN2YxNWIzY2JkYjkyMzk4ZjM4YzZjZWNkMDIyOWJhM2E1MTE4NmEzZmYzZmEwMGJmYzBhODgzNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzM2ExM2I4YzZmNjRiMjU1MDdlMzQzNzU2NDcxMWExZjBiMmMxNzEzYzQzMGY5MTMwMWIzNmM2Zjk3OGIyMTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwMTY5MWJmMmViZDhhMjYxZWYxNzBhM2IwNWIwODA3OWY0MTg4MjBhMmFmODhmMDQ0MDA3ZjY5MTE5MTY5YzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_40c7d88b26cf43598f44dbf787d0b2cd",
+      "statement": "mergeRetrieveResults unions model-emitted results with citation-derived sources by URL: model results keep their snippets and win on URL conflict, citation-only URLs are appended with empty content, and every entry lacking a model-emitted score receives round((1 - index/total)*1000)/1000 in (0,1] based on its position after the union, preserving citation order for appended entries.",
+      "evidence": [
+        {
+          "resource": "repo://src/retrieval.ts#L69-L90",
+          "version": "repo-lines-v1:sha256:e5a7e267a04d85b268ac6fb26d018626448e009343b372d87943745b01f29606:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBjYmQ2NzVjZWU1ZTM0M2VhYTI0NThhNjMyMDMzZTZhMWNkYWNmMjQ1MDM0ZGMxNmQ4NWRjNGRjNWFhNzExMjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE4ZjMwZjM2YjdmNzFmZTc0YzcwNWY4MDhkYWNkYjk5NjA4MzAyMGM4OWExOTExYmZiNjE5NzdhMTg5ZjExYTEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://test/retrieval.test.ts#L66-L86",
+          "version": "repo-lines-v1:sha256:bb8833f2cb9ddea26812f5569676e7e26df19f3fafbe0b6e1c57a36aecb54210:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMzYzZiMDczYTljZDk1NGU0NGFjNjRlZWY3MzhjZjI2ZDI4YTM2Y2IzZjQ4ZWM0ODczMWMzZjViYmFhMzNmY2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMzMzI1ZjBlNzlmYzMzYTdlYjVjYTBlYjIzZmRhNWEyYTQ5MGY4ZDkzZGM2ZmE4OWJiMGFlMmY1MjEyYjc1NDMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_512479961c5248e29ec6c3f0f8bd2d1a",
+      "statement": "resultsFromSources maps a Source[] to SearchResult[] with empty content and descending citation-order scores roundScore(1 - index/count) in (0,1]; an empty sources array returns [].",
+      "evidence": [
+        {
+          "resource": "repo://src/retrieval.ts#L55-L64",
+          "version": "repo-lines-v1:sha256:295bf9c4cc8dcb792da5f76f6035188b95f02f107b248749b3b93f15c2420398:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiMzUyYjE4ZWYzMDEyODZlMmFhOTZlYWMzOGMyNGNjZDYzMzljNGZhYWZkODJlOWZkYjIwZWRmYjFhY2NhZmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY0ZDIzNmUwMmVhZjg3NmNiMzEzZTMyMTFlNzI2Yzc2Y2Q1OTkxM2FjNWE3YmZkNTc0OThlZWY5YTg2N2JjMzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3MzU1NGRlZjIyZTU5ZjM0ZDFjZmU3NDEwNTUyNzdhZmFmOWMwOGMyMmQ5YjcwMzg3OTEwNDgyMTBjOTcxZWEifQ"
+        },
+        {
+          "resource": "repo://test/retrieval.test.ts#L48-L64",
+          "version": "repo-lines-v1:sha256:c801c78a08e7776bb988c7f18c2d6da49330147b7763902ff53ca173f8e7830f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlODdhOWI3MjM0NmEyOTA3ZGZkM2M5NzZiYjdjNWM4NWIzYjU5ZTBmZDY3OWVlYjQwZDBhYjkzMTg5ZGNhOTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5YmU0NzhkMzkyMWU0NmRmMGZjNDA4NDczNDdmYjM3YzczNDc4MzU0MTI5NTNmMWI0MGZiNDQ1MjI5ZjFhNGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_897319dfa6ea411089a7b315c0a6cedf",
+      "statement": "Retrieve-mode sources come from extractSources (re-exported from src/retrieval.ts), which merges OpenRouter top-level citations[] with url_citation message annotations, deduped by URL with titles folded in.",
+      "evidence": [
+        {
+          "resource": "repo://src/openrouter.ts#L68-L82",
+          "version": "repo-lines-v1:sha256:1e8cbe2b138ebd5d5828b73f68dc72a6693c7c563ee7577f3051a81673e785fc:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4MjYxOWQ0OWY4OTQ3ZWFmYzRlMmRkYmQ2NDhiZjRjZjY1MWVhYjJhMTAwNTc3ZWE5ZTFmMGYxNmFkZGEyMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImEzNDZmMWQxZjljMjU5YTIwNGQyZDlhNTgyYTk4MTRkZmVjNWFkZmMzMmRkMzc1Y2EzNDJiYjlhNTkyY2Q1YjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2ZTkwNDY1NmM0M2FhNWI0YzRhOTI0OWQ1YTAyMjI0NWY2ZDEzOTQ4MjVlYzk2NTlkOWQ3MTFkOTgyMWZhNTcifQ"
+        },
+        {
+          "resource": "repo://src/retrieval.ts#L1-L5",
+          "version": "repo-lines-v1:sha256:bcedb9db96754668c30120eb6cce758bd20a4341f78e9bb5373412ca5ee283b5:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzE4MGFiNzE0MjNkZDNjZjE3MzkxZjk1ZWNkZmM2NTM5M2JiY2IwOTYyMzQwYjliYmQ5YjlhMDFhZTQ5MTI1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjg0NWJkNjA1NDI0Y2Q0YzlkMjlmOTg0OTIxOWEyNGI5ZDdmMWJiZjc1ZmRhZTgzNjE0ZWYwODMyNjMxMTkwYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzY3MmQ4ZDU5NmM3MjY0NzA0MTY0ZmZiMjM2NzI2YzI5NDFiN2FlMzQwOWIzMTJkZmJjMzUzODc5YjU0YjY2ZSJ9"
+        },
+        {
+          "resource": "repo://test/retrieval.test.ts#L88-L106",
+          "version": "repo-lines-v1:sha256:bb58511ce98919d4d8f31cfafc01c008eb19da304df6c21b6b0da42fbf0b8e8a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlYWRkZjcxMjZkYzRmZjk0YWQxNmI4Mjg0YTJlMDVhZjcyZmNjNjVkNzllNjczYjQwNDk1OGMyYTQ3ZTg2N2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3NzlkMTE4ZDZlM2NiZjQ1MDUzOTc0OGRlZTdhNDMwN2FjYmU2NDQ2Y2JhMjk3ZjI3NjBmYTVkMGJiYTFiYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_05f6bdc8fb484fc09dab42ab60448841",
+      "statement": "--output both fires a second synthesis call whose user message embeds the merged searchResults as a retrieved-sources block (plus optional Live X/Twitter sample and User saved bookmarks blocks when --x/--bookmarks ran); the synthesis leg intentionally carries no web tools because grounding is already in the sources block, and the merged result takes content from the synthesis with usage, sources, and warnings merged across both calls.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L426-L461",
+          "version": "repo-lines-v1:sha256:462569638504c7737821abaa1b017143ad277302834ed33cd609774d341aaa14:eyJzZWxlY3RlZExpbmVDb3VudCI6MzYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMwZTJmMDU1M2U3OWJhNDBjNDAyNjk3ZmI5MWQyYjUxN2MxODkyNjlkZWY2YTM4NjRiMWQ4Mzk5MjNkNTI3NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQwMWE1NWYzMjJhNjUwMzNiZTZhNWJiNjY2M2FiYmVkMmI0YTMxODhkZDEzNzc1N2RjYWI1MmUxNmExNGExZDYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMzZGIxZjQxNzQ4NjIwNjNiY2Q3MTJkMGZmNGVjNGI0YTZlODA2YTdiMzhlNDFlM2JmNDJkZWVhYjU5NmFjMDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBkY2MxZjcyMjk1N2ZjNDc4MDFkYTJiMTVlMDZhMTk2MDZhM2U3NTY1MmQ1MTlkZjY3OWU3YmQ4MWI2N2YwMjcifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L409-L427",
+          "version": "repo-lines-v1:sha256:e0841dbd61845ee6e13fcb7a909b0836130910d02146f03fb6cff671dfcea030:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczNTQ4NWQyNjlmNDQxMTk4MGM2NDY0NDU3NTZjMDYwYWQ5NWVkYzVlM2I5NjZlZGM2MTBlZWQ1MjI5MjI3ZWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYxYWU5NTdkMDZmZjY5ODI1YTQzODA1YWMxYzI3YWJiNmYxN2M1NTM0Y2EyMDQwZTY1ZjllNGQ2NjAyY2ZiMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjExNmVkNGVjNjQ2YWVhOWJkOGIwOWVmYTA2ZDZkZDZhMGQ3YjI3YTkxZDY4YjU3ZTBmM2NkOTgxY2NmMmRjMzIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc3ffa941e534ada91b2580a8c3f0113",
+      "statement": "normalizeRetrieveResult stamps mode/profile/outputFormat, dedupes warnings, attaches searchResults, drops the DecisionAnswer field, and re-derives web from modeAllowsWeb rather than trusting call.web (non-web modes report { searchEnabled: false, fetchEnabled: false }); content is the raw retrieve JSON in brief style, the optional model answer or \"\" in results style, and the synthesis brief in both style.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L466-L499",
+          "version": "repo-lines-v1:sha256:8ce72166ab7f226aebe051a75e97a7318a1008b93735d6bc351eae17c56d42f1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5ODdmZTc3YWM0NDE3MzAxNGNhZGM5MGIwOWU3ZDU1ZjAyZWQ5MjZhYWE1ZGNlM2M4YzU4ZWE3OTZiZmRmZGEifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L399-L407",
+          "version": "repo-lines-v1:sha256:ca740f011ad59b3bab7500f218ed9e24614f32169bd46854a293416dcd1fc48d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDExNTEyZTFkNzEzM2U0YWIxNGIwZGNjZmYyZGU1YWZjMDdlNjYzYTY5ZGZiZDUzODFiYTM5ZjhmNDcwMjM2OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiN2UyNzljYmEwOTQ2MmU1ODgwNTViOTMwMTNmOWFjMDk2YTlhNTQwMjE4ZTMwNmVjNTA0MWMxYzkwZmI5MWExMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzcwZmQ4MjM1MzZhMDU3ZDFkNzI5YzFjMDQ5MGNiOWZmZWUxNTI0ZjBlMTdjYTdhNjVmNDc4MDA2MGMyZDQwMiJ9"
+        },
+        {
+          "resource": "repo://test/modes.test.ts#L429-L437",
+          "version": "repo-lines-v1:sha256:348b028c17b78f894df0aa78ba6f7a4d2a0b97c80296502478400ac6d0509160:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTEzYjJiZWRkNGVkZGRkMTU1Y2QwMDEwMjlmMGVmYzEyYzkxNmI3NDJiM2IxZmY0YWU0ODhiMDQyMTIwZTgwNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2EzZTQ2Zjk0Mjc2YjZmNmY0ZWQxZjAyYWY3OGJlZjZhMmVlMWM0MzlkZDU1ODRiOTczOTQ4MzEzMjE0ZDJiNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTZjOTRmZTRhNGE4OGNiYWNiZGZkMmM4MzVlNWNlZjI0MjUyYzlkY2YxZTMwMjY0M2I0ODZhNTZhZDcyOThhNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTQzN2MyYjM4MWE3ODJmYmM0YWRkYmNmZWFlNTZmNTM0ZjMyNjFkNDdiNGRmYTIyZWZmM2U5MjQyYTIxYWUwYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a9469ef8962944ec86b0c921f5f82450",
+      "statement": "Non-JSON stdout for --output results and retrieve mode is formatRetrieveMarkdown — content, a \"## Results\" list rendering each entry as title (score: N), URL, and snippet, then warnings and the cost footer — while the --json payload emits the same array as search_results when non-empty, with score/raw_content/favicon included only when present.",
+      "evidence": [
+        {
+          "resource": "repo://src/formatters.ts#L14-L30",
+          "version": "repo-lines-v1:sha256:b02814ae2106134fe2166d346c6354091bbae920b309b8e9f9b4a673f58ae624:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc0ODY1NDgzZjlkMzZjMjMwZmI4NzRiOTJjNmFlMzI1YzczMGFlMTI4MTVhNzk2NjRlMWQwMjEwN2U5NjQ3M2IiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIwNjZhOGY1OGIwMzYxNWZmZTUwOWU2ZjM3MTU1YjI4M2EwMTk0OGQ0M2RmZDI1YjE5YzY3NDA5YWYzOWQ5NTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgwZGM0NTRlOGMzNzBjNzkxNzkzN2U5NWQ3MWNmMGVmZjQ5NTAwYTNiYTQxMDk1ZWQyOWI5MGUyNDZiYTExMjQifQ"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L63-L65",
+          "version": "repo-lines-v1:sha256:4dd201f151116e7e2313e35f6216dff402500d607210a20fa49cce148c49f623:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjNiZDk2NmM2MmE2YzM5NWVlMjg0NDc1ZTA0N2MzYWM1ZjczZmI5YTk2OTJjYWYzYmYzNDQwMTlkOThiZTZjZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDgyODc4ZjU2NzA0YTkwY2FjYjYzNWJkMzE2OThkNTIzMDQzMTFmYTM1NDJjNDk3MzBlMDY2YTQ5ZDg4N2U1MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2ZlMzk5MTg4NDA4ZTNmYWNjNjBiYWI3NWI0MDEzNGZlYjkyNzJmY2IzMGM2MTQyZDE0NjIxNWVjN2UzNDc2OCJ9"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L97-L107",
+          "version": "repo-lines-v1:sha256:759bbbce4efb82e061aa72b7202979dc00a948e0c574752fd4fa70373acee69a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUwYjdkNGE4ZTk2MzFkNjA4OTVhZDEyNWM2OTRkNWUyNzg3ZGUyM2JkZTQ5Mjk1ZTRhODZjNmI2ZTZjODUyYjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyYmRiMjhmNzk1ODg4ZWU3ZDMwZDFiMjViZjBlMDhlZDJmYzMwN2NiNGE1Zjc4MTdlMmJiNThmNGE4MDRkZDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxOTVmMGRiMjlmZGNjYTJhNjRlZTU0MDg0YTEwZDZhNGExODk1YjI0YmU1MzgzZjM5YmNmZDA1ZWU4NGZiN2UifQ"
+        },
+        {
+          "resource": "repo://test/formatters.test.ts#L127-L151",
+          "version": "repo-lines-v1:sha256:ddd0cbcb194cee42abde7ce8090c76439ad8433a5794ba3a7018b3461e977cd8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViNWM3OTQ3YTA1M2UxN2U5NDllMjI5ZDVlYWRmYmZjZWJlZjJjZGE3NWUyOWNkZTE4YzkzODMxYWRlZjE0MTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhM2U0NmY5NDI3NmI2ZjZmNGVkMWYwMmFmNzhiZWY2YTJlZTFjNDM5ZGQ1NTg0Yjk3Mzk0ODMxMzIxNGQyYjciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjcyNDNmNzA1ZGUwYjk1NzFmYzFjOGM4MDA5NzJjNmFlN2ViY2UyM2VjM2E5OWNlYzM2ZTA4YmE4OWFjZmIwYzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_80cf5a7544e14142a4b23524e8ec0234",
+      "statement": "SearchResult.score and raw_content are populated only when the underlying provider surfaces them; OpenRouter web tools expose title/url/snippet via annotations, so retrieve scores are derived heuristically from citation order.",
+      "evidence": [
+        {
+          "resource": "repo://src/types.ts#L208-L219",
+          "version": "repo-lines-v1:sha256:72d60760500b7f1f7649d3fc61c553475730e4a317c14ac6a253858804d531ff:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhNWRiM2Q4NzZhMjljNWU4MGJkMTViOWQyNjQxYjlkMjhmMjhiMWNjY2RlNTQ2NjEwNDU1NjA3NWE4ZWE3MjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI2NDRkY2JhNjUxYTAyNGMyNDQ1ZjNlNjcyZDcwNWI1YTFiNDAxYmJmM2ZiZDljYjU5YjI3MjYyY2UwZDA1MTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxMDI1MzkzZWFlNGI1NDc1MDNhZTc0NWE4M2IxMzM5OTIzNDRlNjkwNTliNjcwYzIzZDMzZmY4NzRjMzIwNDEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7eb6336356ba4b63be3a8a466ab5d858",
+      "statement": "Retrieve mode is configured through the shared web block and flags resolved by resolveWebOptions — engine, maxResults (5), maxTotalResults (10), allowedDomains/blockedDomains, and the --web-fetch opt-in (fetch off by default) — and because the mode is web-capable, assertWebToolsCompatible rejects a perplexity/* model alias override with \"Model <model> does not support OpenRouter server tools.\" before the run.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L80-L95",
+          "version": "repo-lines-v1:sha256:c89550ac7144a92e074b63fe9fc4251d0338cec9688fd3796932f99ec7cd971e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFjNTkyYmVjMzdiNTcxMzRmYjcyYmM3ZTM5NDJmZDM2YWE1NGFlODBmNzRhYTk3NDc5MmRhYzc0NWJjZDc3NTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE5M2U3MjUyNTcwZWRmMWVlMTMxNjU5ZDcwYjMxYmZmNzNjN2JiYWU1ZjczNzU1YTVlZDgzMGQxYWZjZDIzZmQifQ"
+        },
+        {
+          "resource": "repo://src/config.ts#L97-L119",
+          "version": "repo-lines-v1:sha256:918bd042af65dd32cf3edebf413dce74d53cbb512823594bbf085b36b8a43e92:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRjMjY5M2Y3Yzg0NTBkMDMzZWYwYjdhNjBmOTYxOGYyNDQ3ZWIzNzNiYTc2ZGZmYWFlZGIxNjZhYWJmYzczODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5ZDcyYmViMTBkODA5MmJjOTFhMTViNzY2ODk3MzQ1ZTBlMDYwMjM5OWJmY2NlNmMyOGRkMjg5YTA4OWRmMTIifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}

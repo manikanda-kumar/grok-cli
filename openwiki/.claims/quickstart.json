@@ -1,0 +1,300 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:386e72bdf2804022b05d408fc60dfd9bf2628e4e6a6d43321d0f5c2180b7d468",
+  "claims": [
+    {
+      "id": "claim_945c6e824bba4a61b558d2accea0a930",
+      "statement": "Authority ordering: README.md is the user-facing contract; source code and tests are authoritative, so wiki uncertainties are verification gaps, not automatic requirements.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L1-L5",
+          "version": "repo-lines-v1:sha256:6dfe9632b5c876803625169bea8449f398cf49d03622e838e7424aedbd47ef11:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDMyNTUyNWQwYmNiNmJiOTEzNjYwNDhjODZkODU0ZjA1NjZhYzFlMDFhNTI4MWEwOGU1MTcxNDMwNzYxNzM4ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWVlOWNiMDM0MzU4OTI1NThiMjIyNmQ4Mjc1YWVjZGVkMGMzOWU3NmRiZTZiN2EzNTVlNTRhYWRiZGZjMzY1YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDRkYjg2MDA0OWFiYWMzOTkwYWM5NjA3ODFhOTg3M2E0MGRhYzQ1OTk2OTg4MWYzMWJhOGI2YmMxN2VlYmVhOCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fed6abcc125841c28cfb7037d02ef4d7",
+      "statement": "src/cli.ts is the sole entrypoint: main() parses argv, loads config, resolves CLI options, canonicalizes the mode, resolves/validates web options, prints the web hint to stderr, wires the single OpenRouter caller into runMode, dispatches the result to exactly one stdout formatter, and routes any thrown error through formatError with process.exitCode = 1; HelpRequested prints HELP_TEXT to stdout and returns (exit 0).",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L16-L68",
+          "version": "repo-lines-v1:sha256:c5d5f816c32334b7b43409be4f4c7f5da545ba31d0b9fcc30b4d2a22db3c7235:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlODIwMGViZDE3MDliNmE2NzViZWNiM2JlOWYzOWU1M2JiYWMwMmNjOTI3MjM0NjJjMDU0NjhlYjBkYTZhMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA4ODZkNGRiYjE4Mjc3ODYxMjE3NDU1YmRmYTgyZmIzYmQyMzdmZmYyMWZhZTQxYjE2OTA2OGU5MjQxM2RlMGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5YmQyZDE2ZTc0OWNlZTc0MDRkNjQzYmFlYmQzZGUzOTgwODc0NDQxMjY2MzRjNWYzM2RjOTNhYTY4ODZjMGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_2548e31f72574c79a8593cf9b573014b",
+      "statement": "The single OpenRouter caller (call) => callOpenRouter(config.openrouter, call) is created in cli.ts and passed into runMode; every pipeline branch funnels through the same retry/error/source/usage path in src/openrouter.ts.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L34-L34",
+          "version": "repo-lines-v1:sha256:3613bfcf8823b98ebc510572e96119734bab3eb4c400a476374c407d93eaf01b:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYxM2JmY2Y4ODIzYjk4ZWJjNTEwNTcyZTk2MTE5NzM0YmFiM2ViNGM0MDBhNDc2Mzc0YzQwN2Q5M2VhZjAxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzYxM2JmY2Y4ODIzYjk4ZWJjNTEwNTcyZTk2MTE5NzM0YmFiM2ViNGM0MDBhNDc2Mzc0YzQwN2Q5M2VhZjAxYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzI1NGNlZmM3MjZkYmI2NDM4MjQxNGNlZGU2Yzg3OGJmNTgxOGJlZmVhMjBiYjZlODEwNzliZWEyOWY0MjZiZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWIyNWI4NzEwMDgyN2JmYzkxZjU0ODI1ZDQ4MjQxMTdjMTlmY2ZkZDg3N2E4Y2MzNmQ4NWUwM2VkNmQ0ZTY5ZSJ9"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L84-L108",
+          "version": "repo-lines-v1:sha256:de741fa5116dc0b5a7bf1f4179b1f25b9f7d26c8335511a8ca836157cc99134d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjczYmQwZThlOTQ0YzJkNTEwNmFjOGVjMDUyOWMwMWQ5YWE5NDIxNGJhZTk0M2Q3NmZkZmRjOWYwZGUzZGFhYTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM0MGEzMjlkYmZjOTZkOGJjYzAxYzM2NzA0MzI5M2EwM2QyMTUzMDBiYWQyYjBiYTVkNjNiMTNjOTk3YWRhYWIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1OTRkMzg5NzZhMjNhMjYxODkwYTgyZTE4Y2E4OWRhZTVjM2RhMDRiODJkZGY2NDkyOTg3NGI2Zjc2OTBjYTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJlODRmNDQ0OTk3ZTU2NjFlNDI0Nzk0M2ExMWFjYTk4MDk1MDQ2YWQ0ZTE4OGUxYjNmYWJhNTA3NGQ4ZWUxOGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7722387699984e1eaadb53a00b78a483",
+      "statement": "stdout carries only the result; every diagnostic (hint, progress, warnings, errors) goes to stderr. With --json, errors print as JSON {\"error\":{\"message\":\"...\"}} on stderr, and wantsJson pre-scans the raw argv so parse-stage errors are JSON-shaped too.",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L417-L419",
+          "version": "repo-lines-v1:sha256:5944a59495dd34c9c4194fff01de968058f9fa1f12d0ffae59cba8f8dd46cb63:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQzNTVhYTNhMmE5ODk4ZjQzNDRhMGY5OWI3NzcyNTc3MmU1OTM0ZDUxNzVmN2RkZTI0NDQ3NmNjZmViZTcxMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmJiYzg3MDIyNTZjOWQ3YTI5MGMxMTEyMzA5ZjdlNmNkYmI3MDA4ZGEzNzA1NTI2YmQ0YjEyOTA1NTZkMmZlMSJ9"
+        },
+        {
+          "resource": "repo://src/cli.ts#L30-L67",
+          "version": "repo-lines-v1:sha256:0a601a5656380fee7625dd4950c08a886149a98719dded1f0ab82ab9d4dddb06:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MjhiYTJjMjE2ZmQzMzExNjUxNzRhMWM3OWIzMDAwMTU1NTFmNGFlYWQ1Y2FkZmU3YWQyODMwN2YwMmM4YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwYjJjZGJkZGU0YzQyOGRlMTc5NDA1ZjdlNDc5NWU4MjFkOGQ2YzE2NTBlZTZjZGVhNjI5M2RkMGUyNjljZDMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjOTc1MjIwNDJhZjhmY2ViYjI2YzJlNDA2YTVhOWJkNzQ4MDliOWQ0NWQxMDA0YmI4OWZjZGFiZGJkZTUzN2YiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEifQ"
+        },
+        {
+          "resource": "repo://src/formatters.ts#L91-L95",
+          "version": "repo-lines-v1:sha256:a918e034de44a4e47e346294632d7c0fe13d97c71a21f519e6343c3ab4275351:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNkMzQ4YWRlMjVkOGM5ZjYwZThjNzIxMTM1OWViZTNjMTY0YmI5ZmUzMzVlYWNiZDVmYzZjMDdmMzIxNDQyYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmNmZGQ3MTZjN2JhN2Y5ZDU3ZDU1ZGJkYjFhMTM2ZDg5MTU5MjQ1NzViMzM3OGNjMTY4NzNkNGUxZmY3Njk1OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzUzMWZiNDFiYjZlYjhmMzI1Y2Q4MmU0NjI4MDNmNmIzMjk3MzU2ZGY5MTA0NGFjNTYzMzEyZGUzMjc1ZTUwNSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a51c570e5fd741a6ace3e4dd7b15d54a",
+      "statement": "Exit-code contract: 0 for any run that produced a PipelineResult (including warnings and degraded parses) and for -h/--help; 1 via process.exitCode for every thrown error (missing prompt, unknown flag, web conflicts, missing key, provider failures, MaxCostExceededError, fatal multi conditions).",
+      "evidence": [
+        {
+          "resource": "repo://src/args.ts#L204-L206",
+          "version": "repo-lines-v1:sha256:f4f799b6851937c996926cdd4f8db9daf0f7274a0d3fa482b8c074db45c129f4:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWUwYTYwMTRmODk4N2UwN2JkOGI4ZDNiZGRhMzE3ZTQ5Njc1MTcwMjVlZWZjZGMwYWMzZThhNmNiYzhiZjRlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNkNTU2ZGE3MTZkZGY5ZmFiNzQzNGNjYzU3NGFlMmNiNzc2NTg2MzFiMzY1MzgwZjk4YmIzNTU0YWVjMzE1YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGVjZjRmZDBhZGQxMzg5ZDQ4Mjg1ZDNiNDAyMDQ0NjUzZGIxN2ZlM2Q4Zjk5MGVmOGE2YTA2MWY1MzVmYzJhMSJ9"
+        },
+        {
+          "resource": "repo://src/cli.ts#L60-L68",
+          "version": "repo-lines-v1:sha256:74dc23c79e83ffa26b6bccf0ec61799a6094ea7fca1a5db50e90bc52beb62b93:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGVkYmY4Mzg3NTM2ODk2NmYzMTNhZTYzOTUzOWM0MDM3MDA0NWJhNTNlMmUyY2VlOTNiYjY3ZDVkYTE3Yjk4MCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjdlNTc4OGQ1ZDlkNzNkMjRhODFkYmMwYTVhNzRiZmE4MmM5YzNiM2FmOTllNTJhZjc5NmU5MGI0NjhhOGEzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWJhMWFmNzUzZDhlYjFiOTVkYjNlMTcwMDhmNzE3YTBjMDFhMWNkYzU4MDA0YjJmYjE3YzJjMWEyMTEyMTlhMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTliZDJkMTZlNzQ5Y2VlNzQwNGQ2NDNiYWViZDNkZTM5ODA4NzQ0NDEyNjYzNGM1ZjMzZGM5M2FhNjg4NmMwYyJ9"
+        },
+        {
+          "resource": "repo://test/cli.test.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:63afde2ae020fbbe8fc4615bfab7357efd76c3d3473dc17265d01f9b45031b3b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiMGE4Y2IyOTZkYzg1NWM4ZjQzZWY0YzdiMTVmODdkOWM4NTZjYTQyZjI4Y2NmYjFjMDdiMTIxZjQ4ZWJlZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8de1f3798f484fe08d79f619f8765b15",
+      "statement": "Modes choose which pipeline runs, not the output format; per-mode call counts are auto/fast/expert 1 Grok call, deepresearch 1 Sonar call, multi 5 calls, and retrieve 1 call plus a second synthesis call with --output both.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L225-L237",
+          "version": "repo-lines-v1:sha256:9d425a3cdbc1dee752a795be30e99951160e14c14f0b00787341b25213e2a331:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg2NTQzNGYzNDI4MTYxMzM1YzY2ZDAwMWY0ZDJiYTIyZjE1N2UxOGI1N2NlNmM1NzFkMWNjZDc3MWYxYmU1MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4MjA0MjliYzc1NTJlZDJiMWY1NGJkOWU2YWMxZGUxMTM0N2VjNmU5YTE0MTk1NmY3Y2U1ZDRlOTBhYjBhNjgifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L399-L464",
+          "version": "repo-lines-v1:sha256:4a45ab68d06285e42a843d728e1ede09cca385fcb458c55623eb7e7dcd36dd62:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3YjgyMjc0YTBiMTE0MjdjMDY3OWMxZGQ4NDRkN2IzZGY2ZGIxNDk3ODhlOTI1NzFkNzk5YmMzMjE5MTk3YWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjgxOTk1YTgyN2ZkNzc5YWRiNmQ1NDcxMDMwODg1ZGViNGNiMDQyMTY1ZTM2ZWRkYzEzOGM1ZmE2ZjgyNTdlY2YifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L548-L633",
+          "version": "repo-lines-v1:sha256:9b18c84620d50b8cb5dcac6882a816c597cb9f90098f8f02bb0587d195fa26bc:eyJzZWxlY3RlZExpbmVDb3VudCI6ODYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2N2FmNzkwM2YzNDg5N2U4MGEzMTVlMjFiZjAxMDI5NjczYzIxZWU0YWVhMzVjY2FkZGEwZjM5NjJjNWQ0MDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiNTgwZTk2NGY4M2E0NzNmNDNkNDQzODQ2Mjk0OWQ2OGI1NjAwZmRhNzg3ZjE2Mzc0NWQwMGRlODljYmYzNmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3YmU2ZTZmYjEyZGEyYWRjNmU2YmRmNjc4ODNlMTQ2NGJhMTAzMjFiMjg5MDBhZGNhNzYwMThkZTdmOTdlYzEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_17ba340b27b248e3a46e20d06ca4cffd",
+      "statement": "runMode dispatches in strict priority order schema \u2192 multi \u2192 retrieve \u2192 deepresearch \u2192 single Grok call; the schema branch takes over the single-call path regardless of mode, and the retrieve branch fires for retrieve mode, --retrieve, or --output results|both on web-capable modes.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L147-L307",
+          "version": "repo-lines-v1:sha256:2db09f9ddcc4827c0cd0cbe082de0c589d1667c02a4caadd877313077197efd4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYxLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiNWM0MGYxNDhkMDA1OThjMjAxYzc1NmJjN2QwODZhOTY4ZjhhNTFlMjExMTEyMmJmZmE2ODBkNzZiOTJhZGUyIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI0OTU2N2JhOGZjZjQzN2U2NDgxZjI5NzEzMDA3NzJlMjEzMDYxMDgzYTNiNGFkMTBlMjlkMWI4ZjczNDMwODVmIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJlMDE5OTk4ODRjYTdjOTIxMTYwYmI5NjFjN2QzNThkZjI1YmZjZDRlNDFlYWY4YTUzYzU5MTZiNzkwYjQzNGU5IiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MywiZm9sbG93aW5nQ29udGV4dEhhc2giOiIzZTc2ZDc3OTMxZWIxYTJjODgzNWQ1ODMyZjVjOTMzNzVjMjlmNjM0ZWU1OTkxMThkZjEzMDVkNjA2NWI2MmYwIn0"
+        },
+        {
+          "resource": "repo://src/modes.ts#L207-L223",
+          "version": "repo-lines-v1:sha256:eb3aa6df75601daa720c2ebcdde48cb28e791aa725195cdb41515f687158d7de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkN2FlYjlkODNjNTRkNTZjODY1NDM5NDc4MGMzYWRlZGU2MjhmYWYxYzUzZDBjYmRiMzE5MDQxZjU0ZWEzNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkYjNlN2NkMGMzYTYyMzA0NzY2ODE2MWQxMDRlOTlkODYyMDljYTNlNzc1NGEyNWIxMTlhNDkwNzg3ODA0MjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd8450a07f4a43e9b6d66e285e410dab",
+      "statement": "withBudget wraps the caller before any dispatch when --max-cost is set: a pre-check throws MaxCostExceededError before a call when cumulative spend already exceeds the cap, and a post-check throws immediately after the call that crosses it; the message pins the abort point (aborted after \"role\").",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L43-L66",
+          "version": "repo-lines-v1:sha256:a7ec205fb31dcac93f6d295f19e684ba59420c4091232fa90ccb9c4c9f8df8a4:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIwMDJlOTk4Y2M1ZjEzNmEwNTMwYjBjMDg5M2M5NDg5YzdjNDJjOTM4NmEzMjgzNDEyY2IwYTk2ODQ3OThiYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjViOTRlYzM3NDg2MTNhYTE2NDlkMTU5NTlmOGVmMTAyN2YxNmIzOGRkZTc5MTcxMGViOWUwNGQ1NDhkYTEyNzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3a2534dd65a5464fb57bcdd72cd39ceb",
+      "statement": "Under --max-cost, multi's three analysis legs switch from parallel Promise.allSettled to sequential runSequential, which stops dispatching the moment a leg throws MaxCostExceededError; a budget abort in any leg is rethrown as fatal and synthesis is skipped.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L579-L598",
+          "version": "repo-lines-v1:sha256:c31f1336d91c0b22c2a890459f51246b37463c1dc59f7b557c2656538e164168:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImUyMDViNmM5Y2FmY2YyOGM3Y2E1NTRlYTJjNzM1M2Q5ZGUzMTRhZGZhYjVhYjk0NDNhZTYxZWJlYmJiNjM2NGIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYwZjRmOTUwYWEyNDZkZTkxOWQ1YmZkYmMyZjZlZTNkNzk5MTMxM2Q0MTIzZWY2NzcwMmUxMGUyZWEwZDU3NDciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzNDZiNTFiMGJkNTVkOWIxMjg2MzY0ZjdiODM4MzJmYjc5NTE3YjhmOWNiMTIzZjU0ZmFlNzgwMTAxY2ExY2IifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L70-L84",
+          "version": "repo-lines-v1:sha256:7fc20e904d0b540aae849d22b128de45286a8459f943a0631b075cb8a7313688:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjUxY2M0ZTlhODE4YTdlNDY4OTIzYTY0YjllNGM4NDUzMzc4MDFmZWQ3ZjhhYjA0MzAxZmI5MWUyYzMyNDQ3MWEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1OGI4NjY0ODM2YWI2MjhlZGUxNTlhZjI3MTg0MWQ4Yjc0N2I4MWZmODRhZTVlMGRlYWYzMjJlNjI2YWZlMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjE4Mzk0NWQxZDVkMDU4YjMyNjU0ZTQwMjQ3NThiZmRjZGEzZDNjMjY5ZjY3YjQzM2RkYTBjZWRiMzJjNjIyZGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d47045e845c344a8ba1876e6890badb9",
+      "statement": "response_format json_object is never combined with OpenRouter server tools: callOpenRouter sets response_format only when call.json is true, the model supports it, and no tools are attached; --json/--schema plus web resolves to a two-pass pattern because a single constrained request on Grok + web_search collapses to garbage like a bare -1.5e-05.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L243-L284",
+          "version": "repo-lines-v1:sha256:3a91920889869fafcaa3c5030f8dd7d4731eec9a498b2ecf2ddf1dca41f648d0:eyJzZWxlY3RlZExpbmVDb3VudCI6NDIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyZDVjYmJmNjAzY2U2NWE4MzEyMThiZTkyNzJhODM4ZGVlY2E4MWRmNGU5ODQ4YjIxZTY5MjYxMjBhZWM3NzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2Mjg4NTQ1NGI4NDYwZDA5NTcyODk0MDY1MjNhZDZmMjEyZmU4NDAyYTA4MjVjNWU1YTBhMGEwNmQ4MTAwMDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJiNjI3MGEyODM1ODRiOWFhMzFkYjExNjQ3NjYwMTUxNmZmNTcwYTQ1NDJkMDQ5YjRmOGFiN2Y1MTQxMjE5YWYifQ"
+        },
+        {
+          "resource": "repo://src/openrouter.ts#L100-L108",
+          "version": "repo-lines-v1:sha256:6cc6af3618a77975863c63bce5c2ab71486c3f00b8b7ffe20f1a0bd5dd1ecb0b:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjgyMzQwMWIxMjI5ZDc0MDZiNTk4MmRkZmFmM2EyM2MyMzc1M2M2NzM4MTNlNDk3OWYwNDkwNTkyNzAwM2U4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzQwYTMyOWRiZmM5NmQ4YmNjMDFjMzY3MDQzMjkzYTAzZDIxNTMwMGJhZDJiMGJhNWQ2M2IxM2M5OTdhZGFhYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTg4YTM0YWYxNGVlOWFlNjc4MjY5ZTkyOGRlOWJmZjgwODc5OTk3Y2Y2NGQ2OGZlZjE2NTViMDg3N2NiMzAyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmU4NGY0NDQ5OTdlNTY2MWU0MjQ3OTQzYTExYWNhOTgwOTUwNDZhZDRlMTg4ZTFiM2ZhYmE1MDc0ZDhlZTE4YSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c6d83a5d5c7a4b6aa6e33cb9eaf40a77",
+      "statement": "Two-pass detail: the research pass uses role expert (or schema_research for --schema), json false, temperature 0.2, web attached; the format pass uses role json_format (or schema), json true, temperature 0.1, no web tools; sources, warnings, and usage merge across both calls and the --json variant adds the two-pass warning.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L156-L184",
+          "version": "repo-lines-v1:sha256:e2f6fb8b46717f39db7360fd252d91574ad239301c68677dcad2c3f3113eabf2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU0MjhiYTJjMjE2ZmQzMzExNjUxNzRhMWM3OWIzMDAwMTU1NTFmNGFlYWQ1Y2FkZmU3YWQyODMwN2YwMmM4YzgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmMyYzlhMWZlYTg4MjVmNDlmMDc0MGE5ZTdhOWVlZjdkNTAzYjA3NzdlMDZjYjQ1ODFjMDU0Nzc3OTE1ZDAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVhN2U1Y2MyNTBiZGViYjE1ZDczYmY0ZGQxMTEwNWU1M2VkODE5NWJkY2MyZTFhNzczM2YwYTgxZDlkNmVmNjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjMTllOTFmZmYwNjEwYmFmYjRmODU4NTU1M2E5NjdmZTliNjNiNGEwOTZiY2M4ODk1NzBjY2I1YTgzMGRkMmIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L246-L283",
+          "version": "repo-lines-v1:sha256:a1357b87b3c528ca29806607723b457d173642ba097866209974d840ac1ec5ba:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5ZGY0ZDkxZTk2NWMwMjdkNGZjYWY0NTQxNzgyOTYzZmI2M2I3YmNhZDU3MzkzNTBmYTE5N2I0NWRiYjhhMDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQyY2E1NjI1ODBjYjZhNTgzZTk2NGUxMTUwNzBlMmQ0M2FhNDljZWI3ZTE4MWU3NWFhNjFlMzI3MjQ5Mjg1YWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OTIzOTY1ODRmNGYyYWQxNGYxNGQ3MGM0ZTMzMDgwMDAzOTRhZmRiYTYzNGZiZDM1NjhlNjIyZGI3ZjEyZjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkwY2M2OWUyMmNjZjEyZDY1MGFhYWMyYzg2YTZjYjg1MmI1ZTQwNjlhMzMyODdmMjVkZjNmMTY5ODU2NzkxYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_485758ff346648c98e58a120f64af45a",
+      "statement": "modeAllowsWeb is true only for auto/fast/expert/retrieve; deepresearch, multi, and the deprecated research token never enable OpenRouter web tools, so --web-* flags are inert there and --retrieve/--output are ignored with a warning on those modes.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L55-L57",
+          "version": "repo-lines-v1:sha256:5f6c4b262a4da660a9513ee863abac9e79ccea18462a241f0d216f24681a5e23:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTkxOTIzODI3YjllYzhiNjdkZmU4ODljNTY5NWY0NzJiZTA2OTZkODFjZTJkZmNmZWIzYjM0ZjBjNmYzNGJlMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTIwNDBlMDk1YTk0ZTJhZGE3NGU0MjFmMzcxODc1MWE5MWE4MTBiZmQ2NmY0OGY0ZTkzOWM3Yjc0ODBlYjY3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzliZDY5MzgzN2UzZTdmOWE2YzY3MmE5M2ZjOTA0ODU2ZDY2NmM4NjNkNTNiZmZkZjE0Njg2YzQ2YWVhM2U1MSJ9"
+        },
+        {
+          "resource": "repo://src/modes.ts#L209-L223",
+          "version": "repo-lines-v1:sha256:7dc5be4257e148b9c1f594ea75786f8060c8169597cb9c2bcf15dcdded3ca34d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ5ODczZjM3MDA2MmIwZDZmOTNkOWYzNTEwNzRkZjIxZjFmNGViMDk5NmJiYTY0ZTA5YWQyOTA3ZDIzY2VhODMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI4NWE2ZjA0MjAwZjA0YjZlYTZjMTU1ZmE2OTcyOGQ3OThlYzkxOTgxNzIwZmFjNGM1MzBjZDI5Y2U3NzVmYTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE1MGQxNDg1NDczN2Y2YjE5NTM1N2E4ODQ4NjE2ODMyMzQwNWJkMDNhMWY4ZDQ2MTFiM2QxMjY2NGIxM2QzY2UifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_94e22991ded849aba5a87352dfa6b26d",
+      "statement": "resolveWebOptions forces web search on for retrieve mode even when config.web.search.enabled is false (--no-web is the only escape), and never forces fetch: fetchEnabled requires searchEnabled and either config.web.fetch.enabled or --web-fetch.",
+      "evidence": [
+        {
+          "resource": "repo://src/config.ts#L97-L104",
+          "version": "repo-lines-v1:sha256:81d78accfbc68dcbd6f05956a19646e96b506c74ab43b1f5ac4c535c86651faf:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGMyNjkzZjdjODQ1MGQwMzNlZjBiN2E2MGY5NjE4ZjI0NDdlYjM3M2JhNzZkZmZhYWVkYjE2NmFhYmZjNzM4MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzA4MGM4ZmZiMTdhYTNlY2YzY2VjNDk2NTMxMWYzZWVkMjUyMGQ1ODFmNjgyOGVkN2JkNmIzNWY5MTVhYWY4MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI1ODBlOTY0ZjgzYTQ3M2Y0M2Q0NDM4NDYyOTQ5ZDY4YjU2MDBmZGE3ODdmMTYzNzQ1ZDAwZGU4OWNiZjM2YSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzk1OTU2YmQzNzQyOTU0NzQ1Y2E5YWQ5Mzg2NTdmYzQ0YTk5ODM0YjI1ZTIxZWI1ZjRjMzAyZTI1ZWYyOWQxYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_82043d3af32e4e3dbf867a5fdd063745",
+      "statement": "usage.costUsd is present only when every call so far reported a cost (addUsageCall/mergeUsage); withBudget flips costKnown false on the first unknown cost and cli.ts prints an always-on stderr warning that --max-cost was not enforced.",
+      "evidence": [
+        {
+          "resource": "repo://src/cli.ts#L36-L40",
+          "version": "repo-lines-v1:sha256:f87aae72577305c953874ebc3b78a7e44f29480c399a5aab8118c1d068856f9f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWJhM2MyZTY4MDRlZjE1ZjJmY2NkZWQwYjRkNDlkNjNhYjYxZDVmMTZlMjYyYmIxZWY4ZTU2OWY0OTAxZGNlZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDg5M2Y0MGUzNzgxZWI4OTZjODJkMDQ2YTA4MDY3YTExZTM1Y2RmMmYxZGZhZjI2ZmVhOTBiOGRiNjY3NjQxMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGIzNGJiMmJmZjAxMTI4OTgzYjQzMGE3YzAxZTU1NTRjMWQxMjFhMmVkMDgyZGViNjQwYzM4OTA2NGQ0ZjA2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJhMGI2OTEyY2I1ZTYzZTVlZGQ2Y2Q1NWM0Zjc2NDhhZTJjYTY3Y2UzZTQ4MzU5ZTk3MTliNjMwMDExZTgxMyJ9"
+        },
+        {
+          "resource": "repo://src/cost.ts#L11-L33",
+          "version": "repo-lines-v1:sha256:f294ca04014fa9b9b0646b1edadb5bd352aa1cdc691a7176a56354bafd3dec59:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMyOTc1Y2Q1NGRkYmFmNjJlMTFhNTY4NWJhODE5NzMwODA1YjRhZjJiODNhZTdmZGRiNDgwMjIyYTYwNzVlMTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk2NjgyODgyOGRkMGZhNTA1MDNiOGIxZjBhNDc0Y2Y1ZjRjNzU1ZjI5NjE3YWUyODFmMmMzYmNkOTE3ZjU1YTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_28bc7c0a3ad340569f14f6bb665a9992",
+      "statement": "Every non-short-circuit branch ends in normalizeResult / normalizeRetrieveResult / normalizeSchemaResult, which stamp mode/profile/outputFormat, dedupe warnings, and re-derive web from modeAllowsWeb, overwriting the client's auto/quality/raw placeholders; answer is parsed only for --json brief runs, and the retrieve/schema normalizers drop it.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L466-L499",
+          "version": "repo-lines-v1:sha256:8ce72166ab7f226aebe051a75e97a7318a1008b93735d6bc351eae17c56d42f1:eyJzZWxlY3RlZExpbmVDb3VudCI6MzQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2MjRjNTQwZWIwMDJjNDVlOGZiNWI3NjRlMTA5MDZkNzZhOTBmYmZhYzgzMGRmMWM3OWI1MzMwNGRlZDhlZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFiYzY1YTY0NGY2MjNkMmMyYmMxZWU2ZjliYjdmM2JkZTI5MzM1MGQ4ZGMxYjFhMWYyNmU5NTAxNTY1MGIzYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM5ODdmZTc3YWM0NDE3MzAxNGNhZGM5MGIwOWU3ZDU1ZjAyZWQ5MjZhYWE1ZGNlM2M4YzU4ZWE3OTZiZmRmZGEifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L501-L531",
+          "version": "repo-lines-v1:sha256:0dd232474307dac0bb5709e4d970102aa2c9e82eaa999b38c7de5eff9930f9e5:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4OWFiMmVmOGM0MjUzZjJiYWJhZGNkNjdlNWEzNGRmOTZjYTMwOTI2MjYxNmNkMTA2NDQxMWNlMjA0ZTIxYjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQxMGM4NjIwNGJmNDE2YWNmNzVlMzhmZGNkNzA0Njc4YWJkYzhmOWVjODQyNjM5MWVhNzRmZjYwZmFjNjE1ZGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc3MzI4NzUxM2NmMWJhOWJhNjFjOGFiZDJlNWUwOTBhYTQxOGI4ZDc2YzZjZTYzYmM1MjkwZDVhM2JlOWFjNzIifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L635-L673",
+          "version": "repo-lines-v1:sha256:a97685c00243ed7f7727413755be74b3b3006a343055d80f79284658b818fbf0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjViYTIyZGU1YWVlZjMzODRmMDQwZjFmNGE2MTM1YmM0ODc5NDAzODE3ZTQ2YzMzODE2YTc2ZWMwZTdjZTJjMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5NGZjMGMxNzNkMWVjM2ZjNTAxZDdkZmE5Mjg1NTAxYzUyN2NmYjQ3MTI1ODNkYTNjYzM2MTgwNTY2YjRiZTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNmYmRkMTFkODY1MmQ2ZGYyMDhiNWIzNWQwNzQxNWFkM2MzZDBlNTdjZTJiYjFmMWVjMTQ0ZjIxNDZlYzliN2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_633daa75f90d4c58a8af7623bb1dd355",
+      "statement": "--x-only and --bookmarks-only are zero-model-call short-circuits returning with emptyUsage() and web off; combining them throws Cannot combine --x-only with --bookmarks-only.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L129-L139",
+          "version": "repo-lines-v1:sha256:f370adf1e16af37e64c99f4e383a9ef48eac5f9b0b6e8d092f8fdc83a464d601:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVhMDI4ZDIwYjRiNDIxMDFjMGJjNGZlNjk1ODUyNzlmZmVkNTU5MzdhMjU5OTQzYjZkZWViYjA0ZGIzMjdiY2EiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlkMjU4ODE5MWNhNzUzODI2ODdkNjFjOTIzMWJmYmUxYzZkMmY1ZGUxYjJlNjNiMmRiZmI3MGI5OGI2NWJmNjAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d78490b89aa74adba2ca7655edb0d5b9",
+      "statement": "Model aliases: the quality profile maps fast to x-ai/grok-4.3, expert to x-ai/grok-4.20, research to perplexity/sonar-reasoning-pro, deepResearch to perplexity/sonar-deep-research, nativeMulti to x-ai/grok-4.20-multi-agent; economy maps expert and fast to x-ai/grok-4.3 and research/deepResearch to perplexity/sonar-pro; deepresearch mode resolves the deepResearch alias, and multi resolves the research alias for its Sonar pass plus the expert alias for roles and synthesis (nativeMulti is unused).",
+      "evidence": [
+        {
+          "resource": "repo://src/defaults.ts#L3-L18",
+          "version": "repo-lines-v1:sha256:3dc6c0e6c39cefa11f0cf25be5fd09d3d344f5924b0cb1be5c5d523b58df2909:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1ZDZkOWJjYWI5NzZlYjY3YmFjZWQwZDk3ZDJmN2FjZDE5ZWY3YWZjZTgxY2Y3ZjIyMjlkZjY5MWM3YTM3MzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFhMWQxYTYzMzkwMjI5Yzc5ODM0N2U4M2EwNDA1NDQxYzk0MDAwMzUyODRhZDE2OGMxYmY2Y2RmMWQ3MGEzNzAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI1MzRlOWZiMzMxM2E0NjQwZjdkZjZiMDUzYjViMDE2YmE5NjQyMmQ1ZmY1ZmFhZGIyYTE5MTAxY2JkMDE0MzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQzMDA1NDdmYjllMmU1YjU1MzVjYTM3MTA3YjIzNDIzMzgwNGY5ODkwMTVlZmViZWM4ODAxMzZkOTU5OWM1NTYifQ"
+        },
+        {
+          "resource": "repo://src/modes.ts#L558-L559",
+          "version": "repo-lines-v1:sha256:e9ed811ca43bc8fb1158cb1be8f871e96c2b4f67f845f2efe0423c129672a493:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmJmYjFmYTlhOTRhYjllZTQ2ZjBkYjRkMzljOGRiY2UyZjk3OTlmZmMyYTRlMjhlOWQzYzRmODIyYmI4YTc1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYmI2OTBkNDZlZGE5YjhiZjIxMDA5NjNiMmNjMDM3ZTllM2M3ZDAwNGY5M2EzNDNhNWU0MWEzMWVkYjk4N2Y1NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTFlMzk1MjdjZGZjNjRkOGU2NDQzYTE5OWY4Y2EzNjYxMzMzOGI5NmI1MzBhZDYyMTA0MjIwZGEyODc4YmM0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMmE0N2VhODg1NzA0ODZiYjQwYTEzMDNmNjNjYzQ3MDZiYWNlOWFlOTBlMWFhOWFkNzIwNmY0MWViMWI1MTUyMSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_5cfb806035c0498a9538ebfcbdf01115",
+      "statement": "Signals are gathered before any model call: --x spawns the headless Grok agent via fetchXSignal and --bookmarks queries TweetSmash via fetchBookmarkSignal; their warnings join the result and the rendered markdown is injected into prompts via withContext, framed as sample context rather than ground truth.",
+      "evidence": [
+        {
+          "resource": "repo://src/modes.ts#L95-L142",
+          "version": "repo-lines-v1:sha256:2282ea22ee45963d3745e17698d804d29ba62e2b5ee4e7a9bba61a17f5477b34:eyJzZWxlY3RlZExpbmVDb3VudCI6NDgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NDE2ZDJkYTNlN2JiMmRhMDNhOGQ4MWI1YzllZWJjNDdkOTY2MWFkMDQzM2FmMzQ0Yzk0Y2QzOTNhOTg5MzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE2MjNhYTI3NjgxMDEyOWVhNDU0ODI0YTdmYWFmMjgzNGU3NDk0NDBlOTM1ODZhNDgzOGY1MjRlNjY1YTVhZGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg4NjA1OWYxYmIyNzNhYmE4MGZkNWNmN2FiMTNmNWQzMWY3MjZmNjQwOWQ2NmIxMTE4YTc2MTEyZWRiZmQ0MDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkNTkxNzc5NjZhNzZhOGQ0MjRmOTk0NGVjZGNiZDg4YzViZTNjNDNmY2NkNzVhZjAyODJjMjcyYTAwMDZmZTAifQ"
+        },
+        {
+          "resource": "repo://src/prompts.ts#L88-L106",
+          "version": "repo-lines-v1:sha256:e6947eddc9e2663c53e558038babbd0c03107c16c810da6e226a3a93eeaa1381:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmOTc3NjQ4MWRmZTI4NzdjZDJjZmMyMWE2YmNiYWE4YTA1Yjg5ZGUwMjU2Yjk1ZmM5YzI5YjgxYmFhZTZhNTIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZhZDI3OWM1ZjY3MDliMjhlZWYwMTUyNGE4Yjg4YzYzMjM2YjUyMjI1ZjZjOTNkNTliNmNjMWQ5YTg4MDFkMjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhjZTY4MDYwNDhjMmQ3MTM3NWZmNDE1NWNmMzMxYThkNzM5NWNmNWM1ZjI4NGZkNTc5YzViMTcwNjFhY2UwM2IifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_79adb3fb9061449e8f4ac81a70ac6d2a",
+      "statement": "package.json maps the grok-research bin to dist/cli.js (ESM, node >= 20) and defines pnpm dev (tsx src/cli.ts), pnpm grok-research (tsx src/cli.ts), pnpm build (tsup src/cli.ts --format esm --clean --out-dir dist), pnpm test (vitest run), and pnpm typecheck (tsc --noEmit).",
+      "evidence": [
+        {
+          "resource": "repo://package.json#L6-L18",
+          "version": "repo-lines-v1:sha256:c66f62e560d9ba00446df5cd39d974e062366927e33664e6ea6e659345fc1288:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YzE0NzU3YjhlMWU5ZDZhN2RlZTk5MDJlOTA0MDdhZDhjZjY3M2IzZThkNzYzZTI3OTUwZDE5ZDA2NzhkNjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkNWNkMmZiNGYzZGY4ODQ1MTUyNTViMzk1MjNmMmY4YjU0NzJiZWVhOWY1NjZmZmNhMjA0ZGI4MDI1NjEwNDEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImViNGY2YTQ2MmQxMmUxMTM3NTBiNjU0M2M0M2M0MzA0ODYyMjkxMTViMjVhNWU3YTNhNWMxZDU3MmE1NWY5MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYxN2M3OTlhNjE3ZTU3MjkxMTIxOTFkMGQzZTkxMjQyMWYwMjQyNjBiMjg1MDJlNzNiNjIxYjZlNmI0YzU1MGQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_11fcfd1def59419dacb81a4907453c93",
+      "statement": "The Vitest suite is organized per module and pins the core invariants (web tools per model, two-pass --json/--schema + web dispatch, --max-cost abort sequencing, JSON parse tolerances, exit-code contract); tests inject at narrow seams \u2014 ModeCaller fakes for runMode, fetchImpl for HTTP, spawnImpl for the Grok agent \u2014 and only test/cli.test.ts uses a real spawnSync of the CLI.",
+      "evidence": [
+        {
+          "resource": "repo://test/cli.test.ts#L1-L14",
+          "version": "repo-lines-v1:sha256:63afde2ae020fbbe8fc4615bfab7357efd76c3d3473dc17265d01f9b45031b3b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNiMGE4Y2IyOTZkYzg1NWM4ZjQzZWY0YzdiMTVmODdkOWM4NTZjYTQyZjI4Y2NmYjFjMDdiMTIxZjQ4ZWJlZDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2ZjViNDBiMTU4NDU3ZDE3ODY0ZjIxNzkwNzg2ZGQ1YTJlY2RiNjRiNjZhNjUxZjc4OGQ0ZTI1Y2QzMzAzZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://test/modes.test.ts",
+          "version": "repo-file-v1:sha256:c1d0860379e6ca94f4a7f1e559defeaa1e4abb9fffa5604b11f624cc59abc2de"
+        },
+        {
+          "resource": "repo://test/openrouter.test.ts",
+          "version": "repo-file-v1:sha256:42d31c4ecd052f820581afa82988c44301e75d1a5dabaa9b2996eb30fdcbd965"
+        }
+      ]
+    },
+    {
+      "id": "claim_1a7db73c6af04e0992e5d6e254fff9a0",
+      "statement": "README agent contract: default output is a Markdown decision brief; web search is on by default for auto/fast/expert (--web is a deprecated no-op, use --no-web for static prompts); research is a deprecated alias for deepresearch; deepresearch is recommended for deep factual research; retrieve or --retrieve gives Tavily-style results[]; --schema constrains JSON output; --json is preferred for structured parsing.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L130-L143",
+          "version": "repo-lines-v1:sha256:56b7b5dc8272baecb089cd2c51817414d2dc51db7427275ba27565d0c7be611d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVlODYxZGViZDk5YmNiZWI3YzhmMDE5YmJlNTNkZTc3MDhkMjlmZTQ1ZWM4NGVjZmE4ZTE1ZjdiY2JhY2MzMmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwYmVhMTMxMWQwM2QyYTA2ZGNlM2U4M2Q4MWM3NzM1MTBiYTQ5NmUzMjM1NTNmOTAxODhiZjAxZTE2ZDNlZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5MjkxOTA4MWQ2NzY2NGMwMGE4OGUwNmI2Yzc2NjE4MmFjMmVjNzNmYWQ4NmMzZjVlNmM5MDlkZjMyZjI4NjUifQ"
+        },
+        {
+          "resource": "repo://README.md#L20-L46",
+          "version": "repo-lines-v1:sha256:dd7b1e9cb32756870e2eee6d68737bd3678c26df2900233e9bddfea2a48146bc:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNmNWExMzI4YzhhNTU1NjQ0MjcyOWM3M2M0MGRkMWVjNzU2MGNmYTE1YzcyYTNhNTEwMmUyZjYzODUyZDA3YTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3YzA2YzU2MWQ1YzMyNzM0MzY4NTI2OGE0NmIzMzkxZjM5OThlZWU4OTBkMmJlNTFmMGQyMWNjNGE1M2FlNmQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI0ZTRkZTE5MTVlODY3ZTA3MjVlNjRjMDViMzMyMTVhNGM5ODE4MDRlYzU3Y2JjYzVkZGU1YzkxNmI4OTdiZWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkxMTkwMDY4Nzk2MzFlNzYyZDQ0ZTQ0YTRiM2U3MmI0ZDM3MGM0NTA3YTIwMWVjYTI5OWM4YzRhMzU0ZTQ3NDEifQ"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.4.3",
+    "at": "2026-08-29T08:01:17.972Z"
+  }
+}
