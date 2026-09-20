@@ -15,7 +15,7 @@ const MODES = new Set<Mode>(["auto", "fast", "expert", "deepresearch", "research
 
 const OUTPUT_STYLES = new Set<OutputStyle>(["brief", "results", "both"]);
 
-const WEB_PROVIDERS = new Set<WebProvider>(["openrouter"]);
+const WEB_PROVIDERS = new Set<WebProvider>(["openrouter", "opencode-go"]);
 
 const X_NETWORK_MODES = new Set<XNetworkMode>(["off", "prefer", "strict"]);
 
@@ -40,7 +40,7 @@ Options:
   --retrieve                 Force retrieval-focused output (results[] in --json)
   --output <style>           Output shape: brief (default), results, both
   --schema <json|file>       Constrain JSON output to a JSON Schema (inline or file path)
-  --web-provider <provider>  Web retrieval provider: openrouter (default)
+  --web-provider <provider>  Web retrieval provider: openrouter (default), opencode-go
   --no-web                   Disable OpenRouter web search for this run
   --web                      Deprecated no-op (web search is on by default)
   --web-fetch                Also enable openrouter:web_fetch (Grok modes only)

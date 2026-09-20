@@ -135,6 +135,7 @@ describe("parseArgs", () => {
 
   it("parses --web-provider", () => {
     expect(parseArgs(["--web-provider", "openrouter", "Prompt"])).toMatchObject({ webProvider: "openrouter" });
+    expect(parseArgs(["--web-provider", "opencode-go", "Prompt"])).toMatchObject({ webProvider: "opencode-go" });
   });
 
   it("rejects invalid --web-provider", () => {

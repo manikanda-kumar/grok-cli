@@ -16,9 +16,11 @@ export type ModelAliases = Record<ModelAlias, string>;
 
 export type ModelProfiles = Record<Profile, ModelAliases>;
 
-// Web retrieval provider. Only "openrouter" is supported today; kept as an
-// extension point so future providers can be wired behind --web-provider.
-export type WebProvider = "openrouter";
+// Backend that executes the Grok-model calls (and optionally web tools).
+//   openrouter  -> OpenRouter /api/v1/chat/completions (default; server web tools)
+//   opencode-go -> opencode.ai /zen/go/v1/responses (bare model; NO server tools,
+//                  NO X tools — X search still requires Grok Build /whathappened)
+export type WebProvider = "openrouter" | "opencode-go";
 
 export interface WebSearchConfig {
   enabled: boolean;
@@ -46,11 +48,23 @@ export interface OpenRouterConfig {
   siteUrl?: string;
 }
 
+// opencode.ai/zen/go (OpenCode Go) — bare Responses API. Requires an apiKey
+// and a session id to reduce 403s / aid routing. Models are the plain zen IDs
+// (e.g. "grok-4.6"), NOT "x-ai/grok-*". See https://opencode.ai/docs/go/.
+export interface OpencodeGoConfig {
+  apiKey?: string;
+  baseUrl?: string;
+  sessionId?: string;
+}
+
 export interface AppConfig {
   defaultMode: Mode;
   defaultProfile: Profile;
   models: ModelProfiles;
   openrouter: OpenRouterConfig;
+  // Optional — when set, opencode-go replaces OpenRouter for Grok legs on
+  // supported modes. Sonar (perplexity/*) always stays on OpenRouter.
+  opencodeGo?: OpencodeGoConfig;
   web: WebConfig;
 }
 
@@ -316,6 +330,45 @@ export interface OpenRouterRequest {
   max_tokens?: number;
   response_format?: { type: "json_object" };
   tools?: OpenRouterTool[];
+}
+
+// Responses API (opencode-go & OpenRouter responses-compatible endpoints).
+export interface OpencodeGoItem {
+  role: "system" | "user" | "assistant";
+  content: string;
+}
+
+export interface OpencodeGoResponse {
+  id?: string;
+  object?: string;
+  model?: string;
+  status?: string;
+  error?: unknown;
+  output?: Array<{
+    type?: string;
+    message?: {
+      role?: string;
+      content?: Array<{ type?: string; text?: string; annotations?: Array<{
+        type?: string;
+        start_index?: number;
+        end_index?: number;
+        url_citation?: { url?: string; title?: string };
+      }> }>;
+    };
+    content?: Array<{ type?: string; text?: string; annotations?: Array<{
+      type?: string;
+      start_index?: number;
+      end_index?: number;
+      url_citation?: { url?: string; title?: string };
+    }> }>;
+  }>;
+  citations?: string[];
+  usage?: {
+    input_tokens?: number;
+    output_tokens?: number;
+    total_tokens?: number;
+    output_tokens_details?: { reasoning_tokens?: number };
+  };
 }
 
 export interface OpenRouterUsage {

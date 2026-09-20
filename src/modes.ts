@@ -1,6 +1,6 @@
 import { readFileSync } from "node:fs";
 import { resolve as resolvePath } from "node:path";
-import { canonicalizeMode, modeAllowsWeb, resolveModel, resolveWebOptions } from "./config.js";
+import { canonicalizeMode, isOpencodeGoModel, modeAllowsWeb, providerForGrokCall, resolveModel, resolveWebOptions } from "./config.js";
 import { emptyUsage, mergeUsage } from "./cost.js";
 import {
   buildJsonFromResearchMessages,
@@ -28,7 +28,7 @@ import type {
 import { fetchBookmarkSignal, formatBookmarksMarkdown } from "./bookmarks.js";
 import { fetchXSignal } from "./x-signal.js";
 
-interface ModeCall {
+export interface ModeCall {
   role: string;
   model: string;
   messages: OpenRouterMessage[];
@@ -36,9 +36,12 @@ interface ModeCall {
   maxTokens?: number;
   json?: boolean;
   web?: ResolvedWebOptions;
+  // Structured-output schema (Responses-API providers). Ignored by OpenRouter
+  // (which uses response_format) and only honored by opencode-go.
+  schema?: string;
 }
 
-type ModeCaller = (call: ModeCall) => Promise<PipelineResult>;
+export type ModeCaller = (call: ModeCall) => Promise<PipelineResult>;
 
 export class MaxCostExceededError extends Error {
   constructor(spentUsd: number, limitUsd: number, role: string) {
@@ -91,6 +94,8 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     ...modeWarnings,
     ...(options.web.deprecatedWebFlag ? ['Flag "--web" is deprecated; web search is on by default. Use --no-web to disable.'] : []),
   ];
+
+  const grokProvider = providerForGrokCall(options.webProvider, config.opencodeGo);
 
   // Optional: native X signal via Grok agent /whathappened (before web research).
   let xSignal: XSignalResult | undefined;
@@ -152,8 +157,9 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     const schemaJson = loadSchema(options.schema);
     const model = resolveModel(config, options.profile, mode === "fast" ? "fast" : "expert");
     const schemaPrompt = withXInSchemaPrompt(options.prompt, xMarkdown);
+    const viaOpencodeGo = grokProvider === "opencode-go" && isOpencodeGoModel(model);
 
-    if (web.searchEnabled) {
+    if (web.searchEnabled && !viaOpencodeGo) {
       if (!options.json) console.error(`Step 1/2: Researching with web search (${model})...`);
       const research = await caller({
         role: "schema_research",
@@ -174,6 +180,7 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
         ),
         temperature: 0.1,
         json: true,
+        schema: schemaJson,
       });
       const merged = {
         ...formatted,
@@ -188,10 +195,13 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
     const result = await caller({
       role: "schema",
       model,
-      messages: buildSchemaMessages(schemaPrompt, schemaJson),
+      messages: viaOpencodeGo
+        ? buildSchemaMessagesOpencodeGo(schemaPrompt, schemaJson)
+        : buildSchemaMessages(schemaPrompt, schemaJson),
       temperature: 0.1,
       json: true,
       web,
+      ...(viaOpencodeGo ? { schema: schemaJson } : {}),
     });
     return attachContext(normalizeSchemaResult(result, options, mode, web, schemaWarnings), xSignal, bookmarks);
   }
@@ -310,6 +320,18 @@ export async function runMode(config: AppConfig, options: CliOptions, rawCaller:
 function withXInSchemaPrompt(prompt: string, xMarkdown?: string): string {
   if (!xMarkdown?.trim()) return prompt;
   return `${prompt}\n\nLive X/Twitter sample (for context):\n${xMarkdown.trim()}`;
+}
+
+// opencode-go responds with Responses-API json_schema structured output, so we
+// only need to ask for matching JSON (structured output constrains the format).
+function buildSchemaMessagesOpencodeGo(prompt: string, schemaJson: string): OpenRouterMessage[] {
+  return [
+    {
+      role: "system",
+      content: "Return a JSON object that exactly matches the user-provided JSON Schema. Do not add prose.",
+    },
+    { role: "user", content: `${prompt}\n\nSchema to match:\n${schemaJson}` },
+  ];
 }
 
 function attachXSignal(result: PipelineResult, xSignal: XSignalResult | undefined): PipelineResult {

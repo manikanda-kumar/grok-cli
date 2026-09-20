@@ -10,8 +10,9 @@ import {
   validateWebOptions,
 } from "./config.js";
 import { formatError, formatJson, formatMarkdown, formatRaw, formatRetrieveMarkdown } from "./formatters.js";
-import { runMode } from "./modes.js";
+import { runMode, type ModeCaller } from "./modes.js";
 import { callOpenRouter } from "./openrouter.js";
+import { callOpencodeGo } from "./opencode-go.js";
 
 async function main() {
   const argv = process.argv.slice(2);
@@ -27,11 +28,20 @@ async function main() {
     validateWebOptions(web, options.web);
     assertWebToolsCompatible(config, options.profile, mode, web);
 
+    const caller: ModeCaller =
+      options.webProvider === "opencode-go" && config.opencodeGo?.apiKey
+        ? (call) => callOpencodeGo(config.opencodeGo!, call)
+        : (call) => callOpenRouter(config.openrouter, call);
+
     if (web.searchEnabled) {
-      console.error("hint: OpenRouter web search is enabled (--no-web to disable)");
+      if (options.webProvider === "opencode-go") {
+        console.error("hint: opencode-go is a bare model (no server tools). Pass --no-web for pure model replies; web retrieval stays on OpenRouter.");
+      } else {
+        console.error("hint: OpenRouter web search is enabled (--no-web to disable)");
+      }
     }
 
-    const result = await runMode(config, options, (call) => callOpenRouter(config.openrouter, call));
+    const result = await runMode(config, options, caller);
 
     // Over-limit aborts inside runMode (before further calls). Here we only flag the
     // case where cost is unknown, so a silently-unenforced --max-cost is visible.

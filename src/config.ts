@@ -9,9 +9,11 @@ import type {
   CliWebOverrides,
   Mode,
   ModelAlias,
+  OpencodeGoConfig,
   Profile,
   ResolvedWebOptions,
   WebConfig,
+  WebProvider,
 } from "./types.js";
 
 interface LoadConfigOptions {
@@ -24,12 +26,22 @@ export function loadConfig(options: LoadConfigOptions = {}): AppConfig {
   const configPath = options.configPath ?? join(homedir(), ".config", "grok-cli", "config.json");
   const fileConfig = readConfigFile(configPath);
   const merged = mergeConfig(DEFAULT_CONFIG, fileConfig);
-  const apiKey = env.OPENROUTER_API_KEY ?? merged.openrouter.apiKey;
 
-  return {
-    ...merged,
-    openrouter: apiKey === undefined ? merged.openrouter : { ...merged.openrouter, apiKey },
-  };
+  const openrouterApiKey = env.OPENROUTER_API_KEY ?? merged.openrouter.apiKey;
+  const openrouter = openrouterApiKey === undefined ? merged.openrouter : { ...merged.openrouter, apiKey: openrouterApiKey };
+
+  const opencodeGoApiKey = env.OPENCODE_GO_API_KEY ?? merged.opencodeGo?.apiKey;
+  const opencodeGo = merged.opencodeGo
+    ? {
+        ...merged.opencodeGo,
+        ...(opencodeGoApiKey === undefined ? {} : { apiKey: opencodeGoApiKey }),
+        // Stable per-host session id helps opencode.ai route/cache (403s without
+        // a sane UA; 400s without x-opencode-session).
+        sessionId: merged.opencodeGo.sessionId ?? sessionIdForHost(env),
+      }
+    : undefined;
+
+  return { ...merged, openrouter, ...(opencodeGo === undefined ? {} : { opencodeGo }) };
 }
 
 export function resolveModel(config: AppConfig, profile: Profile, alias: ModelAlias): string {
@@ -58,6 +70,21 @@ export function modeAllowsWeb(mode: CanonicalMode): boolean {
 
 export function modelSupportsServerTools(model: string): boolean {
   return !model.startsWith("perplexity/");
+}
+
+export function isOpencodeGoModel(model: string): boolean {
+  // Models served by opencode-go are bare zen IDs without a provider slash,
+  // e.g. "grok-4.6" / "kimi-k2.7-code" — never "x-ai/*" or "perplexity/*".
+  return !!model && !model.includes("/");
+}
+
+// Never route a Sonar model through opencode-go — it only serves zen models.
+export function providerForGrokCall(
+  webProvider: WebProvider,
+  opencodeGo?: OpencodeGoConfig,
+): "openrouter" | "opencode-go" {
+  if (webProvider === "opencode-go" && opencodeGo?.apiKey) return "opencode-go";
+  return "openrouter";
 }
 
 export function resolveWebModel(config: AppConfig, profile: Profile, mode: CanonicalMode): string {
@@ -118,6 +145,13 @@ export function resolveWebOptions(config: AppConfig, mode: CanonicalMode, web: C
   };
 }
 
+function sessionIdForHost(env: NodeJS.ProcessEnv | Record<string, string | undefined>): string {
+  // Best stable per-host identity we have without leaking secrets.
+  const host = env.HOSTNAME || env.HOST || env.USER || "local";
+  const sanitized = host.replace(/[^A-Za-z0-9._-]/g, "-").slice(0, 64) || "local";
+  return `grok-cli-${sanitized}`;
+}
+
 function readConfigFile(path: string): Partial<AppConfig> {
   if (!existsSync(path)) return {};
   const raw = readFileSync(path, "utf8");
@@ -133,6 +167,9 @@ function mergeConfig(base: AppConfig, override: Partial<AppConfig>): AppConfig {
       economy: { ...base.models.economy, ...override.models?.economy },
     },
     openrouter: { ...base.openrouter, ...override.openrouter },
+    ...(override.opencodeGo === undefined
+      ? {}
+      : { opencodeGo: { ...(base.opencodeGo ?? {}), ...override.opencodeGo } }),
     web: mergeWebConfig(base.web, override.web),
   };
 }
